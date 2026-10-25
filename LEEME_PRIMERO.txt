@@ -1,0 +1,17 @@
+RAÍZVOLT - EVIDENCIA AA2 EV01
+Jhon Edwards Tineo Landaeta
+
+1. Extrae toda esta carpeta del ZIP.
+2. Lee Guia_RaizVolt.pdf.
+3. Instala JDK 17 o superior si no lo tienes.
+4. Entra en raizvolt-jdbc y abre ejecutar.bat.
+
+Incluye código fuente, ejecutable, controladores JDBC, scripts SQL,
+documentación, pruebas e historial Git de la rama publicada.
+
+Enlace de la evidencia:
+https://github.com/Joan-dot650/Programa-Git/tree/evidencia/aa2-ev01-raizvolt/raizvolt-jdbc
+
+La aplicación se ejecuta en tu equipo; GitHub permite consultar su código.
+README.md y kotlin.txt de la raíz corresponden al ejercicio Git anterior.
+El proyecto de esta evidencia está en raizvolt-jdbc.
