@@ -1,17 +1,31 @@
-RAÍZVOLT - EVIDENCIA AA2 EV01
-Jhon Edwards Tineo Landaeta
+RAÍZVOLT WEB - EVIDENCIA AA2 EV02
+Jhon Edwards Tineo Landaeta | Ficha 3235874
 
-1. Extrae toda esta carpeta del ZIP.
-2. Lee Guia_RaizVolt.pdf.
-3. Instala JDK 17 o superior si no lo tienes.
-4. Entra en raizvolt-jdbc y abre ejecutar.bat.
+1. Haz clic derecho sobre el ZIP y selecciona "Extraer todo".
+2. Abre la carpeta extraída y después entra en raizvolt-web.
+3. Necesitas Java JDK 17 o superior. Compruébalo en CMD con: java -version
+4. Haz doble clic en ejecutar.bat y deja la ventana abierta.
+5. Cuando aparezca "RAÍZVOLT ESTÁ LISTO", abre en el navegador:
+   http://localhost:8080/raizvolt/productos
+6. Pulsa "Nuevo producto" para registrar tu primer producto de prueba.
+7. Para detener la aplicación, vuelve a la ventana negra y presiona Ctrl+C.
 
-Incluye código fuente, ejecutable, controladores JDBC, scripts SQL,
-documentación, pruebas e historial Git de la rama publicada.
+LEE Guia_RaizVolt_Web.pdf para seguir el procedimiento explicado.
+El catálogo comienza vacío. La base se crea automáticamente en raizvolt-web/datos.
+No borres esa carpeta si quieres conservar tus registros.
 
-Enlace de la evidencia:
-https://github.com/Joan-dot650/Programa-Git/tree/evidencia/aa2-ev01-raizvolt/raizvolt-jdbc
+NO abras index.jsp con doble clic ni con Live Server: JSP necesita el servidor Java.
+Para esta opción no necesitas instalar XAMPP ni un Tomcat aparte: va incluido.
 
-La aplicación se ejecuta en tu equipo; GitHub permite consultar su código.
-README.md y kotlin.txt de la raíz corresponden al ejercicio Git anterior.
-El proyecto de esta evidencia está en raizvolt-jdbc.
+Si aparece "puerto ocupado", abre CMD dentro de raizvolt-web y escribe:
+  ejecutar.bat 8081
+Después abre http://localhost:8081/raizvolt/productos
+
+PARA EDITAR Y VOLVER A COMPILAR:
+Abre la carpeta raizvolt-web en Visual Studio Code. Después ejecuta compilar.bat.
+Para comprobar el proyecto: primero compilar.bat y luego pruebas.bat.
+Para usar Linux/macOS: bash ejecutar.sh (también compilar.sh y pruebas.sh).
+
+PARA ENTREGAR:
+Sube el archivo JhonEdwardsTineoLandaeta_AA2_EV02.zip a la evidencia correspondiente.
+Incluye ENLACE_REPOSITORIO.txt, el proyecto, su historial Git y la guía.

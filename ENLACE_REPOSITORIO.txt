@@ -1,21 +1,16 @@
-EVIDENCIA GA7-220501096-AA2-EV01
+EVIDENCIA GA7-220501096-AA2-EV02
 Aprendiz: Jhon Edwards Tineo Landaeta
-Programa: Análisis y Desarrollo de Software - Ficha 3235874
-Proyecto: RaízVolt - módulo de productos Java JDBC
 
-ENLACE DIRECTO AL CÓDIGO DEL MÓDULO:
-https://github.com/Joan-dot650/Programa-Git/tree/evidencia/aa2-ev01-raizvolt/raizvolt-jdbc
-
-Repositorio público:
+Repositorio:
 https://github.com/Joan-dot650/Programa-Git
 
-Rama de la evidencia:
-evidencia/aa2-ev01-raizvolt
+Rama de esta evidencia:
+evidencia/aa2-ev02-raizvolt-web
 
-Carpeta del proyecto dentro del repositorio:
-raizvolt-jdbc
+Enlace directo a los archivos de EV02:
+https://github.com/Joan-dot650/Programa-Git/tree/evidencia/aa2-ev02-raizvolt-web
 
-El enlace directo abre la rama y la carpeta de esta evidencia.
-Incluye código Java, esquema SQL, pruebas y documentación.
-El repositorio aloja el código; la aplicación se ejecuta localmente con Java.
-El ZIP incluye además el ejecutable compilado y los controladores JDBC.
+Módulo web:
+https://github.com/Joan-dot650/Programa-Git/tree/evidencia/aa2-ev02-raizvolt-web/raizvolt-web
+
+La evidencia EV01 continúa disponible en la rama evidencia/aa2-ev01-raizvolt.

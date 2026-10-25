@@ -1,0 +1,101 @@
+EVIDENCIA GA7-220501096-AA2-EV02
+Fecha: 2026-10-25
+Java 17.0.20 | Tomcat 10.1.61 | H2 2.5.250
+
+OK 1 - base nueva vacía
+OK 2 - inserción con ID generado
+OK 3 - normalización de código
+OK 4 - consulta por ID
+OK 5 - precio decimal exacto en JDBC
+OK 6 - consulta parcial por nombre
+OK 7 - consulta por código sin distinguir mayúsculas
+OK 8 - duplicado rechazado
+OK 9 - duplicado no crea una fila adicional
+OK 10 - apóstrofe almacenado con parámetros
+OK 11 - comodines de búsqueda tratados como texto
+OK 12 - intento de inyección tratado como texto
+OK 13 - duplicado en actualización
+OK 14 - actualización fallida conserva el registro original
+OK 15 - actualización persiste todos los cambios
+OK 16 - actualización no modifica otro producto
+OK 17 - persistencia al cerrar y reabrir conexiones / esquema idempotente
+OK 18 - código vacío
+OK 19 - nombre vacío
+OK 20 - categoría obligatoria
+OK 21 - precio inválido: 0
+OK 22 - precio inválido: -1
+OK 23 - precio inválido: abc
+OK 24 - precio inválido: 1.234
+OK 25 - precio inválido: 1.000.000
+OK 26 - precio inválido: 1e3
+OK 27 - precio inválido: 10000000000.00
+OK 28 - existencias inválidas: -1
+OK 29 - existencias inválidas: 1.5
+OK 30 - existencias inválidas: abc
+OK 31 - existencias inválidas: 1000001
+OK 32 - existencias inválidas: 999999999999
+OK 33 - límites válidos de precio y existencias
+OK 34 - actualización de ID inexistente
+OK 35 - eliminación sin selección
+OK 36 - CHECK de la base rechaza precio negativo aun sin servicio
+OK 37 - error de conexión controlado
+OK 38 - DELETE elimina el ID elegido
+OK 39 - DELETE conserva los demás productos
+OK 40 - no se informa éxito al eliminar un ID ausente
+RESULTADO: 40 verificaciones JDBC aprobadas.
+OK 1 - inicio mediante jsp:forward
+OK 2 - catálogo vacío
+OK 3 - JSP y EL procesadas en servidor
+OK 4 - fragmento JSP del pie conserva UTF-8
+OK 5 - UTF-8
+OK 6 - política de contenido
+OK 7 - CSS disponible
+OK 8 - JSP protegida de acceso directo
+OK 9 - formulario HTML POST
+OK 10 - token de sesión
+OK 11 - POST sin token rechazado
+OK 12 - token incorrecto rechazado
+OK 13 - validación de precio en servidor
+OK 14 - datos conservados tras error
+OK 15 - categoría inválida rechazada
+OK 16 - stock negativo rechazado
+OK 17 - alta POST redirige con 303
+OK 18 - redirección al catálogo
+OK 19 - alta y código normalizado
+OK 20 - confirmación de éxito
+OK 21 - formulario HTML GET
+OK 22 - mensaje de un solo uso
+OK 23 - código duplicado rechazado
+OK 24 - GET recibe código de búsqueda
+OK 25 - búsqueda vacía
+OK 26 - consulta parametrizada ante texto SQL
+OK 27 - longitud de búsqueda limitada
+OK 28 - ID no numérico controlado
+OK 29 - ID negativo controlado
+OK 30 - producto inexistente controlado
+OK 31 - edición precargada
+OK 32 - GET no elimina
+OK 33 - GET conserva los datos
+OK 34 - actualización POST
+OK 35 - HTML escapado y acentos conservados
+OK 36 - entrada sin ejecución de script
+OK 37 - precio exacto y formato COP
+OK 38 - aviso de stock bajo
+OK 39 - stock actualizado
+OK 40 - confirmación explícita
+OK 41 - confirmación escapa HTML
+OK 42 - cancelar conserva el registro
+OK 43 - eliminación POST
+OK 44 - eliminación reflejada en lista
+OK 45 - repetir eliminación no muestra éxito falso
+OK 46 - acción POST desconocida controlada
+OK 47 - alta para prueba de reinicio
+OK 48 - datos persistentes tras reiniciar Tomcat
+OK 49 - eliminación persistente tras reiniciar
+RESULTADO: 49 verificaciones HTTP/JSP aprobadas.
+
+OK WAR /productos
+OK WAR /productos?accion=nuevo
+OK WAR /assets/estilos.css
+RESULTADO: WAR independiente desplegado y JSP compiladas.
+OK: navegador Chromium, registro, búsqueda, edición, cancelación y diseño móvil.

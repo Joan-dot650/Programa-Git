@@ -1,0 +1,27 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<fmt:setLocale value="es_CO" />
+<c:url var="catalogoUrl" value="/productos" />
+<c:url var="nuevoUrl" value="/productos"><c:param name="accion" value="nuevo" /></c:url>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><c:out value="${tituloPagina}" /> · RaízVolt</title>
+  <link rel="stylesheet" href="<c:url value='/assets/estilos.css' />">
+  <link rel="icon" href="<c:url value='/assets/marca.svg' />" type="image/svg+xml">
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<div class="estructura">
+  <aside class="lateral" aria-label="Navegación principal">
+    <a class="marca" href="<c:out value='${catalogoUrl}' />"><img src="<c:url value='/assets/marca.svg' />" alt="" width="38" height="38"><span>RaízVolt<span class="marca-detalle">ENERGÍA QUE CONECTA</span></span></a>
+    <p class="etiqueta lateral-etiqueta">ADMINISTRACIÓN</p>
+    <nav><a class="nav-activa" href="<c:out value='${catalogoUrl}' />" aria-current="page"><span aria-hidden="true">▦</span> Catálogo de productos</a></nav>
+    <div class="lateral-pie"><span class="punto"></span> Gestión de energía solar<p>Una visión sostenible.<br>Un catálogo bien organizado.</p></div>
+  </aside>
+  <div class="zona-principal">
+    <header class="barra"><span>Espacio de trabajo <span class="separador">/</span> Catálogo solar</span><span class="insignia">RaízVolt</span></header>
+    <main id="contenido" tabindex="-1">

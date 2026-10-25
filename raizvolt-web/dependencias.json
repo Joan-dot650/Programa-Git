@@ -1,0 +1,47 @@
+[
+  {
+    "file": "tomcat-embed-core-10.1.61.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-core/10.1.61/tomcat-embed-core-10.1.61.jar",
+    "sha256": "57b8e4bdb3a49163c3a6a501929240531523c111ff53844c9f82efba60f789f7"
+  },
+  {
+    "file": "tomcat-embed-jasper-10.1.61.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-jasper/10.1.61/tomcat-embed-jasper-10.1.61.jar",
+    "sha256": "8275586cefddf6b736c5b2c6d6d7703a6da271af61bf7674d05bdab43455fc9a"
+  },
+  {
+    "file": "tomcat-embed-el-10.1.61.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/tomcat/embed/tomcat-embed-el/10.1.61/tomcat-embed-el-10.1.61.jar",
+    "sha256": "a72e0e067ae4e5b9aba0b36c7812cbe268c555648355c9d3e662bbff0d07f972"
+  },
+  {
+    "file": "tomcat-annotations-api-10.1.61.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/apache/tomcat/tomcat-annotations-api/10.1.61/tomcat-annotations-api-10.1.61.jar",
+    "sha256": "8d408d675d89da99f86171ead3067f9e947accf722e3785e6775e9af387ff3a6"
+  },
+  {
+    "file": "ecj-3.33.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/eclipse/jdt/ecj/3.33.0/ecj-3.33.0.jar",
+    "sha256": "f7686c4960cf70c2ebc5c500a73a8cfc04541b730c18f1c5c21329889b137f45"
+  },
+  {
+    "file": "jakarta.servlet.jsp.jstl-api-3.0.2.jar",
+    "url": "https://repo.maven.apache.org/maven2/jakarta/servlet/jsp/jstl/jakarta.servlet.jsp.jstl-api/3.0.2/jakarta.servlet.jsp.jstl-api-3.0.2.jar",
+    "sha256": "d55951aefedb543cb16193a873b92d22c40c3b8ba26cfa7ed9229eb118bb9c9b"
+  },
+  {
+    "file": "jakarta.servlet.jsp.jstl-3.0.1.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/glassfish/web/jakarta.servlet.jsp.jstl/3.0.1/jakarta.servlet.jsp.jstl-3.0.1.jar",
+    "sha256": "5cc6e60b9e74d38c25fe4f2d22dfd40577f5b8396bc885f7061cd2c525a43b86"
+  },
+  {
+    "file": "h2-2.5.250.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/h2database/h2/2.5.250/h2-2.5.250.jar",
+    "sha256": "82a80a2ac06901b03cdb233c663d21c4f49c884bf6d0cf85022729e8db9ab86f"
+  },
+  {
+    "file": "mysql-connector-j-9.5.0.jar",
+    "url": "https://repo.maven.apache.org/maven2/com/mysql/mysql-connector-j/9.5.0/mysql-connector-j-9.5.0.jar",
+    "sha256": "f2ca3dfaf00d4aa311470db7ea3051962944ba0cb60005a2f75467549c39f425"
+  }
+]

@@ -1,0 +1,8 @@
+/build/
+/dist/
+/datos/
+/.runtime/
+/config/database.properties
+/lib/*.jar
+/target/
+*.log
