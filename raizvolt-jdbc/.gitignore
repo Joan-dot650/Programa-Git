@@ -1,0 +1,9 @@
+build/
+dist/
+datos/
+config/database.properties
+*.log
+lib/*.jar
+.idea/
+*.iml
+.DS_Store

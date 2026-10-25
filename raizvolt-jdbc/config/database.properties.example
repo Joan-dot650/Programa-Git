@@ -1,0 +1,6 @@
+# Copiar como database.properties SOLO si se desea usar MySQL.
+# Importar database/mysql.sql antes de ejecutar la aplicación.
+# Los valores siguientes son ejemplos. Completar el usuario local.
+db.url=jdbc:mysql://localhost:3306/raizvolt?connectionTimeZone=America/Bogota&connectTimeout=5000&socketTimeout=10000
+db.user=raizvolt_app
+db.password=CAMBIAR_EN_TU_EQUIPO
