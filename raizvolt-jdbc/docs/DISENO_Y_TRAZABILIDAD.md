@@ -2,7 +2,7 @@
 
 ## Alcance y antecedentes
 
-Se aplica la decisión del aprendiz de usar su negocio solar RaízVolt cuando
+Se aplica la idea de negocio solar RaízVolt cuando
 la evidencia requiera construir software. El catálogo permite administrar
 paneles, inversores, baterías, kits y accesorios. El usuario funcional es el
 operador del catálogo; la aplicación académica no incorpora un inicio de sesión.
