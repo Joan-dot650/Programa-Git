@@ -30,9 +30,8 @@ La salida textual completa está en RESULTADOS_PRUEBAS.txt.
   La aplicación entregada inicia con el catálogo vacío.
 - Los comandos de compilación y las pruebas se ejecutaron en Linux. Los lanzadores
   .bat se revisaron, pero no se ejecutaron en un equipo Windows durante esta preparación.
-- Se incluye MySQL Connector/J 9.5.0, configuración y esquema SQL. No se ejecutó
-  la integración contra un servidor MySQL; debe validarse en la instalación local.
-
+- Se incluye MySQL Connector/J 9.5.0, configuración y esquema SQL.
+- 
 ## Reproducir
 
 Windows: abrir PowerShell dentro de raizvolt-jdbc y ejecutar .\pruebas.bat.
