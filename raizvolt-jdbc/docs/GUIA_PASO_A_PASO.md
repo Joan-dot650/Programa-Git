@@ -89,7 +89,7 @@ Tras editar código, guarda los archivos y ejecuta:
 ```
 
 El compilador actualiza dist/raizvolt.jar. Ejecutar sin volver a compilar utiliza
-la última versión compilada. No edites los archivos .class ni el JAR directamente.
+la última versión compilada.
 
 ## 5. Ejecutar pruebas automáticas
 
@@ -165,12 +165,9 @@ ENLACE_REPOSITORIO.txt contiene el enlace que corresponde a esta evidencia.
 
 ## 8. Entregar
 
-Revisa el código, ejecuta el módulo y abre el enlace de ENLACE_REPOSITORIO.txt
-para comprobar la carpeta publicada. El archivo a entregar es JhonEdwardsTineoLandaeta_AA2_EV01.zip. La guía de esta actividad
-no exige pantallazos; puedes capturarlos en tu equipo si el instructor los solicita.
+se revisa el código, se ejecuta el módulo y se abre el enlace de ENLACE_REPOSITORIO.txt
+para comprobar la carpeta publicada. El archivo a entregar es JhonEdwardsTineoLandaeta_AA2_EV01.
 
-Si modificas el proyecto, recompila, ejecuta las pruebas, registra el cambio con
-Git y vuelve a comprimir la carpeta completa para que el ZIP coincida con tu versión.
 
 ## Problemas frecuentes
 
