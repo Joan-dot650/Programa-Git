@@ -11,10 +11,9 @@ solares. Continúa el catálogo JDBC de la evidencia EV01 con una interfaz web M
 ## Empezar
 
 1. Extraer completamente `JhonEdwardsTineoLandaeta_AA2_EV02.zip`.
-2. Leer `LEEME_PRIMERO.txt` o `Guia_RaizVolt_Web.pdf`.
-3. Instalar un **JDK 17 o superior** y entrar en `raizvolt-web`.
-4. Abrir `ejecutar.bat` (Windows) o ejecutar `bash ejecutar.sh` (Linux/macOS).
-5. Visitar **http://localhost:8080/raizvolt/productos**.
+2. Instalar un **JDK 17 o superior** y entrar en `raizvolt-web`.
+3. Abrir `ejecutar.bat` (Windows) o ejecutar `bash ejecutar.sh` (Linux/macOS).
+4. Visitar **http://localhost:8080/raizvolt/productos**.
 
 El ZIP incluye código, dependencias y compilados. El repositorio versiona código,
 documentación y la lista verificada de dependencias; al clonarlo se deben ejecutar
@@ -29,8 +28,7 @@ documentación y la lista verificada de dependencias; al clonarlo se deben ejecu
 
 Repositorio de esta evidencia: https://github.com/Joan-dot650/Programa-Git/tree/evidencia/aa2-ev02-raizvolt-web
 
-La carpeta `.git` del ZIP conserva el historial real de la rama. Los archivos
-`kotlin.txt` y `raizvolt-jdbc` proceden del repositorio previo y no son el punto de
+Los archivos `raizvolt-jdbc` proceden del repositorio previo y no son el punto de
 entrada de la aplicación web.
 
 ## Requisitos cubiertos
