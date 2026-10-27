@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos :: cabecera('Eliminar producto')}"></head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<div class="estructura">
+  <aside th:replace="~{fragmentos :: lateral}"></aside>
+  <div class="zona-principal">
+    <header th:replace="~{fragmentos :: barra}"></header>
+    <main id="contenido">
+      <a class="volver" th:href="@{/productos}">← Volver al catálogo</a>
+      <section class="tarjeta confirmacion"><p class="etiqueta">REVISAR ANTES DE CONTINUAR</p><h1>Eliminar producto</h1><p>Este producto se retirará del catálogo. Esta acción no se puede deshacer.</p>
+        <div class="producto-confirmacion"><strong th:text="${producto.nombre}"></strong><span th:text="${producto.codigo} + ' · ' + ${producto.categoria}"></span><span th:text="${producto.existencias} + ' unidades disponibles'"></span></div>
+        <form method="post" th:action="@{/productos/{id}/eliminar(id=${producto.id})}"><div class="acciones-formulario"><a class="boton secundario" th:href="@{/productos}">Cancelar</a><button class="boton peligro" type="submit">Confirmar eliminación</button></div></form>
+      </section>
+    </main>
+    <footer th:replace="~{fragmentos :: pie}"></footer>
+  </div>
+</div>
+</body>
+</html>

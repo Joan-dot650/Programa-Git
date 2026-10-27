@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos :: cabecera('Revisar solicitud')}"></head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<div class="estructura">
+  <aside th:replace="~{fragmentos :: lateral}"></aside>
+  <div class="zona-principal">
+    <header th:replace="~{fragmentos :: barra}"></header>
+    <main id="contenido"><section class="tarjeta confirmacion"><p class="etiqueta" th:text="'SOLICITUD · ' + ${status}">SOLICITUD</p><h1>No pudimos completar la solicitud</h1>
+      <div th:switch="${status}"><p th:case="403">El formulario ha vencido o no es válido. Vuelve al catálogo y abre el formulario nuevamente.</p><p th:case="404">El producto o la página que buscas no existe. Puede haber sido eliminado.</p><p th:case="400">La solicitud contiene datos que no son válidos. Revisa la dirección e inténtalo otra vez.</p><p th:case="503">La base de datos no está disponible. Inténtalo nuevamente y revisa la consola si el problema continúa.</p><p th:case="*">Revisa la solicitud y vuelve a intentarlo. Si el problema continúa, consulta la consola de la aplicación.</p></div>
+      <a class="boton primario" th:href="@{/productos}">Volver al catálogo</a></section></main>
+    <footer th:replace="~{fragmentos :: pie}"></footer>
+  </div>
+</div>
+</body>
+</html>

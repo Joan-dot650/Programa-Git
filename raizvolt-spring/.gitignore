@@ -1,0 +1,8 @@
+/target/
+/dist/*.jar
+/datos/
+*.log
+.idea/
+*.iml
+.vscode/
+application-local.properties

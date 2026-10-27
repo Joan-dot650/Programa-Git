@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="cabecera(titulo)">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title th:text="${titulo} + ' | RaízVolt'">RaízVolt</title>
+  <link rel="icon" type="image/svg+xml" th:href="@{/assets/marca.svg}">
+  <link rel="stylesheet" th:href="@{/assets/estilos.css}">
+</head>
+<body>
+  <aside th:fragment="lateral" class="lateral">
+    <a class="marca" th:href="@{/productos}" aria-label="RaízVolt, ir al catálogo">
+      <img th:src="@{/assets/marca.svg}" width="43" height="43" alt="">
+      <span>RaízVolt<small class="marca-detalle">ENERGÍA QUE CONECTA</small></span>
+    </a>
+    <p class="etiqueta lateral-etiqueta">ADMINISTRACIÓN</p>
+    <nav aria-label="Navegación principal">
+      <a class="nav-activa" th:href="@{/productos}"><span aria-hidden="true">▦</span> Catálogo de productos</a>
+    </nav>
+    <div class="lateral-pie"><span class="punto"></span> Catálogo local
+      <p>Soluciones solares para conectar más hogares y territorios.</p>
+    </div>
+  </aside>
+  <header th:fragment="barra" class="barra">
+    <span>RaízVolt <span class="separador">/</span> Gestión de productos</span>
+    <span class="insignia">Energía solar · Colombia</span>
+  </header>
+  <footer th:fragment="pie">RaízVolt<span>Precios en pesos colombianos (COP)</span></footer>
+</body>
+</html>

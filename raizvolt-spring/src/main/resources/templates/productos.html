@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragmentos :: cabecera('Catálogo de productos')}"></head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<div class="estructura">
+  <aside th:replace="~{fragmentos :: lateral}"></aside>
+  <div class="zona-principal">
+    <header th:replace="~{fragmentos :: barra}"></header>
+    <main id="contenido">
+      <div class="encabezado">
+        <div><p class="etiqueta">TU INVENTARIO SOLAR</p><h1>Catálogo de productos</h1>
+          <p class="subtitulo">Organiza tus soluciones solares y mantén tus existencias al día.</p></div>
+        <a class="boton primario" th:href="@{/productos/nuevo}"><span aria-hidden="true">+</span> Nuevo producto</a>
+      </div>
+      <div class="aviso exito" role="status" th:if="${mensaje}" th:text="${mensaje}"></div>
+      <section class="metricas" aria-label="Resumen de los productos mostrados">
+        <div class="metrica"><span>Referencias</span><strong th:text="${#lists.size(productos)}">0</strong><small>En la lista actual</small></div>
+        <div class="metrica"><span>Unidades disponibles</span><strong th:text="${unidades}">0</strong><small>Existencias de la lista</small></div>
+        <div class="metrica"><span>Stock bajo</span><strong th:text="${stockBajo}">0</strong><small>Menos de 5 unidades</small></div>
+      </section>
+      <section class="tarjeta" aria-labelledby="titulo-lista">
+        <div class="titulo-tarjeta"><div><h2 id="titulo-lista">Tus productos</h2><p>Consulta, actualiza y organiza cada referencia.</p></div>
+          <span class="contador" th:text="${#lists.size(productos)} + ' referencias'">0 referencias</span></div>
+        <!-- GET permite compartir la búsqueda y no modifica los registros. -->
+        <form class="busqueda" method="get" th:action="@{/productos}">
+          <div class="campo-busqueda"><label class="solo-lectores" for="q">Buscar por nombre o código</label>
+            <input id="q" name="q" type="search" maxlength="120" th:value="${q}" placeholder="Buscar por nombre o código…"></div>
+          <button class="boton secundario" type="submit">Buscar</button>
+          <a class="enlace" th:if="${!#strings.isEmpty(q)}" th:href="@{/productos}">Limpiar</a>
+        </form>
+        <div class="vacio" th:if="${#lists.isEmpty(productos)}">
+          <div class="vacio-icono" aria-hidden="true">☀</div>
+          <h3 th:text="${#strings.isEmpty(q)} ? 'Tu catálogo empieza aquí' : 'No encontramos coincidencias'">Tu catálogo empieza aquí</h3>
+          <p th:text="${#strings.isEmpty(q)} ? 'Agrega tu primera solución solar para comenzar.' : 'Prueba con otro nombre o código de producto.'"></p>
+          <a class="boton primario" th:if="${#strings.isEmpty(q)}" th:href="@{/productos/nuevo}">Registrar primer producto</a>
+          <a class="boton secundario" th:unless="${#strings.isEmpty(q)}" th:href="@{/productos}">Ver todo el catálogo</a>
+        </div>
+        <th:block th:unless="${#lists.isEmpty(productos)}">
+          <p class="ayuda-tabla">Desliza la tabla para ver todas las columnas.</p>
+          <div class="tabla-contenedor" tabindex="0" role="region" aria-label="Tabla de productos">
+            <table><caption class="solo-lectores">Productos encontrados en el catálogo solar</caption>
+              <thead><tr><th scope="col">Producto</th><th scope="col">Categoría</th><th scope="col" class="numero">Precio unitario</th><th scope="col" class="numero">Existencias</th><th scope="col" class="acciones-titulo">Acciones</th></tr></thead>
+              <tbody><tr th:each="producto : ${productos}">
+                <!-- th:text escapa la entrada del usuario antes de mostrarla como HTML. -->
+                <td><span class="nombre-producto" th:text="${producto.nombre}"></span><span class="codigo-producto" th:text="${producto.codigo}"></span></td>
+                <td><span class="categoria" th:text="${producto.categoria}"></span></td>
+                <td class="numero precio" th:text="'$ ' + ${#numbers.formatDecimal(producto.precio, 1, 'POINT', 2, 'COMMA')}"></td>
+                <td class="numero"><span class="stock" th:classappend="${producto.existencias &lt; 5} ? 'stock-bajo'" th:text="${producto.existencias}"></span><span class="stock-nota" th:if="${producto.existencias &lt; 5}">Stock bajo</span></td>
+                <td class="acciones"><a th:href="@{/productos/{id}/editar(id=${producto.id})}" th:aria-label="'Editar ' + ${producto.codigo}">Editar</a><a class="accion-eliminar" th:href="@{/productos/{id}/eliminar(id=${producto.id})}" th:aria-label="'Eliminar ' + ${producto.codigo}">Eliminar</a></td>
+              </tr></tbody>
+            </table>
+          </div>
+          <div class="resumen-tabla"><span>Valor de las existencias mostradas</span><strong th:text="'$ ' + ${#numbers.formatDecimal(valorInventario, 1, 'POINT', 2, 'COMMA')} + ' COP'"></strong></div>
+        </th:block>
+      </section>
+      <p class="nota-pagina">Cada producto organizado es un paso hacia más energía al alcance de todos.</p>
+    </main>
+    <footer th:replace="~{fragmentos :: pie}"></footer>
+  </div>
+</div>
+</body>
+</html>

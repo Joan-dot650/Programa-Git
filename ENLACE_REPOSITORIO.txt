@@ -1,16 +1,26 @@
-EVIDENCIA GA7-220501096-AA2-EV02
+EVIDENCIA GA7-220501096-AA3-EV01
 Aprendiz: Jhon Edwards Tineo Landaeta
+Programa: Análisis y Desarrollo de Software
+Ficha: 3235874
 
-Repositorio:
+Repositorio público del aprendiz:
 https://github.com/Joan-dot650/Programa-Git
 
 Rama de esta evidencia:
-evidencia/aa2-ev02-raizvolt-web
+evidencia/aa3-ev01-raizvolt-spring
 
-Enlace directo a los archivos de EV02:
+Enlace directo a AA3-EV01:
+https://github.com/Joan-dot650/Programa-Git/tree/evidencia/aa3-ev01-raizvolt-spring
+
+Archivos del módulo:
+https://github.com/Joan-dot650/Programa-Git/tree/evidencia/aa3-ev01-raizvolt-spring/raizvolt-spring
+
+Historial de versiones de la rama:
+https://github.com/Joan-dot650/Programa-Git/commits/evidencia/aa3-ev01-raizvolt-spring
+
+El repositorio contiene el código fuente, las pruebas y la documentación.
+El ZIP incluye además el ejecutable con sus dependencias y repositorio.bundle
+para recuperar el historial de la rama sin conexión a Internet.
+
+Antecedente AA2-EV02:
 https://github.com/Joan-dot650/Programa-Git/tree/evidencia/aa2-ev02-raizvolt-web
-
-Módulo web:
-https://github.com/Joan-dot650/Programa-Git/tree/evidencia/aa2-ev02-raizvolt-web/raizvolt-web
-
-La evidencia EV01 continúa disponible en la rama evidencia/aa2-ev01-raizvolt.

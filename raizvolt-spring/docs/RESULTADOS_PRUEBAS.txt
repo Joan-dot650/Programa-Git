@@ -1,0 +1,32 @@
+RESULTADOS DE PRUEBAS - GA7-220501096-AA3-EV01
+Proyecto: RaízVolt / Spring Boot 4.0.9
+Fecha: 26 de octubre de 2026
+Entorno: Linux x86_64; compilación JDK 17.0.21; ejecución JAR Java 17.0.20.
+
+Pruebas JUnit (Maven verify):
+co.raizvolt.CatalogoWebTest: 29 pruebas; 0 fallos; 0 errores; 0 omitidas.
+co.raizvolt.PersistenciaArchivoTest: 1 pruebas; 0 fallos; 0 errores; 0 omitidas.
+
+Total: 30 pruebas. Fallos: 0. Errores: 0. Omitidas: 0.
+Compilación y empaquetado: BUILD SUCCESS.
+Maven Wrapper 3.3.4: descarga y arranque de Maven 3.9.11 comprobados.
+
+Verificación de navegador y JAR real (Chromium 142 / Playwright):
+OK - JAR: catálogo vacío accesible
+OK - Crear mediante formulario con CSRF real
+OK - Duplicado conserva los campos y muestra error
+OK - Editar precarga y guarda valores
+OK - Buscar sin coincidencias y limpiar
+OK - Cancelar eliminación conserva el registro
+OK - Confirmar eliminación retira el registro
+OK - Diseño de escritorio sin desborde
+OK - Diseño móvil sin desborde del documento
+OK - Formulario móvil con cinco campos y sin desborde
+OK - Error 404 legible con regreso al catálogo
+OK - POST sin token CSRF rechazado por el servidor
+OK - Reinicio real conserva los tres productos
+OK - Sin errores de JavaScript de la aplicación
+Total adicional: 14 comprobaciones correctas; 0 fallidas.
+
+Revisión visual: catálogo 1440 px y catálogo/formulario 390 px, sin superposición.
+Los lanzadores .bat no se ejecutaron en Windows. Ver docs/PRUEBAS.md.

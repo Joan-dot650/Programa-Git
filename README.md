@@ -1,43 +1,34 @@
-# RaízVolt · Módulo web con servlets y JSP
+# RaízVolt · Módulo web con framework
 
-**Evidencia GA7-220501096-AA2-EV02**  
-Aprendiz: Jhon Edwards Tineo Landaeta  
-Programa: Análisis y Desarrollo de Software (ADSO) · Ficha 3235874  
-Centro Regional Antioquia · 25 de octubre de 2026
+**Evidencia GA7-220501096-AA3-EV01**
+**Aprendiz:** Jhon Edwards Tineo Landaeta · Ficha 3235874
+**Programa:** Análisis y Desarrollo de Software · Centro Regional Antioquia
+**Fecha:** 26 de octubre de 2026
 
-Aplicación web académica para registrar, consultar, actualizar y eliminar productos
-solares. Continúa el catálogo JDBC de la evidencia EV01 con una interfaz web MVC.
+El módulo de esta entrega se encuentra en **[raizvolt-spring](raizvolt-spring)**.
+Aplica Spring Boot 4.0.9, Spring MVC, Thymeleaf y Spring JDBC al catálogo de productos
+solares. La base H2 guarda los datos en disco.
 
-## Empezar
+## Ejecución
 
-1. Extraer completamente `JhonEdwardsTineoLandaeta_AA2_EV02.zip`.
-2. Instalar un **JDK 17 o superior** y entrar en `raizvolt-web`.
-3. Abrir `ejecutar.bat` (Windows) o ejecutar `bash ejecutar.sh` (Linux/macOS).
-4. Visitar **http://localhost:8080/raizvolt/productos**.
+Desde el ZIP, entra en `raizvolt-spring` y abre `ejecutar.bat` con Java 17+ instalado.
+Desde un clon Git, instala JDK 17+, entra en `raizvolt-spring`, ejecuta
+`compilar.bat` y luego `ejecutar.bat`.
 
-El ZIP incluye código, dependencias y compilados. El repositorio versiona código,
-documentación y la lista verificada de dependencias; al clonarlo se deben ejecutar
-`descargar_dependencias` y `compilar` antes de `ejecutar`.
+Abre http://localhost:8080/raizvolt/productos.
 
-## Ubicación de la evidencia
+## Entregas conservadas
 
-- `raizvolt-web/`: módulo de **esta evidencia EV02**.
-- `raizvolt-jdbc/`: código anterior EV01, conservado como antecedente.
-- `ENLACE_REPOSITORIO.txt`: enlace directo a esta rama.
-- `raizvolt-web/docs/`: manual, trazabilidad, estándares y pruebas.
-
-Repositorio de esta evidencia: https://github.com/Joan-dot650/Programa-Git/tree/evidencia/aa2-ev02-raizvolt-web
-
-Los archivos `raizvolt-jdbc` proceden del repositorio previo y no son el punto de
-entrada de la aplicación web.
-
-## Requisitos cubiertos
-
-| Criterio de la guía | Implementación |
+| Carpeta | Evidencia |
 | --- | --- |
-| Formularios HTML con servlets | Vistas JSP generan `<form>` y envían parámetros a `ProductoServlet`. |
-| GET y POST | `doGet` consulta; `doPost` registra, actualiza y elimina. |
-| Elementos JSP | Directivas, EL, JSTL, inclusiones y `jsp:forward`. |
-| Versionamiento | Git, historial y rama independiente para EV02 en GitHub. |
+| `raizvolt-spring` | AA3-EV01: implementación con framework, entrega actual. |
+| `raizvolt-web` | AA2-EV02: antecedente con servlets y JSP. |
+| `raizvolt-jdbc` | AA2-EV01: antecedente de escritorio y JDBC. |
 
-El término “pos” del instrumento se implementa como **POST**, el método HTTP.
+La documentación, los comentarios, los estándares y las pruebas de esta evidencia
+están en `raizvolt-spring`. Los módulos anteriores se conservan como antecedentes.
+El ZIP incluye el ejecutable; Git versiona el código y sus instrucciones de compilación.
+
+Rama de esta evidencia: https://github.com/Joan-dot650/Programa-Git/tree/evidencia/aa3-ev01-raizvolt-spring
+
+Código del módulo: https://github.com/Joan-dot650/Programa-Git/tree/evidencia/aa3-ev01-raizvolt-spring/raizvolt-spring
