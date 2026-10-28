@@ -85,7 +85,7 @@ Rama de esta evidencia: [`evidencia/aa3-ev01-raizvolt-spring`](https://github.co
 
 El nuevo módulo está en `raizvolt-spring/`. La rama conserva los módulos anteriores
 como antecedente. El ZIP contiene el módulo de esta evidencia, las instrucciones,
-el enlace directo y un archivo `repositorio.bundle` con el historial Git.
+el enlace directo.
 Los datos locales y los binarios se excluyen del código versionado.
 
 Para obtener el código desde GitHub:
