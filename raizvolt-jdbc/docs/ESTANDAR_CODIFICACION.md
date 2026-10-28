@@ -3,7 +3,7 @@
 ## Continuidad con AA1-EV01 y AA1-EV02
 
 Se revisaron el Informe técnico de plan de trabajo (21/10/2026) y el Informe
-técnico sobre estándares de codificación (22/10/2026) de Jhon Tineo. Ambos
+técnico sobre estándares de codificación (22/10/2026). Ambos
 proponían desarrollo web; esta evidencia pide expresamente JDBC. Se concreta
 por ello un módulo Java de escritorio, con separación de interfaz, servicio y
 acceso a datos. Se conservan UTF-8, dos espacios, nombres descriptivos y Git.
