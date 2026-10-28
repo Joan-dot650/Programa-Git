@@ -17,8 +17,7 @@ Se revisaron estos antecedentes disponibles:
 
 Los diagramas e historias específicos de este módulo no venían adjuntos. Los
 siguientes artefactos documentan el diseño de esta implementación; no se
-presentan como versiones previas aprobadas. Deben cotejarse con cualquier
-artefacto adicional que solicite el instructor.
+presentan como versiones previas aprobadas.
 
 ## Historias, casos de uso y aceptación
 
