@@ -18,4 +18,4 @@ raizvolt-jdbc
 El enlace directo abre la rama y la carpeta de esta evidencia.
 Incluye código Java, esquema SQL, pruebas y documentación.
 El repositorio aloja el código; la aplicación se ejecuta localmente con Java.
-El ZIP incluye además el ejecutable compilado y los controladores JDBC.
+El ZIP incluye los controladores JDBC.
