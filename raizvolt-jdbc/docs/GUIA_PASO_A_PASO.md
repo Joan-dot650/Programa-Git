@@ -138,7 +138,7 @@ https://github.com/Joan-dot650/Programa-Git/tree/evidencia/aa2-ev01-raizvolt/rai
 
 El ZIP final incluye la copia Git de esta rama. El directorio .git se encuentra
 en la carpeta raíz de la entrega, un nivel por encima de raizvolt-jdbc. Los
-archivos README.md y kotlin.txt de la raíz pertenecen al ejercicio Git anterior;
+archivos README.md  de la raíz pertenecen al ejercicio Git anterior;
 el módulo JDBC y su documentación están dentro de raizvolt-jdbc.
 
 Desde la carpeta raizvolt-jdbc, ejecuta cada comando por separado:
