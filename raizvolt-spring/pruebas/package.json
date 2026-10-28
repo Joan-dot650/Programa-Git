@@ -1,0 +1,9 @@
+{
+  "name": "raizvolt-pruebas-aa3-ev02",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Recorrido de navegador de la evidencia AA3-EV02",
+  "scripts": { "test": "node evidencia-browser.cjs" },
+  "devDependencies": { "playwright": "1.62.1" },
+  "engines": { "node": ">=20" }
+}

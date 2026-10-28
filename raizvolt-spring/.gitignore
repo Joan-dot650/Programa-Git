@@ -6,3 +6,5 @@
 *.iml
 .vscode/
 application-local.properties
+/evidencia-generada/
+/pruebas/node_modules/

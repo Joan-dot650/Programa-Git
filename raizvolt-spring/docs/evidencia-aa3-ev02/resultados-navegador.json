@@ -1,0 +1,284 @@
+{
+  "fecha": "2026-10-28T19:26:08.466Z",
+  "zona": "America/Bogota",
+  "navegador": "141.0.7390.37",
+  "viewport": "1280x800 y 390x844",
+  "total": 34,
+  "aprobadas": 34,
+  "fallidas": 0,
+  "baseAislada": true,
+  "casos": [
+    {
+      "id": "UI01",
+      "requisito": "HU-PR02",
+      "detalle": "Catálogo vacío",
+      "esperado": "Mensaje sin productos",
+      "obtenido": "Mensaje visible",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI02",
+      "requisito": "HU-PR01",
+      "detalle": "Cinco campos vacíos",
+      "esperado": "Envío bloqueado",
+      "obtenido": "5 campos inválidos",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI03",
+      "requisito": "HU-PR01",
+      "detalle": "Registro y normalización",
+      "esperado": "303, SOL-550 y precio 680000.50",
+      "obtenido": "Fila creada con valores correctos",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI04",
+      "requisito": "HU-PR01",
+      "detalle": "Recargar después de guardar",
+      "esperado": "Una sola fila",
+      "obtenido": "1 fila",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI05",
+      "requisito": "HU-PR01",
+      "detalle": "Código duplicado",
+      "esperado": "409 sin nueva fila y datos conservados",
+      "obtenido": "409, mensaje y nombre conservado",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI06",
+      "requisito": "Validación HTML",
+      "detalle": "Código con carácter no permitido",
+      "esperado": "patternMismatch y envío bloqueado",
+      "obtenido": "Please match the requested format.",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI07",
+      "requisito": "Validación HTML",
+      "detalle": "Nombre de dos caracteres",
+      "esperado": "tooShort y envío bloqueado",
+      "obtenido": "Please lengthen this text to 3 characters or more (you are currently using 2 characters).",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI08",
+      "requisito": "HU-PR01",
+      "detalle": "Máximo del nombre en interfaz",
+      "esperado": "Limitar a 120 caracteres",
+      "obtenido": "120 caracteres",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI09",
+      "requisito": "HU-PR01",
+      "detalle": "Máximo del código en interfaz",
+      "esperado": "Limitar a 30 caracteres",
+      "obtenido": "30 caracteres",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI10",
+      "requisito": "Validación HTML",
+      "detalle": "Precio con texto",
+      "esperado": "patternMismatch y envío bloqueado",
+      "obtenido": "Please match the requested format.",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI11",
+      "requisito": "Validación HTML",
+      "detalle": "Precio con tres decimales",
+      "esperado": "patternMismatch y envío bloqueado",
+      "obtenido": "Please match the requested format.",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI12",
+      "requisito": "Validación HTML",
+      "detalle": "Existencias negativas",
+      "esperado": "rangeUnderflow y envío bloqueado",
+      "obtenido": "Value must be greater than or equal to 0.",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI13",
+      "requisito": "Validación HTML",
+      "detalle": "Existencias con decimales",
+      "esperado": "stepMismatch y envío bloqueado",
+      "obtenido": "Please enter a valid value. The two nearest valid values are 1 and 2.",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI14",
+      "requisito": "Validación HTML",
+      "detalle": "Existencias superiores al máximo",
+      "esperado": "rangeOverflow y envío bloqueado",
+      "obtenido": "Value must be less than or equal to 1000000.",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI15",
+      "requisito": "Validación servidor",
+      "detalle": "Servidor | Caracteres especiales en el código",
+      "esperado": "HTTP 400 sin guardar",
+      "obtenido": "El código debe tener de 3 a 30 letras, números o guiones.",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI16",
+      "requisito": "Validación servidor",
+      "detalle": "Servidor | Nombre de 121 caracteres",
+      "esperado": "HTTP 400 sin guardar",
+      "obtenido": "El nombre debe tener de 3 a 120 caracteres y una sola línea.",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI17",
+      "requisito": "Validación servidor",
+      "detalle": "Servidor | El precio debe ser mayor que cero",
+      "esperado": "HTTP 400 sin guardar",
+      "obtenido": "El precio debe ser mayor que cero y máximo 9999999999.99.",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI18",
+      "requisito": "Validación servidor",
+      "detalle": "Servidor | Categoría fuera del catálogo",
+      "esperado": "HTTP 400 sin guardar",
+      "obtenido": "Selecciona una categoría válida.",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI19",
+      "requisito": "Validación servidor",
+      "detalle": "Servidor | Máximo de un millón de unidades",
+      "esperado": "HTTP 400 sin guardar",
+      "obtenido": "Las existencias deben estar entre 0 y 1000000.",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI20",
+      "requisito": "HU-PR01",
+      "detalle": "Integridad tras entradas inválidas",
+      "esperado": "Conservar una sola referencia",
+      "obtenido": "1 referencia sin cambios",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI21",
+      "requisito": "HU-PR02",
+      "detalle": "Indicadores y stock menor que cinco",
+      "esperado": "2 referencias, 15 unidades, 1 stock bajo",
+      "obtenido": "2 / 15 / 1",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI22",
+      "requisito": "HU-PR02",
+      "detalle": "Búsqueda parcial por nombre",
+      "esperado": "Solo SOL-550",
+      "obtenido": "SOL-550",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI23",
+      "requisito": "HU-PR02",
+      "detalle": "Búsqueda por código sin distinguir mayúsculas",
+      "esperado": "Solo INV-3000",
+      "obtenido": "INV-3000",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI24",
+      "requisito": "HU-PR02",
+      "detalle": "Búsqueda literal SIN-RESULTADO",
+      "esperado": "Sin coincidencias",
+      "obtenido": "Estado sin coincidencias",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI25",
+      "requisito": "HU-PR02",
+      "detalle": "Búsqueda literal %",
+      "esperado": "Sin coincidencias",
+      "obtenido": "Estado sin coincidencias",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI26",
+      "requisito": "HU-PR03",
+      "detalle": "Precarga y edición de precio y stock",
+      "esperado": "Mismo ID, 2 filas y nuevos valores",
+      "obtenido": "Precio 750000.25 y 2 unidades",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI27",
+      "requisito": "HU-PR03",
+      "detalle": "Edición inválida no altera el registro",
+      "esperado": "400 y precio original",
+      "obtenido": "400; conserva 750000.25",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI28",
+      "requisito": "HU-PR04",
+      "detalle": "Cancelar eliminación",
+      "esperado": "Dos filas conservadas",
+      "obtenido": "2 filas",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI29",
+      "requisito": "HU-PR04",
+      "detalle": "Eliminar una referencia",
+      "esperado": "303, solo SOL-550",
+      "obtenido": "303, solo SOL-550",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI30",
+      "requisito": "Persistencia",
+      "detalle": "Reinicio real del proceso Java",
+      "esperado": "Mismo registro editado; eliminado ausente",
+      "obtenido": "SOL-550, 2 unidades; INV-3000 ausente",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI31",
+      "requisito": "Rutas",
+      "detalle": "Producto inexistente",
+      "esperado": "HTTP 404",
+      "obtenido": "HTTP 404",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI32",
+      "requisito": "Seguridad",
+      "detalle": "Envío sin token CSRF",
+      "esperado": "HTTP 403",
+      "obtenido": "HTTP 403",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI33",
+      "requisito": "HU-PR01",
+      "detalle": "Texto con tildes, ñ, & y HTML",
+      "esperado": "Texto literal, sin etiqueta ejecutada",
+      "obtenido": "Texto íntegro; cero elementos b",
+      "resultado": "APROBADO"
+    },
+    {
+      "id": "UI34",
+      "requisito": "Interfaz adaptable",
+      "detalle": "Formulario en 390 × 844",
+      "esperado": "Campos visibles y sin desbordamiento",
+      "obtenido": "Comprobado",
+      "resultado": "APROBADO"
+    }
+  ]
+}
