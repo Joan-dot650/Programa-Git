@@ -1,0 +1,25 @@
+
+> test:integracion
+> node --test pruebas/interfaz.test.mjs
+
+▶ integración del React compilado, API real, CSRF, archivo H2 y reinicio
+  ✔ JAR sirve los recursos y el catálogo inicia vacío (142.751981ms)
+  ✔ obligatorios muestran errores y enfocan código (67.88929ms)
+  ✔ registro real con coma decimal y normalización (191.811519ms)
+  ✔ código duplicado conserva formulario y enfoca el error del servidor (182.875923ms)
+  ✔ búsqueda por código, resumen filtrado y estado sin resultados (115.770765ms)
+  ✔ editar precarga y conserva el ID (83.803832ms)
+  ✔ cancelar eliminación conserva; confirmar elimina solo el elegido (116.672894ms)
+  ✔ error de consulta recuperable con Reintentar (62.270353ms)
+  ✔ si falla consulta tras guardar, informa que ya quedó guardado (99.622424ms)
+  ✔ ruta desconocida vuelve al catálogo sin perder datos (55.519011ms)
+  ✔ reiniciar el JAR conserva el producto en H2 (2776.404252ms)
+✔ integración del React compilado, API real, CSRF, archivo H2 y reinicio (7882.899851ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8378.272612

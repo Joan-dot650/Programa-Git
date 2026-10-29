@@ -1,0 +1,8 @@
+[INFO] Tests run: 33, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 25.32 s -- in co.raizvolt.LimitesValidacionTest
+[INFO] Tests run: 29, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.454 s -- in co.raizvolt.CatalogoWebTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.245 s -- in co.raizvolt.PersistenciaArchivoTest
+[INFO] Tests run: 33, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.451 s -- in co.raizvolt.ProductoApiTest
+[INFO] Tests run: 96, Failures: 0, Errors: 0, Skipped: 0
+[INFO] BUILD SUCCESS
+[INFO] Total time:  39.625 s
+[INFO] Finished at: 2026-10-29T17:47:44-05:00

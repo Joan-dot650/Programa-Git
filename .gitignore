@@ -1,2 +1,8 @@
+node_modules/
+ejecutable/*.jar
+datos/
+target/
+*.log
+raizvolt-spring/src/main/resources/static/react/
 /VERIFICACION_ENTREGA.txt
 /Guia_RaizVolt_Web.pdf

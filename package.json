@@ -1,0 +1,10 @@
+{
+  "name": "raizvolt-aa4-ev03",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "node scripts/compilar.mjs",
+    "test:integracion": "node --test pruebas/interfaz.test.mjs"
+  }
+}

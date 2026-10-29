@@ -1,26 +1,21 @@
-EVIDENCIA GA7-220501096-AA3-EV01
-Aprendiz: Jhon Edwards Tineo Landaeta
-Programa: Análisis y Desarrollo de Software
-Ficha: 3235874
+EVIDENCIA GA7-220501096-AA4-EV03
+RaízVolt: catálogo solar con React y Spring Boot
 
-Repositorio público del aprendiz:
+Repositorio:
 https://github.com/Joan-dot650/Programa-Git
 
 Rama de esta evidencia:
-evidencia/aa3-ev01-raizvolt-spring
+https://github.com/Joan-dot650/Programa-Git/tree/evidencia/aa4-ev03-react
 
-Enlace directo a AA3-EV01:
-https://github.com/Joan-dot650/Programa-Git/tree/evidencia/aa3-ev01-raizvolt-spring
+Código React:
+https://github.com/Joan-dot650/Programa-Git/tree/evidencia/aa4-ev03-react/raizvolt-react
 
-Archivos del módulo:
-https://github.com/Joan-dot650/Programa-Git/tree/evidencia/aa3-ev01-raizvolt-spring/raizvolt-spring
+Servidor y API:
+https://github.com/Joan-dot650/Programa-Git/tree/evidencia/aa4-ev03-react/raizvolt-spring
 
-Historial de versiones de la rama:
-https://github.com/Joan-dot650/Programa-Git/commits/evidencia/aa3-ev01-raizvolt-spring
+Historial:
+https://github.com/Joan-dot650/Programa-Git/commits/evidencia/aa4-ev03-react
 
-El repositorio contiene el código fuente, las pruebas y la documentación.
-El ZIP incluye además el ejecutable con sus dependencias y repositorio.bundle
-para recuperar el historial de la rama sin conexión a Internet.
-
-Antecedente AA2-EV02:
-https://github.com/Joan-dot650/Programa-Git/tree/evidencia/aa2-ev02-raizvolt-web
+La rama conserva el historial previo de RaízVolt. La entrega ZIP incorpora
+el ejecutable compilado; Git contiene las fuentes y las instrucciones para
+generarlo. No se incluyen las bases con datos de uso ni node_modules.

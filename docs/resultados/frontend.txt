@@ -1,0 +1,45 @@
+
+> raizvolt-react@1.0.0 test
+> node --test tests/*.test.js
+
+✔ normaliza código, espacios y coma sin convertir importes a punto flotante (1.669176ms)
+✔ acepta tildes, cero existencias y límites monetarios (0.378628ms)
+✔ rechaza codigo: "" (0.203997ms)
+✔ rechaza codigo: "AB" (0.085149ms)
+✔ rechaza codigo: "BAD_CODE" (0.103432ms)
+✔ rechaza codigo: "ÑÑÑ" (0.074071ms)
+✔ rechaza codigo: "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA" (0.100526ms)
+✔ rechaza nombre: "" (0.070146ms)
+✔ rechaza nombre: "ab" (0.09163ms)
+✔ rechaza nombre: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" (0.178906ms)
+✔ rechaza nombre: "Panel\nsolar" (0.16892ms)
+✔ rechaza nombre: "Panel
+solar" (0.101859ms)
+✔ rechaza categoria: "" (0.793475ms)
+✔ rechaza categoria: "OTRA" (0.046484ms)
+✔ rechaza categoria: "toString" (0.064015ms)
+✔ rechaza precio: "" (0.076078ms)
+✔ rechaza precio: "0" (0.046676ms)
+✔ rechaza precio: "-1" (0.028459ms)
+✔ rechaza precio: "1e3" (0.050159ms)
+✔ rechaza precio: "1.234" (0.02392ms)
+✔ rechaza precio: "1.000.000" (0.028762ms)
+✔ rechaza precio: "10000000000" (0.030642ms)
+✔ rechaza precio: "NaN" (0.02779ms)
+✔ rechaza precio: "Infinity" (0.02617ms)
+✔ rechaza existencias: "" (0.030914ms)
+✔ rechaza existencias: "-1" (0.02662ms)
+✔ rechaza existencias: "1.5" (0.028652ms)
+✔ rechaza existencias: "1e3" (0.024653ms)
+✔ rechaza existencias: "1000001" (0.025395ms)
+✔ rechaza existencias: "Infinity" (0.025287ms)
+✔ muestra centavos exactos aunque el total supere Number.MAX_SAFE_INTEGER (24.16757ms)
+✔ interpreta rutas al recargar y conserva búsqueda codificada (0.420323ms)
+ℹ tests 32
+ℹ suites 0
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 126.974114
