@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Demostración del servicio web de registro e inicio de sesión.">
+  <title>Acceso | Servicio de autenticación</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Inicio"><span class="brand-mark" aria-hidden="true">a.</span> acceso<span class="brand-dot">/</span></a>
+    <span class="project-tag">CONSTRUCCIÓN API <span>AA5 · EV01</span></span>
+  </header>
+  <main>
+    <section class="intro">
+      <p class="eyebrow"><span class="status-dot"></span> SERVICIO WEB DE AUTENTICACIÓN</p>
+      <h1>Tu cuenta.<br>Un acceso sencillo.</h1>
+      <p class="lead">Crea un usuario y comprueba tus credenciales con nuestro servicio de registro e inicio de sesión.</p>
+    </section>
+
+    <div class="workspace">
+      <section class="card form-card" aria-labelledby="form-title">
+        <div class="mode-switch" aria-label="Operación">
+          <button type="button" id="register-mode" class="mode active" aria-pressed="true">Crear cuenta</button>
+          <button type="button" id="login-mode" class="mode" aria-pressed="false">Iniciar sesión</button>
+        </div>
+        <h2 id="form-title">Comienza aquí</h2>
+        <p id="form-description" class="muted">Elige un usuario y una contraseña para registrarte.</p>
+        <form id="auth-form">
+          <div class="field">
+            <label for="usuario">Usuario</label>
+            <input id="usuario" name="usuario" autocomplete="username" placeholder="Ej.: jhon.demo" required maxlength="32" aria-describedby="username-help" spellcheck="false" autocapitalize="none">
+            <small id="username-help">Entre 3 y 30 caracteres. Letras, números, punto, guion o guion bajo.</small>
+          </div>
+          <div class="field">
+            <label for="contrasena">Contraseña</label>
+            <div class="password-wrap">
+              <input id="contrasena" name="contrasena" type="password" autocomplete="new-password" placeholder="Tu contraseña" minlength="8" maxlength="128" required aria-describedby="password-help">
+              <button id="toggle-password" type="button" aria-pressed="false" aria-label="Mostrar contraseña">Mostrar</button>
+            </div>
+            <small id="password-help">De 8 a 128 caracteres. Se distinguen mayúsculas y espacios.</small>
+          </div>
+          <button class="submit" id="submit-button" type="submit">Crear cuenta <span aria-hidden="true">→</span></button>
+        </form>
+        <p class="privacy-note">Tu contraseña se almacena como un hash con sal individual.</p>
+      </section>
+
+      <aside class="side-column">
+        <section class="card result-card" aria-labelledby="result-title">
+          <div class="section-top"><span class="eyebrow">RESULTADO</span><span id="response-code" class="response-code">EN ESPERA</span></div>
+          <h2 id="result-title">Respuesta del servicio</h2>
+          <p id="status-message" role="status" aria-live="polite">Completa el formulario para ver el resultado de tu solicitud.</p>
+          <pre id="json-response" hidden aria-label="Respuesta JSON"></pre>
+        </section>
+        <section class="steps" aria-labelledby="steps-title">
+          <h2 id="steps-title">Prueba el recorrido completo</h2>
+          <ol>
+            <li><span>01</span><div><strong>Crea tu cuenta</strong><p>Registra un usuario que aún no exista.</p></div></li>
+            <li><span>02</span><div><strong>Comprueba el acceso</strong><p>Inicia sesión con los mismos datos.</p></div></li>
+            <li><span>03</span><div><strong>Verifica el error</strong><p>Prueba una contraseña distinta de al menos 8 caracteres.</p></div></li>
+          </ol>
+        </section>
+      </aside>
+    </div>
+    <p class="scope-note">Demostración académica: el inicio de sesión verifica las credenciales y devuelve un mensaje.</p>
+  </main>
+  <footer><span>Jhon Edwards Tineo Landaeta</span><span>SENA · Análisis y Desarrollo de Software</span></footer>
+</body>
+</html>
+
