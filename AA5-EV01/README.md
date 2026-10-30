@@ -117,9 +117,7 @@ El código está publicado en la rama `evidencia-aa5-ev01`, carpeta `AA5-EV01`:
 https://github.com/Joan-dot650/Programa-Git/tree/evidencia-aa5-ev01/AA5-EV01
 
 El diseño, la implementación y las pruebas/documentación tienen commits
-separados. El ZIP incluye además una copia recuperable del historial en
-`versionamiento/Programa-Git.bundle` y un listado en
-`versionamiento/HISTORIAL_GIT.txt` (junto a la carpeta AA5-EV01).
+separados. El ZIP incluye todos los documentos junto a la carpeta AA5-EV01.
 
 Para clonar desde GitHub, abre Git Bash en una carpeta nueva:
 
@@ -132,7 +130,7 @@ node src/server.js
 ```
 
 Para recuperar el historial sin internet, abre Git Bash en la carpeta extraída
-que contiene `AA5-EV01` y `versionamiento`:
+que contiene `AA5-EV01`.
 
 ```bash
 git clone --branch evidencia-aa5-ev01 versionamiento/Programa-Git.bundle Proyecto_Git
