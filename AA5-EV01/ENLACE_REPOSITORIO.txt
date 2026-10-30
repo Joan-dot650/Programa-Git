@@ -21,5 +21,4 @@ EJECUTAR (Node.js 24.x)
  cd Programa-Git/AA5-EV01
  node src/server.js
 
-El ZIP conserva una copia del historial en versionamiento/Programa-Git.bundle.
-Consulta versionamiento/HISTORIAL_GIT.txt para ver los commits de la entrega.
+
