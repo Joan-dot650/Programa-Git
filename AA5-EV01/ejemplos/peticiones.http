@@ -1,0 +1,29 @@
+# Abrir con un cliente HTTP compatible, por ejemplo REST Client en VS Code.
+# Datos de demostración. Ejecuta primero el registro.
+
+### 1. Registrar: HTTP 201; si se repite, HTTP 409.
+POST http://127.0.0.1:3000/api/registro
+Content-Type: application/json
+
+{"usuario":"jhon.demo","contrasena":"Solar2026!"}
+
+### 2. Autenticación correcta: HTTP 200.
+POST http://127.0.0.1:3000/api/login
+Content-Type: application/json
+
+{"usuario":"jhon.demo","contrasena":"Solar2026!"}
+
+### 3. Contraseña incorrecta: HTTP 401.
+POST http://127.0.0.1:3000/api/login
+Content-Type: application/json
+
+{"usuario":"jhon.demo","contrasena":"Equivocada123!"}
+
+### 4. Validación: HTTP 400.
+POST http://127.0.0.1:3000/api/registro
+Content-Type: application/json
+
+{"usuario":"ab","contrasena":"123"}
+
+### 5. Disponibilidad: HTTP 200.
+GET http://127.0.0.1:3000/api/salud

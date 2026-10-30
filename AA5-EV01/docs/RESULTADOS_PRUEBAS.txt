@@ -1,0 +1,53 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> servicio-autenticacion-aa5-ev01@1.0.0 test
+> node --test tests/*.test.js
+
+✔ RF01: registra una cuenta y excluye contraseña/hash de la respuesta (399.99446ms)
+✔ RF02: credenciales correctas devuelven autenticación satisfactoria (186.614747ms)
+✔ RF03: contraseña incorrecta produce HTTP 401 (180.64859ms)
+✔ RF03: usuario inexistente tiene el mismo error de autenticación (172.133911ms)
+✔ RF04: rechaza registro duplicado (2.835002ms)
+✔ RF04: normaliza espacios de extremos y mayúsculas del usuario (190.258038ms)
+✔ RF04: campos ausentes se rechaza en registro e inicio de sesión (5.157191ms)
+✔ RF04: usuario vacío se rechaza en registro e inicio de sesión (4.335326ms)
+✔ RF04: usuario corto se rechaza en registro e inicio de sesión (3.058608ms)
+✔ RF04: usuario largo se rechaza en registro e inicio de sesión (2.403794ms)
+✔ RF04: usuario numérico se rechaza en registro e inicio de sesión (2.351174ms)
+✔ RF04: usuario con espacio interno se rechaza en registro e inicio de sesión (3.138037ms)
+✔ RF04: usuario que comienza con guion se rechaza en registro e inicio de sesión (3.642625ms)
+✔ RF04: intento de inyección SQL se rechaza en registro e inicio de sesión (2.01606ms)
+✔ RF04: contraseña corta se rechaza en registro e inicio de sesión (2.741421ms)
+✔ RF04: contraseña demasiado larga se rechaza en registro e inicio de sesión (1.787797ms)
+✔ RF04: contraseña en blanco se rechaza en registro e inicio de sesión (1.80318ms)
+✔ RF04: contraseña no textual se rechaza en registro e inicio de sesión (1.584883ms)
+✔ RF04: propiedad inesperada se rechaza en registro e inicio de sesión (2.722062ms)
+✔ RF04: objeto nulo se rechaza en registro e inicio de sesión (1.820597ms)
+✔ RF04: arreglo se rechaza en registro e inicio de sesión (2.001969ms)
+✔ acepta los límites inferiores de longitud (374.808784ms)
+✔ acepta los límites superiores de longitud (346.04222ms)
+✔ permite caracteres especiales y conserva espacios y mayúsculas de contraseña (662.87746ms)
+✔ dos registros simultáneos del mismo usuario crean una sola cuenta (184.350946ms)
+✔ la base guarda hashes diferentes para contraseñas iguales (175.705122ms)
+✔ RF05: la cuenta persiste después de cerrar y reabrir el servidor (339.182254ms)
+✔ rechaza JSON mal formado con HTTP 400 (1.791713ms)
+✔ rechaza bytes UTF-8 inválidos con HTTP 400 (1.515167ms)
+✔ exige application/json con HTTP 415 (1.801959ms)
+✔ rechaza cuerpos comprimidos no admitidos con HTTP 415 (0.915856ms)
+✔ limita el tamaño del cuerpo con HTTP 413 (1.45686ms)
+✔ rechaza un método incorrecto e informa el método permitido (3.335693ms)
+✔ una ruta inexistente devuelve JSON 404 (1.262317ms)
+✔ no expone la base de datos ni los archivos fuente por HTTP (2.739958ms)
+✔ la pantalla y sus recursos se sirven sin dependencias externas (3.024626ms)
+✔ incluye cabeceras de seguridad y no habilita CORS abierto (1.0777ms)
+✔ el contrato OpenAPI documenta ambos métodos (1.501838ms)
+✔ el límite predeterminado bloquea la solicitud 21 de una IP (207.517682ms)
+✔ el límite permite nuevos intentos al vencer la ventana (166.998591ms)
+ℹ tests 40
+ℹ suites 0
+ℹ pass 40
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3754.582235

@@ -1,0 +1,25 @@
+EVIDENCIA GA7-220501096-AA5-EV01
+Aprendiz: Jhon Edwards Tineo Landaeta
+Ficha: 3235874
+
+REPOSITORIO PUBLICO
+https://github.com/Joan-dot650/Programa-Git
+
+CARPETA DEL PROYECTO
+https://github.com/Joan-dot650/Programa-Git/tree/evidencia-aa5-ev01/AA5-EV01
+
+HISTORIAL DE LA EVIDENCIA
+https://github.com/Joan-dot650/Programa-Git/commits/evidencia-aa5-ev01/AA5-EV01
+
+Rama: evidencia-aa5-ev01
+Carpeta: AA5-EV01
+
+CLONAR
+ git clone --branch evidencia-aa5-ev01 --single-branch https://github.com/Joan-dot650/Programa-Git.git
+
+EJECUTAR (Node.js 24.x)
+ cd Programa-Git/AA5-EV01
+ node src/server.js
+
+El ZIP conserva una copia del historial en versionamiento/Programa-Git.bundle.
+Consulta versionamiento/HISTORIAL_GIT.txt para ver los commits de la entrega.
