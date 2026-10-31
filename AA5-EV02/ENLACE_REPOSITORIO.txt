@@ -10,7 +10,7 @@ https://github.com/Joan-dot650/Programa-Git/tree/evidencia-aa5-ev01/AA5-EV01
 
 ESTADO DE AA5-EV02
 La nueva evidencia está completa como proyecto local y versionada con Git.
-Su publicación remota está pendiente de autorización. El enlace anterior
+Su publicación remota todavía no se ha completado. El enlace anterior
 corresponde a la evidencia de origen, no a los archivos nuevos de AA5-EV02.
 
 Rama: evidencia-aa5-ev02

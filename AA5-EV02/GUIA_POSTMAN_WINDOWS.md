@@ -26,7 +26,7 @@ No necesitas MySQL, XAMPP ni Live Server. Para ejecutar la API no se requiere `n
 
 ## 3. Importar la colección
 
-1. Selecciona **Import**.
+1. Selecciona **Import**; en versiones recientes puede aparecer como **Use resources or import > Import**.
 2. Selecciona **postman/AA5_EV02.postman_collection.json** dentro de la carpeta extraída.
 3. Importa también **postman/Local.postman_environment.json** y selecciona el entorno **AA5-EV02 - Local**.
 4. Comprueba que `baseUrl` sea `http://127.0.0.1:3000`.
@@ -39,11 +39,11 @@ Si tu versión de Postman no permite importar colecciones sin iniciar sesión, p
 **Antes de cada ejecución completa:** detén el servidor con Ctrl+C y vuelve a iniciarlo. Esto reinicia el contador de intentos sin borrar las cuentas. No envíes otras solicitudes de registro o login durante esta ejecución.
 
 1. En CP01 pulsa **Send**. Su script crea un nombre de usuario nuevo para esta ejecución.
-2. Ejecuta CP02, CP03 y los demás **en orden**, una sola vez cada uno.
+2. Ejecuta CP02, CP03 y los demás **en orden**, una sola vez cada uno. Completa la secuencia dentro de 10 minutos; si la ventana expira, CP25 no reproducirá el bloqueo esperado.
 3. En cada caso muestra el método, URL, Body cuando exista, el código HTTP y el JSON de respuesta. Abre **Test Results** para ver las verificaciones.
 4. Toma una captura por caso con **Windows + Mayús + S** y guárdala con el identificador (por ejemplo CP02_POSTMAN.png).
 5. CP25 debe devolver **429**: es el intento número 21 de autenticación. Los GET no consumen ese contador.
-6. Para otra ejecución automatizada: reinicia el servidor y usa **Run collection**, una iteración, todos los casos en orden. Deben pasar **25 solicitudes y 140 verificaciones**.
+6. Para otra ejecución automatizada: reinicia el servidor, selecciona la colección y pulsa **Run** o **Run collection**. Si aparecen las opciones **Functional** y **Local**, selecciónalas. Usa una iteración y todos los casos en orden, con **Persist responses for a session** activado. Pulsa **Start run**. Deben pasar **25 solicitudes y 140 verificaciones**. Guarda una captura del resumen y abre después cada resultado para documentarlo, sin reenviar solicitudes.
 
 Las respuestas 400, 401, 404, 405, 409, 413, 415 y 429 son resultados correctos cuando el caso está diseñado para provocarlas. No son fallos de la prueba si coinciden con lo esperado.
 
@@ -66,7 +66,7 @@ El video incluido de Newman es una demostración técnica complementaria. No afi
 
 ## 6. Completar la entrega en escritorio
 
-Agrega al documento las capturas que tomaste en Postman y añade tu grabación de escritorio al ZIP. Conserva los archivos del proyecto, ENDPOINT.txt y ENLACE_REPOSITORIO.txt. El archivo final debe llamarse **JHON_EDWARDS_TINEO_LANDAETA_AA5_EV02.zip**.
+Abre **documentos/PLANTILLA_INFORME_POSTMAN.docx** en Word y guarda una copia como **INFORME_POSTMAN_ESCRITORIO.docx**. Completa las fechas, resultados observados y espacios para las capturas. Exporta esa copia a PDF con **Archivo > Guardar como > PDF**. La plantilla no es un informe final hasta completar esos campos. Añade tu grabación de escritorio al ZIP. Conserva los archivos del proyecto, ENDPOINT.txt y ENLACE_REPOSITORIO.txt. El archivo final debe llamarse **JHON_EDWARDS_TINEO_LANDAETA_AA5_EV02.zip**.
 
 ## Si aparece un problema
 
@@ -75,8 +75,22 @@ Agrega al documento las capturas que tomaste en Postman y añade tu grabación d
 | `ECONNREFUSED` | Inicia el servidor y revisa el puerto de baseUrl. |
 | 409 al repetir CP02 | Repite toda la secuencia desde CP01 para generar otro usuario. |
 | 429 antes de CP25 | Reinicia el servidor y repite los casos en orden, sin enviar otros POST. |
-| CP25 no da 429 | Falta algún POST anterior o reiniciaste el servidor a mitad de la secuencia. |
+| CP25 no da 429 | Falta algún POST anterior, reiniciaste la API o transcurrieron más de 10 minutos. Reinicia y usa el Runner local para ejecutar toda la secuencia. |
 | `npm.ps1` bloqueado | Usa `npm.cmd` en PowerShell. |
 | Puerto 3000 ocupado | Cierra la instancia anterior; o cambia PORT y el valor baseUrl al mismo puerto. |
 
 Fuentes: documentación oficial de instalación y colecciones de Postman; enlaces en el informe.
+
+## Una forma práctica de grabar y tomar capturas
+
+1. Inicia la grabación de pantalla y presenta tu nombre, ficha y evidencia.
+2. Muestra la terminal del servidor, la versión de Node.js y los endpoints.
+3. Reinicia la API justo antes de la secuencia. Si usas `modoVideo=true` en el entorno, la colección hará una pausa de seis segundos por caso; el recorrido automático dura aproximadamente tres minutos.
+4. Inicia el Runner local con los 25 casos en orden y una iteración. Mantén activada la conservación de respuestas.
+5. Muestra el resumen y abre los detalles de registro, login correcto, login incorrecto, validaciones y límite de intentos. Explica el resultado esperado y el observado.
+6. Detén y guarda la grabación. Revisa los resultados conservados para tomar las capturas de CP01 a CP25. No hace falta reenviar solicitudes.
+7. Si tu versión no permite consultar las respuestas conservadas, ejecuta manualmente una secuencia nueva completa dentro de los diez minutos y captura cada respuesta.
+
+Referencias de la interfaz consultadas el 31 de octubre de 2026:
+- https://learning.postman.com/docs/getting-started/importing-and-exporting/importing-data/
+- https://learning.postman.com/docs/tests-and-scripts/running-collections/intro-to-collection-runs/

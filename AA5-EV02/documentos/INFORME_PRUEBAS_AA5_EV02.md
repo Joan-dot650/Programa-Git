@@ -220,10 +220,18 @@ Esta es la solicitud de autenticación número 21 desde el inicio de la ejecuci�
 ## Conclusión
 Los casos definidos coinciden con el comportamiento esperado. Para añadir la interfaz de Postman de escritorio se debe seguir GUIA_POSTMAN_WINDOWS.md y agregar las capturas y la grabación del computador del aprendiz.
 
-La rama AA5-EV02 está versionada localmente; su publicación remota está pendiente de autorización.
+La rama AA5-EV02 está versionada localmente; su publicación remota todavía no se ha completado.
 
 ## Referencias
 - [Postman: instalar la aplicación](https://learning.postman.com/docs/getting-started/installation/install-app)
 - [Postman: ejecutar colecciones con Newman](https://learning.postman.com/docs/collections/using-newman-cli/installing-running-newman)
 - [Postman: scripts de pruebas](https://learning.postman.com/docs/tests-and-scripts/write-scripts/test-scripts/)
 - [Repositorio de referencia (origen AA5-EV01)](https://github.com/Joan-dot650/Programa-Git/tree/evidencia-aa5-ev01/AA5-EV01)
+
+## Anexo A Comprobación del 31 de octubre de 2026
+
+Se repitieron las pruebas sobre el código recuperado de la entrega con Node.js 24.22.1. Aprobaron las 40 pruebas de integración y las 140 verificaciones de las 25 solicitudes de la colección ejecutada con Newman 6.2.1. No se modificó la lógica de la API.
+
+Los reportes originales permanecen intactos. La nueva ejecución está en `resultados/VERIFICACION_NODE_2026_10_31.txt`, `resultados/VERIFICACION_NEWMAN_2026_10_31.txt` y `resultados/VERIFICACION_NEWMAN_2026_10_31.json`.
+
+Esta comprobación adicional corresponde a Newman. Para completar la presentación en Postman de escritorio se agregó `PLANTILLA_INFORME_POSTMAN.docx`, con los casos y campos para incorporar las capturas y resultados observados. La rama de GitHub continúa pendiente de publicación.

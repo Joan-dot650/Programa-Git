@@ -48,7 +48,7 @@ node --test tests/api.test.js
 1. Instala Postman desde https://www.postman.com/downloads/.
 2. Importa los archivos `postman/AA5_EV02.postman_collection.json` y `postman/Local.postman_environment.json`.
 3. Selecciona el entorno local y comprueba `baseUrl = http://127.0.0.1:3000`.
-4. Inicia el servidor y ejecuta CP01 a CP25, una vez cada uno, en orden.
+4. Inicia el servidor y ejecuta CP01 a CP25, una vez cada uno, en orden y dentro de 10 minutos.
 5. Revisa el estado HTTP, el JSON y **Test Results**. Toma las capturas y graba el video siguiendo **GUIA_POSTMAN_WINDOWS.md**.
 
 Antes de cada repetición completa, reinicia el servidor. La API permite 20 intentos de autenticación por IP en 10 minutos. CP25 comprueba el bloqueo del intento 21; no envíes otros POST durante la ejecución. Reiniciar la API reinicia el contador, sin borrar las cuentas. La variable opcional `modoVideo=true` solo añade una pausa para leer los resultados al grabar.
@@ -67,6 +67,7 @@ Antes de cada repetición completa, reinicia el servidor. La API permite 20 inte
 | `ENDPOINT.txt` | Métodos, URL, solicitudes y respuestas. |
 | `docs/openapi.json` | Contrato OpenAPI 3.1.0. |
 | `ENLACE_REPOSITORIO.txt` | Enlace al código y al historial. |
+| `documentos/PLANTILLA_INFORME_POSTMAN.docx` | Plantilla editable para incorporar las capturas y los resultados de Postman de escritorio. |
 | `GUIA_POSTMAN_WINDOWS.md` | Instalación, importación, capturas y guion del video en escritorio. |
 
 Los errores HTTP esperados, como 400, 401 o 429, se consideran casos aprobados cuando coinciden con el resultado definido en la colección.
@@ -86,7 +87,7 @@ El servicio verifica credenciales y devuelve el mensaje solicitado. No emite JWT
 
 Repositorio de referencia: https://github.com/Joan-dot650/Programa-Git
 
-AA5-EV02 está versionada localmente en la rama `evidencia-aa5-ev02`, carpeta `AA5-EV02`. **Su publicación en GitHub está pendiente de autorización.** El repositorio remoto conserva la evidencia anterior; no se afirma que ya incluya estos archivos nuevos.
+AA5-EV02 está versionada localmente en la rama `evidencia-aa5-ev02`, carpeta `AA5-EV02`. **La rama todavía no está publicada en GitHub.** El repositorio remoto conserva la evidencia anterior; no se afirma que ya incluya estos archivos nuevos.
 
 El ZIP incluye una copia recuperable del historial en `versionamiento/Programa-Git.bundle`. Desde la carpeta principal extraída puedes recuperar el proyecto completo sin depender de la publicación remota:
 
@@ -104,3 +105,9 @@ node src/server.js
 - Newman: https://learning.postman.com/docs/collections/using-newman-cli/installing-running-newman
 - Colecciones: https://learning.postman.com/docs/collections/using-collections/
 - Scripts de pruebas: https://learning.postman.com/docs/tests-and-scripts/write-scripts/test-scripts/
+
+## Continuación del 31 de octubre de 2026
+
+Se repitieron las 40 pruebas de integración y la colección completa con Node.js 24.22.1: 25 solicitudes, 140 verificaciones y cero fallos. Los reportes nuevos están en `resultados/VERIFICACION_*_2026_10_31.*`; se conservan las evidencias originales. El informe PDF incorpora un anexo con la nueva comprobación.
+
+La entrega aún requiere las capturas y el video de Postman de escritorio, además de completar la publicación de la rama. La plantilla Word permite documentar cada caso sin editar el PDF de Newman. Para una ejecución reproducible, usa el Runner local con una iteración y revisa después las respuestas conservadas; la secuencia debe finalizar antes de que venza la ventana de 10 minutos del límite de intentos.
