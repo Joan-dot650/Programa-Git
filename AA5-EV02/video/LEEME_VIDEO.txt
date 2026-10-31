@@ -1,0 +1,9 @@
+VIDEO INCLUIDO: PRUEBAS_POSTMAN_NEWMAN.mp4
+
+Grabación real de pantalla de la ejecución de una colección Postman mediante
+Newman 6.2.1. Duración aproximada: 3 minutos. Sin voz.
+Los títulos visibles explican cada caso; las respuestas provienen de la API real.
+
+Esta grabación no muestra la interfaz de Postman de escritorio. Para completar
+ese requisito de presentación, sigue GUIA_POSTMAN_WINDOWS.md y guarda tu video
+como PRUEBAS_POSTMAN_ESCRITORIO.mp4 en esta carpeta.

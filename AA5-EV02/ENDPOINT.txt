@@ -1,0 +1,68 @@
+ENDPOINT DE LA API - GA7-220501096-AA5-EV02
+Aprendiz: Jhon Edwards Tineo Landaeta | Ficha: 3235874
+
+URL BASE LOCAL: http://127.0.0.1:3000
+Requisito: Node.js 24 o superior (incluye Node.js 26).
+Inicio: node src/server.js o INICIAR_WINDOWS.bat
+La URL solo funciona mientras el servidor esté abierto en tu computador.
+
+1. CONSULTAR ESTADO
+Método: GET
+URL: http://127.0.0.1:3000/api/salud
+Cuerpo: ninguno
+Respuesta: 200
+{"exito":true,"mensaje":"Servicio disponible."}
+
+2. REGISTRAR USUARIO
+Método: POST
+URL: http://127.0.0.1:3000/api/registro
+Header: Content-Type: application/json
+Body / raw / JSON:
+{
+  "usuario": "jhon.demo",
+  "contrasena": "Solar2026!"
+}
+Respuesta correcta: 201, exito=true, mensaje="Registro satisfactorio."
+Incluye usuario.id, usuario.usuario y usuario.creadoEn, sin contraseña ni hash.
+Usuario existente: 409, mensaje="El usuario ya está registrado."
+
+3. INICIAR SESIÓN
+Método: POST
+URL: http://127.0.0.1:3000/api/login
+Header: Content-Type: application/json
+Body / raw / JSON:
+{
+  "usuario": "jhon.demo",
+  "contrasena": "Solar2026!"
+}
+Primero se debe registrar esta cuenta; no viene precargada.
+Respuesta correcta: 200, mensaje="Autenticación satisfactoria"
+Credenciales incorrectas: 401, mensaje="Error en la autenticación"
+
+4. CONSULTAR CONTRATO
+Método: GET
+URL: http://127.0.0.1:3000/api/openapi.json
+Cuerpo: ninguno
+Respuesta: 200, documento OpenAPI 3.1.0.
+Copia local: docs/openapi.json
+
+VALIDACIONES Y RESPUESTAS COMUNES
+400: JSON mal formado, cuerpo que no sea objeto o credenciales inválidas.
+404: ruta inexistente.
+405: método incorrecto; header Allow informa el permitido.
+413: cuerpo HTTP mayor de 4096 bytes.
+415: Content-Type distinto de application/json o cuerpo comprimido.
+429: solicitud de autenticación 21 dentro de 10 minutos por IP; Retry-After
+     indica cuántos segundos esperar. Registro e inicio comparten el límite.
+500: error interno no previsto; no expone trazas al cliente.
+
+USUARIO: texto de 3 a 30 caracteres. Letras, números, punto, guion o guion bajo.
+Debe comenzar por letra o número. Se quitan espacios externos y se convierte
+a minúsculas. Expresión aplicada después de normalizar: ^[a-z0-9][a-z0-9._-]{2,29}$
+CONTRASEÑA: texto de 8 a 128 caracteres y no solo espacios. Los espacios y las
+mayúsculas sí forman parte de la contraseña; no se normaliza.
+CAMPOS: únicamente usuario y contrasena.
+
+La API comprueba credenciales; no genera JWT ni mantiene una sesión.
+Authorization: No Auth. El usuario y contraseña viajan en el cuerpo JSON.
+Datos de ejemplo ficticios para la práctica académica.

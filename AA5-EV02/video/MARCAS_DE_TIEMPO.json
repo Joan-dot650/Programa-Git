@@ -1,0 +1,106 @@
+[
+  {
+    "case": "CP01",
+    "second": 11.59
+  },
+  {
+    "case": "CP02",
+    "second": 17.85
+  },
+  {
+    "case": "CP03",
+    "second": 24.08
+  },
+  {
+    "case": "CP04",
+    "second": 30.31
+  },
+  {
+    "case": "CP05",
+    "second": 36.55
+  },
+  {
+    "case": "CP06",
+    "second": 42.76
+  },
+  {
+    "case": "CP07",
+    "second": 48.77
+  },
+  {
+    "case": "CP08",
+    "second": 54.79
+  },
+  {
+    "case": "CP09",
+    "second": 60.81
+  },
+  {
+    "case": "CP10",
+    "second": 66.83
+  },
+  {
+    "case": "CP11",
+    "second": 72.85
+  },
+  {
+    "case": "CP12",
+    "second": 78.86
+  },
+  {
+    "case": "CP13",
+    "second": 84.88
+  },
+  {
+    "case": "CP14",
+    "second": 90.9
+  },
+  {
+    "case": "CP15",
+    "second": 96.92
+  },
+  {
+    "case": "CP16",
+    "second": 102.93
+  },
+  {
+    "case": "CP17",
+    "second": 108.95
+  },
+  {
+    "case": "CP18",
+    "second": 114.96
+  },
+  {
+    "case": "CP19",
+    "second": 120.98
+  },
+  {
+    "case": "CP20",
+    "second": 127.0
+  },
+  {
+    "case": "CP21",
+    "second": 133.02
+  },
+  {
+    "case": "CP22",
+    "second": 139.22
+  },
+  {
+    "case": "CP23",
+    "second": 145.43
+  },
+  {
+    "case": "CP24",
+    "second": 151.45
+  },
+  {
+    "case": "CP25",
+    "second": 157.46
+  },
+  {
+    "case": "RESUMEN",
+    "second": 163.49
+  }
+]

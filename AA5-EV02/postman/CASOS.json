@@ -1,0 +1,381 @@
+[
+  {
+    "id": "CP01",
+    "title": "Servicio disponible",
+    "method": "GET",
+    "path": "/api/salud",
+    "status": 200,
+    "message": "Servicio disponible.",
+    "body": null,
+    "detail": null,
+    "description": "Consultar el estado del servidor antes de enviar credenciales.",
+    "content_type": "application/json"
+  },
+  {
+    "id": "CP02",
+    "title": "Registro satisfactorio",
+    "method": "POST",
+    "path": "/api/registro",
+    "status": 201,
+    "message": "Registro satisfactorio.",
+    "body": {
+      "usuario": "{{usuarioPrueba}}",
+      "contrasena": "Solar2026!"
+    },
+    "detail": null,
+    "description": "Registrar un usuario nuevo con una contraseña válida. Debe devolver un identificador, sin contraseña ni hash.",
+    "content_type": "application/json"
+  },
+  {
+    "id": "CP03",
+    "title": "Autenticación satisfactoria",
+    "method": "POST",
+    "path": "/api/login",
+    "status": 200,
+    "message": "Autenticación satisfactoria",
+    "body": {
+      "usuario": "{{usuarioPrueba}}",
+      "contrasena": "Solar2026!"
+    },
+    "detail": null,
+    "description": "Ingresar con la cuenta creada en CP02 y la misma contraseña.",
+    "content_type": "application/json"
+  },
+  {
+    "id": "CP04",
+    "title": "Contraseña incorrecta",
+    "method": "POST",
+    "path": "/api/login",
+    "status": 401,
+    "message": "Error en la autenticación",
+    "body": {
+      "usuario": "{{usuarioPrueba}}",
+      "contrasena": "Equivocada123!"
+    },
+    "detail": null,
+    "description": "Cambiar únicamente la contraseña por otra de longitud válida.",
+    "content_type": "application/json"
+  },
+  {
+    "id": "CP05",
+    "title": "Usuario inexistente",
+    "method": "POST",
+    "path": "/api/login",
+    "status": 401,
+    "message": "Error en la autenticación",
+    "body": {
+      "usuario": "{{usuarioInexistente}}",
+      "contrasena": "Solar2026!"
+    },
+    "detail": null,
+    "description": "Usar un nombre que no fue registrado. El mensaje debe ser el mismo que para una contraseña incorrecta.",
+    "content_type": "application/json"
+  },
+  {
+    "id": "CP06",
+    "title": "Registro duplicado",
+    "method": "POST",
+    "path": "/api/registro",
+    "status": 409,
+    "message": "El usuario ya está registrado.",
+    "body": {
+      "usuario": "{{usuarioPrueba}}",
+      "contrasena": "Solar2026!"
+    },
+    "detail": null,
+    "description": "Repetir el registro de la cuenta creada en CP02.",
+    "content_type": "application/json"
+  },
+  {
+    "id": "CP07",
+    "title": "Campos obligatorios ausentes",
+    "method": "POST",
+    "path": "/api/registro",
+    "status": 400,
+    "message": "Datos de entrada inválidos.",
+    "body": {},
+    "detail": [
+      "usuario",
+      "contrasena"
+    ],
+    "description": "Enviar un objeto vacío; el servidor debe identificar los dos campos obligatorios.",
+    "content_type": "application/json"
+  },
+  {
+    "id": "CP08",
+    "title": "Usuario demasiado corto",
+    "method": "POST",
+    "path": "/api/registro",
+    "status": 400,
+    "message": "Datos de entrada inválidos.",
+    "body": {
+      "usuario": "ab",
+      "contrasena": "Solar2026!"
+    },
+    "detail": [
+      "usuario"
+    ],
+    "description": "Enviar un nombre de dos caracteres; el mínimo es tres.",
+    "content_type": "application/json"
+  },
+  {
+    "id": "CP09",
+    "title": "Contraseña demasiado corta",
+    "method": "POST",
+    "path": "/api/registro",
+    "status": 400,
+    "message": "Datos de entrada inválidos.",
+    "body": {
+      "usuario": "{{usuarioPrueba}}",
+      "contrasena": "1234567"
+    },
+    "detail": [
+      "contrasena"
+    ],
+    "description": "Enviar una contraseña de siete caracteres; el mínimo es ocho.",
+    "content_type": "application/json"
+  },
+  {
+    "id": "CP10",
+    "title": "Usuario demasiado largo",
+    "method": "POST",
+    "path": "/api/registro",
+    "status": 400,
+    "message": "Datos de entrada inválidos.",
+    "body": {
+      "usuario": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "contrasena": "Solar2026!"
+    },
+    "detail": [
+      "usuario"
+    ],
+    "description": "Enviar un nombre de 31 caracteres; el máximo es 30.",
+    "content_type": "application/json"
+  },
+  {
+    "id": "CP11",
+    "title": "Contraseña demasiado larga",
+    "method": "POST",
+    "path": "/api/registro",
+    "status": 400,
+    "message": "Datos de entrada inválidos.",
+    "body": {
+      "usuario": "{{usuarioPrueba}}",
+      "contrasena": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "detail": [
+      "contrasena"
+    ],
+    "description": "Enviar una contraseña de 129 caracteres; el máximo es 128.",
+    "content_type": "application/json"
+  },
+  {
+    "id": "CP12",
+    "title": "Tipo de usuario incorrecto",
+    "method": "POST",
+    "path": "/api/registro",
+    "status": 400,
+    "message": "Datos de entrada inválidos.",
+    "body": {
+      "usuario": 12345,
+      "contrasena": "Solar2026!"
+    },
+    "detail": [
+      "usuario"
+    ],
+    "description": "Enviar el usuario como número JSON; se exige una cadena de texto.",
+    "content_type": "application/json"
+  },
+  {
+    "id": "CP13",
+    "title": "Caracteres no permitidos",
+    "method": "POST",
+    "path": "/api/registro",
+    "status": 400,
+    "message": "Datos de entrada inválidos.",
+    "body": {
+      "usuario": "' OR 1=1 --",
+      "contrasena": "Solar2026!"
+    },
+    "detail": [
+      "usuario"
+    ],
+    "description": "Enviar texto con comilla, espacios y operadores; debe rechazarse por el formato permitido del usuario.",
+    "content_type": "application/json"
+  },
+  {
+    "id": "CP14",
+    "title": "Propiedad adicional",
+    "method": "POST",
+    "path": "/api/registro",
+    "status": 400,
+    "message": "Datos de entrada inválidos.",
+    "body": {
+      "usuario": "{{usuarioPrueba}}",
+      "contrasena": "Solar2026!",
+      "administrador": true
+    },
+    "detail": [
+      "campos"
+    ],
+    "description": "Añadir administrador: true. Solo se admiten usuario y contrasena.",
+    "content_type": "application/json"
+  },
+  {
+    "id": "CP15",
+    "title": "JSON mal formado",
+    "method": "POST",
+    "path": "/api/registro",
+    "status": 400,
+    "message": "JSON inválido.",
+    "body": "{\"usuario\":",
+    "detail": null,
+    "description": "Enviar un cuerpo incompleto con Content-Type application/json.",
+    "content_type": "application/json"
+  },
+  {
+    "id": "CP16",
+    "title": "Tipo de contenido incorrecto",
+    "method": "POST",
+    "path": "/api/registro",
+    "status": 415,
+    "message": "Envía application/json sin compresión.",
+    "body": {
+      "usuario": "{{usuarioPrueba}}",
+      "contrasena": "Solar2026!"
+    },
+    "detail": null,
+    "description": "Enviar el objeto como text/plain; el servidor exige application/json.",
+    "content_type": "text/plain"
+  },
+  {
+    "id": "CP17",
+    "title": "Cuerpo mayor de 4096 bytes",
+    "method": "POST",
+    "path": "/api/registro",
+    "status": 413,
+    "message": "El cuerpo supera el límite de 4096 bytes.",
+    "body": {
+      "usuario": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "contrasena": "Solar2026!"
+    },
+    "detail": null,
+    "description": "Enviar un nombre de 5000 caracteres para superar el tamaño máximo del cuerpo HTTP.",
+    "content_type": "application/json"
+  },
+  {
+    "id": "CP18",
+    "title": "Método no permitido",
+    "method": "GET",
+    "path": "/api/login",
+    "status": 405,
+    "message": "Método no permitido.",
+    "body": null,
+    "detail": null,
+    "description": "Usar GET en el inicio de sesión. Debe informar Allow: POST.",
+    "content_type": "application/json"
+  },
+  {
+    "id": "CP19",
+    "title": "Ruta inexistente",
+    "method": "GET",
+    "path": "/api/no-existe",
+    "status": 404,
+    "message": "Recurso no encontrado.",
+    "body": null,
+    "detail": null,
+    "description": "Solicitar una ruta que la API no define.",
+    "content_type": "application/json"
+  },
+  {
+    "id": "CP20",
+    "title": "Contrato OpenAPI",
+    "method": "GET",
+    "path": "/api/openapi.json",
+    "status": 200,
+    "message": null,
+    "body": null,
+    "detail": null,
+    "description": "Consultar la definición OpenAPI y verificar las operaciones de registro e inicio de sesión.",
+    "content_type": "application/json"
+  },
+  {
+    "id": "CP21",
+    "title": "Normalización del usuario",
+    "method": "POST",
+    "path": "/api/login",
+    "status": 200,
+    "message": "Autenticación satisfactoria",
+    "body": {
+      "usuario": "  {{usuarioMayusculas}}  ",
+      "contrasena": "Solar2026!"
+    },
+    "detail": null,
+    "description": "Usar mayúsculas y espacios al principio y al final del usuario registrado. La API normaliza solo el usuario.",
+    "content_type": "application/json"
+  },
+  {
+    "id": "CP22",
+    "title": "Contraseña con espacios distintos",
+    "method": "POST",
+    "path": "/api/login",
+    "status": 401,
+    "message": "Error en la autenticación",
+    "body": {
+      "usuario": "{{usuarioPrueba}}",
+      "contrasena": " Solar2026! "
+    },
+    "detail": null,
+    "description": "Añadir espacios a la contraseña válida. La contraseña se conserva exactamente y la autenticación debe fallar.",
+    "content_type": "application/json"
+  },
+  {
+    "id": "CP23",
+    "title": "Tipo de contraseña incorrecto",
+    "method": "POST",
+    "path": "/api/registro",
+    "status": 400,
+    "message": "Datos de entrada inválidos.",
+    "body": {
+      "usuario": "{{usuarioPrueba}}",
+      "contrasena": 12345678
+    },
+    "detail": [
+      "contrasena"
+    ],
+    "description": "Enviar una contraseña numérica; se exige texto.",
+    "content_type": "application/json"
+  },
+  {
+    "id": "CP24",
+    "title": "Contraseña solo con espacios",
+    "method": "POST",
+    "path": "/api/registro",
+    "status": 400,
+    "message": "Datos de entrada inválidos.",
+    "body": {
+      "usuario": "{{usuarioPrueba}}",
+      "contrasena": "        "
+    },
+    "detail": [
+      "contrasena"
+    ],
+    "description": "Enviar ocho espacios. Aunque tiene ocho caracteres, debe rechazarse por estar en blanco.",
+    "content_type": "application/json"
+  },
+  {
+    "id": "CP25",
+    "title": "Límite de intentos",
+    "method": "POST",
+    "path": "/api/login",
+    "status": 429,
+    "message": "Demasiados intentos. Intenta de nuevo más tarde.",
+    "body": {
+      "usuario": "{{usuarioPrueba}}",
+      "contrasena": "Solar2026!"
+    },
+    "detail": null,
+    "description": "Esta es la solicitud de autenticación número 21 desde el inicio de la ejecución. Debe rechazarse e incluir Retry-After.",
+    "content_type": "application/json"
+  }
+]

@@ -1,0 +1,33 @@
+EVIDENCIA GA7-220501096-AA5-EV02
+Aprendiz: Jhon Edwards Tineo Landaeta
+Ficha: 3235874
+
+REPOSITORIO
+https://github.com/Joan-dot650/Programa-Git
+
+CARPETA DE ESTA EVIDENCIA
+https://github.com/Joan-dot650/Programa-Git/tree/evidencia-aa5-ev02/AA5-EV02
+
+HISTORIAL
+https://github.com/Joan-dot650/Programa-Git/commits/evidencia-aa5-ev02/AA5-EV02
+
+Rama: evidencia-aa5-ev02
+Carpeta: AA5-EV02
+
+CLONAR Y EJECUTAR
+git clone --branch evidencia-aa5-ev02 --single-branch https://github.com/Joan-dot650/Programa-Git.git
+cd Programa-Git/AA5-EV02
+node src/server.js
+
+REQUISITO
+Node.js 24 o superior, sin límite máximo. Se verificó con Node.js 26.13.0.
+
+PRUEBAS DE LA COLECCIÓN DE POSTMAN
+npm ci --ignore-scripts
+npm run test:postman
+En PowerShell puedes usar npm.cmd en lugar de npm.
+
+La evidencia visual incluida corresponde a Newman. Para agregar la interfaz de
+Postman de escritorio, sigue GUIA_POSTMAN_WINDOWS.md.
+
+La carpeta versionamiento del ZIP conserva una copia recuperable del historial.

@@ -1,0 +1,1322 @@
+{
+  "info": {
+    "name": "AA5-EV02 - Testing API de autenticación",
+    "description": "Jhon Edwards Tineo Landaeta | Ficha 3235874. Ejecutar CP01 a CP25 una vez, en orden, tras reiniciar el servidor. La colección realiza 20 solicitudes de autenticación permitidas y comprueba el bloqueo de la 21. No enviar solicitudes de autenticación adicionales durante la ejecución. Datos ficticios. Node.js 24 o superior.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:3000"
+    },
+    {
+      "key": "usuarioPrueba",
+      "value": "jhon.demo"
+    },
+    {
+      "key": "usuarioInexistente",
+      "value": "ausente.demo"
+    },
+    {
+      "key": "usuarioMayusculas",
+      "value": "JHON.DEMO"
+    }
+  ],
+  "item": [
+    {
+      "name": "CP01 - Servicio disponible",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/salud",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "salud"
+          ]
+        },
+        "description": "Consultar el estado del servidor antes de enviar credenciales."
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "// Un nombre diferente evita duplicados entre ejecuciones.",
+              "const suffix=Date.now().toString(36)+Math.random().toString(36).slice(2,6);",
+              "pm.collectionVariables.set(\"usuarioPrueba\", \"jhon.\"+suffix);",
+              "pm.collectionVariables.set(\"usuarioInexistente\", \"ausente.\"+suffix);",
+              "pm.collectionVariables.set(\"usuarioMayusculas\", (\"jhon.\"+suffix).toUpperCase());"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Respuesta JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+              "const cuerpoRespuestaAA5 = pm.response.json();",
+              "pm.test(\"Indicador de éxito\", () => pm.expect(cuerpoRespuestaAA5.exito).to.eql(true));",
+              "pm.test(\"Mensaje esperado\", () => pm.expect(cuerpoRespuestaAA5.mensaje).to.eql(\"Servicio disponible.\"));",
+              "pm.test(\"Sin contraseñas ni hashes\", () => { [cuerpoRespuestaAA5, cuerpoRespuestaAA5.usuario || {}].forEach(obj => { [\"contrasena\", \"password_hash\", \"hash\", \"password\"].forEach(key => pm.expect(obj).not.to.have.property(key)); }); });",
+              "console.log(\"PETICION: \" + pm.request.method + \" \" + pm.variables.replaceIn(pm.request.url.toString()));",
+              "console.log(\"RESPUESTA: \" + JSON.stringify(cuerpoRespuestaAA5));",
+              "// Pausa opcional para leer resultados durante la grabación; no cambia las verificaciones.",
+              "if (pm.environment.get(\"modoVideo\") === \"true\") { setTimeout(() => {}, 6000); }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP02 - Registro satisfactorio",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/registro",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "registro"
+          ]
+        },
+        "description": "Registrar un usuario nuevo con una contraseña válida. Debe devolver un identificador, sin contraseña ni hash.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"usuario\": \"{{usuarioPrueba}}\",\n  \"contrasena\": \"Solar2026!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 201\", () => pm.response.to.have.status(201));",
+              "pm.test(\"Respuesta JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+              "const cuerpoRespuestaAA5 = pm.response.json();",
+              "pm.test(\"Indicador de éxito\", () => pm.expect(cuerpoRespuestaAA5.exito).to.eql(true));",
+              "pm.test(\"Mensaje esperado\", () => pm.expect(cuerpoRespuestaAA5.mensaje).to.eql(\"Registro satisfactorio.\"));",
+              "pm.test(\"Sin contraseñas ni hashes\", () => { [cuerpoRespuestaAA5, cuerpoRespuestaAA5.usuario || {}].forEach(obj => { [\"contrasena\", \"password_hash\", \"hash\", \"password\"].forEach(key => pm.expect(obj).not.to.have.property(key)); }); });",
+              "pm.test(\"Usuario e identificador válidos\", () => { pm.expect(cuerpoRespuestaAA5.usuario.usuario).to.eql(pm.collectionVariables.get(\"usuarioPrueba\")); pm.expect(cuerpoRespuestaAA5.usuario.id).to.be.above(0); });",
+              "console.log(\"PETICION: \" + pm.request.method + \" \" + pm.variables.replaceIn(pm.request.url.toString()));",
+              "console.log(\"CUERPO: \" + pm.variables.replaceIn(pm.request.body.raw).replace(/\\n/g,\" \"));",
+              "console.log(\"RESPUESTA: \" + JSON.stringify(cuerpoRespuestaAA5));",
+              "// Pausa opcional para leer resultados durante la grabación; no cambia las verificaciones.",
+              "if (pm.environment.get(\"modoVideo\") === \"true\") { setTimeout(() => {}, 6000); }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP03 - Autenticación satisfactoria",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "login"
+          ]
+        },
+        "description": "Ingresar con la cuenta creada en CP02 y la misma contraseña.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"usuario\": \"{{usuarioPrueba}}\",\n  \"contrasena\": \"Solar2026!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Respuesta JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+              "const cuerpoRespuestaAA5 = pm.response.json();",
+              "pm.test(\"Indicador de éxito\", () => pm.expect(cuerpoRespuestaAA5.exito).to.eql(true));",
+              "pm.test(\"Mensaje esperado\", () => pm.expect(cuerpoRespuestaAA5.mensaje).to.eql(\"Autenticación satisfactoria\"));",
+              "pm.test(\"Sin contraseñas ni hashes\", () => { [cuerpoRespuestaAA5, cuerpoRespuestaAA5.usuario || {}].forEach(obj => { [\"contrasena\", \"password_hash\", \"hash\", \"password\"].forEach(key => pm.expect(obj).not.to.have.property(key)); }); });",
+              "pm.test(\"Usuario e identificador válidos\", () => { pm.expect(cuerpoRespuestaAA5.usuario.usuario).to.eql(pm.collectionVariables.get(\"usuarioPrueba\")); pm.expect(cuerpoRespuestaAA5.usuario.id).to.be.above(0); });",
+              "console.log(\"PETICION: \" + pm.request.method + \" \" + pm.variables.replaceIn(pm.request.url.toString()));",
+              "console.log(\"CUERPO: \" + pm.variables.replaceIn(pm.request.body.raw).replace(/\\n/g,\" \"));",
+              "console.log(\"RESPUESTA: \" + JSON.stringify(cuerpoRespuestaAA5));",
+              "// Pausa opcional para leer resultados durante la grabación; no cambia las verificaciones.",
+              "if (pm.environment.get(\"modoVideo\") === \"true\") { setTimeout(() => {}, 6000); }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP04 - Contraseña incorrecta",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "login"
+          ]
+        },
+        "description": "Cambiar únicamente la contraseña por otra de longitud válida.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"usuario\": \"{{usuarioPrueba}}\",\n  \"contrasena\": \"Equivocada123!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 401\", () => pm.response.to.have.status(401));",
+              "pm.test(\"Respuesta JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+              "const cuerpoRespuestaAA5 = pm.response.json();",
+              "pm.test(\"Indicador de éxito\", () => pm.expect(cuerpoRespuestaAA5.exito).to.eql(false));",
+              "pm.test(\"Mensaje esperado\", () => pm.expect(cuerpoRespuestaAA5.mensaje).to.eql(\"Error en la autenticación\"));",
+              "pm.test(\"Sin contraseñas ni hashes\", () => { [cuerpoRespuestaAA5, cuerpoRespuestaAA5.usuario || {}].forEach(obj => { [\"contrasena\", \"password_hash\", \"hash\", \"password\"].forEach(key => pm.expect(obj).not.to.have.property(key)); }); });",
+              "console.log(\"PETICION: \" + pm.request.method + \" \" + pm.variables.replaceIn(pm.request.url.toString()));",
+              "console.log(\"CUERPO: \" + pm.variables.replaceIn(pm.request.body.raw).replace(/\\n/g,\" \"));",
+              "console.log(\"RESPUESTA: \" + JSON.stringify(cuerpoRespuestaAA5));",
+              "// Pausa opcional para leer resultados durante la grabación; no cambia las verificaciones.",
+              "if (pm.environment.get(\"modoVideo\") === \"true\") { setTimeout(() => {}, 6000); }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP05 - Usuario inexistente",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "login"
+          ]
+        },
+        "description": "Usar un nombre que no fue registrado. El mensaje debe ser el mismo que para una contraseña incorrecta.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"usuario\": \"{{usuarioInexistente}}\",\n  \"contrasena\": \"Solar2026!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 401\", () => pm.response.to.have.status(401));",
+              "pm.test(\"Respuesta JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+              "const cuerpoRespuestaAA5 = pm.response.json();",
+              "pm.test(\"Indicador de éxito\", () => pm.expect(cuerpoRespuestaAA5.exito).to.eql(false));",
+              "pm.test(\"Mensaje esperado\", () => pm.expect(cuerpoRespuestaAA5.mensaje).to.eql(\"Error en la autenticación\"));",
+              "pm.test(\"Sin contraseñas ni hashes\", () => { [cuerpoRespuestaAA5, cuerpoRespuestaAA5.usuario || {}].forEach(obj => { [\"contrasena\", \"password_hash\", \"hash\", \"password\"].forEach(key => pm.expect(obj).not.to.have.property(key)); }); });",
+              "console.log(\"PETICION: \" + pm.request.method + \" \" + pm.variables.replaceIn(pm.request.url.toString()));",
+              "console.log(\"CUERPO: \" + pm.variables.replaceIn(pm.request.body.raw).replace(/\\n/g,\" \"));",
+              "console.log(\"RESPUESTA: \" + JSON.stringify(cuerpoRespuestaAA5));",
+              "// Pausa opcional para leer resultados durante la grabación; no cambia las verificaciones.",
+              "if (pm.environment.get(\"modoVideo\") === \"true\") { setTimeout(() => {}, 6000); }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP06 - Registro duplicado",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/registro",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "registro"
+          ]
+        },
+        "description": "Repetir el registro de la cuenta creada en CP02.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"usuario\": \"{{usuarioPrueba}}\",\n  \"contrasena\": \"Solar2026!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 409\", () => pm.response.to.have.status(409));",
+              "pm.test(\"Respuesta JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+              "const cuerpoRespuestaAA5 = pm.response.json();",
+              "pm.test(\"Indicador de éxito\", () => pm.expect(cuerpoRespuestaAA5.exito).to.eql(false));",
+              "pm.test(\"Mensaje esperado\", () => pm.expect(cuerpoRespuestaAA5.mensaje).to.eql(\"El usuario ya está registrado.\"));",
+              "pm.test(\"Sin contraseñas ni hashes\", () => { [cuerpoRespuestaAA5, cuerpoRespuestaAA5.usuario || {}].forEach(obj => { [\"contrasena\", \"password_hash\", \"hash\", \"password\"].forEach(key => pm.expect(obj).not.to.have.property(key)); }); });",
+              "console.log(\"PETICION: \" + pm.request.method + \" \" + pm.variables.replaceIn(pm.request.url.toString()));",
+              "console.log(\"CUERPO: \" + pm.variables.replaceIn(pm.request.body.raw).replace(/\\n/g,\" \"));",
+              "console.log(\"RESPUESTA: \" + JSON.stringify(cuerpoRespuestaAA5));",
+              "// Pausa opcional para leer resultados durante la grabación; no cambia las verificaciones.",
+              "if (pm.environment.get(\"modoVideo\") === \"true\") { setTimeout(() => {}, 6000); }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP07 - Campos obligatorios ausentes",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/registro",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "registro"
+          ]
+        },
+        "description": "Enviar un objeto vacío; el servidor debe identificar los dos campos obligatorios.",
+        "body": {
+          "mode": "raw",
+          "raw": "{}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Respuesta JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+              "const cuerpoRespuestaAA5 = pm.response.json();",
+              "pm.test(\"Indicador de éxito\", () => pm.expect(cuerpoRespuestaAA5.exito).to.eql(false));",
+              "pm.test(\"Mensaje esperado\", () => pm.expect(cuerpoRespuestaAA5.mensaje).to.eql(\"Datos de entrada inválidos.\"));",
+              "pm.test(\"Sin contraseñas ni hashes\", () => { [cuerpoRespuestaAA5, cuerpoRespuestaAA5.usuario || {}].forEach(obj => { [\"contrasena\", \"password_hash\", \"hash\", \"password\"].forEach(key => pm.expect(obj).not.to.have.property(key)); }); });",
+              "pm.test(\"Detalle de validación: usuario\", () => pm.expect(cuerpoRespuestaAA5.errores).to.have.property(\"usuario\"));",
+              "pm.test(\"Detalle de validación: contrasena\", () => pm.expect(cuerpoRespuestaAA5.errores).to.have.property(\"contrasena\"));",
+              "console.log(\"PETICION: \" + pm.request.method + \" \" + pm.variables.replaceIn(pm.request.url.toString()));",
+              "console.log(\"CUERPO: \" + pm.variables.replaceIn(pm.request.body.raw).replace(/\\n/g,\" \"));",
+              "console.log(\"RESPUESTA: \" + JSON.stringify(cuerpoRespuestaAA5));",
+              "// Pausa opcional para leer resultados durante la grabación; no cambia las verificaciones.",
+              "if (pm.environment.get(\"modoVideo\") === \"true\") { setTimeout(() => {}, 6000); }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP08 - Usuario demasiado corto",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/registro",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "registro"
+          ]
+        },
+        "description": "Enviar un nombre de dos caracteres; el mínimo es tres.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"usuario\": \"ab\",\n  \"contrasena\": \"Solar2026!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Respuesta JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+              "const cuerpoRespuestaAA5 = pm.response.json();",
+              "pm.test(\"Indicador de éxito\", () => pm.expect(cuerpoRespuestaAA5.exito).to.eql(false));",
+              "pm.test(\"Mensaje esperado\", () => pm.expect(cuerpoRespuestaAA5.mensaje).to.eql(\"Datos de entrada inválidos.\"));",
+              "pm.test(\"Sin contraseñas ni hashes\", () => { [cuerpoRespuestaAA5, cuerpoRespuestaAA5.usuario || {}].forEach(obj => { [\"contrasena\", \"password_hash\", \"hash\", \"password\"].forEach(key => pm.expect(obj).not.to.have.property(key)); }); });",
+              "pm.test(\"Detalle de validación: usuario\", () => pm.expect(cuerpoRespuestaAA5.errores).to.have.property(\"usuario\"));",
+              "console.log(\"PETICION: \" + pm.request.method + \" \" + pm.variables.replaceIn(pm.request.url.toString()));",
+              "console.log(\"CUERPO: \" + pm.variables.replaceIn(pm.request.body.raw).replace(/\\n/g,\" \"));",
+              "console.log(\"RESPUESTA: \" + JSON.stringify(cuerpoRespuestaAA5));",
+              "// Pausa opcional para leer resultados durante la grabación; no cambia las verificaciones.",
+              "if (pm.environment.get(\"modoVideo\") === \"true\") { setTimeout(() => {}, 6000); }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP09 - Contraseña demasiado corta",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/registro",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "registro"
+          ]
+        },
+        "description": "Enviar una contraseña de siete caracteres; el mínimo es ocho.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"usuario\": \"{{usuarioPrueba}}\",\n  \"contrasena\": \"1234567\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Respuesta JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+              "const cuerpoRespuestaAA5 = pm.response.json();",
+              "pm.test(\"Indicador de éxito\", () => pm.expect(cuerpoRespuestaAA5.exito).to.eql(false));",
+              "pm.test(\"Mensaje esperado\", () => pm.expect(cuerpoRespuestaAA5.mensaje).to.eql(\"Datos de entrada inválidos.\"));",
+              "pm.test(\"Sin contraseñas ni hashes\", () => { [cuerpoRespuestaAA5, cuerpoRespuestaAA5.usuario || {}].forEach(obj => { [\"contrasena\", \"password_hash\", \"hash\", \"password\"].forEach(key => pm.expect(obj).not.to.have.property(key)); }); });",
+              "pm.test(\"Detalle de validación: contrasena\", () => pm.expect(cuerpoRespuestaAA5.errores).to.have.property(\"contrasena\"));",
+              "console.log(\"PETICION: \" + pm.request.method + \" \" + pm.variables.replaceIn(pm.request.url.toString()));",
+              "console.log(\"CUERPO: \" + pm.variables.replaceIn(pm.request.body.raw).replace(/\\n/g,\" \"));",
+              "console.log(\"RESPUESTA: \" + JSON.stringify(cuerpoRespuestaAA5));",
+              "// Pausa opcional para leer resultados durante la grabación; no cambia las verificaciones.",
+              "if (pm.environment.get(\"modoVideo\") === \"true\") { setTimeout(() => {}, 6000); }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP10 - Usuario demasiado largo",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/registro",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "registro"
+          ]
+        },
+        "description": "Enviar un nombre de 31 caracteres; el máximo es 30.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"usuario\": \"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\",\n  \"contrasena\": \"Solar2026!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Respuesta JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+              "const cuerpoRespuestaAA5 = pm.response.json();",
+              "pm.test(\"Indicador de éxito\", () => pm.expect(cuerpoRespuestaAA5.exito).to.eql(false));",
+              "pm.test(\"Mensaje esperado\", () => pm.expect(cuerpoRespuestaAA5.mensaje).to.eql(\"Datos de entrada inválidos.\"));",
+              "pm.test(\"Sin contraseñas ni hashes\", () => { [cuerpoRespuestaAA5, cuerpoRespuestaAA5.usuario || {}].forEach(obj => { [\"contrasena\", \"password_hash\", \"hash\", \"password\"].forEach(key => pm.expect(obj).not.to.have.property(key)); }); });",
+              "pm.test(\"Detalle de validación: usuario\", () => pm.expect(cuerpoRespuestaAA5.errores).to.have.property(\"usuario\"));",
+              "console.log(\"PETICION: \" + pm.request.method + \" \" + pm.variables.replaceIn(pm.request.url.toString()));",
+              "console.log(\"CUERPO: \" + pm.variables.replaceIn(pm.request.body.raw).replace(/\\n/g,\" \"));",
+              "console.log(\"RESPUESTA: \" + JSON.stringify(cuerpoRespuestaAA5));",
+              "// Pausa opcional para leer resultados durante la grabación; no cambia las verificaciones.",
+              "if (pm.environment.get(\"modoVideo\") === \"true\") { setTimeout(() => {}, 6000); }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP11 - Contraseña demasiado larga",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/registro",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "registro"
+          ]
+        },
+        "description": "Enviar una contraseña de 129 caracteres; el máximo es 128.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"usuario\": \"{{usuarioPrueba}}\",\n  \"contrasena\": \"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Respuesta JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+              "const cuerpoRespuestaAA5 = pm.response.json();",
+              "pm.test(\"Indicador de éxito\", () => pm.expect(cuerpoRespuestaAA5.exito).to.eql(false));",
+              "pm.test(\"Mensaje esperado\", () => pm.expect(cuerpoRespuestaAA5.mensaje).to.eql(\"Datos de entrada inválidos.\"));",
+              "pm.test(\"Sin contraseñas ni hashes\", () => { [cuerpoRespuestaAA5, cuerpoRespuestaAA5.usuario || {}].forEach(obj => { [\"contrasena\", \"password_hash\", \"hash\", \"password\"].forEach(key => pm.expect(obj).not.to.have.property(key)); }); });",
+              "pm.test(\"Detalle de validación: contrasena\", () => pm.expect(cuerpoRespuestaAA5.errores).to.have.property(\"contrasena\"));",
+              "console.log(\"PETICION: \" + pm.request.method + \" \" + pm.variables.replaceIn(pm.request.url.toString()));",
+              "console.log(\"CUERPO: \" + pm.variables.replaceIn(pm.request.body.raw).replace(/\\n/g,\" \"));",
+              "console.log(\"RESPUESTA: \" + JSON.stringify(cuerpoRespuestaAA5));",
+              "// Pausa opcional para leer resultados durante la grabación; no cambia las verificaciones.",
+              "if (pm.environment.get(\"modoVideo\") === \"true\") { setTimeout(() => {}, 6000); }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP12 - Tipo de usuario incorrecto",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/registro",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "registro"
+          ]
+        },
+        "description": "Enviar el usuario como número JSON; se exige una cadena de texto.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"usuario\": 12345,\n  \"contrasena\": \"Solar2026!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Respuesta JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+              "const cuerpoRespuestaAA5 = pm.response.json();",
+              "pm.test(\"Indicador de éxito\", () => pm.expect(cuerpoRespuestaAA5.exito).to.eql(false));",
+              "pm.test(\"Mensaje esperado\", () => pm.expect(cuerpoRespuestaAA5.mensaje).to.eql(\"Datos de entrada inválidos.\"));",
+              "pm.test(\"Sin contraseñas ni hashes\", () => { [cuerpoRespuestaAA5, cuerpoRespuestaAA5.usuario || {}].forEach(obj => { [\"contrasena\", \"password_hash\", \"hash\", \"password\"].forEach(key => pm.expect(obj).not.to.have.property(key)); }); });",
+              "pm.test(\"Detalle de validación: usuario\", () => pm.expect(cuerpoRespuestaAA5.errores).to.have.property(\"usuario\"));",
+              "console.log(\"PETICION: \" + pm.request.method + \" \" + pm.variables.replaceIn(pm.request.url.toString()));",
+              "console.log(\"CUERPO: \" + pm.variables.replaceIn(pm.request.body.raw).replace(/\\n/g,\" \"));",
+              "console.log(\"RESPUESTA: \" + JSON.stringify(cuerpoRespuestaAA5));",
+              "// Pausa opcional para leer resultados durante la grabación; no cambia las verificaciones.",
+              "if (pm.environment.get(\"modoVideo\") === \"true\") { setTimeout(() => {}, 6000); }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP13 - Caracteres no permitidos",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/registro",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "registro"
+          ]
+        },
+        "description": "Enviar texto con comilla, espacios y operadores; debe rechazarse por el formato permitido del usuario.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"usuario\": \"' OR 1=1 --\",\n  \"contrasena\": \"Solar2026!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Respuesta JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+              "const cuerpoRespuestaAA5 = pm.response.json();",
+              "pm.test(\"Indicador de éxito\", () => pm.expect(cuerpoRespuestaAA5.exito).to.eql(false));",
+              "pm.test(\"Mensaje esperado\", () => pm.expect(cuerpoRespuestaAA5.mensaje).to.eql(\"Datos de entrada inválidos.\"));",
+              "pm.test(\"Sin contraseñas ni hashes\", () => { [cuerpoRespuestaAA5, cuerpoRespuestaAA5.usuario || {}].forEach(obj => { [\"contrasena\", \"password_hash\", \"hash\", \"password\"].forEach(key => pm.expect(obj).not.to.have.property(key)); }); });",
+              "pm.test(\"Detalle de validación: usuario\", () => pm.expect(cuerpoRespuestaAA5.errores).to.have.property(\"usuario\"));",
+              "console.log(\"PETICION: \" + pm.request.method + \" \" + pm.variables.replaceIn(pm.request.url.toString()));",
+              "console.log(\"CUERPO: \" + pm.variables.replaceIn(pm.request.body.raw).replace(/\\n/g,\" \"));",
+              "console.log(\"RESPUESTA: \" + JSON.stringify(cuerpoRespuestaAA5));",
+              "// Pausa opcional para leer resultados durante la grabación; no cambia las verificaciones.",
+              "if (pm.environment.get(\"modoVideo\") === \"true\") { setTimeout(() => {}, 6000); }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP14 - Propiedad adicional",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/registro",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "registro"
+          ]
+        },
+        "description": "Añadir administrador: true. Solo se admiten usuario y contrasena.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"usuario\": \"{{usuarioPrueba}}\",\n  \"contrasena\": \"Solar2026!\",\n  \"administrador\": true\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Respuesta JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+              "const cuerpoRespuestaAA5 = pm.response.json();",
+              "pm.test(\"Indicador de éxito\", () => pm.expect(cuerpoRespuestaAA5.exito).to.eql(false));",
+              "pm.test(\"Mensaje esperado\", () => pm.expect(cuerpoRespuestaAA5.mensaje).to.eql(\"Datos de entrada inválidos.\"));",
+              "pm.test(\"Sin contraseñas ni hashes\", () => { [cuerpoRespuestaAA5, cuerpoRespuestaAA5.usuario || {}].forEach(obj => { [\"contrasena\", \"password_hash\", \"hash\", \"password\"].forEach(key => pm.expect(obj).not.to.have.property(key)); }); });",
+              "pm.test(\"Detalle de validación: campos\", () => pm.expect(cuerpoRespuestaAA5.errores).to.have.property(\"campos\"));",
+              "console.log(\"PETICION: \" + pm.request.method + \" \" + pm.variables.replaceIn(pm.request.url.toString()));",
+              "console.log(\"CUERPO: \" + pm.variables.replaceIn(pm.request.body.raw).replace(/\\n/g,\" \"));",
+              "console.log(\"RESPUESTA: \" + JSON.stringify(cuerpoRespuestaAA5));",
+              "// Pausa opcional para leer resultados durante la grabación; no cambia las verificaciones.",
+              "if (pm.environment.get(\"modoVideo\") === \"true\") { setTimeout(() => {}, 6000); }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP15 - JSON mal formado",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/registro",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "registro"
+          ]
+        },
+        "description": "Enviar un cuerpo incompleto con Content-Type application/json.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\"usuario\":",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Respuesta JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+              "const cuerpoRespuestaAA5 = pm.response.json();",
+              "pm.test(\"Indicador de éxito\", () => pm.expect(cuerpoRespuestaAA5.exito).to.eql(false));",
+              "pm.test(\"Mensaje esperado\", () => pm.expect(cuerpoRespuestaAA5.mensaje).to.eql(\"JSON inválido.\"));",
+              "pm.test(\"Sin contraseñas ni hashes\", () => { [cuerpoRespuestaAA5, cuerpoRespuestaAA5.usuario || {}].forEach(obj => { [\"contrasena\", \"password_hash\", \"hash\", \"password\"].forEach(key => pm.expect(obj).not.to.have.property(key)); }); });",
+              "console.log(\"PETICION: \" + pm.request.method + \" \" + pm.variables.replaceIn(pm.request.url.toString()));",
+              "console.log(\"CUERPO: \" + pm.variables.replaceIn(pm.request.body.raw).replace(/\\n/g,\" \"));",
+              "console.log(\"RESPUESTA: \" + JSON.stringify(cuerpoRespuestaAA5));",
+              "// Pausa opcional para leer resultados durante la grabación; no cambia las verificaciones.",
+              "if (pm.environment.get(\"modoVideo\") === \"true\") { setTimeout(() => {}, 6000); }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP16 - Tipo de contenido incorrecto",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "text/plain"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/registro",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "registro"
+          ]
+        },
+        "description": "Enviar el objeto como text/plain; el servidor exige application/json.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"usuario\": \"{{usuarioPrueba}}\",\n  \"contrasena\": \"Solar2026!\"\n}",
+          "options": {
+            "raw": {
+              "language": "text"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 415\", () => pm.response.to.have.status(415));",
+              "pm.test(\"Respuesta JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+              "const cuerpoRespuestaAA5 = pm.response.json();",
+              "pm.test(\"Indicador de éxito\", () => pm.expect(cuerpoRespuestaAA5.exito).to.eql(false));",
+              "pm.test(\"Mensaje esperado\", () => pm.expect(cuerpoRespuestaAA5.mensaje).to.eql(\"Envía application/json sin compresión.\"));",
+              "pm.test(\"Sin contraseñas ni hashes\", () => { [cuerpoRespuestaAA5, cuerpoRespuestaAA5.usuario || {}].forEach(obj => { [\"contrasena\", \"password_hash\", \"hash\", \"password\"].forEach(key => pm.expect(obj).not.to.have.property(key)); }); });",
+              "console.log(\"PETICION: \" + pm.request.method + \" \" + pm.variables.replaceIn(pm.request.url.toString()));",
+              "console.log(\"CUERPO: \" + pm.variables.replaceIn(pm.request.body.raw).replace(/\\n/g,\" \"));",
+              "console.log(\"RESPUESTA: \" + JSON.stringify(cuerpoRespuestaAA5));",
+              "// Pausa opcional para leer resultados durante la grabación; no cambia las verificaciones.",
+              "if (pm.environment.get(\"modoVideo\") === \"true\") { setTimeout(() => {}, 6000); }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP17 - Cuerpo mayor de 4096 bytes",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/registro",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "registro"
+          ]
+        },
+        "description": "Enviar un nombre de 5000 caracteres para superar el tamaño máximo del cuerpo HTTP.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"usuario\": \"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\n  \"contrasena\": \"Solar2026!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 413\", () => pm.response.to.have.status(413));",
+              "pm.test(\"Respuesta JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+              "const cuerpoRespuestaAA5 = pm.response.json();",
+              "pm.test(\"Indicador de éxito\", () => pm.expect(cuerpoRespuestaAA5.exito).to.eql(false));",
+              "pm.test(\"Mensaje esperado\", () => pm.expect(cuerpoRespuestaAA5.mensaje).to.eql(\"El cuerpo supera el límite de 4096 bytes.\"));",
+              "pm.test(\"Sin contraseñas ni hashes\", () => { [cuerpoRespuestaAA5, cuerpoRespuestaAA5.usuario || {}].forEach(obj => { [\"contrasena\", \"password_hash\", \"hash\", \"password\"].forEach(key => pm.expect(obj).not.to.have.property(key)); }); });",
+              "console.log(\"PETICION: \" + pm.request.method + \" \" + pm.variables.replaceIn(pm.request.url.toString()));",
+              "console.log(\"CUERPO: objeto JSON con usuario de 5000 caracteres. Longitud total: \" + pm.request.body.raw.length + \" caracteres.\");",
+              "console.log(\"RESPUESTA: \" + JSON.stringify(cuerpoRespuestaAA5));",
+              "// Pausa opcional para leer resultados durante la grabación; no cambia las verificaciones.",
+              "if (pm.environment.get(\"modoVideo\") === \"true\") { setTimeout(() => {}, 6000); }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP18 - Método no permitido",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "login"
+          ]
+        },
+        "description": "Usar GET en el inicio de sesión. Debe informar Allow: POST."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 405\", () => pm.response.to.have.status(405));",
+              "pm.test(\"Respuesta JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+              "const cuerpoRespuestaAA5 = pm.response.json();",
+              "pm.test(\"Indicador de éxito\", () => pm.expect(cuerpoRespuestaAA5.exito).to.eql(false));",
+              "pm.test(\"Mensaje esperado\", () => pm.expect(cuerpoRespuestaAA5.mensaje).to.eql(\"Método no permitido.\"));",
+              "pm.test(\"Sin contraseñas ni hashes\", () => { [cuerpoRespuestaAA5, cuerpoRespuestaAA5.usuario || {}].forEach(obj => { [\"contrasena\", \"password_hash\", \"hash\", \"password\"].forEach(key => pm.expect(obj).not.to.have.property(key)); }); });",
+              "pm.test(\"Allow informa POST\", () => pm.expect(pm.response.headers.get(\"Allow\")).to.eql(\"POST\"));",
+              "console.log(\"PETICION: \" + pm.request.method + \" \" + pm.variables.replaceIn(pm.request.url.toString()));",
+              "console.log(\"RESPUESTA: \" + JSON.stringify(cuerpoRespuestaAA5));",
+              "console.log(\"Allow: \" + pm.response.headers.get(\"Allow\"));",
+              "// Pausa opcional para leer resultados durante la grabación; no cambia las verificaciones.",
+              "if (pm.environment.get(\"modoVideo\") === \"true\") { setTimeout(() => {}, 6000); }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP19 - Ruta inexistente",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/no-existe",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "no-existe"
+          ]
+        },
+        "description": "Solicitar una ruta que la API no define."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 404\", () => pm.response.to.have.status(404));",
+              "pm.test(\"Respuesta JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+              "const cuerpoRespuestaAA5 = pm.response.json();",
+              "pm.test(\"Indicador de éxito\", () => pm.expect(cuerpoRespuestaAA5.exito).to.eql(false));",
+              "pm.test(\"Mensaje esperado\", () => pm.expect(cuerpoRespuestaAA5.mensaje).to.eql(\"Recurso no encontrado.\"));",
+              "pm.test(\"Sin contraseñas ni hashes\", () => { [cuerpoRespuestaAA5, cuerpoRespuestaAA5.usuario || {}].forEach(obj => { [\"contrasena\", \"password_hash\", \"hash\", \"password\"].forEach(key => pm.expect(obj).not.to.have.property(key)); }); });",
+              "console.log(\"PETICION: \" + pm.request.method + \" \" + pm.variables.replaceIn(pm.request.url.toString()));",
+              "console.log(\"RESPUESTA: \" + JSON.stringify(cuerpoRespuestaAA5));",
+              "// Pausa opcional para leer resultados durante la grabación; no cambia las verificaciones.",
+              "if (pm.environment.get(\"modoVideo\") === \"true\") { setTimeout(() => {}, 6000); }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP20 - Contrato OpenAPI",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/openapi.json",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "openapi.json"
+          ]
+        },
+        "description": "Consultar la definición OpenAPI y verificar las operaciones de registro e inicio de sesión."
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Respuesta JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+              "const cuerpoRespuestaAA5 = pm.response.json();",
+              "pm.test(\"OpenAPI 3.1.0\", () => pm.expect(cuerpoRespuestaAA5.openapi).to.eql(\"3.1.0\"));",
+              "pm.test(\"Documenta registro y login\", () => { pm.expect(cuerpoRespuestaAA5.paths[\"/api/registro\"].post.responses).to.have.property(\"201\"); pm.expect(cuerpoRespuestaAA5.paths[\"/api/login\"].post.responses).to.have.property(\"401\"); });",
+              "console.log(\"PETICION: \" + pm.request.method + \" \" + pm.variables.replaceIn(pm.request.url.toString()));",
+              "console.log(\"RESPUESTA: OpenAPI \" + cuerpoRespuestaAA5.openapi + \"; rutas: \" + Object.keys(cuerpoRespuestaAA5.paths).join(\", \"));",
+              "// Pausa opcional para leer resultados durante la grabación; no cambia las verificaciones.",
+              "if (pm.environment.get(\"modoVideo\") === \"true\") { setTimeout(() => {}, 6000); }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP21 - Normalización del usuario",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "login"
+          ]
+        },
+        "description": "Usar mayúsculas y espacios al principio y al final del usuario registrado. La API normaliza solo el usuario.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"usuario\": \"  {{usuarioMayusculas}}  \",\n  \"contrasena\": \"Solar2026!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 200\", () => pm.response.to.have.status(200));",
+              "pm.test(\"Respuesta JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+              "const cuerpoRespuestaAA5 = pm.response.json();",
+              "pm.test(\"Indicador de éxito\", () => pm.expect(cuerpoRespuestaAA5.exito).to.eql(true));",
+              "pm.test(\"Mensaje esperado\", () => pm.expect(cuerpoRespuestaAA5.mensaje).to.eql(\"Autenticación satisfactoria\"));",
+              "pm.test(\"Sin contraseñas ni hashes\", () => { [cuerpoRespuestaAA5, cuerpoRespuestaAA5.usuario || {}].forEach(obj => { [\"contrasena\", \"password_hash\", \"hash\", \"password\"].forEach(key => pm.expect(obj).not.to.have.property(key)); }); });",
+              "pm.test(\"Usuario e identificador válidos\", () => { pm.expect(cuerpoRespuestaAA5.usuario.usuario).to.eql(pm.collectionVariables.get(\"usuarioPrueba\")); pm.expect(cuerpoRespuestaAA5.usuario.id).to.be.above(0); });",
+              "console.log(\"PETICION: \" + pm.request.method + \" \" + pm.variables.replaceIn(pm.request.url.toString()));",
+              "console.log(\"CUERPO: \" + pm.variables.replaceIn(pm.request.body.raw).replace(/\\n/g,\" \"));",
+              "console.log(\"RESPUESTA: \" + JSON.stringify(cuerpoRespuestaAA5));",
+              "// Pausa opcional para leer resultados durante la grabación; no cambia las verificaciones.",
+              "if (pm.environment.get(\"modoVideo\") === \"true\") { setTimeout(() => {}, 6000); }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP22 - Contraseña con espacios distintos",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "login"
+          ]
+        },
+        "description": "Añadir espacios a la contraseña válida. La contraseña se conserva exactamente y la autenticación debe fallar.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"usuario\": \"{{usuarioPrueba}}\",\n  \"contrasena\": \" Solar2026! \"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 401\", () => pm.response.to.have.status(401));",
+              "pm.test(\"Respuesta JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+              "const cuerpoRespuestaAA5 = pm.response.json();",
+              "pm.test(\"Indicador de éxito\", () => pm.expect(cuerpoRespuestaAA5.exito).to.eql(false));",
+              "pm.test(\"Mensaje esperado\", () => pm.expect(cuerpoRespuestaAA5.mensaje).to.eql(\"Error en la autenticación\"));",
+              "pm.test(\"Sin contraseñas ni hashes\", () => { [cuerpoRespuestaAA5, cuerpoRespuestaAA5.usuario || {}].forEach(obj => { [\"contrasena\", \"password_hash\", \"hash\", \"password\"].forEach(key => pm.expect(obj).not.to.have.property(key)); }); });",
+              "console.log(\"PETICION: \" + pm.request.method + \" \" + pm.variables.replaceIn(pm.request.url.toString()));",
+              "console.log(\"CUERPO: \" + pm.variables.replaceIn(pm.request.body.raw).replace(/\\n/g,\" \"));",
+              "console.log(\"RESPUESTA: \" + JSON.stringify(cuerpoRespuestaAA5));",
+              "// Pausa opcional para leer resultados durante la grabación; no cambia las verificaciones.",
+              "if (pm.environment.get(\"modoVideo\") === \"true\") { setTimeout(() => {}, 6000); }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP23 - Tipo de contraseña incorrecto",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/registro",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "registro"
+          ]
+        },
+        "description": "Enviar una contraseña numérica; se exige texto.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"usuario\": \"{{usuarioPrueba}}\",\n  \"contrasena\": 12345678\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Respuesta JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+              "const cuerpoRespuestaAA5 = pm.response.json();",
+              "pm.test(\"Indicador de éxito\", () => pm.expect(cuerpoRespuestaAA5.exito).to.eql(false));",
+              "pm.test(\"Mensaje esperado\", () => pm.expect(cuerpoRespuestaAA5.mensaje).to.eql(\"Datos de entrada inválidos.\"));",
+              "pm.test(\"Sin contraseñas ni hashes\", () => { [cuerpoRespuestaAA5, cuerpoRespuestaAA5.usuario || {}].forEach(obj => { [\"contrasena\", \"password_hash\", \"hash\", \"password\"].forEach(key => pm.expect(obj).not.to.have.property(key)); }); });",
+              "pm.test(\"Detalle de validación: contrasena\", () => pm.expect(cuerpoRespuestaAA5.errores).to.have.property(\"contrasena\"));",
+              "console.log(\"PETICION: \" + pm.request.method + \" \" + pm.variables.replaceIn(pm.request.url.toString()));",
+              "console.log(\"CUERPO: \" + pm.variables.replaceIn(pm.request.body.raw).replace(/\\n/g,\" \"));",
+              "console.log(\"RESPUESTA: \" + JSON.stringify(cuerpoRespuestaAA5));",
+              "// Pausa opcional para leer resultados durante la grabación; no cambia las verificaciones.",
+              "if (pm.environment.get(\"modoVideo\") === \"true\") { setTimeout(() => {}, 6000); }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP24 - Contraseña solo con espacios",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/registro",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "registro"
+          ]
+        },
+        "description": "Enviar ocho espacios. Aunque tiene ocho caracteres, debe rechazarse por estar en blanco.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"usuario\": \"{{usuarioPrueba}}\",\n  \"contrasena\": \"        \"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 400\", () => pm.response.to.have.status(400));",
+              "pm.test(\"Respuesta JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+              "const cuerpoRespuestaAA5 = pm.response.json();",
+              "pm.test(\"Indicador de éxito\", () => pm.expect(cuerpoRespuestaAA5.exito).to.eql(false));",
+              "pm.test(\"Mensaje esperado\", () => pm.expect(cuerpoRespuestaAA5.mensaje).to.eql(\"Datos de entrada inválidos.\"));",
+              "pm.test(\"Sin contraseñas ni hashes\", () => { [cuerpoRespuestaAA5, cuerpoRespuestaAA5.usuario || {}].forEach(obj => { [\"contrasena\", \"password_hash\", \"hash\", \"password\"].forEach(key => pm.expect(obj).not.to.have.property(key)); }); });",
+              "pm.test(\"Detalle de validación: contrasena\", () => pm.expect(cuerpoRespuestaAA5.errores).to.have.property(\"contrasena\"));",
+              "console.log(\"PETICION: \" + pm.request.method + \" \" + pm.variables.replaceIn(pm.request.url.toString()));",
+              "console.log(\"CUERPO: \" + pm.variables.replaceIn(pm.request.body.raw).replace(/\\n/g,\" \"));",
+              "console.log(\"RESPUESTA: \" + JSON.stringify(cuerpoRespuestaAA5));",
+              "// Pausa opcional para leer resultados durante la grabación; no cambia las verificaciones.",
+              "if (pm.environment.get(\"modoVideo\") === \"true\") { setTimeout(() => {}, 6000); }"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "CP25 - Límite de intentos",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/api/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "api",
+            "login"
+          ]
+        },
+        "description": "Esta es la solicitud de autenticación número 21 desde el inicio de la ejecución. Debe rechazarse e incluir Retry-After.",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"usuario\": \"{{usuarioPrueba}}\",\n  \"contrasena\": \"Solar2026!\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"HTTP 429\", () => pm.response.to.have.status(429));",
+              "pm.test(\"Respuesta JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));",
+              "const cuerpoRespuestaAA5 = pm.response.json();",
+              "pm.test(\"Indicador de éxito\", () => pm.expect(cuerpoRespuestaAA5.exito).to.eql(false));",
+              "pm.test(\"Mensaje esperado\", () => pm.expect(cuerpoRespuestaAA5.mensaje).to.eql(\"Demasiados intentos. Intenta de nuevo más tarde.\"));",
+              "pm.test(\"Sin contraseñas ni hashes\", () => { [cuerpoRespuestaAA5, cuerpoRespuestaAA5.usuario || {}].forEach(obj => { [\"contrasena\", \"password_hash\", \"hash\", \"password\"].forEach(key => pm.expect(obj).not.to.have.property(key)); }); });",
+              "pm.test(\"Retry-After positivo\", () => pm.expect(Number(pm.response.headers.get(\"Retry-After\"))).to.be.within(1,600));",
+              "console.log(\"PETICION: \" + pm.request.method + \" \" + pm.variables.replaceIn(pm.request.url.toString()));",
+              "console.log(\"CUERPO: \" + pm.variables.replaceIn(pm.request.body.raw).replace(/\\n/g,\" \"));",
+              "console.log(\"RESPUESTA: \" + JSON.stringify(cuerpoRespuestaAA5));",
+              "console.log(\"Retry-After: \" + pm.response.headers.get(\"Retry-After\") + \" segundos\");",
+              "// Pausa opcional para leer resultados durante la grabación; no cambia las verificaciones.",
+              "if (pm.environment.get(\"modoVideo\") === \"true\") { setTimeout(() => {}, 6000); }"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "testing-api-aa5-ev02",
+  "version": "1.1.0",
+  "private": true,
+  "description": "Testing con Postman de la API de registro e inicio de sesión - SENA AA5-EV02",
+  "author": "Jhon Edwards Tineo Landaeta",
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test tests/*.test.js",
+    "test:postman": "node scripts/run-postman.mjs"
+  },
+  "devDependencies": {
+    "newman": "6.2.1"
+  }
+}

@@ -1,0 +1,461 @@
+(node:74) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+newman
+
+AA5-EV02 - Testing API de autenticación
+
+→ CP01 - Servicio disponible
+  GET http://127.0.0.1:3000/api/salud [200 OK, 475B, 31ms]
+  ✓  HTTP 200
+  ✓  Respuesta JSON
+  ✓  Indicador de éxito
+  ✓  Mensaje esperado
+  ✓  Sin contraseñas ni hashes
+  ┌
+  │ 'PETICION: GET http://127.0.0.1:3000/api/salud'[
+  │ 39m
+  │ 'RESPUESTA: {"exito":true,"mensaje":"Servicio dis
+  │ ponible."}'
+  └
+
+→ CP02 - Registro satisfactorio
+  POST http://127.0.0.1:3000/api/registro [201 Created, 570B, 214ms]
+  ✓  HTTP 201
+  ✓  Respuesta JSON
+  ✓  Indicador de éxito
+  ✓  Mensaje esperado
+  ✓  Sin contraseñas ni hashes
+  ✓  Usuario e identificador válidos
+  ┌
+  │ 'PETICION: POST http://127.0.0.1:3000/api/registr
+  │ o'
+  │ 'CUERPO: {   "usuario": "jhon.mvvu6mjkwxjp",   "c
+  │ ontrasena": "Solar2026!" }'
+  │ 'RESPUESTA: {"exito":true,"mensaje":"Registro sat
+  │ isfactorio.","usuario":{"id":2,"usuario":"jhon.mvvu6mj
+  │ kwxjp","creadoEn":"2026-10-31T03:23:37.897Z"}}'
+  └
+
+→ CP03 - Autenticación satisfactoria
+  POST http://127.0.0.1:3000/api/login [200 OK, 570B, 203ms]
+  ✓  HTTP 200
+  ✓  Respuesta JSON
+  ✓  Indicador de éxito
+  ✓  Mensaje esperado
+  ✓  Sin contraseñas ni hashes
+  ✓  Usuario e identificador válidos
+  ┌
+  │ 'PETICION: POST http://127.0.0.1:3000/api/login'
+  │ [39m
+  │ 'CUERPO: {   "usuario": "jhon.mvvu6mjkwxjp",   "c
+  │ ontrasena": "Solar2026!" }'
+  │ 'RESPUESTA: {"exito":true,"mensaje":"Autenticació
+  │ n satisfactoria","usuario":{"id":2,"usuario":"jhon.mvv
+  │ u6mjkwxjp","creadoEn":"2026-10-31T03:23:37.897Z"}}'[3
+  │ 9m
+  └
+
+→ CP04 - Contraseña incorrecta
+  POST http://127.0.0.1:3000/api/login [401 Unauthorized, 492B, 222ms]
+  ✓  HTTP 401
+  ✓  Respuesta JSON
+  ✓  Indicador de éxito
+  ✓  Mensaje esperado
+  ✓  Sin contraseñas ni hashes
+  ┌
+  │ 'PETICION: POST http://127.0.0.1:3000/api/login'
+  │ [39m
+  │ 'CUERPO: {   "usuario": "jhon.mvvu6mjkwxjp",   "c
+  │ ontrasena": "Equivocada123!" }'
+  │ 'RESPUESTA: {"exito":false,"mensaje":"Error en la
+  │  autenticación"}'
+  └
+
+→ CP05 - Usuario inexistente
+  POST http://127.0.0.1:3000/api/login [401 Unauthorized, 492B, 190ms]
+  ✓  HTTP 401
+  ✓  Respuesta JSON
+  ✓  Indicador de éxito
+  ✓  Mensaje esperado
+  ✓  Sin contraseñas ni hashes
+  ┌
+  │ 'PETICION: POST http://127.0.0.1:3000/api/login'
+  │ [39m
+  │ 'CUERPO: {   "usuario": "ausente.mvvu6mjkwxjp",  
+  │  "contrasena": "Solar2026!" }'
+  │ 'RESPUESTA: {"exito":false,"mensaje":"Error en la
+  │  autenticación"}'
+  └
+
+→ CP06 - Registro duplicado
+  POST http://127.0.0.1:3000/api/registro [409 Conflict, 493B, 3ms]
+  ✓  HTTP 409
+  ✓  Respuesta JSON
+  ✓  Indicador de éxito
+  ✓  Mensaje esperado
+  ✓  Sin contraseñas ni hashes
+  ┌
+  │ 'PETICION: POST http://127.0.0.1:3000/api/registr
+  │ o'
+  │ 'CUERPO: {   "usuario": "jhon.mvvu6mjkwxjp",   "c
+  │ ontrasena": "Solar2026!" }'
+  │ 'RESPUESTA: {"exito":false,"mensaje":"El usuario 
+  │ ya está registrado."}'
+  └
+
+→ CP07 - Campos obligatorios ausentes
+  POST http://127.0.0.1:3000/api/registro [400 Bad Request, 716B, 3ms]
+  ✓  HTTP 400
+  ✓  Respuesta JSON
+  ✓  Indicador de éxito
+  ✓  Mensaje esperado
+  ✓  Sin contraseñas ni hashes
+  ✓  Detalle de validación: usuario
+  ✓  Detalle de validación: contrasena
+  ┌
+  │ 'PETICION: POST http://127.0.0.1:3000/api/registr
+  │ o'
+  │ 'CUERPO: {}'
+  │ 'RESPUESTA: {"exito":false,"mensaje":"Datos de en
+  │ trada inválidos.","errores":{"usuario":"Usa de 3 a 30 
+  │ caracteres: letras, números, punto, guion o guion bajo
+  │ . Comienza con letra o número.","contrasena":"La contr
+  │ aseña debe tener de 8 a 128 caracteres y no puede cont
+  │ ener solo espacios."}}'
+  └
+
+→ CP08 - Usuario demasiado corto
+  POST http://127.0.0.1:3000/api/registro [400 Bad Request, 618B, 4ms]
+  ✓  HTTP 400
+  ✓  Respuesta JSON
+  ✓  Indicador de éxito
+  ✓  Mensaje esperado
+  ✓  Sin contraseñas ni hashes
+  ✓  Detalle de validación: usuario
+  ┌
+  │ 'PETICION: POST http://127.0.0.1:3000/api/registr
+  │ o'
+  │ 'CUERPO: {   "usuario": "ab",   "contrasena": "So
+  │ lar2026!" }'
+  │ 'RESPUESTA: {"exito":false,"mensaje":"Datos de en
+  │ trada inválidos.","errores":{"usuario":"Usa de 3 a 30 
+  │ caracteres: letras, números, punto, guion o guion bajo
+  │ . Comienza con letra o número."}}'
+  └
+
+→ CP09 - Contraseña demasiado corta
+  POST http://127.0.0.1:3000/api/registro [400 Bad Request, 603B, 3ms]
+  ✓  HTTP 400
+  ✓  Respuesta JSON
+  ✓  Indicador de éxito
+  ✓  Mensaje esperado
+  ✓  Sin contraseñas ni hashes
+  ✓  Detalle de validación: contrasena
+  ┌
+  │ 'PETICION: POST http://127.0.0.1:3000/api/registr
+  │ o'
+  │ 'CUERPO: {   "usuario": "jhon.mvvu6mjkwxjp",   "c
+  │ ontrasena": "1234567" }'
+  │ 'RESPUESTA: {"exito":false,"mensaje":"Datos de en
+  │ trada inválidos.","errores":{"contrasena":"La contrase
+  │ ña debe tener de 8 a 128 caracteres y no puede contene
+  │ r solo espacios."}}'
+  └
+
+→ CP10 - Usuario demasiado largo
+  POST http://127.0.0.1:3000/api/registro [400 Bad Request, 618B, 3ms]
+  ✓  HTTP 400
+  ✓  Respuesta JSON
+  ✓  Indicador de éxito
+  ✓  Mensaje esperado
+  ✓  Sin contraseñas ni hashes
+  ✓  Detalle de validación: usuario
+  ┌
+  │ 'PETICION: POST http://127.0.0.1:3000/api/registr
+  │ o'
+  │ 'CUERPO: {   "usuario": "aaaaaaaaaaaaaaaaaaaaaaaa
+  │ aaaaaaa",   "contrasena": "Solar2026!" }'
+  │ 'RESPUESTA: {"exito":false,"mensaje":"Datos de en
+  │ trada inválidos.","errores":{"usuario":"Usa de 3 a 30 
+  │ caracteres: letras, números, punto, guion o guion bajo
+  │ . Comienza con letra o número."}}'
+  └
+
+→ CP11 - Contraseña demasiado larga
+  POST http://127.0.0.1:3000/api/registro [400 Bad Request, 603B, 2ms]
+  ✓  HTTP 400
+  ✓  Respuesta JSON
+  ✓  Indicador de éxito
+  ✓  Mensaje esperado
+  ✓  Sin contraseñas ni hashes
+  ✓  Detalle de validación: contrasena
+  ┌
+  │ 'PETICION: POST http://127.0.0.1:3000/api/registr
+  │ o'
+  │ 'CUERPO: {   "usuario": "jhon.mvvu6mjkwxjp",   "c
+  │ ontrasena": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  │ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  │ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" }'
+  │ 'RESPUESTA: {"exito":false,"mensaje":"Datos de en
+  │ trada inválidos.","errores":{"contrasena":"La contrase
+  │ ña debe tener de 8 a 128 caracteres y no puede contene
+  │ r solo espacios."}}'
+  └
+
+→ CP12 - Tipo de usuario incorrecto
+  POST http://127.0.0.1:3000/api/registro [400 Bad Request, 618B, 2ms]
+  ✓  HTTP 400
+  ✓  Respuesta JSON
+  ✓  Indicador de éxito
+  ✓  Mensaje esperado
+  ✓  Sin contraseñas ni hashes
+  ✓  Detalle de validación: usuario
+  ┌
+  │ 'PETICION: POST http://127.0.0.1:3000/api/registr
+  │ o'
+  │ 'CUERPO: {   "usuario": 12345,   "contrasena": "S
+  │ olar2026!" }'
+  │ 'RESPUESTA: {"exito":false,"mensaje":"Datos de en
+  │ trada inválidos.","errores":{"usuario":"Usa de 3 a 30 
+  │ caracteres: letras, números, punto, guion o guion bajo
+  │ . Comienza con letra o número."}}'
+  └
+
+→ CP13 - Caracteres no permitidos
+  POST http://127.0.0.1:3000/api/registro [400 Bad Request, 618B, 2ms]
+  ✓  HTTP 400
+  ✓  Respuesta JSON
+  ✓  Indicador de éxito
+  ✓  Mensaje esperado
+  ✓  Sin contraseñas ni hashes
+  ✓  Detalle de validación: usuario
+  ┌
+  │ 'PETICION: POST http://127.0.0.1:3000/api/registr
+  │ o'
+  │ `CUERPO: {   "usuario": "' OR 1=1 --",   "contras
+  │ ena": "Solar2026!" }`
+  │ 'RESPUESTA: {"exito":false,"mensaje":"Datos de en
+  │ trada inválidos.","errores":{"usuario":"Usa de 3 a 30 
+  │ caracteres: letras, números, punto, guion o guion bajo
+  │ . Comienza con letra o número."}}'
+  └
+
+→ CP14 - Propiedad adicional
+  POST http://127.0.0.1:3000/api/registro [400 Bad Request, 554B, 3ms]
+  ✓  HTTP 400
+  ✓  Respuesta JSON
+  ✓  Indicador de éxito
+  ✓  Mensaje esperado
+  ✓  Sin contraseñas ni hashes
+  ✓  Detalle de validación: campos
+  ┌
+  │ 'PETICION: POST http://127.0.0.1:3000/api/registr
+  │ o'
+  │ 'CUERPO: {   "usuario": "jhon.mvvu6mjkwxjp",   "c
+  │ ontrasena": "Solar2026!",   "administrador": true }'[
+  │ 39m
+  │ 'RESPUESTA: {"exito":false,"mensaje":"Datos de en
+  │ trada inválidos.","errores":{"campos":"Solo se admiten
+  │  usuario y contrasena."}}'
+  └
+
+→ CP15 - JSON mal formado
+  POST http://127.0.0.1:3000/api/registro [400 Bad Request, 480B, 2ms]
+  ✓  HTTP 400
+  ✓  Respuesta JSON
+  ✓  Indicador de éxito
+  ✓  Mensaje esperado
+  ✓  Sin contraseñas ni hashes
+  ┌
+  │ 'PETICION: POST http://127.0.0.1:3000/api/registr
+  │ o'
+  │ 'CUERPO: {"usuario":'
+  │ 'RESPUESTA: {"exito":false,"mensaje":"JSON inváli
+  │ do."}'
+  └
+
+→ CP16 - Tipo de contenido incorrecto
+  POST http://127.0.0.1:3000/api/registro [415 Unsupported Media Type, 516B, 3ms]
+  ✓  HTTP 415
+  ✓  Respuesta JSON
+  ✓  Indicador de éxito
+  ✓  Mensaje esperado
+  ✓  Sin contraseñas ni hashes
+  ┌
+  │ 'PETICION: POST http://127.0.0.1:3000/api/registr
+  │ o'
+  │ 'CUERPO: {   "usuario": "jhon.mvvu6mjkwxjp",   "c
+  │ ontrasena": "Solar2026!" }'
+  │ 'RESPUESTA: {"exito":false,"mensaje":"Envía appli
+  │ cation/json sin compresión."}'
+  └
+
+→ CP17 - Cuerpo mayor de 4096 bytes
+  POST http://127.0.0.1:3000/api/registro [413 Payload Too Large, 513B, 3ms]
+  ✓  HTTP 413
+  ✓  Respuesta JSON
+  ✓  Indicador de éxito
+  ✓  Mensaje esperado
+  ✓  Sin contraseñas ni hashes
+  ┌
+  │ 'PETICION: POST http://127.0.0.1:3000/api/registr
+  │ o'
+  │ 'CUERPO: objeto JSON con usuario de 5000 caracter
+  │ es. Longitud total: 5049 caracteres.'
+  │ 'RESPUESTA: {"exito":false,"mensaje":"El cuerpo s
+  │ upera el límite de 4096 bytes."}'
+  └
+
+→ CP18 - Método no permitido
+  GET http://127.0.0.1:3000/api/login [405 Method Not Allowed, 506B, 2ms]
+  ✓  HTTP 405
+  ✓  Respuesta JSON
+  ✓  Indicador de éxito
+  ✓  Mensaje esperado
+  ✓  Sin contraseñas ni hashes
+  ✓  Allow informa POST
+  ┌
+  │ 'PETICION: GET http://127.0.0.1:3000/api/login'[
+  │ 39m
+  │ 'RESPUESTA: {"exito":false,"mensaje":"Método no p
+  │ ermitido."}'
+  │ 'Allow: POST'
+  └
+
+→ CP19 - Ruta inexistente
+  GET http://127.0.0.1:3000/api/no-existe [404 Not Found, 485B, 2ms]
+  ✓  HTTP 404
+  ✓  Respuesta JSON
+  ✓  Indicador de éxito
+  ✓  Mensaje esperado
+  ✓  Sin contraseñas ni hashes
+  ┌
+  │ 'PETICION: GET http://127.0.0.1:3000/api/no-exist
+  │ e'
+  │ 'RESPUESTA: {"exito":false,"mensaje":"Recurso no 
+  │ encontrado."}'
+  └
+
+→ CP20 - Contrato OpenAPI
+  GET http://127.0.0.1:3000/api/openapi.json [200 OK, 10.34kB, 2ms]
+  ✓  HTTP 200
+  ✓  Respuesta JSON
+  ✓  OpenAPI 3.1.0
+  ✓  Documenta registro y login
+  ┌
+  │ 'PETICION: GET http://127.0.0.1:3000/api/openapi.
+  │ json'
+  │ 'RESPUESTA: OpenAPI 3.1.0; rutas: /api/registro, 
+  │ /api/login, /api/salud'
+  └
+
+→ CP21 - Normalización del usuario
+  POST http://127.0.0.1:3000/api/login [200 OK, 570B, 182ms]
+  ✓  HTTP 200
+  ✓  Respuesta JSON
+  ✓  Indicador de éxito
+  ✓  Mensaje esperado
+  ✓  Sin contraseñas ni hashes
+  ✓  Usuario e identificador válidos
+  ┌
+  │ 'PETICION: POST http://127.0.0.1:3000/api/login'
+  │ [39m
+  │ 'CUERPO: {   "usuario": "  JHON.MVVU6MJKWXJP  ", 
+  │   "contrasena": "Solar2026!" }'
+  │ 'RESPUESTA: {"exito":true,"mensaje":"Autenticació
+  │ n satisfactoria","usuario":{"id":2,"usuario":"jhon.mvv
+  │ u6mjkwxjp","creadoEn":"2026-10-31T03:23:37.897Z"}}'[3
+  │ 9m
+  └
+
+→ CP22 - Contraseña con espacios distintos
+  POST http://127.0.0.1:3000/api/login [401 Unauthorized, 492B, 206ms]
+  ✓  HTTP 401
+  ✓  Respuesta JSON
+  ✓  Indicador de éxito
+  ✓  Mensaje esperado
+  ✓  Sin contraseñas ni hashes
+  ┌
+  │ 'PETICION: POST http://127.0.0.1:3000/api/login'
+  │ [39m
+  │ 'CUERPO: {   "usuario": "jhon.mvvu6mjkwxjp",   "c
+  │ ontrasena": " Solar2026! " }'
+  │ 'RESPUESTA: {"exito":false,"mensaje":"Error en la
+  │  autenticación"}'
+  └
+
+→ CP23 - Tipo de contraseña incorrecto
+  POST http://127.0.0.1:3000/api/registro [400 Bad Request, 603B, 1ms]
+  ✓  HTTP 400
+  ✓  Respuesta JSON
+  ✓  Indicador de éxito
+  ✓  Mensaje esperado
+  ✓  Sin contraseñas ni hashes
+  ✓  Detalle de validación: contrasena
+  ┌
+  │ 'PETICION: POST http://127.0.0.1:3000/api/registr
+  │ o'
+  │ 'CUERPO: {   "usuario": "jhon.mvvu6mjkwxjp",   "c
+  │ ontrasena": 12345678 }'
+  │ 'RESPUESTA: {"exito":false,"mensaje":"Datos de en
+  │ trada inválidos.","errores":{"contrasena":"La contrase
+  │ ña debe tener de 8 a 128 caracteres y no puede contene
+  │ r solo espacios."}}'
+  └
+
+→ CP24 - Contraseña solo con espacios
+  POST http://127.0.0.1:3000/api/registro [400 Bad Request, 603B, 3ms]
+  ✓  HTTP 400
+  ✓  Respuesta JSON
+  ✓  Indicador de éxito
+  ✓  Mensaje esperado
+  ✓  Sin contraseñas ni hashes
+  ✓  Detalle de validación: contrasena
+  ┌
+  │ 'PETICION: POST http://127.0.0.1:3000/api/registr
+  │ o'
+  │ 'CUERPO: {   "usuario": "jhon.mvvu6mjkwxjp",   "c
+  │ ontrasena": "        " }'
+  │ 'RESPUESTA: {"exito":false,"mensaje":"Datos de en
+  │ trada inválidos.","errores":{"contrasena":"La contrase
+  │ ña debe tener de 8 a 128 caracteres y no puede contene
+  │ r solo espacios."}}'
+  └
+
+→ CP25 - Límite de intentos
+  POST http://127.0.0.1:3000/api/login [429 Too Many Requests, 538B, 2ms]
+  ✓  HTTP 429
+  ✓  Respuesta JSON
+  ✓  Indicador de éxito
+  ✓  Mensaje esperado
+  ✓  Sin contraseñas ni hashes
+  ✓  Retry-After positivo
+  ┌
+  │ 'PETICION: POST http://127.0.0.1:3000/api/login'
+  │ [39m
+  │ 'CUERPO: {   "usuario": "jhon.mvvu6mjkwxjp",   "c
+  │ ontrasena": "Solar2026!" }'
+  │ 'RESPUESTA: {"exito":false,"mensaje":"Demasiados 
+  │ intentos. Intenta de nuevo más tarde."}'
+  │ 'Retry-After: 461 segundos'
+  └
+
+┌─────────────────────────┬───────────────────┬──────────────────┐
+│                         │          executed │           failed │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│              iterations │                 1 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│                requests │                25 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│            test-scripts │                25 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│      prerequest-scripts │                 1 │                0 │
+├─────────────────────────┼───────────────────┼──────────────────┤
+│              assertions │               140 │                0 │
+├─────────────────────────┴───────────────────┴──────────────────┤
+│ total run duration: 2m 31.6s                                   │
+├────────────────────────────────────────────────────────────────┤
+│ total data received: 12.74kB (approx)                          │
+├────────────────────────────────────────────────────────────────┤
+│ average response time: 51ms [min: 1ms, max: 222ms, s.d.: 85ms] │
+└────────────────────────────────────────────────────────────────┘

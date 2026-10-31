@@ -1,0 +1,362 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Servicio de registro e inicio de sesión",
+    "version": "1.0.0",
+    "description": "GA7-220501096-AA5-EV01. Comprueba credenciales; no emite tokens ni crea una sesión persistente."
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:3000"
+    }
+  ],
+  "paths": {
+    "/api/registro": {
+      "post": {
+        "operationId": "registrarUsuario",
+        "summary": "Registro satisfactorio.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Credenciales"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Datos de entrada o JSON inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Cuerpo mayor de 4096 bytes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Se requiere application/json sin compresión.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Límite compartido de 20 solicitudes por IP cada 10 minutos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Segundos hasta el siguiente intento.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Registro satisfactorio.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "exito",
+                    "mensaje",
+                    "usuario"
+                  ],
+                  "properties": {
+                    "exito": {
+                      "const": true
+                    },
+                    "mensaje": {
+                      "type": "string"
+                    },
+                    "usuario": {
+                      "$ref": "#/components/schemas/Usuario"
+                    }
+                  }
+                },
+                "example": {
+                  "exito": true,
+                  "mensaje": "Registro satisfactorio.",
+                  "usuario": {
+                    "id": 1,
+                    "usuario": "jhon.demo",
+                    "creadoEn": "2026-10-30T15:00:00.000Z"
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "El usuario ya está registrado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "El usuario ya está registrado."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/login": {
+      "post": {
+        "operationId": "autenticarUsuario",
+        "summary": "Autenticación satisfactoria",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Credenciales"
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": "Datos de entrada o JSON inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Cuerpo mayor de 4096 bytes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Se requiere application/json sin compresión.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Límite compartido de 20 solicitudes por IP cada 10 minutos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "description": "Segundos hasta el siguiente intento.",
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Autenticación satisfactoria",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "exito",
+                    "mensaje",
+                    "usuario"
+                  ],
+                  "properties": {
+                    "exito": {
+                      "const": true
+                    },
+                    "mensaje": {
+                      "type": "string"
+                    },
+                    "usuario": {
+                      "$ref": "#/components/schemas/Usuario"
+                    }
+                  }
+                },
+                "example": {
+                  "exito": true,
+                  "mensaje": "Autenticación satisfactoria",
+                  "usuario": {
+                    "id": 1,
+                    "usuario": "jhon.demo",
+                    "creadoEn": "2026-10-30T15:00:00.000Z"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error en la autenticación",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Error en la autenticación"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/salud": {
+      "get": {
+        "summary": "Consultar disponibilidad",
+        "responses": {
+          "200": {
+            "description": "Servicio disponible.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "exito": true,
+                  "mensaje": "Servicio disponible."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Credenciales": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "usuario",
+          "contrasena"
+        ],
+        "properties": {
+          "usuario": {
+            "type": "string",
+            "pattern": "^\\s*[a-zA-Z0-9][a-zA-Z0-9._-]{2,29}\\s*$",
+            "description": "3-30 caracteres después de recortar extremos; se normaliza a minúsculas.",
+            "examples": [
+              "jhon.demo"
+            ]
+          },
+          "contrasena": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 128,
+            "pattern": "\\S",
+            "writeOnly": true,
+            "description": "Longitud medida en unidades UTF-16; se conserva exactamente.",
+            "examples": [
+              "Solar2026!"
+            ]
+          }
+        }
+      },
+      "Usuario": {
+        "type": "object",
+        "required": [
+          "id",
+          "usuario",
+          "creadoEn"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "usuario": {
+            "type": "string"
+          },
+          "creadoEn": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": [
+          "exito",
+          "mensaje"
+        ],
+        "properties": {
+          "exito": {
+            "const": false
+          },
+          "mensaje": {
+            "type": "string"
+          },
+          "errores": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

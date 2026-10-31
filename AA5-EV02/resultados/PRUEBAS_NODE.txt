@@ -1,0 +1,48 @@
+✔ RF01: registra una cuenta y excluye contraseña/hash de la respuesta (391.481623ms)
+✔ RF02: credenciales correctas devuelven autenticación satisfactoria (190.102469ms)
+✔ RF03: contraseña incorrecta produce HTTP 401 (159.529421ms)
+✔ RF03: usuario inexistente tiene el mismo error de autenticación (166.09899ms)
+✔ RF04: rechaza registro duplicado (2.677014ms)
+✔ RF04: normaliza espacios de extremos y mayúsculas del usuario (174.611723ms)
+✔ RF04: campos ausentes se rechaza en registro e inicio de sesión (3.165769ms)
+✔ RF04: usuario vacío se rechaza en registro e inicio de sesión (3.095033ms)
+✔ RF04: usuario corto se rechaza en registro e inicio de sesión (2.211915ms)
+✔ RF04: usuario largo se rechaza en registro e inicio de sesión (2.055079ms)
+✔ RF04: usuario numérico se rechaza en registro e inicio de sesión (1.87628ms)
+✔ RF04: usuario con espacio interno se rechaza en registro e inicio de sesión (1.794627ms)
+✔ RF04: usuario que comienza con guion se rechaza en registro e inicio de sesión (3.251778ms)
+✔ RF04: intento de inyección SQL se rechaza en registro e inicio de sesión (1.846956ms)
+✔ RF04: contraseña corta se rechaza en registro e inicio de sesión (1.960447ms)
+✔ RF04: contraseña demasiado larga se rechaza en registro e inicio de sesión (1.600175ms)
+✔ RF04: contraseña en blanco se rechaza en registro e inicio de sesión (2.013977ms)
+✔ RF04: contraseña no textual se rechaza en registro e inicio de sesión (1.566915ms)
+✔ RF04: propiedad inesperada se rechaza en registro e inicio de sesión (1.65668ms)
+✔ RF04: objeto nulo se rechaza en registro e inicio de sesión (1.778915ms)
+✔ RF04: arreglo se rechaza en registro e inicio de sesión (1.900967ms)
+✔ acepta los límites inferiores de longitud (323.010416ms)
+✔ acepta los límites superiores de longitud (340.793883ms)
+✔ permite caracteres especiales y conserva espacios y mayúsculas de contraseña (678.707547ms)
+✔ dos registros simultáneos del mismo usuario crean una sola cuenta (160.183353ms)
+✔ la base guarda hashes diferentes para contraseñas iguales (181.981632ms)
+✔ RF05: la cuenta persiste después de cerrar y reabrir el servidor (337.526752ms)
+✔ rechaza JSON mal formado con HTTP 400 (1.892014ms)
+✔ rechaza bytes UTF-8 inválidos con HTTP 400 (1.183649ms)
+✔ exige application/json con HTTP 415 (2.682422ms)
+✔ rechaza cuerpos comprimidos no admitidos con HTTP 415 (1.338161ms)
+✔ limita el tamaño del cuerpo con HTTP 413 (1.000944ms)
+✔ rechaza un método incorrecto e informa el método permitido (2.412737ms)
+✔ una ruta inexistente devuelve JSON 404 (0.810238ms)
+✔ no expone la base de datos ni los archivos fuente por HTTP (2.502232ms)
+✔ la pantalla y sus recursos se sirven sin dependencias externas (5.714861ms)
+✔ incluye cabeceras de seguridad y no habilita CORS abierto (0.986163ms)
+✔ el contrato OpenAPI documenta ambos métodos (1.25729ms)
+✔ el límite predeterminado bloquea la solicitud 21 de una IP (178.730363ms)
+✔ el límite permite nuevos intentos al vencer la ventana (187.986138ms)
+ℹ tests 40
+ℹ suites 0
+ℹ pass 40
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3626.234019
