@@ -84,23 +84,18 @@ El servicio verifica credenciales y devuelve el mensaje solicitado. No emite JWT
 
 ## Versionamiento
 
-Repositorio: https://github.com/Joan-dot650/Programa-Git
-Rama de esta evidencia: `evidencia-aa5-ev02`
-Carpeta: `AA5-EV02`
+Repositorio de referencia: https://github.com/Joan-dot650/Programa-Git
 
-```bash
-git clone --branch evidencia-aa5-ev02 --single-branch https://github.com/Joan-dot650/Programa-Git.git
-cd Programa-Git/AA5-EV02
-git log --oneline
-node src/server.js
-```
+AA5-EV02 está versionada localmente en la rama `evidencia-aa5-ev02`, carpeta `AA5-EV02`. **Su publicación en GitHub está pendiente de autorización.** El repositorio remoto conserva la evidencia anterior; no se afirma que ya incluya estos archivos nuevos.
 
-El ZIP incluye una copia recuperable del historial en `versionamiento/Programa-Git.bundle`. Desde la carpeta principal extraída:
+El ZIP incluye una copia recuperable del historial en `versionamiento/Programa-Git.bundle`. Desde la carpeta principal extraída puedes recuperar el proyecto completo sin depender de la publicación remota:
 
 ```bash
 git clone --branch evidencia-aa5-ev02 versionamiento/Programa-Git.bundle Proyecto_Git
 cd Proyecto_Git/AA5-EV02
 git remote set-url origin https://github.com/Joan-dot650/Programa-Git.git
+git log --oneline
+node src/server.js
 ```
 
 ## Fuentes

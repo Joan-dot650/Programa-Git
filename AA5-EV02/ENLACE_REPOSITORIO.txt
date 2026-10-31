@@ -5,18 +5,21 @@ Ficha: 3235874
 REPOSITORIO
 https://github.com/Joan-dot650/Programa-Git
 
-CARPETA DE ESTA EVIDENCIA
-https://github.com/Joan-dot650/Programa-Git/tree/evidencia-aa5-ev02/AA5-EV02
+PROYECTO ANTERIOR PUBLICADO (REFERENCIA AA5-EV01)
+https://github.com/Joan-dot650/Programa-Git/tree/evidencia-aa5-ev01/AA5-EV01
 
-HISTORIAL
-https://github.com/Joan-dot650/Programa-Git/commits/evidencia-aa5-ev02/AA5-EV02
+ESTADO DE AA5-EV02
+La nueva evidencia está completa como proyecto local y versionada con Git.
+Su publicación remota está pendiente de autorización. El enlace anterior
+corresponde a la evidencia de origen, no a los archivos nuevos de AA5-EV02.
 
 Rama: evidencia-aa5-ev02
 Carpeta: AA5-EV02
 
-CLONAR Y EJECUTAR
-git clone --branch evidencia-aa5-ev02 --single-branch https://github.com/Joan-dot650/Programa-Git.git
-cd Programa-Git/AA5-EV02
+RECUPERAR EL HISTORIAL DEL ZIP Y EJECUTAR
+Desde la carpeta principal extraída:
+git clone --branch evidencia-aa5-ev02 versionamiento/Programa-Git.bundle Proyecto_Git
+cd Proyecto_Git/AA5-EV02
 node src/server.js
 
 REQUISITO

@@ -220,8 +220,10 @@ Esta es la solicitud de autenticación número 21 desde el inicio de la ejecuci�
 ## Conclusión
 Los casos definidos coinciden con el comportamiento esperado. Para añadir la interfaz de Postman de escritorio se debe seguir GUIA_POSTMAN_WINDOWS.md y agregar las capturas y la grabación del computador del aprendiz.
 
+La rama AA5-EV02 está versionada localmente; su publicación remota está pendiente de autorización.
+
 ## Referencias
 - [Postman: instalar la aplicación](https://learning.postman.com/docs/getting-started/installation/install-app)
 - [Postman: ejecutar colecciones con Newman](https://learning.postman.com/docs/collections/using-newman-cli/installing-running-newman)
 - [Postman: scripts de pruebas](https://learning.postman.com/docs/tests-and-scripts/write-scripts/test-scripts/)
-- [Código y pruebas de la evidencia](https://github.com/Joan-dot650/Programa-Git/tree/evidencia-aa5-ev02/AA5-EV02)
+- [Repositorio de referencia (origen AA5-EV01)](https://github.com/Joan-dot650/Programa-Git/tree/evidencia-aa5-ev01/AA5-EV01)
