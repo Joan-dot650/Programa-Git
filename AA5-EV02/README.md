@@ -1,76 +1,50 @@
-# Testing de la API - AA5-EV02
+# Pruebas de la API de autenticación - AA5-EV02
 
-**Aprendiz:** Jhon Edwards Tineo Landaeta · **Ficha:** 3235874
-**Programa:** Análisis y Desarrollo de Software · SENA
+**Aprendiz:** Jhon Edwards Tineo Landaeta · **Ficha:** 3235874  
+**Programa:** Análisis y Desarrollo de Software · SENA  
 **Evidencia:** GA7-220501096-AA5-EV02
 
-Se prueba la API de registro e inicio de sesión construida en AA5-EV01. El proyecto acepta **Node.js 24 o superior**, sin límite máximo. Se verificó con Node.js 24.22.1 y 26.13.0.
+## Resultado comprobado el 1 de noviembre de 2026
 
-**Alcance de la evidencia incluida:** las pruebas, capturas y el video corresponden a **Newman 6.2.1**, el ejecutor local de colecciones de Postman. No son capturas ni una grabación de la interfaz de Postman de escritorio. Para completar ese formato solicitado por la guía, usa **GUIA_POSTMAN_WINDOWS.md**, importa la colección, toma las capturas y graba tu ejecución en Postman.
+40 pruebas de integración y 25 solicitudes con 140 verificaciones aprobadas, sin fallos. La API procede de AA5-EV01. Requiere Node.js 24 o posterior; se volvió a comprobar con Node.js 24.22.1.
 
-## Abrir la aplicación en Windows
+**Alcance visual:** las capturas y el video muestran la colección de Postman ejecutada mediante Newman 6.2.1 en consola. Falta añadir las capturas y la grabación de Postman de escritorio requeridas por la guía. El informe PDF y Word está completo con los resultados disponibles; no contiene espacios de una plantilla vacía.
 
-1. Extrae todo el ZIP. Abre la carpeta **AA5-EV02**.
-2. Haz doble clic en **INICIAR_WINDOWS.bat**. Node.js 26 está permitido.
-3. Mantén la ventana abierta y visita **http://127.0.0.1:3000**.
-4. Para detener el servidor, pulsa **Ctrl+C** en esa ventana.
+## Ejecutar en Windows
 
-También puedes ejecutar desde la terminal de VS Code, dentro de esta carpeta:
+1. Extrae el ZIP y abre `AA5-EV02`.
+2. Haz doble clic en `INICIAR_WINDOWS.bat` y mantén la ventana abierta.
+3. Abre http://127.0.0.1:3000. Detén el servidor con Ctrl+C.
 
-```powershell
-node --version
-node src/server.js
-```
+También puedes ejecutar `node src/server.js` desde una terminal de VS Code dentro de la carpeta. No necesitas MySQL, XAMPP ni Live Server. La aplicación crea la base SQLite local al iniciarse. Las cuentas reales de tu copia no se incluyen en esta entrega.
 
-La API no necesita instalar paquetes, MySQL, XAMPP ni Live Server. SQLite guarda las cuentas en `data/usuarios.sqlite`, que se crea automáticamente. Los datos de las pruebas incluidas son ficticios.
+## Repetir las pruebas
 
-## Repetir las pruebas de la colección automáticamente
-
-Haz doble clic en **EJECUTAR_PRUEBAS_NEWMAN.bat**. La primera vez instala Newman desde el archivo de dependencias; requiere internet para esa instalación. La ejecución de las pruebas usa una API local y una base temporal propia, sin cambiar las cuentas de la aplicación.
-
-Alternativa en PowerShell:
+En PowerShell:
 
 ```powershell
 npm.cmd ci --ignore-scripts
+npm.cmd test
 npm.cmd run test:postman
 ```
 
-Resultado esperado: **25 solicitudes, 140 verificaciones y 0 fallos**. La nueva ejecución se guarda en **resultados/EJECUCION_LOCAL.json**. Los resultados de la entrega permanecen en **POSTMAN_NEWMAN.json** y **POSTMAN_NEWMAN.txt**.
+La prueba de la colección crea una API temporal, usa una base en memoria y cierra el servidor al finalizar. No altera las cuentas de tu aplicación. El nuevo reporte se guarda en `resultados/EJECUCION_LOCAL.json`. También puedes usar `EJECUTAR_PRUEBAS_NEWMAN.bat`.
 
-Para repetir las 40 pruebas de integración del proyecto:
-
-```powershell
-node --test tests/api.test.js
-```
-
-## Repetirlas en Postman de escritorio
-
-1. Instala Postman desde https://www.postman.com/downloads/.
-2. Importa los archivos `postman/AA5_EV02.postman_collection.json` y `postman/Local.postman_environment.json`.
-3. Selecciona el entorno local y comprueba `baseUrl = http://127.0.0.1:3000`.
-4. Inicia el servidor y ejecuta CP01 a CP25, una vez cada uno, en orden y dentro de 10 minutos.
-5. Revisa el estado HTTP, el JSON y **Test Results**. Toma las capturas y graba el video siguiendo **GUIA_POSTMAN_WINDOWS.md**.
-
-Antes de cada repetición completa, reinicia el servidor. La API permite 20 intentos de autenticación por IP en 10 minutos. CP25 comprueba el bloqueo del intento 21; no envíes otros POST durante la ejecución. Reiniciar la API reinicia el contador, sin borrar las cuentas. La variable opcional `modoVideo=true` solo añade una pausa para leer los resultados al grabar.
-
-## Archivos de la evidencia
+## Archivos de entrega
 
 | Archivo o carpeta | Contenido |
 |---|---|
-| `src/`, `public/`, `tests/` | Proyecto comentado, interfaz y 40 pruebas de integración. |
-| `postman/` | Colección de 25 casos, entorno y matriz de datos. |
-| `documentos/INFORME_PRUEBAS_AA5_EV02.pdf` | Informe con resultados y capturas de consola. |
-| `documentos/INFORME_PRUEBAS_AA5_EV02.md` | Texto editable del informe. |
-| `documentos/capturas/` | Capturas reales de la ejecución con Newman. |
-| `video/PRUEBAS_POSTMAN_NEWMAN.mp4` | Grabación de pantalla de la ejecución; sin voz. |
-| `resultados/` | Reportes originales y verificación en Node.js 24 y 26. |
-| `ENDPOINT.txt` | Métodos, URL, solicitudes y respuestas. |
+| `src/`, `public/`, `tests/` | Código comentado, interfaz y 40 pruebas de integración. |
+| `postman/` | Colección v2.1 de 25 casos, entorno y matriz de datos. |
+| `documentos/INFORME_PRUEBAS_AA5_EV02.pdf` | Informe actualizado y capturas de consola. |
+| `documentos/INFORME_PRUEBAS_AA5_EV02.docx` | El mismo informe completo y editable en Word. |
+| `documentos/capturas/` | Capturas conservadas de la ejecución con Newman. |
+| `video/PRUEBAS_POSTMAN_NEWMAN.mp4` | Video complementario de 2:59.8, sin audio. |
+| `resultados/VERIFICACION_*_2026_11_01.*` | Reportes de la comprobación más reciente. |
+| `ENDPOINT.txt` | Métodos, URL, cuerpos y respuestas. |
 | `docs/openapi.json` | Contrato OpenAPI 3.1.0. |
-| `ENLACE_REPOSITORIO.txt` | Enlace al código y al historial. |
-| `documentos/PLANTILLA_INFORME_POSTMAN.docx` | Plantilla editable para incorporar las capturas y los resultados de Postman de escritorio. |
-| `GUIA_POSTMAN_WINDOWS.md` | Instalación, importación, capturas y guion del video en escritorio. |
-
-Los errores HTTP esperados, como 400, 401 o 429, se consideran casos aprobados cuando coinciden con el resultado definido en la colección.
+| `ENLACE_REPOSITORIO.txt` | Enlace al repositorio y a esta carpeta. |
+| `GUIA_POSTMAN_WINDOWS.md` | Instalación, importación, capturas y guion de grabación. |
 
 ## Endpoints
 
@@ -78,36 +52,24 @@ Los errores HTTP esperados, como 400, 401 o 429, se consideran casos aprobados c
 |---|---|---|
 | GET | `/api/salud` | Consultar disponibilidad. |
 | POST | `/api/registro` | Crear una cuenta. |
-| POST | `/api/login` | Verificar usuario y contraseña. |
-| GET | `/api/openapi.json` | Consultar el contrato de la API. |
+| POST | `/api/login` | Comprobar credenciales. |
+| GET | `/api/openapi.json` | Consultar el contrato. |
 
-El servicio verifica credenciales y devuelve el mensaje solicitado. No emite JWT ni mantiene una sesión autenticada. Las pruebas presentadas verifican los casos descritos; no constituyen una prueba de carga ni una auditoría completa de seguridad.
+La URL base habitual es `http://127.0.0.1:3000`. El servicio verifica las credenciales, pero no genera JWT ni mantiene una sesión. Los datos de prueba son ficticios.
+
+## Repetir en Postman de escritorio
+
+Sigue `GUIA_POSTMAN_WINDOWS.md`: inicia la API, importa la colección y el entorno, selecciona `baseUrl`, ejecuta CP01 a CP25 en orden y conserva las respuestas para capturarlas. Antes de cada ejecución completa reinicia la API. CP25 debe devolver HTTP 429: corresponde al intento 21 de autenticación desde una IP dentro de 10 minutos. No envíes otros POST durante esa secuencia.
+
+La colección entregada usa JSON v2.1, compatible con Newman 6.2.1. Conserva este archivo original si tu versión de Postman convierte las colecciones a otro formato.
 
 ## Versionamiento
 
 Repositorio de referencia: https://github.com/Joan-dot650/Programa-Git
 
-AA5-EV02 está versionada localmente en la rama `evidencia-aa5-ev02`, carpeta `AA5-EV02`. **La rama todavía no está publicada en GitHub.** El repositorio remoto conserva la evidencia anterior; no se afirma que ya incluya estos archivos nuevos.
+**Publicación pendiente.** Los archivos nuevos están preparados localmente para la rama `evidencia-aa5-ev02`, carpeta `AA5-EV02`. La revisión automática de aprobación bloqueó su publicación. El ZIP incluye el código completo, `versionamiento/Programa-Git.bundle` y el historial de commits.
 
-El ZIP incluye una copia recuperable del historial en `versionamiento/Programa-Git.bundle`. Desde la carpeta principal extraída puedes recuperar el proyecto completo sin depender de la publicación remota:
+## Referencias
 
-```bash
-git clone --branch evidencia-aa5-ev02 versionamiento/Programa-Git.bundle Proyecto_Git
-cd Proyecto_Git/AA5-EV02
-git remote set-url origin https://github.com/Joan-dot650/Programa-Git.git
-git log --oneline
-node src/server.js
-```
-
-## Fuentes
-
-- Postman: https://learning.postman.com/docs/getting-started/installation/install-app
-- Newman: https://learning.postman.com/docs/collections/using-newman-cli/installing-running-newman
-- Colecciones: https://learning.postman.com/docs/collections/using-collections/
-- Scripts de pruebas: https://learning.postman.com/docs/tests-and-scripts/write-scripts/test-scripts/
-
-## Continuación del 31 de octubre de 2026
-
-Se repitieron las 40 pruebas de integración y la colección completa con Node.js 24.22.1: 25 solicitudes, 140 verificaciones y cero fallos. Los reportes nuevos están en `resultados/VERIFICACION_*_2026_10_31.*`; se conservan las evidencias originales. El informe PDF incorpora un anexo con la nueva comprobación.
-
-La entrega aún requiere las capturas y el video de Postman de escritorio, además de completar la publicación de la rama. La plantilla Word permite documentar cada caso sin editar el PDF de Newman. Para una ejecución reproducible, usa el Runner local con una iteración y revisa después las respuestas conservadas; la secuencia debe finalizar antes de que venza la ventana de 10 minutos del límite de intentos.
+- https://learning.postman.com/docs/collections/using-newman-cli/installing-running-newman
+- https://learning.postman.com/docs/getting-started/installation/install-app

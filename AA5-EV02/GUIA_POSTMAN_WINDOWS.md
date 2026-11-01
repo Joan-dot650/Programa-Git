@@ -66,7 +66,7 @@ El video incluido de Newman es una demostración técnica complementaria. No afi
 
 ## 6. Completar la entrega en escritorio
 
-Abre **documentos/PLANTILLA_INFORME_POSTMAN.docx** en Word y guarda una copia como **INFORME_POSTMAN_ESCRITORIO.docx**. Completa las fechas, resultados observados y espacios para las capturas. Exporta esa copia a PDF con **Archivo > Guardar como > PDF**. La plantilla no es un informe final hasta completar esos campos. Añade tu grabación de escritorio al ZIP. Conserva los archivos del proyecto, ENDPOINT.txt y ENLACE_REPOSITORIO.txt. El archivo final debe llamarse **JHON_EDWARDS_TINEO_LANDAETA_AA5_EV02.zip**.
+Abre **documentos/INFORME_PRUEBAS_AA5_EV02.docx** en Word y guarda una copia como **INFORME_POSTMAN_ESCRITORIO.docx**. El informe ya contiene los resultados y las capturas de Newman. Después de ejecutar los casos en Postman de escritorio, sustituye o complementa esas capturas con las nuevas y actualiza la fecha y el alcance visual. Exporta esa copia a PDF con **Archivo > Guardar como > PDF**. Añade tu grabación de escritorio al ZIP. Conserva los archivos del proyecto, ENDPOINT.txt y ENLACE_REPOSITORIO.txt. El archivo final debe llamarse **JHON_EDWARDS_TINEO_LANDAETA_AA5_EV02.zip**.
 
 ## Si aparece un problema
 

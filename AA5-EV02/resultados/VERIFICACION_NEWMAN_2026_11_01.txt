@@ -1,0 +1,37 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> testing-api-aa5-ev02@1.1.0 test:postman
+> node scripts/run-postman.mjs
+
+(node:18) [DEP0176] DeprecationWarning: fs.F_OK is deprecated, use fs.constants.F_OK instead
+(Use `node --trace-deprecation ...` to show where the warning was created)
+API temporal disponible en http://127.0.0.1:33505
+Node.js v24.22.1 | Colección Postman ejecutada con Newman
+CP01 - Servicio disponible: HTTP 200
+CP02 - Registro satisfactorio: HTTP 201
+CP03 - Autenticación satisfactoria: HTTP 200
+CP04 - Contraseña incorrecta: HTTP 401
+CP05 - Usuario inexistente: HTTP 401
+CP06 - Registro duplicado: HTTP 409
+CP07 - Campos obligatorios ausentes: HTTP 400
+CP08 - Usuario demasiado corto: HTTP 400
+CP09 - Contraseña demasiado corta: HTTP 400
+CP10 - Usuario demasiado largo: HTTP 400
+CP11 - Contraseña demasiado larga: HTTP 400
+CP12 - Tipo de usuario incorrecto: HTTP 400
+CP13 - Caracteres no permitidos: HTTP 400
+CP14 - Propiedad adicional: HTTP 400
+CP15 - JSON mal formado: HTTP 400
+CP16 - Tipo de contenido incorrecto: HTTP 415
+CP17 - Cuerpo mayor de 4096 bytes: HTTP 413
+CP18 - Método no permitido: HTTP 405
+CP19 - Ruta inexistente: HTTP 404
+CP20 - Contrato OpenAPI: HTTP 200
+CP21 - Normalización del usuario: HTTP 200
+CP22 - Contraseña con espacios distintos: HTTP 401
+CP23 - Tipo de contraseña incorrecto: HTTP 400
+CP24 - Contraseña solo con espacios: HTTP 400
+CP25 - Límite de intentos: HTTP 429
+
+RESUMEN FINAL: 25 solicitudes, 140 verificaciones, 0 fallos.
+Reporte completo: resultados/EJECUCION_LOCAL.json
