@@ -1,0 +1,346 @@
+TAP version 13
+# Subtest: Salud pública y cabeceras de seguridad
+ok 1 - Salud pública y cabeceras de seguridad
+  ---
+  duration_ms: 1583.398027
+  type: 'test'
+  ...
+# Subtest: Registro normaliza el usuario y nunca entrega hash ni contraseña
+ok 2 - Registro normaliza el usuario y nunca entrega hash ni contraseña
+  ---
+  duration_ms: 165.567571
+  type: 'test'
+  ...
+# Subtest: Usuario duplicado, incluso con mayúsculas, devuelve 409
+ok 3 - Usuario duplicado, incluso con mayúsculas, devuelve 409
+  ---
+  duration_ms: 2.763621
+  type: 'test'
+  ...
+# Subtest: La API no permite registrarse como administrador
+ok 4 - La API no permite registrarse como administrador
+  ---
+  duration_ms: 3.389986
+  type: 'test'
+  ...
+# Subtest: Registro rechaza cuerpo nulo
+ok 5 - Registro rechaza cuerpo nulo
+  ---
+  duration_ms: 2.655768
+  type: 'test'
+  ...
+# Subtest: Registro rechaza arreglo
+ok 6 - Registro rechaza arreglo
+  ---
+  duration_ms: 1.748508
+  type: 'test'
+  ...
+# Subtest: Registro rechaza usuario corto
+ok 7 - Registro rechaza usuario corto
+  ---
+  duration_ms: 1.688618
+  type: 'test'
+  ...
+# Subtest: Registro rechaza usuario con inyección SQL
+ok 8 - Registro rechaza usuario con inyección SQL
+  ---
+  duration_ms: 2.309285
+  type: 'test'
+  ...
+# Subtest: Registro rechaza contraseña corta
+ok 9 - Registro rechaza contraseña corta
+  ---
+  duration_ms: 2.310316
+  type: 'test'
+  ...
+# Subtest: Registro rechaza contraseña vacía de espacios
+ok 10 - Registro rechaza contraseña vacía de espacios
+  ---
+  duration_ms: 2.419331
+  type: 'test'
+  ...
+# Subtest: Registro rechaza contraseña excesiva
+ok 11 - Registro rechaza contraseña excesiva
+  ---
+  duration_ms: 2.154351
+  type: 'test'
+  ...
+# Subtest: Error de acceso genérico para cuenta inexistente y contraseña incorrecta
+ok 12 - Error de acceso genérico para cuenta inexistente y contraseña incorrecta
+  ---
+  duration_ms: 348.558744
+  type: 'test'
+  ...
+# Subtest: Ruta protegida sin token devuelve 401 y anuncia Bearer
+ok 13 - Ruta protegida sin token devuelve 401 y anuncia Bearer
+  ---
+  duration_ms: 5.081869
+  type: 'test'
+  ...
+# Subtest: Un cliente no crea productos ni consulta inventario administrativo
+ok 14 - Un cliente no crea productos ni consulta inventario administrativo
+  ---
+  duration_ms: 2.249465
+  type: 'test'
+  ...
+# Subtest: Perfil propio conserva tildes y no acepta cambiar el rol
+ok 15 - Perfil propio conserva tildes y no acepta cambiar el rol
+  ---
+  duration_ms: 3.821547
+  type: 'test'
+  ...
+# Subtest: Catálogo enumera las cinco categorías del proyecto anterior
+ok 16 - Catálogo enumera las cinco categorías del proyecto anterior
+  ---
+  duration_ms: 1.695999
+  type: 'test'
+  ...
+# Subtest: CRUD registra, consulta, edita y retira sin reutilizar código
+ok 17 - CRUD registra, consulta, edita y retira sin reutilizar código
+  ---
+  duration_ms: 14.301109
+  type: 'test'
+  ...
+# Subtest: Producto rechaza precio numérico
+ok 18 - Producto rechaza precio numérico
+  ---
+  duration_ms: 2.06759
+  type: 'test'
+  ...
+# Subtest: Producto rechaza precio cero
+ok 19 - Producto rechaza precio cero
+  ---
+  duration_ms: 1.914529
+  type: 'test'
+  ...
+# Subtest: Producto rechaza precio negativo
+ok 20 - Producto rechaza precio negativo
+  ---
+  duration_ms: 1.69601
+  type: 'test'
+  ...
+# Subtest: Producto rechaza precio con tres decimales
+ok 21 - Producto rechaza precio con tres decimales
+  ---
+  duration_ms: 1.735459
+  type: 'test'
+  ...
+# Subtest: Producto rechaza precio fuera del máximo
+ok 22 - Producto rechaza precio fuera del máximo
+  ---
+  duration_ms: 1.77599
+  type: 'test'
+  ...
+# Subtest: Producto rechaza precio con coma
+ok 23 - Producto rechaza precio con coma
+  ---
+  duration_ms: 5.190923
+  type: 'test'
+  ...
+# Subtest: Producto rechaza stock negativo
+ok 24 - Producto rechaza stock negativo
+  ---
+  duration_ms: 1.218078
+  type: 'test'
+  ...
+# Subtest: Producto rechaza stock fraccionario
+ok 25 - Producto rechaza stock fraccionario
+  ---
+  duration_ms: 1.944826
+  type: 'test'
+  ...
+# Subtest: Producto rechaza stock como texto
+ok 26 - Producto rechaza stock como texto
+  ---
+  duration_ms: 1.29884
+  type: 'test'
+  ...
+# Subtest: Producto rechaza stock excesivo
+ok 27 - Producto rechaza stock excesivo
+  ---
+  duration_ms: 1.473724
+  type: 'test'
+  ...
+# Subtest: Producto rechaza categoría desconocida
+ok 28 - Producto rechaza categoría desconocida
+  ---
+  duration_ms: 1.32529
+  type: 'test'
+  ...
+# Subtest: Producto rechaza nombre corto
+ok 29 - Producto rechaza nombre corto
+  ---
+  duration_ms: 1.322085
+  type: 'test'
+  ...
+# Subtest: Producto rechaza nombre con control
+ok 30 - Producto rechaza nombre con control
+  ---
+  duration_ms: 1.399061
+  type: 'test'
+  ...
+# Subtest: Producto rechaza código inválido
+ok 31 - Producto rechaza código inválido
+  ---
+  duration_ms: 1.374264
+  type: 'test'
+  ...
+# Subtest: ID inválido, recurso inexistente y método incorrecto se distinguen
+ok 32 - ID inválido, recurso inexistente y método incorrecto se distinguen
+  ---
+  duration_ms: 2.543238
+  type: 'test'
+  ...
+# Subtest: Filtros literales, tildes, paginación y parámetros inesperados
+ok 33 - Filtros literales, tildes, paginación y parámetros inesperados
+  ---
+  duration_ms: 7.924909
+  type: 'test'
+  ...
+# Subtest: Ajuste de inventario registra motivo y saldo, y rechaza saldo negativo
+ok 34 - Ajuste de inventario registra motivo y saldo, y rechaza saldo negativo
+  ---
+  duration_ms: 8.352706
+  type: 'test'
+  ...
+# Subtest: Resumen mantiene importes exactos por encima del límite entero de JavaScript
+ok 35 - Resumen mantiene importes exactos por encima del límite entero de JavaScript
+  ---
+  duration_ms: 4.164284
+  type: 'test'
+  ...
+# Subtest: Cotización calcula precios del servidor, no descuenta stock y congela los importes
+ok 36 - Cotización calcula precios del servidor, no descuenta stock y congela los importes
+  ---
+  duration_ms: 9.289859
+  type: 'test'
+  ...
+# Subtest: Cotización valida cantidades, repetidos y campos de precio impuestos por el cliente
+ok 37 - Cotización valida cantidades, repetidos y campos de precio impuestos por el cliente
+  ---
+  duration_ms: 7.008347
+  type: 'test'
+  ...
+# Subtest: Cliente ajeno no consulta ni convierte una cotización de otra cuenta
+ok 38 - Cliente ajeno no consulta ni convierte una cotización de otra cuenta
+  ---
+  duration_ms: 8.020124
+  type: 'test'
+  ...
+# Subtest: Cotización caducada se rechaza sin alterar existencias
+ok 39 - Cotización caducada se rechaza sin alterar existencias
+  ---
+  duration_ms: 6.093546
+  type: 'test'
+  ...
+# Subtest: Pedido requiere un perfil completo antes de reservar productos
+ok 40 - Pedido requiere un perfil completo antes de reservar productos
+  ---
+  duration_ms: 166.752866
+  type: 'test'
+  ...
+# Subtest: Pedido multiartículo falla de forma atómica ante existencias insuficientes
+ok 41 - Pedido multiartículo falla de forma atómica ante existencias insuficientes
+  ---
+  duration_ms: 6.442933
+  type: 'test'
+  ...
+# Subtest: Dos confirmaciones concurrentes de la misma cotización reservan una sola vez
+ok 42 - Dos confirmaciones concurrentes de la misma cotización reservan una sola vez
+  ---
+  duration_ms: 7.416152
+  type: 'test'
+  ...
+# Subtest: Dos cotizaciones compiten por la última unidad sin sobreventa
+ok 43 - Dos cotizaciones compiten por la última unidad sin sobreventa
+  ---
+  duration_ms: 15.747615
+  type: 'test'
+  ...
+# Subtest: Cancelar un pedido devuelve existencias una sola vez y conserva sus datos
+ok 44 - Cancelar un pedido devuelve existencias una sola vez y conserva sus datos
+  ---
+  duration_ms: 10.802273
+  type: 'test'
+  ...
+# Subtest: El estado del pedido respeta permisos, propietario y transiciones
+ok 45 - El estado del pedido respeta permisos, propietario y transiciones
+  ---
+  duration_ms: 12.553484
+  type: 'test'
+  ...
+# Subtest: Retirar un producto impide nuevas compras y permite cancelar reservas anteriores
+ok 46 - Retirar un producto impide nuevas compras y permite cancelar reservas anteriores
+  ---
+  duration_ms: 10.921002
+  type: 'test'
+  ...
+# Subtest: Modificar perfil no cambia la dirección guardada en un pedido anterior
+ok 47 - Modificar perfil no cambia la dirección guardada en un pedido anterior
+  ---
+  duration_ms: 7.389802
+  type: 'test'
+  ...
+# Subtest: Registro concurrente conserva una sola cuenta y responde 201/409
+ok 48 - Registro concurrente conserva una sola cuenta y responde 201/409
+  ---
+  duration_ms: 173.324969
+  type: 'test'
+  ...
+# Subtest: Cancelación multiartículo revierte todo si una devolución supera el máximo
+ok 49 - Cancelación multiartículo revierte todo si una devolución supera el máximo
+  ---
+  duration_ms: 12.138684
+  type: 'test'
+  ...
+# Subtest: Protocolo rechaza JSON roto, UTF-8 inválido, tipos y cuerpos excesivos
+ok 50 - Protocolo rechaza JSON roto, UTF-8 inválido, tipos y cuerpos excesivos
+  ---
+  duration_ms: 4.710899
+  type: 'test'
+  ...
+# Subtest: Tokens guardados como hash; un nuevo login y logout revocan accesos previos
+ok 51 - Tokens guardados como hash; un nuevo login y logout revocan accesos previos
+  ---
+  duration_ms: 342.300144
+  type: 'test'
+  ...
+# Subtest: Rate limit devuelve 429 y Retry-After al superar la ventana por IP
+ok 52 - Rate limit devuelve 429 y Retry-After al superar la ventana por IP
+  ---
+  duration_ms: 178.284579
+  type: 'test'
+  ...
+# Subtest: Datos y sesiones persisten al reiniciar el servidor
+ok 53 - Datos y sesiones persisten al reiniciar el servidor
+  ---
+  duration_ms: 171.138118
+  type: 'test'
+  ...
+# Subtest: Token vencido se rechaza después de dos horas
+ok 54 - Token vencido se rechaza después de dos horas
+  ---
+  duration_ms: 371.065025
+  type: 'test'
+  ...
+# Subtest: Contrato OpenAPI cubre exactamente las rutas implementadas
+ok 55 - Contrato OpenAPI cubre exactamente las rutas implementadas
+  ---
+  duration_ms: 8.588372
+  type: 'test'
+  ...
+# Subtest: Las 34 solicitudes de la colección completan el recorrido HTTP documentado
+ok 56 - Las 34 solicitudes de la colección completan el recorrido HTTP documentado
+  ---
+  duration_ms: 1442.324601
+  type: 'test'
+  ...
+1..56
+# tests 56
+# suites 0
+# pass 56
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3843.156686

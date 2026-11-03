@@ -1,0 +1,26 @@
+RAIZVOLT - DISEÑO Y CODIFICACIÓN DE API DEL PROYECTO
+Aprendiz: Jhon Edwards Tineo Landaeta
+Ficha: 3235874
+
+REPOSITORIO PUBLICO
+https://github.com/Joan-dot650/Programa-Git
+
+CODIGO Y DOCUMENTACION DE ESTA ENTREGA
+https://github.com/Joan-dot650/Programa-Git/tree/evidencia-aa5-api-proyecto/API-PROYECTO
+
+HISTORIAL REMOTO
+https://github.com/Joan-dot650/Programa-Git/commits/evidencia-aa5-api-proyecto/API-PROYECTO
+
+CLONAR DESDE GITHUB
+ git clone --branch evidencia-aa5-api-proyecto --single-branch https://github.com/Joan-dot650/Programa-Git.git
+ cd Programa-Git/API-PROYECTO
+ node --test tests/api.test.js tests/coleccion.test.js
+ node scripts/preparar-demo.js
+ node src/server.js
+
+RECUPERAR EL HISTORIAL LOCAL SIN INTERNET
+Desde la carpeta extraída del ZIP:
+ git clone --branch evidencia-aa5-api-proyecto versionamiento/RaizVolt.bundle Proyecto_Git
+
+VERSIONAMIENTO.txt del ZIP identifica el commit remoto y el commit local.
+La rama independiente conserva las evidencias anteriores del repositorio.
