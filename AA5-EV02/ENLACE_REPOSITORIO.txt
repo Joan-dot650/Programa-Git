@@ -5,22 +5,9 @@ Ficha: 3235874
 REPOSITORIO
 https://github.com/Joan-dot650/Programa-Git
 
-DESTINO PREPARADO PARA LA EVIDENCIA (NO PUBLICADO)
-https://github.com/Joan-dot650/Programa-Git/tree/evidencia-aa5-ev02/AA5-EV02
+ENLACE DIRECTO A LA EVIDENCIA
+https://github.com/Joan-dot650/Programa-Git/tree/evidencia-aa5-ev02
 
 Rama: evidencia-aa5-ev02
 Carpeta: AA5-EV02
 
-ESTADO
-Los archivos nuevos de AA5-EV02 están preparados localmente.
-La publicación quedó bloqueada por la revisión automática de aprobación.
-El repositorio remoto conserva el contenido anterior.
-
-RECUPERAR EL PROYECTO COMPLETO DESDE EL ZIP
-git clone --branch evidencia-aa5-ev02 versionamiento/Programa-Git.bundle Proyecto_Git
-cd Proyecto_Git/AA5-EV02
-node src/server.js
-
-Requiere Node.js 24 o posterior. Verificado nuevamente con 24.22.1.
-Las capturas y el video incluidos corresponden a Newman.
-La grabación y las capturas de Postman de escritorio siguen pendientes.
