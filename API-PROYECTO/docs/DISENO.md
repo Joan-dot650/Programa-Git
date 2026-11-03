@@ -183,7 +183,7 @@ https://github.com/Joan-dot650/Programa-Git/tree/evidencia-aa5-api-proyecto/API-
 
 El ZIP incluye también el historial local de preparación en
 versionamiento/RaizVolt.bundle. VERSIONAMIENTO.txt identifica las revisiones
-remota y local; los archivos finales del módulo coinciden.
+remota y local.
 
 ## Referencias técnicas
 
