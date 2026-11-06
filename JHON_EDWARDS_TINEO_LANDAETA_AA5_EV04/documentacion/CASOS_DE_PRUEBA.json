@@ -1,0 +1,562 @@
+[
+  {
+    "id": "CP-01",
+    "nombre": "Salud",
+    "metodo": "GET",
+    "ruta": "/api/salud",
+    "esperado": 200,
+    "aserciones": 3,
+    "obtenido": 200,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-02",
+    "nombre": "Login ADMIN",
+    "metodo": "POST",
+    "ruta": "/api/login",
+    "esperado": 200,
+    "aserciones": 3,
+    "obtenido": 200,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-03",
+    "nombre": "Registrar cliente",
+    "metodo": "POST",
+    "ruta": "/api/registro",
+    "esperado": 201,
+    "aserciones": 3,
+    "obtenido": 201,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-04",
+    "nombre": "Login cliente",
+    "metodo": "POST",
+    "ruta": "/api/login",
+    "esperado": 200,
+    "aserciones": 3,
+    "obtenido": 200,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-05",
+    "nombre": "Completar perfil",
+    "metodo": "PUT",
+    "ruta": "/api/perfil",
+    "esperado": 200,
+    "aserciones": 3,
+    "obtenido": 200,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-06",
+    "nombre": "Consultar perfil",
+    "metodo": "GET",
+    "ruta": "/api/perfil",
+    "esperado": 200,
+    "aserciones": 3,
+    "obtenido": 200,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-07",
+    "nombre": "Categorías",
+    "metodo": "GET",
+    "ruta": "/api/categorias",
+    "esperado": 200,
+    "aserciones": 3,
+    "obtenido": 200,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-08",
+    "nombre": "Crear producto",
+    "metodo": "POST",
+    "ruta": "/api/productos",
+    "esperado": 201,
+    "aserciones": 3,
+    "obtenido": 201,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-09",
+    "nombre": "Buscar catálogo",
+    "metodo": "GET",
+    "ruta": "/api/productos?q=DEMO-&pagina=1&limite=20",
+    "esperado": 200,
+    "aserciones": 3,
+    "obtenido": 200,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-10",
+    "nombre": "Consultar producto",
+    "metodo": "GET",
+    "ruta": "/api/productos/{{producto_id}}",
+    "esperado": 200,
+    "aserciones": 3,
+    "obtenido": 200,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-11",
+    "nombre": "Editar producto",
+    "metodo": "PUT",
+    "ruta": "/api/productos/{{producto_id}}",
+    "esperado": 200,
+    "aserciones": 3,
+    "obtenido": 200,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-12",
+    "nombre": "Ajustar inventario",
+    "metodo": "POST",
+    "ruta": "/api/productos/{{producto_id}}/inventario",
+    "esperado": 200,
+    "aserciones": 3,
+    "obtenido": 200,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-13",
+    "nombre": "Resumen inventario",
+    "metodo": "GET",
+    "ruta": "/api/inventario",
+    "esperado": 200,
+    "aserciones": 3,
+    "obtenido": 200,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-14",
+    "nombre": "Movimientos",
+    "metodo": "GET",
+    "ruta": "/api/inventario/movimientos",
+    "esperado": 200,
+    "aserciones": 3,
+    "obtenido": 200,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-15",
+    "nombre": "Cotizar",
+    "metodo": "POST",
+    "ruta": "/api/cotizaciones",
+    "esperado": 201,
+    "aserciones": 3,
+    "obtenido": 201,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-16",
+    "nombre": "Listar cotizaciones",
+    "metodo": "GET",
+    "ruta": "/api/cotizaciones",
+    "esperado": 200,
+    "aserciones": 3,
+    "obtenido": 200,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-17",
+    "nombre": "Consultar cotización",
+    "metodo": "GET",
+    "ruta": "/api/cotizaciones/{{cotizacion_id}}",
+    "esperado": 200,
+    "aserciones": 3,
+    "obtenido": 200,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-18",
+    "nombre": "Confirmar pedido",
+    "metodo": "POST",
+    "ruta": "/api/pedidos",
+    "esperado": 201,
+    "aserciones": 3,
+    "obtenido": 201,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-19",
+    "nombre": "Repetir confirmación sin reservar de nuevo",
+    "metodo": "POST",
+    "ruta": "/api/pedidos",
+    "esperado": 200,
+    "aserciones": 3,
+    "obtenido": 200,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-20",
+    "nombre": "Listar pedidos",
+    "metodo": "GET",
+    "ruta": "/api/pedidos",
+    "esperado": 200,
+    "aserciones": 3,
+    "obtenido": 200,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-21",
+    "nombre": "Consultar pedido",
+    "metodo": "GET",
+    "ruta": "/api/pedidos/{{pedido_id}}",
+    "esperado": 200,
+    "aserciones": 3,
+    "obtenido": 200,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-22",
+    "nombre": "Cliente no puede enviar",
+    "metodo": "PATCH",
+    "ruta": "/api/pedidos/{{pedido_id}}/estado",
+    "esperado": 403,
+    "aserciones": 3,
+    "obtenido": 403,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-23",
+    "nombre": "Cancelar pedido",
+    "metodo": "PATCH",
+    "ruta": "/api/pedidos/{{pedido_id}}/estado",
+    "esperado": 200,
+    "aserciones": 3,
+    "obtenido": 200,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-24",
+    "nombre": "Segunda cotización",
+    "metodo": "POST",
+    "ruta": "/api/cotizaciones",
+    "esperado": 201,
+    "aserciones": 3,
+    "obtenido": 201,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-25",
+    "nombre": "Segundo pedido",
+    "metodo": "POST",
+    "ruta": "/api/pedidos",
+    "esperado": 201,
+    "aserciones": 3,
+    "obtenido": 201,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-26",
+    "nombre": "Enviar pedido",
+    "metodo": "PATCH",
+    "ruta": "/api/pedidos/{{pedido_id}}/estado",
+    "esperado": 200,
+    "aserciones": 3,
+    "obtenido": 200,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-27",
+    "nombre": "Entregar pedido",
+    "metodo": "PATCH",
+    "ruta": "/api/pedidos/{{pedido_id}}/estado",
+    "esperado": 200,
+    "aserciones": 3,
+    "obtenido": 200,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-28",
+    "nombre": "Cliente no puede retirar producto",
+    "metodo": "DELETE",
+    "ruta": "/api/productos/{{producto_id}}",
+    "esperado": 403,
+    "aserciones": 3,
+    "obtenido": 403,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-29",
+    "nombre": "Usuario duplicado",
+    "metodo": "POST",
+    "ruta": "/api/registro",
+    "esperado": 409,
+    "aserciones": 3,
+    "obtenido": 409,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-30",
+    "nombre": "Usuario con caracteres no permitidos",
+    "metodo": "POST",
+    "ruta": "/api/registro",
+    "esperado": 400,
+    "aserciones": 3,
+    "obtenido": 400,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-31",
+    "nombre": "Contrasena menor de ocho caracteres",
+    "metodo": "POST",
+    "ruta": "/api/registro",
+    "esperado": 400,
+    "aserciones": 3,
+    "obtenido": 400,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-32",
+    "nombre": "Contrasena incorrecta",
+    "metodo": "POST",
+    "ruta": "/api/login",
+    "esperado": 401,
+    "aserciones": 3,
+    "obtenido": 401,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-33",
+    "nombre": "Perfil sin token",
+    "metodo": "GET",
+    "ruta": "/api/perfil",
+    "esperado": 401,
+    "aserciones": 3,
+    "obtenido": 401,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-34",
+    "nombre": "Cliente sin permiso de inventario",
+    "metodo": "GET",
+    "ruta": "/api/inventario",
+    "esperado": 403,
+    "aserciones": 3,
+    "obtenido": 403,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-35",
+    "nombre": "Precio negativo",
+    "metodo": "POST",
+    "ruta": "/api/productos",
+    "esperado": 400,
+    "aserciones": 3,
+    "obtenido": 400,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-36",
+    "nombre": "Precio numerico en lugar de texto",
+    "metodo": "POST",
+    "ruta": "/api/productos",
+    "esperado": 400,
+    "aserciones": 3,
+    "obtenido": 400,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-37",
+    "nombre": "Existencias con decimales",
+    "metodo": "POST",
+    "ruta": "/api/productos",
+    "esperado": 400,
+    "aserciones": 3,
+    "obtenido": 400,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-38",
+    "nombre": "Categoria desconocida",
+    "metodo": "POST",
+    "ruta": "/api/productos",
+    "esperado": 400,
+    "aserciones": 3,
+    "obtenido": 400,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-39",
+    "nombre": "Nombre supera 120 caracteres",
+    "metodo": "POST",
+    "ruta": "/api/productos",
+    "esperado": 400,
+    "aserciones": 3,
+    "obtenido": 400,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-40",
+    "nombre": "Telefono con letras",
+    "metodo": "PUT",
+    "ruta": "/api/perfil",
+    "esperado": 400,
+    "aserciones": 3,
+    "obtenido": 400,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-41",
+    "nombre": "Registro intenta asignarse rol ADMIN",
+    "metodo": "POST",
+    "ruta": "/api/registro",
+    "esperado": 400,
+    "aserciones": 3,
+    "obtenido": 400,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-42",
+    "nombre": "Identificador no numerico",
+    "metodo": "GET",
+    "ruta": "/api/productos/abc",
+    "esperado": 400,
+    "aserciones": 3,
+    "obtenido": 400,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-43",
+    "nombre": "Paginacion invalida",
+    "metodo": "GET",
+    "ruta": "/api/productos?pagina=0",
+    "esperado": 400,
+    "aserciones": 3,
+    "obtenido": 400,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-44",
+    "nombre": "JSON mal formado",
+    "metodo": "POST",
+    "ruta": "/api/productos",
+    "esperado": 400,
+    "aserciones": 3,
+    "obtenido": 400,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-45",
+    "nombre": "Content-Type incorrecto",
+    "metodo": "POST",
+    "ruta": "/api/productos",
+    "esperado": 415,
+    "aserciones": 3,
+    "obtenido": 415,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-46",
+    "nombre": "Ajuste dejaria inventario negativo",
+    "metodo": "POST",
+    "ruta": "/api/productos/{{producto_id}}/inventario",
+    "esperado": 409,
+    "aserciones": 3,
+    "obtenido": 409,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-47",
+    "nombre": "Codigo de producto duplicado",
+    "metodo": "POST",
+    "ruta": "/api/productos",
+    "esperado": 409,
+    "aserciones": 3,
+    "obtenido": 409,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-48",
+    "nombre": "Cotizacion sin productos",
+    "metodo": "POST",
+    "ruta": "/api/cotizaciones",
+    "esperado": 400,
+    "aserciones": 3,
+    "obtenido": 400,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-49",
+    "nombre": "Cancelar pedido ya entregado",
+    "metodo": "PATCH",
+    "ruta": "/api/pedidos/{{pedido_id}}/estado",
+    "esperado": 409,
+    "aserciones": 3,
+    "obtenido": 409,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-50",
+    "nombre": "Inventario final conserva 24 unidades",
+    "metodo": "GET",
+    "ruta": "/api/productos/{{producto_id}}",
+    "esperado": 200,
+    "aserciones": 3,
+    "obtenido": 200,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-51",
+    "nombre": "Retirar producto",
+    "metodo": "DELETE",
+    "ruta": "/api/productos/{{producto_id}}",
+    "esperado": 204,
+    "aserciones": 2,
+    "obtenido": 204,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-52",
+    "nombre": "Producto retirado no aparece",
+    "metodo": "GET",
+    "ruta": "/api/productos/{{producto_id}}",
+    "esperado": 404,
+    "aserciones": 3,
+    "obtenido": 404,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-53",
+    "nombre": "Contrato",
+    "metodo": "GET",
+    "ruta": "/api/openapi.json",
+    "esperado": 200,
+    "aserciones": 3,
+    "obtenido": 200,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-54",
+    "nombre": "Cerrar sesión cliente",
+    "metodo": "POST",
+    "ruta": "/api/logout",
+    "esperado": 204,
+    "aserciones": 2,
+    "obtenido": 204,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-55",
+    "nombre": "Token revocado",
+    "metodo": "GET",
+    "ruta": "/api/perfil",
+    "esperado": 401,
+    "aserciones": 3,
+    "obtenido": 401,
+    "resultado": "APROBADO"
+  },
+  {
+    "id": "CP-56",
+    "nombre": "Cerrar sesión admin",
+    "metodo": "POST",
+    "ruta": "/api/logout",
+    "esperado": 204,
+    "aserciones": 2,
+    "obtenido": 204,
+    "resultado": "APROBADO"
+  }
+]

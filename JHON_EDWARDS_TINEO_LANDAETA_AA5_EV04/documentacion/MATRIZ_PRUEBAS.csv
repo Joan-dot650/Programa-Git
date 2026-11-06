@@ -1,0 +1,57 @@
+﻿id;nombre;metodo;ruta;esperado;aserciones;obtenido;resultado
+CP-01;Salud;GET;/api/salud;200;3;200;APROBADO
+CP-02;Login ADMIN;POST;/api/login;200;3;200;APROBADO
+CP-03;Registrar cliente;POST;/api/registro;201;3;201;APROBADO
+CP-04;Login cliente;POST;/api/login;200;3;200;APROBADO
+CP-05;Completar perfil;PUT;/api/perfil;200;3;200;APROBADO
+CP-06;Consultar perfil;GET;/api/perfil;200;3;200;APROBADO
+CP-07;Categorías;GET;/api/categorias;200;3;200;APROBADO
+CP-08;Crear producto;POST;/api/productos;201;3;201;APROBADO
+CP-09;Buscar catálogo;GET;/api/productos?q=DEMO-&pagina=1&limite=20;200;3;200;APROBADO
+CP-10;Consultar producto;GET;/api/productos/{{producto_id}};200;3;200;APROBADO
+CP-11;Editar producto;PUT;/api/productos/{{producto_id}};200;3;200;APROBADO
+CP-12;Ajustar inventario;POST;/api/productos/{{producto_id}}/inventario;200;3;200;APROBADO
+CP-13;Resumen inventario;GET;/api/inventario;200;3;200;APROBADO
+CP-14;Movimientos;GET;/api/inventario/movimientos;200;3;200;APROBADO
+CP-15;Cotizar;POST;/api/cotizaciones;201;3;201;APROBADO
+CP-16;Listar cotizaciones;GET;/api/cotizaciones;200;3;200;APROBADO
+CP-17;Consultar cotización;GET;/api/cotizaciones/{{cotizacion_id}};200;3;200;APROBADO
+CP-18;Confirmar pedido;POST;/api/pedidos;201;3;201;APROBADO
+CP-19;Repetir confirmación sin reservar de nuevo;POST;/api/pedidos;200;3;200;APROBADO
+CP-20;Listar pedidos;GET;/api/pedidos;200;3;200;APROBADO
+CP-21;Consultar pedido;GET;/api/pedidos/{{pedido_id}};200;3;200;APROBADO
+CP-22;Cliente no puede enviar;PATCH;/api/pedidos/{{pedido_id}}/estado;403;3;403;APROBADO
+CP-23;Cancelar pedido;PATCH;/api/pedidos/{{pedido_id}}/estado;200;3;200;APROBADO
+CP-24;Segunda cotización;POST;/api/cotizaciones;201;3;201;APROBADO
+CP-25;Segundo pedido;POST;/api/pedidos;201;3;201;APROBADO
+CP-26;Enviar pedido;PATCH;/api/pedidos/{{pedido_id}}/estado;200;3;200;APROBADO
+CP-27;Entregar pedido;PATCH;/api/pedidos/{{pedido_id}}/estado;200;3;200;APROBADO
+CP-28;Cliente no puede retirar producto;DELETE;/api/productos/{{producto_id}};403;3;403;APROBADO
+CP-29;Usuario duplicado;POST;/api/registro;409;3;409;APROBADO
+CP-30;Usuario con caracteres no permitidos;POST;/api/registro;400;3;400;APROBADO
+CP-31;Contrasena menor de ocho caracteres;POST;/api/registro;400;3;400;APROBADO
+CP-32;Contrasena incorrecta;POST;/api/login;401;3;401;APROBADO
+CP-33;Perfil sin token;GET;/api/perfil;401;3;401;APROBADO
+CP-34;Cliente sin permiso de inventario;GET;/api/inventario;403;3;403;APROBADO
+CP-35;Precio negativo;POST;/api/productos;400;3;400;APROBADO
+CP-36;Precio numerico en lugar de texto;POST;/api/productos;400;3;400;APROBADO
+CP-37;Existencias con decimales;POST;/api/productos;400;3;400;APROBADO
+CP-38;Categoria desconocida;POST;/api/productos;400;3;400;APROBADO
+CP-39;Nombre supera 120 caracteres;POST;/api/productos;400;3;400;APROBADO
+CP-40;Telefono con letras;PUT;/api/perfil;400;3;400;APROBADO
+CP-41;Registro intenta asignarse rol ADMIN;POST;/api/registro;400;3;400;APROBADO
+CP-42;Identificador no numerico;GET;/api/productos/abc;400;3;400;APROBADO
+CP-43;Paginacion invalida;GET;/api/productos?pagina=0;400;3;400;APROBADO
+CP-44;JSON mal formado;POST;/api/productos;400;3;400;APROBADO
+CP-45;Content-Type incorrecto;POST;/api/productos;415;3;415;APROBADO
+CP-46;Ajuste dejaria inventario negativo;POST;/api/productos/{{producto_id}}/inventario;409;3;409;APROBADO
+CP-47;Codigo de producto duplicado;POST;/api/productos;409;3;409;APROBADO
+CP-48;Cotizacion sin productos;POST;/api/cotizaciones;400;3;400;APROBADO
+CP-49;Cancelar pedido ya entregado;PATCH;/api/pedidos/{{pedido_id}}/estado;409;3;409;APROBADO
+CP-50;Inventario final conserva 24 unidades;GET;/api/productos/{{producto_id}};200;3;200;APROBADO
+CP-51;Retirar producto;DELETE;/api/productos/{{producto_id}};204;2;204;APROBADO
+CP-52;Producto retirado no aparece;GET;/api/productos/{{producto_id}};404;3;404;APROBADO
+CP-53;Contrato;GET;/api/openapi.json;200;3;200;APROBADO
+CP-54;Cerrar sesión cliente;POST;/api/logout;204;2;204;APROBADO
+CP-55;Token revocado;GET;/api/perfil;401;3;401;APROBADO
+CP-56;Cerrar sesión admin;POST;/api/logout;204;2;204;APROBADO
