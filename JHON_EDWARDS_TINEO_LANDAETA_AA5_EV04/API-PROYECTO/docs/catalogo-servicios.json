@@ -1,0 +1,552 @@
+[
+  {
+    "method": "GET",
+    "path": "/api/salud",
+    "title": "Comprobar disponibilidad",
+    "role": "PUBLICO",
+    "tag": "Sistema",
+    "description": "Comprueba que el proceso HTTP responde. No prueba servicios externos.",
+    "request": null,
+    "response": "Salud",
+    "code": 200,
+    "errors": {},
+    "paged": false,
+    "filters": false,
+    "number": "S01",
+    "all_errors": {
+      "400": "Datos, identificador o parámetros de consulta inválidos.",
+      "405": "Método no permitido para este recurso.",
+      "500": "Error interno; no se exponen trazas ni consultas SQL."
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/api/registro",
+    "title": "Registrar cliente",
+    "role": "PUBLICO",
+    "tag": "Autenticación",
+    "description": "Crea una cuenta CLIENTE. No inicia sesión. Para ADMIN se usa un comando local.",
+    "request": "Credenciales",
+    "response": "Registro",
+    "code": 201,
+    "errors": {
+      "409": "El nombre de usuario ya existe.",
+      "429": "Se superaron 20 solicitudes de registro/login por IP en 10 minutos."
+    },
+    "paged": false,
+    "filters": false,
+    "number": "S02",
+    "all_errors": {
+      "400": "Datos, identificador o parámetros de consulta inválidos.",
+      "405": "Método no permitido para este recurso.",
+      "409": "El nombre de usuario ya existe.",
+      "413": "Cuerpo superior a 32768 bytes.",
+      "415": "Se requiere application/json sin compresión.",
+      "429": "Se superaron 20 solicitudes de registro/login por IP en 10 minutos.",
+      "500": "Error interno; no se exponen trazas ni consultas SQL."
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/api/login",
+    "title": "Iniciar sesión",
+    "role": "PUBLICO",
+    "tag": "Autenticación",
+    "description": "Verifica la contraseña y entrega un token aleatorio de 2 horas. Invalida la sesión anterior de la misma cuenta.",
+    "request": "Credenciales",
+    "response": "Login",
+    "code": 200,
+    "errors": {
+      "401": "Credenciales incorrectas.",
+      "429": "Se superaron 20 solicitudes de registro/login por IP en 10 minutos."
+    },
+    "paged": false,
+    "filters": false,
+    "number": "S03",
+    "all_errors": {
+      "400": "Datos, identificador o parámetros de consulta inválidos.",
+      "401": "Credenciales incorrectas.",
+      "405": "Método no permitido para este recurso.",
+      "413": "Cuerpo superior a 32768 bytes.",
+      "415": "Se requiere application/json sin compresión.",
+      "429": "Se superaron 20 solicitudes de registro/login por IP en 10 minutos.",
+      "500": "Error interno; no se exponen trazas ni consultas SQL."
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/api/logout",
+    "title": "Cerrar sesión",
+    "role": "USUARIO",
+    "tag": "Autenticación",
+    "description": "Revoca el token utilizado. La solicitud no requiere cuerpo.",
+    "request": null,
+    "response": null,
+    "code": 204,
+    "errors": {},
+    "paged": false,
+    "filters": false,
+    "number": "S04",
+    "all_errors": {
+      "400": "Datos, identificador o parámetros de consulta inválidos.",
+      "401": "Token ausente, inválido, revocado o vencido.",
+      "405": "Método no permitido para este recurso.",
+      "500": "Error interno; no se exponen trazas ni consultas SQL."
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/perfil",
+    "title": "Consultar perfil propio",
+    "role": "USUARIO",
+    "tag": "Perfil",
+    "description": "Entrega solo los datos de la cuenta autenticada.",
+    "request": null,
+    "response": "Perfil",
+    "code": 200,
+    "errors": {},
+    "paged": false,
+    "filters": false,
+    "number": "S05",
+    "all_errors": {
+      "400": "Datos, identificador o parámetros de consulta inválidos.",
+      "401": "Token ausente, inválido, revocado o vencido.",
+      "405": "Método no permitido para este recurso.",
+      "500": "Error interno; no se exponen trazas ni consultas SQL."
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/api/perfil",
+    "title": "Completar o actualizar perfil",
+    "role": "USUARIO",
+    "tag": "Perfil",
+    "description": "Reemplaza los cuatro campos de contacto. El perfil debe estar completo para confirmar un pedido. No modifica usuario ni rol.",
+    "request": "PerfilEntrada",
+    "response": "Perfil",
+    "code": 200,
+    "errors": {},
+    "paged": false,
+    "filters": false,
+    "number": "S06",
+    "all_errors": {
+      "400": "Datos, identificador o parámetros de consulta inválidos.",
+      "401": "Token ausente, inválido, revocado o vencido.",
+      "405": "Método no permitido para este recurso.",
+      "413": "Cuerpo superior a 32768 bytes.",
+      "415": "Se requiere application/json sin compresión.",
+      "500": "Error interno; no se exponen trazas ni consultas SQL."
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/categorias",
+    "title": "Consultar categorías",
+    "role": "PUBLICO",
+    "tag": "Catálogo",
+    "description": "Devuelve las cinco categorías del modelo de RaízVolt.",
+    "request": null,
+    "response": "Categorias",
+    "code": 200,
+    "errors": {},
+    "paged": false,
+    "filters": false,
+    "number": "S07",
+    "all_errors": {
+      "400": "Datos, identificador o parámetros de consulta inválidos.",
+      "405": "Método no permitido para este recurso.",
+      "500": "Error interno; no se exponen trazas ni consultas SQL."
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/productos",
+    "title": "Listar y buscar productos",
+    "role": "PUBLICO",
+    "tag": "Catálogo",
+    "description": "Solo lista productos activos. q busca coincidencia literal parcial en código o nombre sin distinguir mayúsculas, incluidas tildes. total cuenta todos los resultados del filtro.",
+    "request": null,
+    "response": "ListaProducto",
+    "code": 200,
+    "errors": {},
+    "paged": true,
+    "filters": true,
+    "number": "S08",
+    "all_errors": {
+      "400": "Datos, identificador o parámetros de consulta inválidos.",
+      "405": "Método no permitido para este recurso.",
+      "500": "Error interno; no se exponen trazas ni consultas SQL."
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/productos/{id}",
+    "title": "Consultar producto",
+    "role": "PUBLICO",
+    "tag": "Catálogo",
+    "description": "Consulta por identificador; los retirados no están disponibles.",
+    "request": null,
+    "response": "Producto",
+    "code": 200,
+    "errors": {
+      "404": "Producto inexistente o retirado."
+    },
+    "paged": false,
+    "filters": false,
+    "number": "S09",
+    "all_errors": {
+      "400": "Datos, identificador o parámetros de consulta inválidos.",
+      "404": "Producto inexistente o retirado.",
+      "405": "Método no permitido para este recurso.",
+      "500": "Error interno; no se exponen trazas ni consultas SQL."
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/api/productos",
+    "title": "Registrar producto",
+    "role": "ADMIN",
+    "tag": "Catálogo",
+    "description": "Crea producto y registra el movimiento inicial de inventario en una transacción. Devuelve Location.",
+    "request": "ProductoCreacion",
+    "response": "Producto",
+    "code": 201,
+    "errors": {
+      "409": "Código repetido, incluso si fue retirado."
+    },
+    "paged": false,
+    "filters": false,
+    "number": "S10",
+    "all_errors": {
+      "400": "Datos, identificador o parámetros de consulta inválidos.",
+      "401": "Token ausente, inválido, revocado o vencido.",
+      "403": "Se requiere rol ADMIN.",
+      "405": "Método no permitido para este recurso.",
+      "409": "Código repetido, incluso si fue retirado.",
+      "413": "Cuerpo superior a 32768 bytes.",
+      "415": "Se requiere application/json sin compresión.",
+      "500": "Error interno; no se exponen trazas ni consultas SQL."
+    }
+  },
+  {
+    "method": "PUT",
+    "path": "/api/productos/{id}",
+    "title": "Actualizar producto",
+    "role": "ADMIN",
+    "tag": "Catálogo",
+    "description": "Reemplaza código, nombre, categoría y precio. No recibe existencias: se ajustan mediante el servicio de inventario.",
+    "request": "ProductoEntrada",
+    "response": "Producto",
+    "code": 200,
+    "errors": {
+      "404": "Producto inexistente o retirado.",
+      "409": "Código repetido."
+    },
+    "paged": false,
+    "filters": false,
+    "number": "S11",
+    "all_errors": {
+      "400": "Datos, identificador o parámetros de consulta inválidos.",
+      "401": "Token ausente, inválido, revocado o vencido.",
+      "403": "Se requiere rol ADMIN.",
+      "404": "Producto inexistente o retirado.",
+      "405": "Método no permitido para este recurso.",
+      "409": "Código repetido.",
+      "413": "Cuerpo superior a 32768 bytes.",
+      "415": "Se requiere application/json sin compresión.",
+      "500": "Error interno; no se exponen trazas ni consultas SQL."
+    }
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/productos/{id}",
+    "title": "Retirar producto",
+    "role": "ADMIN",
+    "tag": "Catálogo",
+    "description": "Realiza baja lógica; conserva pedidos, cotizaciones, movimientos y el código único. Impide nuevas ventas. Sin cuerpo de respuesta.",
+    "request": null,
+    "response": null,
+    "code": 204,
+    "errors": {
+      "404": "Producto inexistente o ya retirado."
+    },
+    "paged": false,
+    "filters": false,
+    "number": "S12",
+    "all_errors": {
+      "400": "Datos, identificador o parámetros de consulta inválidos.",
+      "401": "Token ausente, inválido, revocado o vencido.",
+      "403": "Se requiere rol ADMIN.",
+      "404": "Producto inexistente o ya retirado.",
+      "405": "Método no permitido para este recurso.",
+      "500": "Error interno; no se exponen trazas ni consultas SQL."
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/inventario",
+    "title": "Consultar resumen de inventario",
+    "role": "ADMIN",
+    "tag": "Inventario",
+    "description": "Resume referencias activas, unidades disponibles, referencias con menos de cinco unidades y valor exacto en COP. Los pedidos ya reservados no cuentan como stock disponible.",
+    "request": null,
+    "response": "ResumenInventario",
+    "code": 200,
+    "errors": {},
+    "paged": false,
+    "filters": false,
+    "number": "S13",
+    "all_errors": {
+      "400": "Datos, identificador o parámetros de consulta inválidos.",
+      "401": "Token ausente, inválido, revocado o vencido.",
+      "403": "Se requiere rol ADMIN.",
+      "405": "Método no permitido para este recurso.",
+      "500": "Error interno; no se exponen trazas ni consultas SQL."
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/inventario/movimientos",
+    "title": "Consultar movimientos",
+    "role": "ADMIN",
+    "tag": "Inventario",
+    "description": "Lista movimientos más recientes primero, incluidos los de productos retirados. Incluye actor, variación, saldo, motivo y pedido relacionado.",
+    "request": null,
+    "response": "ListaMovimiento",
+    "code": 200,
+    "errors": {},
+    "paged": true,
+    "filters": false,
+    "number": "S14",
+    "all_errors": {
+      "400": "Datos, identificador o parámetros de consulta inválidos.",
+      "401": "Token ausente, inválido, revocado o vencido.",
+      "403": "Se requiere rol ADMIN.",
+      "405": "Método no permitido para este recurso.",
+      "500": "Error interno; no se exponen trazas ni consultas SQL."
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/api/productos/{id}/inventario",
+    "title": "Ajustar existencias",
+    "role": "ADMIN",
+    "tag": "Inventario",
+    "description": "Suma o resta variacion; exige motivo. Registra el movimiento y actualiza saldo en la misma transacción.",
+    "request": "AjusteInventario",
+    "response": "Producto",
+    "code": 200,
+    "errors": {
+      "404": "Producto inexistente o retirado.",
+      "409": "Saldo final negativo o superior a 1000000."
+    },
+    "paged": false,
+    "filters": false,
+    "number": "S15",
+    "all_errors": {
+      "400": "Datos, identificador o parámetros de consulta inválidos.",
+      "401": "Token ausente, inválido, revocado o vencido.",
+      "403": "Se requiere rol ADMIN.",
+      "404": "Producto inexistente o retirado.",
+      "405": "Método no permitido para este recurso.",
+      "409": "Saldo final negativo o superior a 1000000.",
+      "413": "Cuerpo superior a 32768 bytes.",
+      "415": "Se requiere application/json sin compresión.",
+      "500": "Error interno; no se exponen trazas ni consultas SQL."
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/api/cotizaciones",
+    "title": "Crear cotización",
+    "role": "USUARIO",
+    "tag": "Cotizaciones",
+    "description": "Obtiene precios del servidor y congela código, nombre y precio. Vigencia: 7 días. No reserva stock; se puede cotizar sin existencias. total suma productos: no incluye flete ni cálculo tributario.",
+    "request": "CotizacionEntrada",
+    "response": "Cotizacion",
+    "code": 201,
+    "errors": {
+      "404": "Un producto no existe o está retirado."
+    },
+    "paged": false,
+    "filters": false,
+    "number": "S16",
+    "all_errors": {
+      "400": "Datos, identificador o parámetros de consulta inválidos.",
+      "401": "Token ausente, inválido, revocado o vencido.",
+      "404": "Un producto no existe o está retirado.",
+      "405": "Método no permitido para este recurso.",
+      "413": "Cuerpo superior a 32768 bytes.",
+      "415": "Se requiere application/json sin compresión.",
+      "500": "Error interno; no se exponen trazas ni consultas SQL."
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/cotizaciones",
+    "title": "Listar cotizaciones",
+    "role": "USUARIO",
+    "tag": "Cotizaciones",
+    "description": "CLIENTE ve únicamente las propias; ADMIN ve todas. Orden descendente por ID.",
+    "request": null,
+    "response": "ListaCotizacion",
+    "code": 200,
+    "errors": {},
+    "paged": true,
+    "filters": false,
+    "number": "S17",
+    "all_errors": {
+      "400": "Datos, identificador o parámetros de consulta inválidos.",
+      "401": "Token ausente, inválido, revocado o vencido.",
+      "405": "Método no permitido para este recurso.",
+      "500": "Error interno; no se exponen trazas ni consultas SQL."
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/cotizaciones/{id}",
+    "title": "Consultar cotización",
+    "role": "USUARIO",
+    "tag": "Cotizaciones",
+    "description": "Consulta las líneas y los precios guardados. No cambia por ediciones posteriores del producto.",
+    "request": null,
+    "response": "Cotizacion",
+    "code": 200,
+    "errors": {
+      "404": "No existe o no pertenece al cliente."
+    },
+    "paged": false,
+    "filters": false,
+    "number": "S18",
+    "all_errors": {
+      "400": "Datos, identificador o parámetros de consulta inválidos.",
+      "401": "Token ausente, inválido, revocado o vencido.",
+      "404": "No existe o no pertenece al cliente.",
+      "405": "Método no permitido para este recurso.",
+      "500": "Error interno; no se exponen trazas ni consultas SQL."
+    }
+  },
+  {
+    "method": "POST",
+    "path": "/api/pedidos",
+    "title": "Confirmar pedido",
+    "role": "USUARIO",
+    "tag": "Pedidos",
+    "description": "Solo permite convertir una cotización propia vigente y con stock. Exige perfil completo. Guarda dirección y reserva todas las líneas de forma atómica. Una cotización admite un solo pedido: reintentar devuelve ese pedido (200), incluso cancelado, sin otra reserva. Para comprar otra vez se crea una cotización nueva.",
+    "request": "PedidoEntrada",
+    "response": "Pedido",
+    "code": 201,
+    "errors": {
+      "404": "No existe una cotización propia con ese ID.",
+      "409": "Cotización vencida, producto retirado o existencias insuficientes."
+    },
+    "paged": false,
+    "filters": false,
+    "number": "S19",
+    "all_errors": {
+      "400": "Datos, identificador o parámetros de consulta inválidos.",
+      "401": "Token ausente, inválido, revocado o vencido.",
+      "404": "No existe una cotización propia con ese ID.",
+      "405": "Método no permitido para este recurso.",
+      "409": "Cotización vencida, producto retirado o existencias insuficientes.",
+      "413": "Cuerpo superior a 32768 bytes.",
+      "415": "Se requiere application/json sin compresión.",
+      "500": "Error interno; no se exponen trazas ni consultas SQL."
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/pedidos",
+    "title": "Listar pedidos",
+    "role": "USUARIO",
+    "tag": "Pedidos",
+    "description": "CLIENTE ve sus pedidos; ADMIN ve todos. La dirección es la copia guardada al confirmar.",
+    "request": null,
+    "response": "ListaPedido",
+    "code": 200,
+    "errors": {},
+    "paged": true,
+    "filters": false,
+    "number": "S20",
+    "all_errors": {
+      "400": "Datos, identificador o parámetros de consulta inválidos.",
+      "401": "Token ausente, inválido, revocado o vencido.",
+      "405": "Método no permitido para este recurso.",
+      "500": "Error interno; no se exponen trazas ni consultas SQL."
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/pedidos/{id}",
+    "title": "Consultar pedido",
+    "role": "USUARIO",
+    "tag": "Pedidos",
+    "description": "Devuelve estado, líneas, total y dirección preservada.",
+    "request": null,
+    "response": "Pedido",
+    "code": 200,
+    "errors": {
+      "404": "No existe o no pertenece al cliente."
+    },
+    "paged": false,
+    "filters": false,
+    "number": "S21",
+    "all_errors": {
+      "400": "Datos, identificador o parámetros de consulta inválidos.",
+      "401": "Token ausente, inválido, revocado o vencido.",
+      "404": "No existe o no pertenece al cliente.",
+      "405": "Método no permitido para este recurso.",
+      "500": "Error interno; no se exponen trazas ni consultas SQL."
+    }
+  },
+  {
+    "method": "PATCH",
+    "path": "/api/pedidos/{id}/estado",
+    "title": "Cambiar estado del pedido",
+    "role": "USUARIO",
+    "tag": "Pedidos",
+    "description": "ADMIN: PENDIENTE a ENVIADO y ENVIADO a ENTREGADO. El propietario o ADMIN puede cancelar solo PENDIENTE, devolviendo existencias una vez. Repetir el estado actual devuelve 200 sin nuevos movimientos. CANCELADO y ENTREGADO son finales.",
+    "request": "EstadoEntrada",
+    "response": "Pedido",
+    "code": 200,
+    "errors": {
+      "403": "El cliente intentó enviar o entregar.",
+      "404": "No existe o no pertenece al cliente.",
+      "409": "Transición inválida o devolución que supera 1000000 unidades."
+    },
+    "paged": false,
+    "filters": false,
+    "number": "S22",
+    "all_errors": {
+      "400": "Datos, identificador o parámetros de consulta inválidos.",
+      "401": "Token ausente, inválido, revocado o vencido.",
+      "403": "El cliente intentó enviar o entregar.",
+      "404": "No existe o no pertenece al cliente.",
+      "405": "Método no permitido para este recurso.",
+      "409": "Transición inválida o devolución que supera 1000000 unidades.",
+      "413": "Cuerpo superior a 32768 bytes.",
+      "415": "Se requiere application/json sin compresión.",
+      "500": "Error interno; no se exponen trazas ni consultas SQL."
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/openapi.json",
+    "title": "Descargar contrato OpenAPI",
+    "role": "PUBLICO",
+    "tag": "Documentación",
+    "description": "Entrega la especificación completa de los servicios, entradas, respuestas, errores y autenticación.",
+    "request": null,
+    "response": "OpenAPI",
+    "code": 200,
+    "errors": {},
+    "paged": false,
+    "filters": false,
+    "number": "S23",
+    "all_errors": {
+      "400": "Datos, identificador o parámetros de consulta inválidos.",
+      "405": "Método no permitido para este recurso.",
+      "500": "Error interno; no se exponen trazas ni consultas SQL."
+    }
+  }
+]

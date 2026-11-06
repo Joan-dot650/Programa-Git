@@ -1,0 +1,418 @@
+{"t": 1.594, "output": "No authorization data found. Please use the `postman login` command.\n"}
+{"t": 1.595, "output": "Refer:https://learning.postman.com/docs/postman-cli/postman-cli-options/#postman-login\n"}
+{"t": 1.595, "output": "\n"}
+{"t": 1.643, "output": "Running your collection...\n"}
+{"t": 1.926, "output": "postman\n"}
+{"t": 1.926, "output": "\n"}
+{"t": 1.926, "output": "RaizVolt - AA5 EV04 - Pruebas locales\n"}
+{"t": 1.928, "output": "\n"}
+{"t": 1.928, "output": "Root 01 - Salud\n"}
+{"t": 1.928, "output": "\n"}
+{"t": 1.953, "output": "  GET http://127.0.0.1:3000/api/salud [200 OK, 449 B, 16 ms]\n"}
+{"t": 1.972, "output": "  Pass  HTTP 200\n"}
+{"t": 1.972, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 1.972, "output": "  Pass  Respuesta JSON\n"}
+{"t": 1.986, "output": "\n"}
+{"t": 1.986, "output": "Root 02 - Login ADMIN\n"}
+{"t": 1.986, "output": "\n"}
+{"t": 2.212, "output": "  POST http://127.0.0.1:3000/api/login [200 OK, 722 B, 211 ms]\n"}
+{"t": 2.218, "output": "  Pass  HTTP 200\n"}
+{"t": 2.218, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 2.218, "output": "  Pass  Respuesta JSON\n"}
+{"t": 2.224, "output": "\n"}
+{"t": 2.224, "output": "Root 03 - Registrar cliente\n"}
+{"t": 2.224, "output": "\n"}
+{"t": 2.443, "output": "  POST http://127.0.0.1:3000/api/registro [201 Created, 596 B, 212 ms]\n"}
+{"t": 2.45, "output": "  Pass  HTTP 201\n"}
+{"t": 2.45, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 2.451, "output": "  Pass  Respuesta JSON\n"}
+{"t": 2.456, "output": "\n"}
+{"t": 2.456, "output": "Root 04 - Login cliente\n"}
+{"t": 2.456, "output": "\n"}
+{"t": 2.664, "output": "  POST http://127.0.0.1:3000/api/login [200 OK, 725 B, 199 ms]\n"}
+{"t": 2.67, "output": "  Pass  HTTP 200\n"}
+{"t": 2.67, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 2.67, "output": "  Pass  Respuesta JSON\n"}
+{"t": 2.674, "output": "\n"}
+{"t": 2.674, "output": "Root 05 - Completar perfil\n"}
+{"t": 2.674, "output": "\n"}
+{"t": 2.689, "output": "  PUT http://127.0.0.1:3000/api/perfil [200 OK, 601 B, 6 ms]\n"}
+{"t": 2.695, "output": "  Pass  HTTP 200\n"}
+{"t": 2.695, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 2.695, "output": "  Pass  Respuesta JSON\n"}
+{"t": 2.7, "output": "\n"}
+{"t": 2.7, "output": "Root 06 - Consultar perfil\n"}
+{"t": 2.7, "output": "\n"}
+{"t": 2.711, "output": "  GET http://127.0.0.1:3000/api/perfil [200 OK, 601 B, 5 ms]\n"}
+{"t": 2.716, "output": "  Pass  HTTP 200\n"}
+{"t": 2.716, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 2.716, "output": "  Pass  Respuesta JSON\n"}
+{"t": 2.74, "output": "\n"}
+{"t": 2.741, "output": "Root 07 - Categorías\n"}
+{"t": 2.741, "output": "\n"}
+{"t": 2.752, "output": "  GET http://127.0.0.1:3000/api/categorias [200 OK, 454 B, 5 ms]\n"}
+{"t": 2.759, "output": "  Pass  HTTP 200\n"}
+{"t": 2.759, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 2.759, "output": "  Pass  Respuesta JSON\n"}
+{"t": 2.764, "output": "\n"}
+{"t": 2.764, "output": "Root 08 - Crear producto\n"}
+{"t": 2.764, "output": "\n"}
+{"t": 2.777, "output": "  POST http://127.0.0.1:3000/api/productos [201 Created, 556 B, 6 ms]\n"}
+{"t": 2.784, "output": "  Pass  HTTP 201\n"}
+{"t": 2.784, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 2.785, "output": "  Pass  Respuesta JSON\n"}
+{"t": 2.789, "output": "\n"}
+{"t": 2.789, "output": "Root 09 - Buscar catálogo\n"}
+{"t": 2.789, "output": "\n"}
+{"t": 2.801, "output": "  GET http://127.0.0.1:3000/api/productos?q=DEMO-&pagina=1&limite=20 [200 OK, 572 B, 5 ms]\n"}
+{"t": 2.806, "output": "  Pass  HTTP 200\n"}
+{"t": 2.806, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 2.806, "output": "  Pass  Respuesta JSON\n"}
+{"t": 2.81, "output": "\n"}
+{"t": 2.811, "output": "Root 10 - Consultar producto\n"}
+{"t": 2.811, "output": "\n"}
+{"t": 2.821, "output": "  GET http://127.0.0.1:3000/api/productos/1 [200 OK, 523 B, 3 ms]\n"}
+{"t": 2.827, "output": "  Pass  HTTP 200\n"}
+{"t": 2.827, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 2.827, "output": "  Pass  Respuesta JSON\n"}
+{"t": 2.831, "output": "\n"}
+{"t": 2.832, "output": "Root 11 - Editar producto\n"}
+{"t": 2.832, "output": "\n"}
+{"t": 2.845, "output": "  PUT http://127.0.0.1:3000/api/productos/1 [200 OK, 529 B, 6 ms]\n"}
+{"t": 2.848, "output": "  Pass  HTTP 200\n"}
+{"t": 2.848, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 2.848, "output": "  Pass  Respuesta JSON\n"}
+{"t": 2.852, "output": "\n"}
+{"t": 2.852, "output": "Root 12 - Ajustar inventario\n"}
+{"t": 2.852, "output": "\n"}
+{"t": 2.865, "output": "  POST http://127.0.0.1:3000/api/productos/1/inventario [200 OK, 529 B, 5 ms]\n"}
+{"t": 2.87, "output": "  Pass  HTTP 200\n"}
+{"t": 2.87, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 2.871, "output": "  Pass  Respuesta JSON\n"}
+{"t": 2.877, "output": "\n"}
+{"t": 2.877, "output": "Root 13 - Resumen inventario\n"}
+{"t": 2.877, "output": "\n"}
+{"t": 2.891, "output": "  GET http://127.0.0.1:3000/api/inventario [200 OK, 471 B, 7 ms]\n"}
+{"t": 2.899, "output": "  Pass  HTTP 200\n"}
+{"t": 2.9, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 2.9, "output": "  Pass  Respuesta JSON\n"}
+{"t": 2.904, "output": "\n"}
+{"t": 2.904, "output": "Root 14 - Movimientos\n"}
+{"t": 2.904, "output": "\n"}
+{"t": 2.918, "output": "  GET http://127.0.0.1:3000/api/inventario/movimientos [200 OK, 795 B, 5 ms]\n"}
+{"t": 2.923, "output": "  Pass  HTTP 200\n"}
+{"t": 2.923, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 2.923, "output": "  Pass  Respuesta JSON\n"}
+{"t": 2.927, "output": "\n"}
+{"t": 2.927, "output": "Root 15 - Cotizar\n"}
+{"t": 2.927, "output": "\n"}
+{"t": 2.94, "output": "  POST http://127.0.0.1:3000/api/cotizaciones [201 Created, 705 B, 5 ms]\n"}
+{"t": 2.945, "output": "  Pass  HTTP 201\n"}
+{"t": 2.945, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 2.945, "output": "  Pass  Respuesta JSON\n"}
+{"t": 2.949, "output": "\n"}
+{"t": 2.949, "output": "Root 16 - Listar cotizaciones\n"}
+{"t": 2.949, "output": "\n"}
+{"t": 2.961, "output": "  GET http://127.0.0.1:3000/api/cotizaciones [200 OK, 721 B, 4 ms]\n"}
+{"t": 2.967, "output": "  Pass  HTTP 200\n"}
+{"t": 2.967, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 2.967, "output": "  Pass  Respuesta JSON\n"}
+{"t": 2.971, "output": "\n"}
+{"t": 2.971, "output": "Root 17 - Consultar cotización\n"}
+{"t": 2.971, "output": "\n"}
+{"t": 2.981, "output": "  GET http://127.0.0.1:3000/api/cotizaciones/1 [200 OK, 669 B, 4 ms]\n"}
+{"t": 2.986, "output": "  Pass  HTTP 200\n"}
+{"t": 2.986, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 2.986, "output": "  Pass  Respuesta JSON\n"}
+{"t": 2.991, "output": "\n"}
+{"t": 2.991, "output": "Root 18 - Confirmar pedido\n"}
+{"t": 2.991, "output": "\n"}
+{"t": 3.007, "output": "  POST http://127.0.0.1:3000/api/pedidos [201 Created, 881 B, 7 ms]\n"}
+{"t": 3.012, "output": "  Pass  HTTP 201\n"}
+{"t": 3.012, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 3.012, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.017, "output": "\n"}
+{"t": 3.017, "output": "Root 19 - Repetir confirmación sin reservar de nuevo\n"}
+{"t": 3.017, "output": "\n"}
+{"t": 3.027, "output": "  POST http://127.0.0.1:3000/api/pedidos [200 OK, 876 B, 3 ms]\n"}
+{"t": 3.033, "output": "  Pass  HTTP 200\n"}
+{"t": 3.033, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 3.033, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.037, "output": "\n"}
+{"t": 3.037, "output": "Root 20 - Listar pedidos\n"}
+{"t": 3.037, "output": "\n"}
+{"t": 3.045, "output": "  GET http://127.0.0.1:3000/api/pedidos [200 OK, 897 B, 3 ms]\n"}
+{"t": 3.049, "output": "  Pass  HTTP 200\n"}
+{"t": 3.05, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 3.05, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.056, "output": "\n"}
+{"t": 3.056, "output": "Root 21 - Consultar pedido\n"}
+{"t": 3.056, "output": "\n"}
+{"t": 3.067, "output": "  GET http://127.0.0.1:3000/api/pedidos/1 [200 OK, 850 B, 4 ms]\n"}
+{"t": 3.073, "output": "  Pass  HTTP 200\n"}
+{"t": 3.073, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 3.073, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.077, "output": "\n"}
+{"t": 3.077, "output": "Root 22 - Cliente no puede enviar\n"}
+{"t": 3.077, "output": "\n"}
+{"t": 3.088, "output": "  PATCH http://127.0.0.1:3000/api/pedidos/1/estado [403 Forbidden, 468 B, 5 ms]\n"}
+{"t": 3.093, "output": "  Pass  HTTP 403\n"}
+{"t": 3.093, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.093, "output": "  Pass  Error controlado\n"}
+{"t": 3.097, "output": "\n"}
+{"t": 3.097, "output": "Root 23 - Cancelar pedido\n"}
+{"t": 3.097, "output": "\n"}
+{"t": 3.108, "output": "  PATCH http://127.0.0.1:3000/api/pedidos/1/estado [200 OK, 850 B, 4 ms]\n"}
+{"t": 3.112, "output": "  Pass  HTTP 200\n"}
+{"t": 3.112, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 3.112, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.115, "output": "\n"}
+{"t": 3.115, "output": "Root 24 - Segunda cotización\n"}
+{"t": 3.115, "output": "\n"}
+{"t": 3.128, "output": "  POST http://127.0.0.1:3000/api/cotizaciones [201 Created, 703 B, 5 ms]\n"}
+{"t": 3.132, "output": "  Pass  HTTP 201\n"}
+{"t": 3.132, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 3.132, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.136, "output": "\n"}
+{"t": 3.136, "output": "Root 25 - Segundo pedido\n"}
+{"t": 3.136, "output": "\n"}
+{"t": 3.149, "output": "  POST http://127.0.0.1:3000/api/pedidos [201 Created, 879 B, 5 ms]\n"}
+{"t": 3.154, "output": "  Pass  HTTP 201\n"}
+{"t": 3.154, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 3.154, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.158, "output": "\n"}
+{"t": 3.158, "output": "Root 26 - Enviar pedido\n"}
+{"t": 3.158, "output": "\n"}
+{"t": 3.171, "output": "  PATCH http://127.0.0.1:3000/api/pedidos/2/estado [200 OK, 846 B, 6 ms]\n"}
+{"t": 3.177, "output": "  Pass  HTTP 200\n"}
+{"t": 3.177, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 3.178, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.183, "output": "\n"}
+{"t": 3.183, "output": "Root 27 - Entregar pedido\n"}
+{"t": 3.183, "output": "\n"}
+{"t": 3.197, "output": "  PATCH http://127.0.0.1:3000/api/pedidos/2/estado [200 OK, 848 B, 7 ms]\n"}
+{"t": 3.201, "output": "  Pass  HTTP 200\n"}
+{"t": 3.201, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 3.202, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.215, "output": "\n"}
+{"t": 3.215, "output": "Root 28 - Cliente no puede retirar producto\n"}
+{"t": 3.215, "output": "\n"}
+{"t": 3.23, "output": "  DELETE http://127.0.0.1:3000/api/productos/1 [403 Forbidden, 439 B, 7 ms]\n"}
+{"t": 3.237, "output": "  Pass  HTTP 403\n"}
+{"t": 3.237, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.237, "output": "  Pass  Error controlado\n"}
+{"t": 3.242, "output": "\n"}
+{"t": 3.242, "output": "Root 29 - Usuario duplicado\n"}
+{"t": 3.242, "output": "\n"}
+{"t": 3.253, "output": "  POST http://127.0.0.1:3000/api/registro [409 Conflict, 444 B, 4 ms]\n"}
+{"t": 3.258, "output": "  Pass  HTTP 409\n"}
+{"t": 3.258, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.259, "output": "  Pass  Error controlado\n"}
+{"t": 3.262, "output": "\n"}
+{"t": 3.262, "output": "Root 30 - Usuario con caracteres no permitidos\n"}
+{"t": 3.262, "output": "\n"}
+{"t": 3.273, "output": "  POST http://127.0.0.1:3000/api/registro [400 Bad Request, 552 B, 4 ms]\n"}
+{"t": 3.278, "output": "  Pass  HTTP 400\n"}
+{"t": 3.278, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.283, "output": "  Pass  Error controlado\n"}
+{"t": 3.289, "output": "\n"}
+{"t": 3.289, "output": "Root 31 - Contrasena menor de ocho caracteres\n"}
+{"t": 3.289, "output": "\n"}
+{"t": 3.299, "output": "  POST http://127.0.0.1:3000/api/registro [400 Bad Request, 531 B, 3 ms]\n"}
+{"t": 3.303, "output": "  Pass  HTTP 400\n"}
+{"t": 3.303, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.303, "output": "  Pass  Error controlado\n"}
+{"t": 3.307, "output": "\n"}
+{"t": 3.307, "output": "Root 32 - Contrasena incorrecta\n"}
+{"t": 3.307, "output": "\n"}
+{"t": 3.545, "output": "  POST http://127.0.0.1:3000/api/login [401 Unauthorized, 469 B, 231 ms]\n"}
+{"t": 3.551, "output": "  Pass  HTTP 401\n"}
+{"t": 3.551, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.552, "output": "  Pass  Error controlado\n"}
+{"t": 3.555, "output": "\n"}
+{"t": 3.555, "output": "Root 33 - Perfil sin token\n"}
+{"t": 3.555, "output": "\n"}
+{"t": 3.565, "output": "  GET http://127.0.0.1:3000/api/perfil [401 Unauthorized, 479 B, 3 ms]\n"}
+{"t": 3.569, "output": "  Pass  HTTP 401\n"}
+{"t": 3.57, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.57, "output": "  Pass  Error controlado\n"}
+{"t": 3.574, "output": "\n"}
+{"t": 3.574, "output": "Root 34 - Cliente sin permiso de inventario\n"}
+{"t": 3.574, "output": "\n"}
+{"t": 3.584, "output": "  GET http://127.0.0.1:3000/api/inventario [403 Forbidden, 439 B, 3 ms]\n"}
+{"t": 3.588, "output": "  Pass  HTTP 403\n"}
+{"t": 3.588, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.588, "output": "  Pass  Error controlado\n"}
+{"t": 3.592, "output": "\n"}
+{"t": 3.592, "output": "Root 35 - Precio negativo\n"}
+{"t": 3.592, "output": "\n"}
+{"t": 3.603, "output": "  POST http://127.0.0.1:3000/api/productos [400 Bad Request, 552 B, 3 ms]\n"}
+{"t": 3.607, "output": "  Pass  HTTP 400\n"}
+{"t": 3.607, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.607, "output": "  Pass  Error controlado\n"}
+{"t": 3.611, "output": "\n"}
+{"t": 3.611, "output": "Root 36 - Precio numerico en lugar de texto\n"}
+{"t": 3.611, "output": "\n"}
+{"t": 3.621, "output": "  POST http://127.0.0.1:3000/api/productos [400 Bad Request, 552 B, 3 ms]\n"}
+{"t": 3.625, "output": "  Pass  HTTP 400\n"}
+{"t": 3.625, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.625, "output": "  Pass  Error controlado\n"}
+{"t": 3.63, "output": "\n"}
+{"t": 3.63, "output": "Root 37 - Existencias con decimales\n"}
+{"t": 3.63, "output": "\n"}
+{"t": 3.642, "output": "  POST http://127.0.0.1:3000/api/productos [400 Bad Request, 515 B, 4 ms]\n"}
+{"t": 3.645, "output": "  Pass  HTTP 400\n"}
+{"t": 3.645, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.645, "output": "  Pass  Error controlado\n"}
+{"t": 3.649, "output": "\n"}
+{"t": 3.649, "output": "Root 38 - Categoria desconocida\n"}
+{"t": 3.649, "output": "\n"}
+{"t": 3.659, "output": "  POST http://127.0.0.1:3000/api/productos [400 Bad Request, 536 B, 2 ms]\n"}
+{"t": 3.664, "output": "  Pass  HTTP 400\n"}
+{"t": 3.664, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.664, "output": "  Pass  Error controlado\n"}
+{"t": 3.668, "output": "\n"}
+{"t": 3.668, "output": "Root 39 - Nombre supera 120 caracteres\n"}
+{"t": 3.668, "output": "\n"}
+{"t": 3.677, "output": "  POST http://127.0.0.1:3000/api/productos [400 Bad Request, 540 B, 3 ms]\n"}
+{"t": 3.681, "output": "  Pass  HTTP 400\n"}
+{"t": 3.681, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.681, "output": "  Pass  Error controlado\n"}
+{"t": 3.685, "output": "\n"}
+{"t": 3.685, "output": "Root 40 - Telefono con letras\n"}
+{"t": 3.685, "output": "\n"}
+{"t": 3.695, "output": "  PUT http://127.0.0.1:3000/api/perfil [400 Bad Request, 541 B, 3 ms]\n"}
+{"t": 3.699, "output": "  Pass  HTTP 400\n"}
+{"t": 3.699, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.699, "output": "  Pass  Error controlado\n"}
+{"t": 3.704, "output": "\n"}
+{"t": 3.704, "output": "Root 41 - Registro intenta asignarse rol ADMIN\n"}
+{"t": 3.704, "output": "\n"}
+{"t": 3.713, "output": "  POST http://127.0.0.1:3000/api/registro [400 Bad Request, 505 B, 3 ms]\n"}
+{"t": 3.717, "output": "  Pass  HTTP 400\n"}
+{"t": 3.717, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.717, "output": "  Pass  Error controlado\n"}
+{"t": 3.72, "output": "\n"}
+{"t": 3.72, "output": "Root 42 - Identificador no numerico\n"}
+{"t": 3.72, "output": "\n"}
+{"t": 3.73, "output": "  GET http://127.0.0.1:3000/api/productos/abc [400 Bad Request, 494 B, 2 ms]\n"}
+{"t": 3.734, "output": "  Pass  HTTP 400\n"}
+{"t": 3.734, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.734, "output": "  Pass  Error controlado\n"}
+{"t": 3.738, "output": "\n"}
+{"t": 3.738, "output": "Root 43 - Paginacion invalida\n"}
+{"t": 3.738, "output": "\n"}
+{"t": 3.746, "output": "  GET http://127.0.0.1:3000/api/productos?pagina=0 [400 Bad Request, 491 B, 2 ms]\n"}
+{"t": 3.75, "output": "  Pass  HTTP 400\n"}
+{"t": 3.75, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.75, "output": "  Pass  Error controlado\n"}
+{"t": 3.754, "output": "\n"}
+{"t": 3.754, "output": "Root 44 - JSON mal formado\n"}
+{"t": 3.754, "output": "\n"}
+{"t": 3.763, "output": "  POST http://127.0.0.1:3000/api/productos [400 Bad Request, 431 B, 3 ms]\n"}
+{"t": 3.767, "output": "  Pass  HTTP 400\n"}
+{"t": 3.767, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.768, "output": "  Pass  Error controlado\n"}
+{"t": 3.771, "output": "\n"}
+{"t": 3.771, "output": "Root 45 - Content-Type incorrecto\n"}
+{"t": 3.771, "output": "\n"}
+{"t": 3.781, "output": "  POST http://127.0.0.1:3000/api/productos [415 Unsupported Media Type, 467 B, 2 ms]\n"}
+{"t": 3.785, "output": "  Pass  HTTP 415\n"}
+{"t": 3.785, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.785, "output": "  Pass  Error controlado\n"}
+{"t": 3.788, "output": "\n"}
+{"t": 3.788, "output": "Root 46 - Ajuste dejaria inventario negativo\n"}
+{"t": 3.788, "output": "\n"}
+{"t": 3.797, "output": "  POST http://127.0.0.1:3000/api/productos/1/inventario [409 Conflict, 470 B, 2 ms]\n"}
+{"t": 3.801, "output": "  Pass  HTTP 409\n"}
+{"t": 3.801, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.802, "output": "  Pass  Error controlado\n"}
+{"t": 3.805, "output": "\n"}
+{"t": 3.805, "output": "Root 47 - Codigo de producto duplicado\n"}
+{"t": 3.805, "output": "\n"}
+{"t": 3.815, "output": "  POST http://127.0.0.1:3000/api/productos [409 Conflict, 471 B, 3 ms]\n"}
+{"t": 3.821, "output": "  Pass  HTTP 409\n"}
+{"t": 3.821, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.821, "output": "  Pass  Error controlado\n"}
+{"t": 3.824, "output": "\n"}
+{"t": 3.824, "output": "Root 48 - Cotizacion sin productos\n"}
+{"t": 3.824, "output": "\n"}
+{"t": 3.834, "output": "  POST http://127.0.0.1:3000/api/cotizaciones [400 Bad Request, 508 B, 4 ms]\n"}
+{"t": 3.839, "output": "  Pass  HTTP 400\n"}
+{"t": 3.839, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.839, "output": "  Pass  Error controlado\n"}
+{"t": 3.843, "output": "\n"}
+{"t": 3.843, "output": "Root 49 - Cancelar pedido ya entregado\n"}
+{"t": 3.843, "output": "\n"}
+{"t": 3.852, "output": "  PATCH http://127.0.0.1:3000/api/pedidos/2/estado [409 Conflict, 448 B, 3 ms]\n"}
+{"t": 3.857, "output": "  Pass  HTTP 409\n"}
+{"t": 3.857, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.857, "output": "  Pass  Error controlado\n"}
+{"t": 3.861, "output": "\n"}
+{"t": 3.861, "output": "Root 50 - Inventario final conserva 24 unidades\n"}
+{"t": 3.861, "output": "\n"}
+{"t": 3.87, "output": "  GET http://127.0.0.1:3000/api/productos/1 [200 OK, 529 B, 2 ms]\n"}
+{"t": 3.874, "output": "  Pass  HTTP 200\n"}
+{"t": 3.874, "output": "  Pass  Stock final 24: reserva, cancelacion e idempotencia\n"}
+{"t": 3.874, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.878, "output": "\n"}
+{"t": 3.878, "output": "Root 51 - Retirar producto\n"}
+{"t": 3.878, "output": "\n"}
+{"t": 3.889, "output": "  DELETE http://127.0.0.1:3000/api/productos/1 [204 No Content, 359 B, 4 ms]\n"}
+{"t": 3.893, "output": "  Pass  HTTP 204\n"}
+{"t": 3.894, "output": "  Pass  Respuesta sin cuerpo\n"}
+{"t": 3.898, "output": "\n"}
+{"t": 3.898, "output": "Root 52 - Producto retirado no aparece\n"}
+{"t": 3.898, "output": "\n"}
+{"t": 3.907, "output": "  GET http://127.0.0.1:3000/api/productos/1 [404 Not Found, 437 B, 2 ms]\n"}
+{"t": 3.912, "output": "  Pass  HTTP 404\n"}
+{"t": 3.912, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.912, "output": "  Pass  Error controlado\n"}
+{"t": 3.915, "output": "\n"}
+{"t": 3.915, "output": "Root 53 - Contrato\n"}
+{"t": 3.915, "output": "\n"}
+{"t": 3.927, "output": "  GET http://127.0.0.1:3000/api/openapi.json [200 OK, 126.54 KB, 4 ms]\n"}
+{"t": 3.933, "output": "  Pass  HTTP 200\n"}
+{"t": 3.934, "output": "  Pass  Contenido y regla de negocio\n"}
+{"t": 3.935, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.939, "output": "\n"}
+{"t": 3.939, "output": "Root 54 - Cerrar sesión cliente\n"}
+{"t": 3.939, "output": "\n"}
+{"t": 3.95, "output": "  POST http://127.0.0.1:3000/api/logout [204 No Content, 359 B, 4 ms]\n"}
+{"t": 3.954, "output": "  Pass  HTTP 204\n"}
+{"t": 3.954, "output": "  Pass  Respuesta sin cuerpo\n"}
+{"t": 3.959, "output": "\n"}
+{"t": 3.959, "output": "Root 55 - Token revocado\n"}
+{"t": 3.959, "output": "\n"}
+{"t": 3.968, "output": "  GET http://127.0.0.1:3000/api/perfil [401 Unauthorized, 471 B, 2 ms]\n"}
+{"t": 3.973, "output": "  Pass  HTTP 401\n"}
+{"t": 3.973, "output": "  Pass  Respuesta JSON\n"}
+{"t": 3.973, "output": "  Pass  Error controlado\n"}
+{"t": 3.977, "output": "\n"}
+{"t": 3.977, "output": "Root 56 - Cerrar sesión admin\n"}
+{"t": 3.977, "output": "\n"}
+{"t": 3.987, "output": "  POST http://127.0.0.1:3000/api/logout [204 No Content, 359 B, 3 ms]\n"}
+{"t": 3.991, "output": "  Pass  HTTP 204\n"}
+{"t": 3.992, "output": "  Pass  Respuesta sin cuerpo\n"}
+{"t": 4.011, "output": "\n"}
+{"t": 4.011, "output": "----------------------------------------------------------------------\n"}
+{"t": 4.011, "output": "|                         |            executed |             failed |\n"}
+{"t": 4.011, "output": "--------------------------+---------------------+---------------------\n"}
+{"t": 4.011, "output": "|              iterations |                   1 |                  0 |\n"}
+{"t": 4.011, "output": "--------------------------+---------------------+---------------------\n"}
+{"t": 4.011, "output": "|                requests |                  56 |                  0 |\n"}
+{"t": 4.011, "output": "--------------------------+---------------------+---------------------\n"}
+{"t": 4.011, "output": "|            test-scripts |                  56 |                  0 |\n"}
+{"t": 4.011, "output": "--------------------------+---------------------+---------------------\n"}
+{"t": 4.011, "output": "|      prerequest-scripts |                   1 |                  0 |\n"}
+{"t": 4.011, "output": "--------------------------+---------------------+---------------------\n"}
+{"t": 4.011, "output": "|              assertions |                 165 |                  0 |\n"}
+{"t": 4.011, "output": "----------------------------------------------------------------------\n"}
+{"t": 4.011, "output": "| total run duration: 2 s                                            |\n"}
+{"t": 4.011, "output": "----------------------------------------------------------------------\n"}
+{"t": 4.011, "output": "| total data received: 136.35 KB (approx)                            |\n"}
+{"t": 4.011, "output": "----------------------------------------------------------------------\n"}
+{"t": 4.011, "output": "| average response time: 19 ms [min: 2 ms, max: 231 ms, s.d.: 53 ms] |\n"}
+{"t": 4.011, "output": "----------------------------------------------------------------------\n"}
+{"t": 4.012, "output": "Postman credentials are required for publishing run details to Postman cloud.\n"}
+{"t": 4.012, "output": "Please specify it by using the `postman login` command\n"}

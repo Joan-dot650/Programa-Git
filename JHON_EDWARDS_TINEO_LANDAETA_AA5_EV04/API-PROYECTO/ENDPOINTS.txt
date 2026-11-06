@@ -1,0 +1,30 @@
+RAÍZVOLT - ENDPOINTS
+Base: http://127.0.0.1:3000
+Content-Type: application/json para cuerpos.
+Authorization: Bearer <token> en rutas USUARIO/ADMIN.
+
+S01  GET    /api/salud                                 PUBLICO | Comprobar disponibilidad
+S02  POST   /api/registro                              PUBLICO | Registrar cliente
+S03  POST   /api/login                                 PUBLICO | Iniciar sesión
+S04  POST   /api/logout                                USUARIO | Cerrar sesión
+S05  GET    /api/perfil                                USUARIO | Consultar perfil propio
+S06  PUT    /api/perfil                                USUARIO | Completar o actualizar perfil
+S07  GET    /api/categorias                            PUBLICO | Consultar categorías
+S08  GET    /api/productos                             PUBLICO | Listar y buscar productos
+S09  GET    /api/productos/{id}                        PUBLICO | Consultar producto
+S10  POST   /api/productos                             ADMIN | Registrar producto
+S11  PUT    /api/productos/{id}                        ADMIN | Actualizar producto
+S12  DELETE /api/productos/{id}                        ADMIN | Retirar producto
+S13  GET    /api/inventario                            ADMIN | Consultar resumen de inventario
+S14  GET    /api/inventario/movimientos                ADMIN | Consultar movimientos
+S15  POST   /api/productos/{id}/inventario             ADMIN | Ajustar existencias
+S16  POST   /api/cotizaciones                          USUARIO | Crear cotización
+S17  GET    /api/cotizaciones                          USUARIO | Listar cotizaciones
+S18  GET    /api/cotizaciones/{id}                     USUARIO | Consultar cotización
+S19  POST   /api/pedidos                               USUARIO | Confirmar pedido
+S20  GET    /api/pedidos                               USUARIO | Listar pedidos
+S21  GET    /api/pedidos/{id}                          USUARIO | Consultar pedido
+S22  PATCH  /api/pedidos/{id}/estado                   USUARIO | Cambiar estado del pedido
+S23  GET    /api/openapi.json                          PUBLICO | Descargar contrato OpenAPI
+
+Documentación detallada: docs/SERVICIOS.html y docs/openapi.json.

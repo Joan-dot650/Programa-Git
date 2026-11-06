@@ -1,0 +1,6 @@
+ORIGEN: Joan-dot650/Programa-Git
+Rama fuente: evidencia-aa5-api-proyecto
+Commit fuente: 1a1ebb54280d66194f28e95194c3491d90bc8162
+Los archivos de src y las pruebas originales coinciden con esa revision.
+
+Destino previsto: evidencia-aa5-ev04-postman-local / AA5-EV04

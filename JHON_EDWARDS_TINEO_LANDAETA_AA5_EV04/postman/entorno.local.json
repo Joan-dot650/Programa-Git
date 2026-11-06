@@ -1,0 +1,22 @@
+{
+  "name": "RaizVolt LOCAL - AA5 EV04",
+  "values": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:3000",
+      "enabled": true
+    },
+    {
+      "key": "admin_usuario",
+      "value": "admin.ev04.6ffcb3ca",
+      "enabled": true
+    },
+    {
+      "key": "admin_contrasena",
+      "value": "Prueba-jc__yyEL0H_Sjvt_q9DZ_w!",
+      "enabled": true,
+      "type": "secret"
+    }
+  ],
+  "_postman_variable_scope": "environment"
+}

@@ -1,0 +1,45 @@
+# Abrir con REST Client de VS Code, o copiar cada solicitud a Postman.
+# Sustituir tokens e IDs con los devueltos por el servidor.
+@base = http://127.0.0.1:3000
+@adminToken = TOKEN_ADMIN
+@clientToken = TOKEN_CLIENTE
+
+### Registro
+POST {{base}}/api/registro
+Content-Type: application/json
+
+{"usuario":"cliente.http","contrasena":"ClaveDemo2026!"}
+
+### Login cliente (copiar el token de la respuesta)
+POST {{base}}/api/login
+Content-Type: application/json
+
+{"usuario":"cliente.http","contrasena":"ClaveDemo2026!"}
+
+### Completar perfil
+PUT {{base}}/api/perfil
+Authorization: Bearer {{clientToken}}
+Content-Type: application/json
+
+{"nombre":"Cliente de prueba","telefono":"3000000000","municipio":"Zipaquirá","direccion":"Calle de prueba 10-20"}
+
+### Catálogo (elegir un ID real)
+GET {{base}}/api/productos
+
+### Cotizar
+POST {{base}}/api/cotizaciones
+Authorization: Bearer {{clientToken}}
+Content-Type: application/json
+
+{"items":[{"productoId":1,"cantidad":2}]}
+
+### Confirmar cotización propia (cambiar ID)
+POST {{base}}/api/pedidos
+Authorization: Bearer {{clientToken}}
+Content-Type: application/json
+
+{"cotizacionId":1}
+
+### Consultar pedidos propios
+GET {{base}}/api/pedidos
+Authorization: Bearer {{clientToken}}

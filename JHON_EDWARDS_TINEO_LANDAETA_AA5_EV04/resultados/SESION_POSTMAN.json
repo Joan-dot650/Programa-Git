@@ -1,0 +1,7 @@
+{
+  "exit_code": 0,
+  "duracion_segundos": 8.935,
+  "postman_cli": "1.85.0",
+  "node": "v24.22.1",
+  "comando": "postman collection run postman/RaizVolt_AA5_EV04.postman_collection.json -e postman/entorno.local.json --no-report-events --disable-unicode --delay-request 1"
+}
