@@ -13,7 +13,7 @@ try {
     server.close();
   });
   server.listen(port, '127.0.0.1', () => {
-    console.log(`RaízVolt API y documentación: http://127.0.0.1:${port}`);
+    console.log(`RaízVolt web: http://127.0.0.1:${port}`);
     console.log('Presiona Ctrl+C para detener. La información se conserva en SQLite.');
   });
   const stop = () => server.close();

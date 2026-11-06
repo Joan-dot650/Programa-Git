@@ -2,7 +2,7 @@
   "openapi": "3.1.1",
   "info": {
     "title": "RaízVolt API del proyecto formativo",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "description": "Diseño y codificación de servicios de catálogo solar, inventario, cotizaciones y pedidos. Aprendiz: Jhon Edwards Tineo Landaeta. Ficha 3235874. Importes COP como texto decimal. Demostración local; no procesa pagos ni trámites de importación."
   },
   "servers": [

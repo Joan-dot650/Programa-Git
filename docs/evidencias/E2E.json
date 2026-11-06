@@ -1,0 +1,64 @@
+{
+  "executedAt": "2026-11-06T16:34:30.664Z",
+  "node": "v24.22.1",
+  "target": "dist/ - aplicación compilada",
+  "results": [
+    {
+      "name": "E-01 Catálogo y filtro de búsqueda",
+      "status": "PASS"
+    },
+    {
+      "name": "E-02 Registro e inicio de sesión de cliente",
+      "status": "PASS"
+    },
+    {
+      "name": "E-03 Guardado del perfil y datos de entrega",
+      "status": "PASS"
+    },
+    {
+      "name": "E-04 Cotización y pedido descuentan exactamente dos unidades",
+      "status": "PASS"
+    },
+    {
+      "name": "E-05 Repetir confirmación no duplica pedido ni descuento",
+      "status": "PASS"
+    },
+    {
+      "name": "E-06 Cancelación devuelve inventario",
+      "status": "PASS"
+    },
+    {
+      "name": "E-07 Ruta de administración rechazada para cliente",
+      "status": "PASS"
+    },
+    {
+      "name": "E-08 Administrador crea, edita y ajusta inventario",
+      "status": "PASS"
+    },
+    {
+      "name": "E-09 Baja lógica retira el producto del catálogo",
+      "status": "PASS"
+    },
+    {
+      "name": "E-10 Despacho y entrega con rol administrador",
+      "status": "PASS"
+    },
+    {
+      "name": "E-11 Catálogo móvil sin desbordamiento horizontal",
+      "status": "PASS"
+    },
+    {
+      "name": "E-12 Recarga elimina sesión de memoria; no hay tokens en almacenamiento web",
+      "status": "PASS"
+    },
+    {
+      "name": "E-13 Sin errores JavaScript en los recorridos",
+      "status": "PASS"
+    }
+  ],
+  "browserErrors": [],
+  "browser": "Chromium 153.0.8010.0",
+  "playwright": "1.58.1",
+  "platform": "Linux-6.18.57-x86_64-with-glibc2.39",
+  "provision": "Ejecutable de Chromium suministrado mediante CHROME_PATH; no se incluye navegador en el proyecto."
+}

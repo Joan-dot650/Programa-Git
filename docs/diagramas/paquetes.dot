@@ -1,0 +1,11 @@
+digraph G { rankdir=TB;node[shape=folder,style=filled,fillcolor="#edf4eb",color="#6c957c",fontname="DejaVu Sans",fontsize=12,margin="0.2,0.15"];edge[color="#476a5b",fontname="DejaVu Sans",fontsize=10];
+public[label="public/
+app · account · catalog · sales · admin
+api · components · cart"];http[label="src/app.js + server.js
+entrada HTTP y rutas"];services[label="src/*-service.js
+auth · catalog · sales"];infra[label="src/database.js + schema.sql
+config · passwords · validation · rate-limit"];scripts[label="scripts/
+build · crear-admin · preparar-demo"];tests[label="tests/
+unit · API · web · E2E"];dist[label="dist/
+servidor + frontend empaquetados"];
+public->http[label="contrato HTTP"];http->services;services->infra;scripts->infra[label="datos demo"];scripts->dist[label="build"];tests->services[style=dashed,label="verifica"];tests->public[style=dashed];{rank=same;public;scripts;} }

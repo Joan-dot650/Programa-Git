@@ -1,0 +1,13 @@
+{
+  "name": "raizvolt-modulos-web",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0 <25.0.0"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "demo": "node scripts/preparar-demo.js"
+  }
+}

@@ -1,0 +1,11 @@
+digraph G {rankdir=TB; node [shape=box,style="rounded,filled",fillcolor="#edf4eb",color="#73a087",fontname="DejaVu Sans",fontsize=12,margin="0.20,0.16"]; edge[color="#476a5b",fontname="DejaVu Sans",fontsize=10];
+ui[label="Interfaz web
+HTML + CSS + módulos ES"]; http[label="API HTTP
+rutas + permisos + errores",fillcolor="#164f3d",fontcolor=white];
+auth[label="Autenticación
+y perfil"];cat[label="Catálogo
+e inventario"];sales[label="Cotizaciones
+y pedidos"];store[label="Store
+SQL parametrizado + transacciones"];db[label="SQLite
+7 tablas relacionadas",shape=cylinder];
+ui->http[label="fetch / JSON / Bearer"];http->auth;http->cat;http->sales;sales->cat[label="consulta producto"];auth->store;cat->store;sales->store;store->db;{rank=same;auth;cat;sales;}}

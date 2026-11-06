@@ -1,0 +1,4310 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "RaízVolt API del proyecto formativo",
+    "version": "2.0.0",
+    "description": "Diseño y codificación de servicios de catálogo solar, inventario, cotizaciones y pedidos. Aprendiz: Jhon Edwards Tineo Landaeta. Ficha 3235874. Importes COP como texto decimal. Demostración local; no procesa pagos ni trámites de importación."
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:3000",
+      "description": "Servicio local"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Sistema"
+    },
+    {
+      "name": "Autenticación"
+    },
+    {
+      "name": "Perfil"
+    },
+    {
+      "name": "Catálogo"
+    },
+    {
+      "name": "Inventario"
+    },
+    {
+      "name": "Cotizaciones"
+    },
+    {
+      "name": "Pedidos"
+    },
+    {
+      "name": "Documentación"
+    }
+  ],
+  "paths": {
+    "/api/salud": {
+      "get": {
+        "operationId": "S01_get_salud",
+        "tags": [
+          "Sistema"
+        ],
+        "summary": "Comprobar disponibilidad",
+        "description": "Comprueba que el proceso HTTP responde. No prueba servicios externos. Acceso: PUBLICO.",
+        "security": [],
+        "x-rol": "PUBLICO",
+        "responses": {
+          "200": {
+            "description": "Operación satisfactoria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Salud"
+                },
+                "example": {
+                  "exito": true,
+                  "mensaje": "RaízVolt API disponible.",
+                  "version": "1.0.0"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos, identificador o parámetros de consulta inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Datos, identificador o parámetros de consulta inválidos."
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Método no permitido para este recurso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Método no permitido para este recurso."
+                }
+              }
+            },
+            "headers": {
+              "Allow": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Métodos admitidos."
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno; no se exponen trazas ni consultas SQL.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Error interno; no se exponen trazas ni consultas SQL."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/registro": {
+      "post": {
+        "operationId": "S02_post_registro",
+        "tags": [
+          "Autenticación"
+        ],
+        "summary": "Registrar cliente",
+        "description": "Crea una cuenta CLIENTE. No inicia sesión. Para ADMIN se usa un comando local. Acceso: PUBLICO.",
+        "security": [],
+        "x-rol": "PUBLICO",
+        "responses": {
+          "201": {
+            "description": "Operación satisfactoria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Registro"
+                },
+                "example": {
+                  "exito": true,
+                  "mensaje": "Registro satisfactorio.",
+                  "usuario": {
+                    "id": 2,
+                    "usuario": "cliente.demo",
+                    "rol": "CLIENTE",
+                    "nombre": "",
+                    "telefono": "",
+                    "municipio": "",
+                    "direccion": "",
+                    "creadoEn": "2026-11-03T01:00:00.000Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos, identificador o parámetros de consulta inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Datos, identificador o parámetros de consulta inválidos."
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Método no permitido para este recurso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Método no permitido para este recurso."
+                }
+              }
+            },
+            "headers": {
+              "Allow": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Métodos admitidos."
+              }
+            }
+          },
+          "409": {
+            "description": "El nombre de usuario ya existe.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "El nombre de usuario ya existe."
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Cuerpo superior a 32768 bytes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Cuerpo superior a 32768 bytes."
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Se requiere application/json sin compresión.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Se requiere application/json sin compresión."
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Se superaron 20 solicitudes de registro/login por IP en 10 minutos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Se superaron 20 solicitudes de registro/login por IP en 10 minutos."
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "description": "Segundos hasta el siguiente intento."
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno; no se exponen trazas ni consultas SQL.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Error interno; no se exponen trazas ni consultas SQL."
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Credenciales"
+              },
+              "example": {
+                "usuario": "cliente.demo",
+                "contrasena": "ClaveDemo2026!"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/login": {
+      "post": {
+        "operationId": "S03_post_login",
+        "tags": [
+          "Autenticación"
+        ],
+        "summary": "Iniciar sesión",
+        "description": "Verifica la contraseña y entrega un token aleatorio de 2 horas. Invalida la sesión anterior de la misma cuenta. Acceso: PUBLICO.",
+        "security": [],
+        "x-rol": "PUBLICO",
+        "responses": {
+          "200": {
+            "description": "Operación satisfactoria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Login"
+                },
+                "example": {
+                  "exito": true,
+                  "mensaje": "Autenticación satisfactoria",
+                  "token": "0000000000000000000000000000000000000000000000000000000000000000",
+                  "tipo": "Bearer",
+                  "expiraEn": "2026-11-03T03:00:00.000Z",
+                  "usuario": {
+                    "id": 2,
+                    "usuario": "cliente.demo",
+                    "rol": "CLIENTE",
+                    "nombre": "Cliente de demostración",
+                    "telefono": "+57 300 000 0000",
+                    "municipio": "Zipaquirá",
+                    "direccion": "Calle de prueba 10-20",
+                    "creadoEn": "2026-11-03T01:00:00.000Z"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos, identificador o parámetros de consulta inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Datos, identificador o parámetros de consulta inválidos."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Credenciales incorrectas.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Credenciales incorrectas."
+                }
+              }
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Bearer"
+              }
+            }
+          },
+          "405": {
+            "description": "Método no permitido para este recurso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Método no permitido para este recurso."
+                }
+              }
+            },
+            "headers": {
+              "Allow": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Métodos admitidos."
+              }
+            }
+          },
+          "413": {
+            "description": "Cuerpo superior a 32768 bytes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Cuerpo superior a 32768 bytes."
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Se requiere application/json sin compresión.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Se requiere application/json sin compresión."
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Se superaron 20 solicitudes de registro/login por IP en 10 minutos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Se superaron 20 solicitudes de registro/login por IP en 10 minutos."
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "description": "Segundos hasta el siguiente intento."
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno; no se exponen trazas ni consultas SQL.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Error interno; no se exponen trazas ni consultas SQL."
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Credenciales"
+              },
+              "example": {
+                "usuario": "cliente.demo",
+                "contrasena": "ClaveDemo2026!"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/logout": {
+      "post": {
+        "operationId": "S04_post_logout",
+        "tags": [
+          "Autenticación"
+        ],
+        "summary": "Cerrar sesión",
+        "description": "Revoca el token utilizado. La solicitud no requiere cuerpo. Acceso: USUARIO.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "x-rol": "USUARIO",
+        "responses": {
+          "204": {
+            "description": "Sin contenido."
+          },
+          "400": {
+            "description": "Datos, identificador o parámetros de consulta inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Datos, identificador o parámetros de consulta inválidos."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token ausente, inválido, revocado o vencido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Token ausente, inválido, revocado o vencido."
+                }
+              }
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Bearer"
+              }
+            }
+          },
+          "405": {
+            "description": "Método no permitido para este recurso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Método no permitido para este recurso."
+                }
+              }
+            },
+            "headers": {
+              "Allow": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Métodos admitidos."
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno; no se exponen trazas ni consultas SQL.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Error interno; no se exponen trazas ni consultas SQL."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/perfil": {
+      "get": {
+        "operationId": "S05_get_perfil",
+        "tags": [
+          "Perfil"
+        ],
+        "summary": "Consultar perfil propio",
+        "description": "Entrega solo los datos de la cuenta autenticada. Acceso: USUARIO.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "x-rol": "USUARIO",
+        "responses": {
+          "200": {
+            "description": "Operación satisfactoria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Perfil"
+                },
+                "example": {
+                  "id": 2,
+                  "usuario": "cliente.demo",
+                  "rol": "CLIENTE",
+                  "nombre": "Cliente de demostración",
+                  "telefono": "+57 300 000 0000",
+                  "municipio": "Zipaquirá",
+                  "direccion": "Calle de prueba 10-20",
+                  "creadoEn": "2026-11-03T01:00:00.000Z"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos, identificador o parámetros de consulta inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Datos, identificador o parámetros de consulta inválidos."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token ausente, inválido, revocado o vencido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Token ausente, inválido, revocado o vencido."
+                }
+              }
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Bearer"
+              }
+            }
+          },
+          "405": {
+            "description": "Método no permitido para este recurso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Método no permitido para este recurso."
+                }
+              }
+            },
+            "headers": {
+              "Allow": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Métodos admitidos."
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno; no se exponen trazas ni consultas SQL.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Error interno; no se exponen trazas ni consultas SQL."
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "S06_put_perfil",
+        "tags": [
+          "Perfil"
+        ],
+        "summary": "Completar o actualizar perfil",
+        "description": "Reemplaza los cuatro campos de contacto. El perfil debe estar completo para confirmar un pedido. No modifica usuario ni rol. Acceso: USUARIO.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "x-rol": "USUARIO",
+        "responses": {
+          "200": {
+            "description": "Operación satisfactoria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Perfil"
+                },
+                "example": {
+                  "id": 2,
+                  "usuario": "cliente.demo",
+                  "rol": "CLIENTE",
+                  "nombre": "Cliente de demostración",
+                  "telefono": "+57 300 000 0000",
+                  "municipio": "Zipaquirá",
+                  "direccion": "Calle de prueba 10-20",
+                  "creadoEn": "2026-11-03T01:00:00.000Z"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos, identificador o parámetros de consulta inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Datos, identificador o parámetros de consulta inválidos."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token ausente, inválido, revocado o vencido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Token ausente, inválido, revocado o vencido."
+                }
+              }
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Bearer"
+              }
+            }
+          },
+          "405": {
+            "description": "Método no permitido para este recurso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Método no permitido para este recurso."
+                }
+              }
+            },
+            "headers": {
+              "Allow": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Métodos admitidos."
+              }
+            }
+          },
+          "413": {
+            "description": "Cuerpo superior a 32768 bytes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Cuerpo superior a 32768 bytes."
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Se requiere application/json sin compresión.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Se requiere application/json sin compresión."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno; no se exponen trazas ni consultas SQL.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Error interno; no se exponen trazas ni consultas SQL."
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PerfilEntrada"
+              },
+              "example": {
+                "nombre": "Cliente de demostración",
+                "telefono": "+57 300 000 0000",
+                "municipio": "Zipaquirá",
+                "direccion": "Calle de prueba 10-20"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/categorias": {
+      "get": {
+        "operationId": "S07_get_categorias",
+        "tags": [
+          "Catálogo"
+        ],
+        "summary": "Consultar categorías",
+        "description": "Devuelve las cinco categorías del modelo de RaízVolt. Acceso: PUBLICO.",
+        "security": [],
+        "x-rol": "PUBLICO",
+        "responses": {
+          "200": {
+            "description": "Operación satisfactoria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Categorias"
+                },
+                "example": {
+                  "categorias": [
+                    "PANEL_SOLAR",
+                    "INVERSOR",
+                    "BATERIA",
+                    "KIT_SOLAR",
+                    "ACCESORIO"
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos, identificador o parámetros de consulta inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Datos, identificador o parámetros de consulta inválidos."
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Método no permitido para este recurso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Método no permitido para este recurso."
+                }
+              }
+            },
+            "headers": {
+              "Allow": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Métodos admitidos."
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno; no se exponen trazas ni consultas SQL.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Error interno; no se exponen trazas ni consultas SQL."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/productos": {
+      "get": {
+        "operationId": "S08_get_productos",
+        "tags": [
+          "Catálogo"
+        ],
+        "summary": "Listar y buscar productos",
+        "description": "Solo lista productos activos. q busca coincidencia literal parcial en código o nombre sin distinguir mayúsculas, incluidas tildes. total cuenta todos los resultados del filtro. Acceso: PUBLICO.",
+        "security": [],
+        "x-rol": "PUBLICO",
+        "responses": {
+          "200": {
+            "description": "Operación satisfactoria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListaProducto"
+                },
+                "example": {
+                  "productos": [
+                    {
+                      "id": 1,
+                      "codigo": "SOL-550",
+                      "nombre": "Panel solar 550 W",
+                      "categoria": "PANEL_SOLAR",
+                      "precio": "680000.50",
+                      "existencias": 20,
+                      "activo": true
+                    }
+                  ],
+                  "total": 1,
+                  "pagina": 1,
+                  "limite": 20
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos, identificador o parámetros de consulta inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Datos, identificador o parámetros de consulta inválidos."
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Método no permitido para este recurso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Método no permitido para este recurso."
+                }
+              }
+            },
+            "headers": {
+              "Allow": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Métodos admitidos."
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno; no se exponen trazas ni consultas SQL.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Error interno; no se exponen trazas ni consultas SQL."
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000,
+              "default": 1
+            }
+          },
+          {
+            "name": "limite",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "maxLength": 120
+            },
+            "description": "Coincidencia literal parcial; vacío significa sin búsqueda."
+          },
+          {
+            "name": "categoria",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PANEL_SOLAR",
+                "INVERSOR",
+                "BATERIA",
+                "KIT_SOLAR",
+                "ACCESORIO"
+              ]
+            }
+          }
+        ]
+      },
+      "post": {
+        "operationId": "S10_post_productos",
+        "tags": [
+          "Catálogo"
+        ],
+        "summary": "Registrar producto",
+        "description": "Crea producto y registra el movimiento inicial de inventario en una transacción. Devuelve Location. Acceso: ADMIN.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "x-rol": "ADMIN",
+        "responses": {
+          "201": {
+            "description": "Operación satisfactoria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Producto"
+                },
+                "example": {
+                  "id": 1,
+                  "codigo": "SOL-550",
+                  "nombre": "Panel solar 550 W",
+                  "categoria": "PANEL_SOLAR",
+                  "precio": "680000.50",
+                  "existencias": 20,
+                  "activo": true
+                }
+              }
+            },
+            "headers": {
+              "Location": {
+                "description": "Ruta del recurso creado.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos, identificador o parámetros de consulta inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Datos, identificador o parámetros de consulta inválidos."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token ausente, inválido, revocado o vencido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Token ausente, inválido, revocado o vencido."
+                }
+              }
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Bearer"
+              }
+            }
+          },
+          "403": {
+            "description": "Se requiere rol ADMIN.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Se requiere rol ADMIN."
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Método no permitido para este recurso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Método no permitido para este recurso."
+                }
+              }
+            },
+            "headers": {
+              "Allow": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Métodos admitidos."
+              }
+            }
+          },
+          "409": {
+            "description": "Código repetido, incluso si fue retirado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Código repetido, incluso si fue retirado."
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Cuerpo superior a 32768 bytes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Cuerpo superior a 32768 bytes."
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Se requiere application/json sin compresión.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Se requiere application/json sin compresión."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno; no se exponen trazas ni consultas SQL.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Error interno; no se exponen trazas ni consultas SQL."
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductoCreacion"
+              },
+              "example": {
+                "codigo": "SOL-550",
+                "nombre": "Panel solar 550 W",
+                "categoria": "PANEL_SOLAR",
+                "precio": "680000.50",
+                "existencias": 20
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/productos/{id}": {
+      "get": {
+        "operationId": "S09_get_productos_id",
+        "tags": [
+          "Catálogo"
+        ],
+        "summary": "Consultar producto",
+        "description": "Consulta por identificador; los retirados no están disponibles. Acceso: PUBLICO.",
+        "security": [],
+        "x-rol": "PUBLICO",
+        "responses": {
+          "200": {
+            "description": "Operación satisfactoria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Producto"
+                },
+                "example": {
+                  "id": 1,
+                  "codigo": "SOL-550",
+                  "nombre": "Panel solar 550 W",
+                  "categoria": "PANEL_SOLAR",
+                  "precio": "680000.50",
+                  "existencias": 20,
+                  "activo": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos, identificador o parámetros de consulta inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Datos, identificador o parámetros de consulta inválidos."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Producto inexistente o retirado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Producto inexistente o retirado."
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Método no permitido para este recurso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Método no permitido para este recurso."
+                }
+              }
+            },
+            "headers": {
+              "Allow": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Métodos admitidos."
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno; no se exponen trazas ni consultas SQL.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Error interno; no se exponen trazas ni consultas SQL."
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "description": "Identificador entero positivo del recurso."
+          }
+        ]
+      },
+      "put": {
+        "operationId": "S11_put_productos_id",
+        "tags": [
+          "Catálogo"
+        ],
+        "summary": "Actualizar producto",
+        "description": "Reemplaza código, nombre, categoría y precio. No recibe existencias: se ajustan mediante el servicio de inventario. Acceso: ADMIN.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "x-rol": "ADMIN",
+        "responses": {
+          "200": {
+            "description": "Operación satisfactoria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Producto"
+                },
+                "example": {
+                  "id": 1,
+                  "codigo": "SOL-550",
+                  "nombre": "Panel solar 550 W",
+                  "categoria": "PANEL_SOLAR",
+                  "precio": "680000.50",
+                  "existencias": 20,
+                  "activo": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos, identificador o parámetros de consulta inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Datos, identificador o parámetros de consulta inválidos."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token ausente, inválido, revocado o vencido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Token ausente, inválido, revocado o vencido."
+                }
+              }
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Bearer"
+              }
+            }
+          },
+          "403": {
+            "description": "Se requiere rol ADMIN.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Se requiere rol ADMIN."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Producto inexistente o retirado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Producto inexistente o retirado."
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Método no permitido para este recurso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Método no permitido para este recurso."
+                }
+              }
+            },
+            "headers": {
+              "Allow": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Métodos admitidos."
+              }
+            }
+          },
+          "409": {
+            "description": "Código repetido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Código repetido."
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Cuerpo superior a 32768 bytes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Cuerpo superior a 32768 bytes."
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Se requiere application/json sin compresión.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Se requiere application/json sin compresión."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno; no se exponen trazas ni consultas SQL.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Error interno; no se exponen trazas ni consultas SQL."
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "description": "Identificador entero positivo del recurso."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductoEntrada"
+              },
+              "example": {
+                "codigo": "SOL-550",
+                "nombre": "Panel solar 550 W",
+                "categoria": "PANEL_SOLAR",
+                "precio": "680000.50"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "S12_delete_productos_id",
+        "tags": [
+          "Catálogo"
+        ],
+        "summary": "Retirar producto",
+        "description": "Realiza baja lógica; conserva pedidos, cotizaciones, movimientos y el código único. Impide nuevas ventas. Sin cuerpo de respuesta. Acceso: ADMIN.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "x-rol": "ADMIN",
+        "responses": {
+          "204": {
+            "description": "Sin contenido."
+          },
+          "400": {
+            "description": "Datos, identificador o parámetros de consulta inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Datos, identificador o parámetros de consulta inválidos."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token ausente, inválido, revocado o vencido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Token ausente, inválido, revocado o vencido."
+                }
+              }
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Bearer"
+              }
+            }
+          },
+          "403": {
+            "description": "Se requiere rol ADMIN.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Se requiere rol ADMIN."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Producto inexistente o ya retirado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Producto inexistente o ya retirado."
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Método no permitido para este recurso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Método no permitido para este recurso."
+                }
+              }
+            },
+            "headers": {
+              "Allow": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Métodos admitidos."
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno; no se exponen trazas ni consultas SQL.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Error interno; no se exponen trazas ni consultas SQL."
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "description": "Identificador entero positivo del recurso."
+          }
+        ]
+      }
+    },
+    "/api/inventario": {
+      "get": {
+        "operationId": "S13_get_inventario",
+        "tags": [
+          "Inventario"
+        ],
+        "summary": "Consultar resumen de inventario",
+        "description": "Resume referencias activas, unidades disponibles, referencias con menos de cinco unidades y valor exacto en COP. Los pedidos ya reservados no cuentan como stock disponible. Acceso: ADMIN.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "x-rol": "ADMIN",
+        "responses": {
+          "200": {
+            "description": "Operación satisfactoria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResumenInventario"
+                },
+                "example": {
+                  "referencias": 1,
+                  "unidades": 20,
+                  "stockBajo": 0,
+                  "valorInventario": "13600010.00",
+                  "moneda": "COP"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos, identificador o parámetros de consulta inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Datos, identificador o parámetros de consulta inválidos."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token ausente, inválido, revocado o vencido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Token ausente, inválido, revocado o vencido."
+                }
+              }
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Bearer"
+              }
+            }
+          },
+          "403": {
+            "description": "Se requiere rol ADMIN.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Se requiere rol ADMIN."
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Método no permitido para este recurso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Método no permitido para este recurso."
+                }
+              }
+            },
+            "headers": {
+              "Allow": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Métodos admitidos."
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno; no se exponen trazas ni consultas SQL.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Error interno; no se exponen trazas ni consultas SQL."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/inventario/movimientos": {
+      "get": {
+        "operationId": "S14_get_inventario_movimientos",
+        "tags": [
+          "Inventario"
+        ],
+        "summary": "Consultar movimientos",
+        "description": "Lista movimientos más recientes primero, incluidos los de productos retirados. Incluye actor, variación, saldo, motivo y pedido relacionado. Acceso: ADMIN.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "x-rol": "ADMIN",
+        "responses": {
+          "200": {
+            "description": "Operación satisfactoria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListaMovimiento"
+                },
+                "example": {
+                  "movimientos": [
+                    {
+                      "id": 1,
+                      "productoId": 1,
+                      "codigo": "SOL-550",
+                      "usuarioId": 1,
+                      "pedidoId": null,
+                      "variacion": 20,
+                      "saldo": 20,
+                      "motivo": "Inventario inicial",
+                      "creadoEn": "2026-11-03T01:00:00.000Z"
+                    }
+                  ],
+                  "total": 1,
+                  "pagina": 1,
+                  "limite": 20
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos, identificador o parámetros de consulta inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Datos, identificador o parámetros de consulta inválidos."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token ausente, inválido, revocado o vencido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Token ausente, inválido, revocado o vencido."
+                }
+              }
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Bearer"
+              }
+            }
+          },
+          "403": {
+            "description": "Se requiere rol ADMIN.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Se requiere rol ADMIN."
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Método no permitido para este recurso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Método no permitido para este recurso."
+                }
+              }
+            },
+            "headers": {
+              "Allow": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Métodos admitidos."
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno; no se exponen trazas ni consultas SQL.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Error interno; no se exponen trazas ni consultas SQL."
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000,
+              "default": 1
+            }
+          },
+          {
+            "name": "limite",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          }
+        ]
+      }
+    },
+    "/api/productos/{id}/inventario": {
+      "post": {
+        "operationId": "S15_post_productos_id_inventario",
+        "tags": [
+          "Inventario"
+        ],
+        "summary": "Ajustar existencias",
+        "description": "Suma o resta variacion; exige motivo. Registra el movimiento y actualiza saldo en la misma transacción. Acceso: ADMIN.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "x-rol": "ADMIN",
+        "responses": {
+          "200": {
+            "description": "Operación satisfactoria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Producto"
+                },
+                "example": {
+                  "id": 1,
+                  "codigo": "SOL-550",
+                  "nombre": "Panel solar 550 W",
+                  "categoria": "PANEL_SOLAR",
+                  "precio": "680000.50",
+                  "existencias": 20,
+                  "activo": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos, identificador o parámetros de consulta inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Datos, identificador o parámetros de consulta inválidos."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token ausente, inválido, revocado o vencido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Token ausente, inválido, revocado o vencido."
+                }
+              }
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Bearer"
+              }
+            }
+          },
+          "403": {
+            "description": "Se requiere rol ADMIN.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Se requiere rol ADMIN."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Producto inexistente o retirado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Producto inexistente o retirado."
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Método no permitido para este recurso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Método no permitido para este recurso."
+                }
+              }
+            },
+            "headers": {
+              "Allow": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Métodos admitidos."
+              }
+            }
+          },
+          "409": {
+            "description": "Saldo final negativo o superior a 1000000.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Saldo final negativo o superior a 1000000."
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Cuerpo superior a 32768 bytes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Cuerpo superior a 32768 bytes."
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Se requiere application/json sin compresión.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Se requiere application/json sin compresión."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno; no se exponen trazas ni consultas SQL.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Error interno; no se exponen trazas ni consultas SQL."
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "description": "Identificador entero positivo del recurso."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AjusteInventario"
+              },
+              "example": {
+                "variacion": 5,
+                "motivo": "Ingreso de mercancía de prueba"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/cotizaciones": {
+      "post": {
+        "operationId": "S16_post_cotizaciones",
+        "tags": [
+          "Cotizaciones"
+        ],
+        "summary": "Crear cotización",
+        "description": "Obtiene precios del servidor y congela código, nombre y precio. Vigencia: 7 días. No reserva stock; se puede cotizar sin existencias. total suma productos: no incluye flete ni cálculo tributario. Acceso: USUARIO.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "x-rol": "USUARIO",
+        "responses": {
+          "201": {
+            "description": "Operación satisfactoria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cotizacion"
+                },
+                "example": {
+                  "id": 1,
+                  "usuarioId": 2,
+                  "total": "1360001.00",
+                  "moneda": "COP",
+                  "creadoEn": "2026-11-03T01:00:00.000Z",
+                  "venceEn": "2026-11-10T01:00:00.000Z",
+                  "items": [
+                    {
+                      "productoId": 1,
+                      "codigo": "SOL-550",
+                      "nombre": "Panel solar 550 W",
+                      "precioUnitario": "680000.50",
+                      "cantidad": 2,
+                      "subtotal": "1360001.00"
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {
+              "Location": {
+                "description": "Ruta del recurso creado.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos, identificador o parámetros de consulta inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Datos, identificador o parámetros de consulta inválidos."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token ausente, inválido, revocado o vencido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Token ausente, inválido, revocado o vencido."
+                }
+              }
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Bearer"
+              }
+            }
+          },
+          "404": {
+            "description": "Un producto no existe o está retirado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Un producto no existe o está retirado."
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Método no permitido para este recurso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Método no permitido para este recurso."
+                }
+              }
+            },
+            "headers": {
+              "Allow": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Métodos admitidos."
+              }
+            }
+          },
+          "413": {
+            "description": "Cuerpo superior a 32768 bytes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Cuerpo superior a 32768 bytes."
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Se requiere application/json sin compresión.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Se requiere application/json sin compresión."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno; no se exponen trazas ni consultas SQL.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Error interno; no se exponen trazas ni consultas SQL."
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CotizacionEntrada"
+              },
+              "example": {
+                "items": [
+                  {
+                    "productoId": 1,
+                    "cantidad": 2
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "S17_get_cotizaciones",
+        "tags": [
+          "Cotizaciones"
+        ],
+        "summary": "Listar cotizaciones",
+        "description": "CLIENTE ve únicamente las propias; ADMIN ve todas. Orden descendente por ID. Acceso: USUARIO.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "x-rol": "USUARIO",
+        "responses": {
+          "200": {
+            "description": "Operación satisfactoria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListaCotizacion"
+                },
+                "example": {
+                  "cotizaciones": [
+                    {
+                      "id": 1,
+                      "usuarioId": 2,
+                      "total": "1360001.00",
+                      "moneda": "COP",
+                      "creadoEn": "2026-11-03T01:00:00.000Z",
+                      "venceEn": "2026-11-10T01:00:00.000Z",
+                      "items": [
+                        {
+                          "productoId": 1,
+                          "codigo": "SOL-550",
+                          "nombre": "Panel solar 550 W",
+                          "precioUnitario": "680000.50",
+                          "cantidad": 2,
+                          "subtotal": "1360001.00"
+                        }
+                      ]
+                    }
+                  ],
+                  "total": 1,
+                  "pagina": 1,
+                  "limite": 20
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos, identificador o parámetros de consulta inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Datos, identificador o parámetros de consulta inválidos."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token ausente, inválido, revocado o vencido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Token ausente, inválido, revocado o vencido."
+                }
+              }
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Bearer"
+              }
+            }
+          },
+          "405": {
+            "description": "Método no permitido para este recurso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Método no permitido para este recurso."
+                }
+              }
+            },
+            "headers": {
+              "Allow": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Métodos admitidos."
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno; no se exponen trazas ni consultas SQL.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Error interno; no se exponen trazas ni consultas SQL."
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000,
+              "default": 1
+            }
+          },
+          {
+            "name": "limite",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          }
+        ]
+      }
+    },
+    "/api/cotizaciones/{id}": {
+      "get": {
+        "operationId": "S18_get_cotizaciones_id",
+        "tags": [
+          "Cotizaciones"
+        ],
+        "summary": "Consultar cotización",
+        "description": "Consulta las líneas y los precios guardados. No cambia por ediciones posteriores del producto. Acceso: USUARIO.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "x-rol": "USUARIO",
+        "responses": {
+          "200": {
+            "description": "Operación satisfactoria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cotizacion"
+                },
+                "example": {
+                  "id": 1,
+                  "usuarioId": 2,
+                  "total": "1360001.00",
+                  "moneda": "COP",
+                  "creadoEn": "2026-11-03T01:00:00.000Z",
+                  "venceEn": "2026-11-10T01:00:00.000Z",
+                  "items": [
+                    {
+                      "productoId": 1,
+                      "codigo": "SOL-550",
+                      "nombre": "Panel solar 550 W",
+                      "precioUnitario": "680000.50",
+                      "cantidad": 2,
+                      "subtotal": "1360001.00"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos, identificador o parámetros de consulta inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Datos, identificador o parámetros de consulta inválidos."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token ausente, inválido, revocado o vencido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Token ausente, inválido, revocado o vencido."
+                }
+              }
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Bearer"
+              }
+            }
+          },
+          "404": {
+            "description": "No existe o no pertenece al cliente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "No existe o no pertenece al cliente."
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Método no permitido para este recurso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Método no permitido para este recurso."
+                }
+              }
+            },
+            "headers": {
+              "Allow": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Métodos admitidos."
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno; no se exponen trazas ni consultas SQL.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Error interno; no se exponen trazas ni consultas SQL."
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "description": "Identificador entero positivo del recurso."
+          }
+        ]
+      }
+    },
+    "/api/pedidos": {
+      "post": {
+        "operationId": "S19_post_pedidos",
+        "tags": [
+          "Pedidos"
+        ],
+        "summary": "Confirmar pedido",
+        "description": "Solo permite convertir una cotización propia vigente y con stock. Exige perfil completo. Guarda dirección y reserva todas las líneas de forma atómica. Una cotización admite un solo pedido: reintentar devuelve ese pedido (200), incluso cancelado, sin otra reserva. Para comprar otra vez se crea una cotización nueva. Acceso: USUARIO.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "x-rol": "USUARIO",
+        "responses": {
+          "201": {
+            "description": "Operación satisfactoria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pedido"
+                },
+                "example": {
+                  "id": 1,
+                  "cotizacionId": 1,
+                  "usuarioId": 2,
+                  "estado": "PENDIENTE",
+                  "total": "1360001.00",
+                  "moneda": "COP",
+                  "envio": {
+                    "nombre": "Cliente de demostración",
+                    "telefono": "+57 300 000 0000",
+                    "municipio": "Zipaquirá",
+                    "direccion": "Calle de prueba 10-20"
+                  },
+                  "creadoEn": "2026-11-03T01:00:00.000Z",
+                  "actualizadoEn": "2026-11-03T01:00:00.000Z",
+                  "items": [
+                    {
+                      "productoId": 1,
+                      "codigo": "SOL-550",
+                      "nombre": "Panel solar 550 W",
+                      "precioUnitario": "680000.50",
+                      "cantidad": 2,
+                      "subtotal": "1360001.00"
+                    }
+                  ]
+                }
+              }
+            },
+            "headers": {
+              "Location": {
+                "description": "Ruta del recurso creado.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Pedido existente de la cotización: no vuelve a reservar inventario.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pedido"
+                },
+                "example": {
+                  "id": 1,
+                  "cotizacionId": 1,
+                  "usuarioId": 2,
+                  "estado": "PENDIENTE",
+                  "total": "1360001.00",
+                  "moneda": "COP",
+                  "envio": {
+                    "nombre": "Cliente de demostración",
+                    "telefono": "+57 300 000 0000",
+                    "municipio": "Zipaquirá",
+                    "direccion": "Calle de prueba 10-20"
+                  },
+                  "creadoEn": "2026-11-03T01:00:00.000Z",
+                  "actualizadoEn": "2026-11-03T01:00:00.000Z",
+                  "items": [
+                    {
+                      "productoId": 1,
+                      "codigo": "SOL-550",
+                      "nombre": "Panel solar 550 W",
+                      "precioUnitario": "680000.50",
+                      "cantidad": 2,
+                      "subtotal": "1360001.00"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos, identificador o parámetros de consulta inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Datos, identificador o parámetros de consulta inválidos."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token ausente, inválido, revocado o vencido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Token ausente, inválido, revocado o vencido."
+                }
+              }
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Bearer"
+              }
+            }
+          },
+          "404": {
+            "description": "No existe una cotización propia con ese ID.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "No existe una cotización propia con ese ID."
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Método no permitido para este recurso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Método no permitido para este recurso."
+                }
+              }
+            },
+            "headers": {
+              "Allow": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Métodos admitidos."
+              }
+            }
+          },
+          "409": {
+            "description": "Cotización vencida, producto retirado o existencias insuficientes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Cotización vencida, producto retirado o existencias insuficientes."
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Cuerpo superior a 32768 bytes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Cuerpo superior a 32768 bytes."
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Se requiere application/json sin compresión.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Se requiere application/json sin compresión."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno; no se exponen trazas ni consultas SQL.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Error interno; no se exponen trazas ni consultas SQL."
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PedidoEntrada"
+              },
+              "example": {
+                "cotizacionId": 1
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "S20_get_pedidos",
+        "tags": [
+          "Pedidos"
+        ],
+        "summary": "Listar pedidos",
+        "description": "CLIENTE ve sus pedidos; ADMIN ve todos. La dirección es la copia guardada al confirmar. Acceso: USUARIO.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "x-rol": "USUARIO",
+        "responses": {
+          "200": {
+            "description": "Operación satisfactoria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListaPedido"
+                },
+                "example": {
+                  "pedidos": [
+                    {
+                      "id": 1,
+                      "cotizacionId": 1,
+                      "usuarioId": 2,
+                      "estado": "PENDIENTE",
+                      "total": "1360001.00",
+                      "moneda": "COP",
+                      "envio": {
+                        "nombre": "Cliente de demostración",
+                        "telefono": "+57 300 000 0000",
+                        "municipio": "Zipaquirá",
+                        "direccion": "Calle de prueba 10-20"
+                      },
+                      "creadoEn": "2026-11-03T01:00:00.000Z",
+                      "actualizadoEn": "2026-11-03T01:00:00.000Z",
+                      "items": [
+                        {
+                          "productoId": 1,
+                          "codigo": "SOL-550",
+                          "nombre": "Panel solar 550 W",
+                          "precioUnitario": "680000.50",
+                          "cantidad": 2,
+                          "subtotal": "1360001.00"
+                        }
+                      ]
+                    }
+                  ],
+                  "total": 1,
+                  "pagina": 1,
+                  "limite": 20
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos, identificador o parámetros de consulta inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Datos, identificador o parámetros de consulta inválidos."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token ausente, inválido, revocado o vencido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Token ausente, inválido, revocado o vencido."
+                }
+              }
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Bearer"
+              }
+            }
+          },
+          "405": {
+            "description": "Método no permitido para este recurso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Método no permitido para este recurso."
+                }
+              }
+            },
+            "headers": {
+              "Allow": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Métodos admitidos."
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno; no se exponen trazas ni consultas SQL.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Error interno; no se exponen trazas ni consultas SQL."
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "pagina",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000000,
+              "default": 1
+            }
+          },
+          {
+            "name": "limite",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 20
+            }
+          }
+        ]
+      }
+    },
+    "/api/pedidos/{id}": {
+      "get": {
+        "operationId": "S21_get_pedidos_id",
+        "tags": [
+          "Pedidos"
+        ],
+        "summary": "Consultar pedido",
+        "description": "Devuelve estado, líneas, total y dirección preservada. Acceso: USUARIO.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "x-rol": "USUARIO",
+        "responses": {
+          "200": {
+            "description": "Operación satisfactoria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pedido"
+                },
+                "example": {
+                  "id": 1,
+                  "cotizacionId": 1,
+                  "usuarioId": 2,
+                  "estado": "PENDIENTE",
+                  "total": "1360001.00",
+                  "moneda": "COP",
+                  "envio": {
+                    "nombre": "Cliente de demostración",
+                    "telefono": "+57 300 000 0000",
+                    "municipio": "Zipaquirá",
+                    "direccion": "Calle de prueba 10-20"
+                  },
+                  "creadoEn": "2026-11-03T01:00:00.000Z",
+                  "actualizadoEn": "2026-11-03T01:00:00.000Z",
+                  "items": [
+                    {
+                      "productoId": 1,
+                      "codigo": "SOL-550",
+                      "nombre": "Panel solar 550 W",
+                      "precioUnitario": "680000.50",
+                      "cantidad": 2,
+                      "subtotal": "1360001.00"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos, identificador o parámetros de consulta inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Datos, identificador o parámetros de consulta inválidos."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token ausente, inválido, revocado o vencido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Token ausente, inválido, revocado o vencido."
+                }
+              }
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Bearer"
+              }
+            }
+          },
+          "404": {
+            "description": "No existe o no pertenece al cliente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "No existe o no pertenece al cliente."
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Método no permitido para este recurso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Método no permitido para este recurso."
+                }
+              }
+            },
+            "headers": {
+              "Allow": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Métodos admitidos."
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno; no se exponen trazas ni consultas SQL.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Error interno; no se exponen trazas ni consultas SQL."
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "description": "Identificador entero positivo del recurso."
+          }
+        ]
+      }
+    },
+    "/api/pedidos/{id}/estado": {
+      "patch": {
+        "operationId": "S22_patch_pedidos_id_estado",
+        "tags": [
+          "Pedidos"
+        ],
+        "summary": "Cambiar estado del pedido",
+        "description": "ADMIN: PENDIENTE a ENVIADO y ENVIADO a ENTREGADO. El propietario o ADMIN puede cancelar solo PENDIENTE, devolviendo existencias una vez. Repetir el estado actual devuelve 200 sin nuevos movimientos. CANCELADO y ENTREGADO son finales. Acceso: USUARIO.",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "x-rol": "USUARIO",
+        "responses": {
+          "200": {
+            "description": "Operación satisfactoria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pedido"
+                },
+                "example": {
+                  "id": 1,
+                  "cotizacionId": 1,
+                  "usuarioId": 2,
+                  "estado": "PENDIENTE",
+                  "total": "1360001.00",
+                  "moneda": "COP",
+                  "envio": {
+                    "nombre": "Cliente de demostración",
+                    "telefono": "+57 300 000 0000",
+                    "municipio": "Zipaquirá",
+                    "direccion": "Calle de prueba 10-20"
+                  },
+                  "creadoEn": "2026-11-03T01:00:00.000Z",
+                  "actualizadoEn": "2026-11-03T01:00:00.000Z",
+                  "items": [
+                    {
+                      "productoId": 1,
+                      "codigo": "SOL-550",
+                      "nombre": "Panel solar 550 W",
+                      "precioUnitario": "680000.50",
+                      "cantidad": 2,
+                      "subtotal": "1360001.00"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos, identificador o parámetros de consulta inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Datos, identificador o parámetros de consulta inválidos."
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Token ausente, inválido, revocado o vencido.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Token ausente, inválido, revocado o vencido."
+                }
+              }
+            },
+            "headers": {
+              "WWW-Authenticate": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Bearer"
+              }
+            }
+          },
+          "403": {
+            "description": "El cliente intentó enviar o entregar.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "El cliente intentó enviar o entregar."
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No existe o no pertenece al cliente.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "No existe o no pertenece al cliente."
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Método no permitido para este recurso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Método no permitido para este recurso."
+                }
+              }
+            },
+            "headers": {
+              "Allow": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Métodos admitidos."
+              }
+            }
+          },
+          "409": {
+            "description": "Transición inválida o devolución que supera 1000000 unidades.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Transición inválida o devolución que supera 1000000 unidades."
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Cuerpo superior a 32768 bytes.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Cuerpo superior a 32768 bytes."
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Se requiere application/json sin compresión.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Se requiere application/json sin compresión."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno; no se exponen trazas ni consultas SQL.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Error interno; no se exponen trazas ni consultas SQL."
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "description": "Identificador entero positivo del recurso."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EstadoEntrada"
+              },
+              "example": {
+                "estado": "CANCELADO"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/openapi.json": {
+      "get": {
+        "operationId": "S23_get_openapi.json",
+        "tags": [
+          "Documentación"
+        ],
+        "summary": "Descargar contrato OpenAPI",
+        "description": "Entrega la especificación completa de los servicios, entradas, respuestas, errores y autenticación. Acceso: PUBLICO.",
+        "security": [],
+        "x-rol": "PUBLICO",
+        "responses": {
+          "200": {
+            "description": "Operación satisfactoria.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OpenAPI"
+                },
+                "example": {
+                  "openapi": "3.1.1",
+                  "info": {
+                    "title": "RaízVolt API",
+                    "version": "1.0.0"
+                  },
+                  "paths": {}
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Datos, identificador o parámetros de consulta inválidos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Datos, identificador o parámetros de consulta inválidos."
+                }
+              }
+            }
+          },
+          "405": {
+            "description": "Método no permitido para este recurso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Método no permitido para este recurso."
+                }
+              }
+            },
+            "headers": {
+              "Allow": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Métodos admitidos."
+              }
+            }
+          },
+          "500": {
+            "description": "Error interno; no se exponen trazas ni consultas SQL.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "exito": false,
+                  "mensaje": "Error interno; no se exponen trazas ni consultas SQL."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Token opaco de POST /api/login, válido 2 horas. No es JWT. Authorization: Bearer <token>."
+      }
+    },
+    "schemas": {
+      "Credenciales": {
+        "type": "object",
+        "properties": {
+          "usuario": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 30,
+            "description": "Se quitan espacios externos y se convierte a minúsculas. Luego debe cumplir ^[a-z0-9][a-z0-9._-]{2,29}$."
+          },
+          "contrasena": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 128,
+            "writeOnly": true,
+            "description": "No se recorta ni normaliza. No se admiten solo espacios."
+          }
+        },
+        "required": [
+          "usuario",
+          "contrasena"
+        ],
+        "additionalProperties": false
+      },
+      "PerfilEntrada": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 100
+          },
+          "telefono": {
+            "type": "string",
+            "minLength": 7,
+            "maxLength": 20,
+            "description": "Al menos siete dígitos. Admite + inicial, espacios, paréntesis y guiones."
+          },
+          "municipio": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 80
+          },
+          "direccion": {
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 200
+          }
+        },
+        "required": [
+          "nombre",
+          "telefono",
+          "municipio",
+          "direccion"
+        ],
+        "additionalProperties": false
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "exito": {
+            "type": "boolean",
+            "const": false
+          },
+          "mensaje": {
+            "type": "string"
+          },
+          "errores": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "exito",
+          "mensaje"
+        ],
+        "additionalProperties": false
+      },
+      "ProductoEntrada": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 30,
+            "description": "Se recorta y convierte a mayúsculas. Solo A-Z, 0-9 y guion; único incluso después de retirar el producto."
+          },
+          "nombre": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 120
+          },
+          "categoria": {
+            "type": "string",
+            "enum": [
+              "PANEL_SOLAR",
+              "INVERSOR",
+              "BATERIA",
+              "KIT_SOLAR",
+              "ACCESORIO"
+            ]
+          },
+          "precio": {
+            "type": "string",
+            "pattern": "^\\d{1,10}(\\.\\d{1,2})?$",
+            "description": "Importe COP mayor que 0 y hasta 9999999999.99. Texto con punto decimal y sin separador de miles."
+          }
+        },
+        "required": [
+          "codigo",
+          "nombre",
+          "categoria",
+          "precio"
+        ],
+        "additionalProperties": false
+      },
+      "AjusteInventario": {
+        "type": "object",
+        "properties": {
+          "variacion": {
+            "type": "integer",
+            "minimum": -1000000,
+            "maximum": 1000000,
+            "description": "Debe ser diferente de cero; el saldo final queda entre 0 y 1000000."
+          },
+          "motivo": {
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 200
+          }
+        },
+        "required": [
+          "variacion",
+          "motivo"
+        ],
+        "additionalProperties": false
+      },
+      "CotizacionEntrada": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "productoId": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 9007199254740991
+                },
+                "cantidad": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 10000
+                }
+              },
+              "required": [
+                "productoId",
+                "cantidad"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1,
+            "maxItems": 20,
+            "description": "No se admiten productoId repetidos. El servidor obtiene los precios del catálogo."
+          }
+        },
+        "required": [
+          "items"
+        ],
+        "additionalProperties": false
+      },
+      "PedidoEntrada": {
+        "type": "object",
+        "properties": {
+          "cotizacionId": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "cotizacionId"
+        ],
+        "additionalProperties": false
+      },
+      "EstadoEntrada": {
+        "type": "object",
+        "properties": {
+          "estado": {
+            "type": "string",
+            "enum": [
+              "ENVIADO",
+              "ENTREGADO",
+              "CANCELADO"
+            ]
+          }
+        },
+        "required": [
+          "estado"
+        ],
+        "additionalProperties": false
+      },
+      "Salud": {
+        "type": "object",
+        "properties": {
+          "exito": {
+            "type": "boolean"
+          },
+          "mensaje": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "exito",
+          "mensaje",
+          "version"
+        ],
+        "additionalProperties": false
+      },
+      "Categorias": {
+        "type": "object",
+        "properties": {
+          "categorias": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "PANEL_SOLAR",
+                "INVERSOR",
+                "BATERIA",
+                "KIT_SOLAR",
+                "ACCESORIO"
+              ]
+            }
+          }
+        },
+        "required": [
+          "categorias"
+        ],
+        "additionalProperties": false
+      },
+      "ResumenInventario": {
+        "type": "object",
+        "properties": {
+          "referencias": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "unidades": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "stockBajo": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "valorInventario": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d{2}$"
+          },
+          "moneda": {
+            "type": "string",
+            "enum": [
+              "COP"
+            ]
+          }
+        },
+        "required": [
+          "referencias",
+          "unidades",
+          "stockBajo",
+          "valorInventario",
+          "moneda"
+        ],
+        "additionalProperties": false
+      },
+      "ProductoCreacion": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 30,
+            "description": "Se recorta y convierte a mayúsculas. Solo A-Z, 0-9 y guion; único incluso después de retirar el producto."
+          },
+          "nombre": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 120
+          },
+          "categoria": {
+            "type": "string",
+            "enum": [
+              "PANEL_SOLAR",
+              "INVERSOR",
+              "BATERIA",
+              "KIT_SOLAR",
+              "ACCESORIO"
+            ]
+          },
+          "precio": {
+            "type": "string",
+            "pattern": "^\\d{1,10}(\\.\\d{1,2})?$",
+            "description": "Importe COP mayor que 0 y hasta 9999999999.99. Texto con punto decimal y sin separador de miles."
+          },
+          "existencias": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000000
+          }
+        },
+        "required": [
+          "codigo",
+          "nombre",
+          "categoria",
+          "precio",
+          "existencias"
+        ],
+        "additionalProperties": false
+      },
+      "Producto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "codigo": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 30,
+            "description": "Se recorta y convierte a mayúsculas. Solo A-Z, 0-9 y guion; único incluso después de retirar el producto."
+          },
+          "nombre": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 120
+          },
+          "categoria": {
+            "type": "string",
+            "enum": [
+              "PANEL_SOLAR",
+              "INVERSOR",
+              "BATERIA",
+              "KIT_SOLAR",
+              "ACCESORIO"
+            ]
+          },
+          "precio": {
+            "type": "string",
+            "pattern": "^\\d{1,10}(\\.\\d{1,2})?$",
+            "description": "Importe COP mayor que 0 y hasta 9999999999.99. Texto con punto decimal y sin separador de miles."
+          },
+          "existencias": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000000
+          },
+          "activo": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "codigo",
+          "nombre",
+          "categoria",
+          "precio",
+          "existencias",
+          "activo"
+        ],
+        "additionalProperties": false
+      },
+      "Perfil": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "usuario": {
+            "type": "string"
+          },
+          "rol": {
+            "type": "string",
+            "enum": [
+              "CLIENTE",
+              "ADMIN"
+            ]
+          },
+          "nombre": {
+            "type": "string",
+            "description": "Puede estar vacío hasta completar el perfil."
+          },
+          "telefono": {
+            "type": "string",
+            "description": "Puede estar vacío hasta completar el perfil."
+          },
+          "municipio": {
+            "type": "string",
+            "description": "Puede estar vacío hasta completar el perfil."
+          },
+          "direccion": {
+            "type": "string",
+            "description": "Puede estar vacío hasta completar el perfil."
+          },
+          "creadoEn": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "usuario",
+          "rol",
+          "nombre",
+          "telefono",
+          "municipio",
+          "direccion",
+          "creadoEn"
+        ],
+        "additionalProperties": false
+      },
+      "Registro": {
+        "type": "object",
+        "properties": {
+          "exito": {
+            "type": "boolean"
+          },
+          "mensaje": {
+            "type": "string"
+          },
+          "usuario": {
+            "$ref": "#/components/schemas/Perfil"
+          }
+        },
+        "required": [
+          "exito",
+          "mensaje",
+          "usuario"
+        ],
+        "additionalProperties": false
+      },
+      "Login": {
+        "type": "object",
+        "properties": {
+          "exito": {
+            "type": "boolean"
+          },
+          "mensaje": {
+            "type": "string"
+          },
+          "token": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$",
+            "description": "Se devuelve una sola vez; no registrarlo ni publicarlo."
+          },
+          "tipo": {
+            "type": "string",
+            "enum": [
+              "Bearer"
+            ]
+          },
+          "expiraEn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "usuario": {
+            "$ref": "#/components/schemas/Perfil"
+          }
+        },
+        "required": [
+          "exito",
+          "mensaje",
+          "token",
+          "tipo",
+          "expiraEn",
+          "usuario"
+        ],
+        "additionalProperties": false
+      },
+      "LineaCotizacion": {
+        "type": "object",
+        "properties": {
+          "productoId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "codigo": {
+            "type": "string"
+          },
+          "nombre": {
+            "type": "string"
+          },
+          "precioUnitario": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d{2}$"
+          },
+          "cantidad": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10000
+          },
+          "subtotal": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d{2}$"
+          }
+        },
+        "required": [
+          "productoId",
+          "codigo",
+          "nombre",
+          "precioUnitario",
+          "cantidad",
+          "subtotal"
+        ],
+        "additionalProperties": false
+      },
+      "Cotizacion": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "usuarioId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "total": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d{2}$"
+          },
+          "moneda": {
+            "type": "string",
+            "enum": [
+              "COP"
+            ]
+          },
+          "creadoEn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "venceEn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LineaCotizacion"
+            },
+            "minItems": 1,
+            "maxItems": 20
+          }
+        },
+        "required": [
+          "id",
+          "usuarioId",
+          "total",
+          "moneda",
+          "creadoEn",
+          "venceEn",
+          "items"
+        ],
+        "additionalProperties": false
+      },
+      "Pedido": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "cotizacionId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "usuarioId": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "estado": {
+            "type": "string",
+            "enum": [
+              "PENDIENTE",
+              "ENVIADO",
+              "ENTREGADO",
+              "CANCELADO"
+            ]
+          },
+          "total": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d{2}$"
+          },
+          "moneda": {
+            "type": "string",
+            "enum": [
+              "COP"
+            ]
+          },
+          "envio": {
+            "$ref": "#/components/schemas/PerfilEntrada"
+          },
+          "creadoEn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "actualizadoEn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LineaCotizacion"
+            },
+            "minItems": 1,
+            "maxItems": 20
+          }
+        },
+        "required": [
+          "id",
+          "cotizacionId",
+          "usuarioId",
+          "estado",
+          "total",
+          "moneda",
+          "envio",
+          "creadoEn",
+          "actualizadoEn",
+          "items"
+        ],
+        "additionalProperties": false
+      },
+      "Movimiento": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "productoId": {
+            "type": "integer"
+          },
+          "codigo": {
+            "type": "string"
+          },
+          "usuarioId": {
+            "type": "integer"
+          },
+          "pedidoId": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "variacion": {
+            "type": "integer"
+          },
+          "saldo": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000000
+          },
+          "motivo": {
+            "type": "string"
+          },
+          "creadoEn": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": [
+          "id",
+          "productoId",
+          "codigo",
+          "usuarioId",
+          "pedidoId",
+          "variacion",
+          "saldo",
+          "motivo",
+          "creadoEn"
+        ],
+        "additionalProperties": false
+      },
+      "ListaProducto": {
+        "type": "object",
+        "properties": {
+          "productos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Producto"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "pagina": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "limite": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          }
+        },
+        "required": [
+          "productos",
+          "total",
+          "pagina",
+          "limite"
+        ],
+        "additionalProperties": false
+      },
+      "ListaCotizacion": {
+        "type": "object",
+        "properties": {
+          "cotizaciones": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Cotizacion"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "pagina": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "limite": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          }
+        },
+        "required": [
+          "cotizaciones",
+          "total",
+          "pagina",
+          "limite"
+        ],
+        "additionalProperties": false
+      },
+      "ListaPedido": {
+        "type": "object",
+        "properties": {
+          "pedidos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Pedido"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "pagina": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "limite": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          }
+        },
+        "required": [
+          "pedidos",
+          "total",
+          "pagina",
+          "limite"
+        ],
+        "additionalProperties": false
+      },
+      "ListaMovimiento": {
+        "type": "object",
+        "properties": {
+          "movimientos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Movimiento"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "pagina": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "limite": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          }
+        },
+        "required": [
+          "movimientos",
+          "total",
+          "pagina",
+          "limite"
+        ],
+        "additionalProperties": false
+      },
+      "OpenAPI": {
+        "type": "object",
+        "description": "Contrato OpenAPI 3.1.1 completo de esta API."
+      }
+    }
+  }
+}

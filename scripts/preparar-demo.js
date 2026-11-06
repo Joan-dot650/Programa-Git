@@ -21,7 +21,7 @@ try {
   }
   console.log('Datos ficticios listos. Guarda estas credenciales para iniciar como ADMIN:');
   console.log(`Usuario: ${username}\nContraseña: ${password}`);
-  console.log('En Postman asigna admin_usuario y admin_contrasena a estos valores.');
+  console.log('Abre http://127.0.0.1:3000, pulsa Ingresar y usa estos valores.');
   console.log('Los precios son de prueba; no constituyen una cotización comercial.');
 } catch (error) { console.error(error.message); process.exitCode = 1; }
 finally { store.close(); }

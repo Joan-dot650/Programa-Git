@@ -9,7 +9,10 @@ import { createRateLimiter } from './rate-limit.js';
 import { CATEGORIES, id, invalid } from './validation.js';
 
 const STATIC = new Map([
-  ['/', ['../docs/SERVICIOS.html', 'text/html; charset=utf-8']],
+  ['/', ['../public/index.html', 'text/html; charset=utf-8']],
+  ['/documentacion', ['../docs/SERVICIOS.html', 'text/html; charset=utf-8']],
+  ['/style.css', ['../public/style.css', 'text/css; charset=utf-8']],
+  ...['app', 'api', 'components', 'cart', 'catalog', 'account', 'sales', 'admin'].map((name) => [`/${name}.js`, [`../public/${name}.js`, 'text/javascript; charset=utf-8']]),
   ['/api/openapi.json', ['../docs/openapi.json', 'application/json; charset=utf-8']],
 ]);
 
@@ -62,7 +65,7 @@ export async function createApplication({ databasePath = ':memory:', rateLimit, 
       pattern: new RegExp(`^${path.replace('{id}', '([^/]+)')}$`) });
   }
 
-  route('GET', '/api/salud', 'PUBLICO', false, () => ({ body: { exito: true, mensaje: 'RaízVolt API disponible.', version: '1.0.0' } }));
+  route('GET', '/api/salud', 'PUBLICO', false, () => ({ body: { exito: true, mensaje: 'RaízVolt API disponible.', version: '2.0.0' } }));
   route('POST', '/api/registro', 'PUBLICO', true, async (c) => ({ status: 201, body: await auth.register(c.body) }));
   route('POST', '/api/login', 'PUBLICO', true, async (c) => ({ body: await auth.login(c.body) }));
   route('POST', '/api/logout', 'USUARIO', false, (c) => { auth.logout(c.user); return { status: 204 }; });
@@ -98,7 +101,7 @@ export async function createApplication({ databasePath = ':memory:', rateLimit, 
     response.setHeader('Cache-Control', 'no-store');
     response.setHeader('X-Content-Type-Options', 'nosniff');
     response.setHeader('Referrer-Policy', 'no-referrer');
-    response.setHeader('Content-Security-Policy', "default-src 'none'; style-src 'unsafe-inline'; frame-ancestors 'none'; base-uri 'none'");
+    response.setHeader('Content-Security-Policy', "default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; connect-src 'self'; img-src 'self' data:; form-action 'self'; frame-ancestors 'none'; base-uri 'none'");
     try {
       let url;
       try { url = new URL(request.url, 'http://localhost'); }
@@ -107,7 +110,10 @@ export async function createApplication({ databasePath = ':memory:', rateLimit, 
         if (request.method !== 'GET') { response.setHeader('Allow', 'GET'); throw new ApiError(405, 'Método no permitido.'); }
         if ([...url.searchParams].length) invalid('consulta', 'Este recurso no recibe parámetros.');
         const [path, type] = STATIC.get(url.pathname);
-        const data = await readFile(new URL(path, import.meta.url));
+        const data = await readFile(new URL(path, import.meta.url)).catch((error) => {
+          if (error.code === 'ENOENT') throw new ApiError(404, 'Archivo no encontrado.');
+          throw error;
+        });
         response.writeHead(200, { 'Content-Type': type }); response.end(data); return;
       }
       const matching = routes.filter((r) => r.pattern.test(url.pathname));

@@ -1,15 +1,26 @@
 {
-  "name": "raizvolt-api-proyecto",
-  "version": "1.0.0",
+  "name": "raizvolt-modulos-web",
+  "version": "2.0.0",
   "private": true,
-  "description": "Servicios REST de catálogo, inventario, cotizaciones y pedidos de RaízVolt",
+  "description": "Integración web de autenticación, catálogo, inventario, cotizaciones y pedidos - GA8-AA1-EV01",
   "author": "Jhon Edwards Tineo Landaeta",
   "type": "module",
-  "engines": { "node": ">=24.0.0 <25.0.0" },
+  "engines": {
+    "node": ">=24.0.0 <25.0.0"
+  },
   "scripts": {
     "start": "node src/server.js",
-    "test": "node --test tests/*.test.js",
+    "test": "node --test tests/*.test.js tests/unit/*.test.js",
     "admin": "node scripts/crear-admin.js",
-    "demo": "node scripts/preparar-demo.js"
+    "demo": "node scripts/preparar-demo.js",
+    "test:unit": "node --test tests/unit/*.test.js",
+    "test:e2e": "node tests/e2e.mjs",
+    "build": "node scripts/build.js",
+    "start:dist": "node dist/src/server.js",
+    "demo:dist": "node dist/scripts/preparar-demo.js"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.12",
+    "playwright": "1.58.1"
   }
 }
