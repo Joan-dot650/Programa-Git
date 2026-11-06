@@ -1,0 +1,824 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Servicios API | RaízVolt</title><style>body{font:16px/1.6 system-ui,sans-serif;color:#18392f;background:#f1f6f3;margin:0}main{max-width:1040px;margin:auto;padding:40px 30px;background:white}h1{font-size:36px;line-height:1.2}h2{border-top:2px solid #c9dfd4;padding-top:24px;margin-top:46px;color:#13704c}table{border-collapse:collapse;width:100%;font-size:14px;margin:20px 0}td,th{border:1px solid #d5e2dc;padding:10px;text-align:left;overflow-wrap:anywhere}th{background:#e8f3ed}pre{background:#102e25;color:#e5f5ee;padding:20px;overflow:auto;border-radius:8px}code{font-family:ui-monospace,monospace}a{color:#006843}.brand{color:#13704c;letter-spacing:3px;font-weight:700}p,li{max-width:95ch}@media(max-width:640px){main{padding:24px 15px}table{font-size:12px}td,th{padding:6px}}@media print{body,main{background:white}main{max-width:none;padding:0}pre{white-space:pre-wrap;background:#f1f5f2;color:#123}h2{break-before:page}tr{break-inside:avoid}}</style><main><p class="brand">RAÍZVOLT / API</p><h1>Documentación de servicios · RaízVolt</h1>
+<p>Jhon Edwards Tineo Landaeta · Ficha 3235874 · Análisis y Desarrollo de Software · SENA</p>
+<p>Base local: <code>http://127.0.0.1:3000</code>. Fecha: 2 de noviembre de 2026 (Colombia).</p>
+<p>Hay 23 operaciones HTTP documentadas: 22 de funcionamiento y una que entrega OpenAPI. La página <code>/</code> presenta este manual. No es un front-end comercial.</p>
+<h2>Convenciones comunes</h2>
+<ul>
+<li>En solicitudes con cuerpo: <code>Content-Type: application/json</code>. Máximo 32768 bytes, UTF-8 y sin compresión.</li>
+<li>Rutas protegidas: <code>Authorization: Bearer &lt;token obtenido al iniciar sesión&gt;</code>.</li>
+<li>ADMIN puede administrar catálogo e inventario. CLIENTE puede consultar catálogo y gestionar sus cotizaciones/pedidos.</li>
+<li>Una sesión por usuario, vigencia de 2 horas. Un nuevo login revoca la anterior. Logout la elimina.</li>
+<li>Registro/login comparten 20 solicitudes por IP cada 10 minutos; HTTP 429 incluye <code>Retry-After</code>.</li>
+<li>No se aceptan campos desconocidos, identificadores arbitrarios de propietario ni parámetros duplicados.</li>
+<li>Los listados usan <code>pagina</code> (1-1000000, defecto 1) y <code>limite</code> (1-100, defecto 20).</li>
+<li>Precios COP como texto con punto decimal. Se guardan centavos enteros; las sumas usan BigInt.</li>
+<li>Los textos se recortan y no admiten caracteres de control. La contraseña conserva sus espacios.</li>
+<li>Fechas del servidor en ISO 8601 UTC; no se reciben fechas del cliente.</li>
+<li>Los ejemplos son ficticios y muestran el formato, no capturas de ejecuciones. El token de ceros no sirve para acceder.</li>
+<li><code>total</code> en cotizaciones/pedidos es el valor de los productos; no se calculan impuestos ni flete y no representa un pago.</li>
+<li>Para cliente, un recurso de otro usuario responde 404. ADMIN puede consultar todos los pedidos/cotizaciones, pero solo convertir sus propias cotizaciones.</li>
+<li>HTTP 204 no contiene cuerpo. Otros errores tienen <code>exito:false</code>, <code>mensaje</code> y opcionalmente <code>errores</code> por campo.</li>
+</ul>
+<h2>Índice de servicios</h2>
+<table><tbody>
+<tr><th>ID</th><th>Método y ruta</th><th>Acceso</th><th>Propósito</th></tr>
+<tr><td>S01</td><td><code>GET /api/salud</code></td><td>PUBLICO</td><td>Comprobar disponibilidad</td></tr>
+<tr><td>S02</td><td><code>POST /api/registro</code></td><td>PUBLICO</td><td>Registrar cliente</td></tr>
+<tr><td>S03</td><td><code>POST /api/login</code></td><td>PUBLICO</td><td>Iniciar sesión</td></tr>
+<tr><td>S04</td><td><code>POST /api/logout</code></td><td>USUARIO</td><td>Cerrar sesión</td></tr>
+<tr><td>S05</td><td><code>GET /api/perfil</code></td><td>USUARIO</td><td>Consultar perfil propio</td></tr>
+<tr><td>S06</td><td><code>PUT /api/perfil</code></td><td>USUARIO</td><td>Completar o actualizar perfil</td></tr>
+<tr><td>S07</td><td><code>GET /api/categorias</code></td><td>PUBLICO</td><td>Consultar categorías</td></tr>
+<tr><td>S08</td><td><code>GET /api/productos</code></td><td>PUBLICO</td><td>Listar y buscar productos</td></tr>
+<tr><td>S09</td><td><code>GET /api/productos/{id}</code></td><td>PUBLICO</td><td>Consultar producto</td></tr>
+<tr><td>S10</td><td><code>POST /api/productos</code></td><td>ADMIN</td><td>Registrar producto</td></tr>
+<tr><td>S11</td><td><code>PUT /api/productos/{id}</code></td><td>ADMIN</td><td>Actualizar producto</td></tr>
+<tr><td>S12</td><td><code>DELETE /api/productos/{id}</code></td><td>ADMIN</td><td>Retirar producto</td></tr>
+<tr><td>S13</td><td><code>GET /api/inventario</code></td><td>ADMIN</td><td>Consultar resumen de inventario</td></tr>
+<tr><td>S14</td><td><code>GET /api/inventario/movimientos</code></td><td>ADMIN</td><td>Consultar movimientos</td></tr>
+<tr><td>S15</td><td><code>POST /api/productos/{id}/inventario</code></td><td>ADMIN</td><td>Ajustar existencias</td></tr>
+<tr><td>S16</td><td><code>POST /api/cotizaciones</code></td><td>USUARIO</td><td>Crear cotización</td></tr>
+<tr><td>S17</td><td><code>GET /api/cotizaciones</code></td><td>USUARIO</td><td>Listar cotizaciones</td></tr>
+<tr><td>S18</td><td><code>GET /api/cotizaciones/{id}</code></td><td>USUARIO</td><td>Consultar cotización</td></tr>
+<tr><td>S19</td><td><code>POST /api/pedidos</code></td><td>USUARIO</td><td>Confirmar pedido</td></tr>
+<tr><td>S20</td><td><code>GET /api/pedidos</code></td><td>USUARIO</td><td>Listar pedidos</td></tr>
+<tr><td>S21</td><td><code>GET /api/pedidos/{id}</code></td><td>USUARIO</td><td>Consultar pedido</td></tr>
+<tr><td>S22</td><td><code>PATCH /api/pedidos/{id}/estado</code></td><td>USUARIO</td><td>Cambiar estado del pedido</td></tr>
+<tr><td>S23</td><td><code>GET /api/openapi.json</code></td><td>PUBLICO</td><td>Descargar contrato OpenAPI</td></tr>
+</tbody></table>
+<h2>S01 · Comprobar disponibilidad</h2>
+<p><code>GET /api/salud</code> · Acceso: <strong>PUBLICO</strong></p>
+<p>Comprueba que el proceso HTTP responde. No prueba servicios externos.</p>
+<p>Cuerpo de solicitud: no se requiere.</p>
+<p>Respuesta correcta: <strong>HTTP 200</strong>.</p>
+<pre><code>{
+  &quot;exito&quot;: true,
+  &quot;mensaje&quot;: &quot;RaízVolt API disponible.&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;
+}</code></pre>
+<p>Errores:</p>
+<table><tbody>
+<tr><th>HTTP</th><th>Causa</th></tr>
+<tr><td>400</td><td>Datos, identificador o parámetros de consulta inválidos.</td></tr>
+<tr><td>405</td><td>Método no permitido para este recurso.</td></tr>
+<tr><td>500</td><td>Error interno; no se exponen trazas ni consultas SQL.</td></tr>
+</tbody></table>
+<h2>S02 · Registrar cliente</h2>
+<p><code>POST /api/registro</code> · Acceso: <strong>PUBLICO</strong></p>
+<p>Crea una cuenta CLIENTE. No inicia sesión. Para ADMIN se usa un comando local.</p>
+<p>Cuerpo JSON de ejemplo:</p>
+<pre><code>{
+  &quot;usuario&quot;: &quot;cliente.demo&quot;,
+  &quot;contrasena&quot;: &quot;ClaveDemo2026!&quot;
+}</code></pre>
+<p>Campos de entrada (todos obligatorios):</p>
+<table><tbody>
+<tr><th>Campo</th><th>Tipo y regla</th></tr>
+<tr><td><code>usuario</code></td><td>string. Se quitan espacios externos y se convierte a minúsculas. Luego debe cumplir ^[a-z0-9][a-z0-9._-]{2,29}$. minLength=3; maxLength=30</td></tr>
+<tr><td><code>contrasena</code></td><td>string. No se recorta ni normaliza. No se admiten solo espacios. minLength=8; maxLength=128</td></tr>
+</tbody></table>
+<p>Respuesta correcta: <strong>HTTP 201</strong>.</p>
+<pre><code>{
+  &quot;exito&quot;: true,
+  &quot;mensaje&quot;: &quot;Registro satisfactorio.&quot;,
+  &quot;usuario&quot;: {
+    &quot;id&quot;: 2,
+    &quot;usuario&quot;: &quot;cliente.demo&quot;,
+    &quot;rol&quot;: &quot;CLIENTE&quot;,
+    &quot;nombre&quot;: &quot;&quot;,
+    &quot;telefono&quot;: &quot;&quot;,
+    &quot;municipio&quot;: &quot;&quot;,
+    &quot;direccion&quot;: &quot;&quot;,
+    &quot;creadoEn&quot;: &quot;2026-11-03T01:00:00.000Z&quot;
+  }
+}</code></pre>
+<p>Errores:</p>
+<table><tbody>
+<tr><th>HTTP</th><th>Causa</th></tr>
+<tr><td>400</td><td>Datos, identificador o parámetros de consulta inválidos.</td></tr>
+<tr><td>405</td><td>Método no permitido para este recurso.</td></tr>
+<tr><td>409</td><td>El nombre de usuario ya existe.</td></tr>
+<tr><td>413</td><td>Cuerpo superior a 32768 bytes.</td></tr>
+<tr><td>415</td><td>Se requiere application/json sin compresión.</td></tr>
+<tr><td>429</td><td>Se superaron 20 solicitudes de registro/login por IP en 10 minutos.</td></tr>
+<tr><td>500</td><td>Error interno; no se exponen trazas ni consultas SQL.</td></tr>
+</tbody></table>
+<h2>S03 · Iniciar sesión</h2>
+<p><code>POST /api/login</code> · Acceso: <strong>PUBLICO</strong></p>
+<p>Verifica la contraseña y entrega un token aleatorio de 2 horas. Invalida la sesión anterior de la misma cuenta.</p>
+<p>Cuerpo JSON de ejemplo:</p>
+<pre><code>{
+  &quot;usuario&quot;: &quot;cliente.demo&quot;,
+  &quot;contrasena&quot;: &quot;ClaveDemo2026!&quot;
+}</code></pre>
+<p>Campos de entrada (todos obligatorios):</p>
+<table><tbody>
+<tr><th>Campo</th><th>Tipo y regla</th></tr>
+<tr><td><code>usuario</code></td><td>string. Se quitan espacios externos y se convierte a minúsculas. Luego debe cumplir ^[a-z0-9][a-z0-9._-]{2,29}$. minLength=3; maxLength=30</td></tr>
+<tr><td><code>contrasena</code></td><td>string. No se recorta ni normaliza. No se admiten solo espacios. minLength=8; maxLength=128</td></tr>
+</tbody></table>
+<p>Respuesta correcta: <strong>HTTP 200</strong>.</p>
+<pre><code>{
+  &quot;exito&quot;: true,
+  &quot;mensaje&quot;: &quot;Autenticación satisfactoria&quot;,
+  &quot;token&quot;: &quot;0000000000000000000000000000000000000000000000000000000000000000&quot;,
+  &quot;tipo&quot;: &quot;Bearer&quot;,
+  &quot;expiraEn&quot;: &quot;2026-11-03T03:00:00.000Z&quot;,
+  &quot;usuario&quot;: {
+    &quot;id&quot;: 2,
+    &quot;usuario&quot;: &quot;cliente.demo&quot;,
+    &quot;rol&quot;: &quot;CLIENTE&quot;,
+    &quot;nombre&quot;: &quot;Cliente de demostración&quot;,
+    &quot;telefono&quot;: &quot;+57 300 000 0000&quot;,
+    &quot;municipio&quot;: &quot;Zipaquirá&quot;,
+    &quot;direccion&quot;: &quot;Calle de prueba 10-20&quot;,
+    &quot;creadoEn&quot;: &quot;2026-11-03T01:00:00.000Z&quot;
+  }
+}</code></pre>
+<p>Errores:</p>
+<table><tbody>
+<tr><th>HTTP</th><th>Causa</th></tr>
+<tr><td>400</td><td>Datos, identificador o parámetros de consulta inválidos.</td></tr>
+<tr><td>401</td><td>Credenciales incorrectas.</td></tr>
+<tr><td>405</td><td>Método no permitido para este recurso.</td></tr>
+<tr><td>413</td><td>Cuerpo superior a 32768 bytes.</td></tr>
+<tr><td>415</td><td>Se requiere application/json sin compresión.</td></tr>
+<tr><td>429</td><td>Se superaron 20 solicitudes de registro/login por IP en 10 minutos.</td></tr>
+<tr><td>500</td><td>Error interno; no se exponen trazas ni consultas SQL.</td></tr>
+</tbody></table>
+<h2>S04 · Cerrar sesión</h2>
+<p><code>POST /api/logout</code> · Acceso: <strong>USUARIO</strong></p>
+<p>Revoca el token utilizado. La solicitud no requiere cuerpo.</p>
+<p>Cuerpo de solicitud: no se requiere.</p>
+<p>Respuesta correcta: <strong>HTTP 204</strong>.</p>
+<p>Errores:</p>
+<table><tbody>
+<tr><th>HTTP</th><th>Causa</th></tr>
+<tr><td>400</td><td>Datos, identificador o parámetros de consulta inválidos.</td></tr>
+<tr><td>401</td><td>Token ausente, inválido, revocado o vencido.</td></tr>
+<tr><td>405</td><td>Método no permitido para este recurso.</td></tr>
+<tr><td>500</td><td>Error interno; no se exponen trazas ni consultas SQL.</td></tr>
+</tbody></table>
+<h2>S05 · Consultar perfil propio</h2>
+<p><code>GET /api/perfil</code> · Acceso: <strong>USUARIO</strong></p>
+<p>Entrega solo los datos de la cuenta autenticada.</p>
+<p>Cuerpo de solicitud: no se requiere.</p>
+<p>Respuesta correcta: <strong>HTTP 200</strong>.</p>
+<pre><code>{
+  &quot;id&quot;: 2,
+  &quot;usuario&quot;: &quot;cliente.demo&quot;,
+  &quot;rol&quot;: &quot;CLIENTE&quot;,
+  &quot;nombre&quot;: &quot;Cliente de demostración&quot;,
+  &quot;telefono&quot;: &quot;+57 300 000 0000&quot;,
+  &quot;municipio&quot;: &quot;Zipaquirá&quot;,
+  &quot;direccion&quot;: &quot;Calle de prueba 10-20&quot;,
+  &quot;creadoEn&quot;: &quot;2026-11-03T01:00:00.000Z&quot;
+}</code></pre>
+<p>Errores:</p>
+<table><tbody>
+<tr><th>HTTP</th><th>Causa</th></tr>
+<tr><td>400</td><td>Datos, identificador o parámetros de consulta inválidos.</td></tr>
+<tr><td>401</td><td>Token ausente, inválido, revocado o vencido.</td></tr>
+<tr><td>405</td><td>Método no permitido para este recurso.</td></tr>
+<tr><td>500</td><td>Error interno; no se exponen trazas ni consultas SQL.</td></tr>
+</tbody></table>
+<h2>S06 · Completar o actualizar perfil</h2>
+<p><code>PUT /api/perfil</code> · Acceso: <strong>USUARIO</strong></p>
+<p>Reemplaza los cuatro campos de contacto. El perfil debe estar completo para confirmar un pedido. No modifica usuario ni rol.</p>
+<p>Cuerpo JSON de ejemplo:</p>
+<pre><code>{
+  &quot;nombre&quot;: &quot;Cliente de demostración&quot;,
+  &quot;telefono&quot;: &quot;+57 300 000 0000&quot;,
+  &quot;municipio&quot;: &quot;Zipaquirá&quot;,
+  &quot;direccion&quot;: &quot;Calle de prueba 10-20&quot;
+}</code></pre>
+<p>Campos de entrada (todos obligatorios):</p>
+<table><tbody>
+<tr><th>Campo</th><th>Tipo y regla</th></tr>
+<tr><td><code>nombre</code></td><td>string.  minLength=3; maxLength=100</td></tr>
+<tr><td><code>telefono</code></td><td>string. Al menos siete dígitos. Admite + inicial, espacios, paréntesis y guiones. minLength=7; maxLength=20</td></tr>
+<tr><td><code>municipio</code></td><td>string.  minLength=3; maxLength=80</td></tr>
+<tr><td><code>direccion</code></td><td>string.  minLength=5; maxLength=200</td></tr>
+</tbody></table>
+<p>Respuesta correcta: <strong>HTTP 200</strong>.</p>
+<pre><code>{
+  &quot;id&quot;: 2,
+  &quot;usuario&quot;: &quot;cliente.demo&quot;,
+  &quot;rol&quot;: &quot;CLIENTE&quot;,
+  &quot;nombre&quot;: &quot;Cliente de demostración&quot;,
+  &quot;telefono&quot;: &quot;+57 300 000 0000&quot;,
+  &quot;municipio&quot;: &quot;Zipaquirá&quot;,
+  &quot;direccion&quot;: &quot;Calle de prueba 10-20&quot;,
+  &quot;creadoEn&quot;: &quot;2026-11-03T01:00:00.000Z&quot;
+}</code></pre>
+<p>Errores:</p>
+<table><tbody>
+<tr><th>HTTP</th><th>Causa</th></tr>
+<tr><td>400</td><td>Datos, identificador o parámetros de consulta inválidos.</td></tr>
+<tr><td>401</td><td>Token ausente, inválido, revocado o vencido.</td></tr>
+<tr><td>405</td><td>Método no permitido para este recurso.</td></tr>
+<tr><td>413</td><td>Cuerpo superior a 32768 bytes.</td></tr>
+<tr><td>415</td><td>Se requiere application/json sin compresión.</td></tr>
+<tr><td>500</td><td>Error interno; no se exponen trazas ni consultas SQL.</td></tr>
+</tbody></table>
+<h2>S07 · Consultar categorías</h2>
+<p><code>GET /api/categorias</code> · Acceso: <strong>PUBLICO</strong></p>
+<p>Devuelve las cinco categorías del modelo de RaízVolt.</p>
+<p>Cuerpo de solicitud: no se requiere.</p>
+<p>Respuesta correcta: <strong>HTTP 200</strong>.</p>
+<pre><code>{
+  &quot;categorias&quot;: [
+    &quot;PANEL_SOLAR&quot;,
+    &quot;INVERSOR&quot;,
+    &quot;BATERIA&quot;,
+    &quot;KIT_SOLAR&quot;,
+    &quot;ACCESORIO&quot;
+  ]
+}</code></pre>
+<p>Errores:</p>
+<table><tbody>
+<tr><th>HTTP</th><th>Causa</th></tr>
+<tr><td>400</td><td>Datos, identificador o parámetros de consulta inválidos.</td></tr>
+<tr><td>405</td><td>Método no permitido para este recurso.</td></tr>
+<tr><td>500</td><td>Error interno; no se exponen trazas ni consultas SQL.</td></tr>
+</tbody></table>
+<h2>S08 · Listar y buscar productos</h2>
+<p><code>GET /api/productos</code> · Acceso: <strong>PUBLICO</strong></p>
+<p>Solo lista productos activos. q busca coincidencia literal parcial en código o nombre sin distinguir mayúsculas, incluidas tildes. total cuenta todos los resultados del filtro.</p>
+<p>Consulta: <code>pagina=1&amp;limite=20</code>. Límites: página 1-1000000; tamaño 1-100.</p>
+<p>Filtros opcionales: <code>q</code> (0-120 caracteres) y <code>categoria</code> (una de las cinco categorías). Ejemplo: <code>/api/productos?q=panel&amp;categoria=PANEL_SOLAR&amp;pagina=1&amp;limite=20</code>.</p>
+<p>Cuerpo de solicitud: no se requiere.</p>
+<p>Respuesta correcta: <strong>HTTP 200</strong>.</p>
+<pre><code>{
+  &quot;productos&quot;: [
+    {
+      &quot;id&quot;: 1,
+      &quot;codigo&quot;: &quot;SOL-550&quot;,
+      &quot;nombre&quot;: &quot;Panel solar 550 W&quot;,
+      &quot;categoria&quot;: &quot;PANEL_SOLAR&quot;,
+      &quot;precio&quot;: &quot;680000.50&quot;,
+      &quot;existencias&quot;: 20,
+      &quot;activo&quot;: true
+    }
+  ],
+  &quot;total&quot;: 1,
+  &quot;pagina&quot;: 1,
+  &quot;limite&quot;: 20
+}</code></pre>
+<p>Errores:</p>
+<table><tbody>
+<tr><th>HTTP</th><th>Causa</th></tr>
+<tr><td>400</td><td>Datos, identificador o parámetros de consulta inválidos.</td></tr>
+<tr><td>405</td><td>Método no permitido para este recurso.</td></tr>
+<tr><td>500</td><td>Error interno; no se exponen trazas ni consultas SQL.</td></tr>
+</tbody></table>
+<h2>S09 · Consultar producto</h2>
+<p><code>GET /api/productos/{id}</code> · Acceso: <strong>PUBLICO</strong></p>
+<p>Consulta por identificador; los retirados no están disponibles.</p>
+<p>Parámetro de ruta <code>id</code>: entero positivo, máximo 9007199254740991.</p>
+<p>Cuerpo de solicitud: no se requiere.</p>
+<p>Respuesta correcta: <strong>HTTP 200</strong>.</p>
+<pre><code>{
+  &quot;id&quot;: 1,
+  &quot;codigo&quot;: &quot;SOL-550&quot;,
+  &quot;nombre&quot;: &quot;Panel solar 550 W&quot;,
+  &quot;categoria&quot;: &quot;PANEL_SOLAR&quot;,
+  &quot;precio&quot;: &quot;680000.50&quot;,
+  &quot;existencias&quot;: 20,
+  &quot;activo&quot;: true
+}</code></pre>
+<p>Errores:</p>
+<table><tbody>
+<tr><th>HTTP</th><th>Causa</th></tr>
+<tr><td>400</td><td>Datos, identificador o parámetros de consulta inválidos.</td></tr>
+<tr><td>404</td><td>Producto inexistente o retirado.</td></tr>
+<tr><td>405</td><td>Método no permitido para este recurso.</td></tr>
+<tr><td>500</td><td>Error interno; no se exponen trazas ni consultas SQL.</td></tr>
+</tbody></table>
+<h2>S10 · Registrar producto</h2>
+<p><code>POST /api/productos</code> · Acceso: <strong>ADMIN</strong></p>
+<p>Crea producto y registra el movimiento inicial de inventario en una transacción. Devuelve Location.</p>
+<p>Cuerpo JSON de ejemplo:</p>
+<pre><code>{
+  &quot;codigo&quot;: &quot;SOL-550&quot;,
+  &quot;nombre&quot;: &quot;Panel solar 550 W&quot;,
+  &quot;categoria&quot;: &quot;PANEL_SOLAR&quot;,
+  &quot;precio&quot;: &quot;680000.50&quot;,
+  &quot;existencias&quot;: 20
+}</code></pre>
+<p>Campos de entrada (todos obligatorios):</p>
+<table><tbody>
+<tr><th>Campo</th><th>Tipo y regla</th></tr>
+<tr><td><code>codigo</code></td><td>string. Se recorta y convierte a mayúsculas. Solo A-Z, 0-9 y guion; único incluso después de retirar el producto. minLength=3; maxLength=30</td></tr>
+<tr><td><code>nombre</code></td><td>string.  minLength=3; maxLength=120</td></tr>
+<tr><td><code>categoria</code></td><td>string.  enum=[&#x27;PANEL_SOLAR&#x27;, &#x27;INVERSOR&#x27;, &#x27;BATERIA&#x27;, &#x27;KIT_SOLAR&#x27;, &#x27;ACCESORIO&#x27;]</td></tr>
+<tr><td><code>precio</code></td><td>string. Importe COP mayor que 0 y hasta 9999999999.99. Texto con punto decimal y sin separador de miles.</td></tr>
+<tr><td><code>existencias</code></td><td>integer.  minimum=0; maximum=1000000</td></tr>
+</tbody></table>
+<p>Respuesta correcta: <strong>HTTP 201</strong>.</p>
+<pre><code>{
+  &quot;id&quot;: 1,
+  &quot;codigo&quot;: &quot;SOL-550&quot;,
+  &quot;nombre&quot;: &quot;Panel solar 550 W&quot;,
+  &quot;categoria&quot;: &quot;PANEL_SOLAR&quot;,
+  &quot;precio&quot;: &quot;680000.50&quot;,
+  &quot;existencias&quot;: 20,
+  &quot;activo&quot;: true
+}</code></pre>
+<p>Cabecera <code>Location</code>: ruta del recurso creado.</p>
+<p>Errores:</p>
+<table><tbody>
+<tr><th>HTTP</th><th>Causa</th></tr>
+<tr><td>400</td><td>Datos, identificador o parámetros de consulta inválidos.</td></tr>
+<tr><td>401</td><td>Token ausente, inválido, revocado o vencido.</td></tr>
+<tr><td>403</td><td>Se requiere rol ADMIN.</td></tr>
+<tr><td>405</td><td>Método no permitido para este recurso.</td></tr>
+<tr><td>409</td><td>Código repetido, incluso si fue retirado.</td></tr>
+<tr><td>413</td><td>Cuerpo superior a 32768 bytes.</td></tr>
+<tr><td>415</td><td>Se requiere application/json sin compresión.</td></tr>
+<tr><td>500</td><td>Error interno; no se exponen trazas ni consultas SQL.</td></tr>
+</tbody></table>
+<h2>S11 · Actualizar producto</h2>
+<p><code>PUT /api/productos/{id}</code> · Acceso: <strong>ADMIN</strong></p>
+<p>Reemplaza código, nombre, categoría y precio. No recibe existencias: se ajustan mediante el servicio de inventario.</p>
+<p>Parámetro de ruta <code>id</code>: entero positivo, máximo 9007199254740991.</p>
+<p>Cuerpo JSON de ejemplo:</p>
+<pre><code>{
+  &quot;codigo&quot;: &quot;SOL-550&quot;,
+  &quot;nombre&quot;: &quot;Panel solar 550 W&quot;,
+  &quot;categoria&quot;: &quot;PANEL_SOLAR&quot;,
+  &quot;precio&quot;: &quot;680000.50&quot;
+}</code></pre>
+<p>Campos de entrada (todos obligatorios):</p>
+<table><tbody>
+<tr><th>Campo</th><th>Tipo y regla</th></tr>
+<tr><td><code>codigo</code></td><td>string. Se recorta y convierte a mayúsculas. Solo A-Z, 0-9 y guion; único incluso después de retirar el producto. minLength=3; maxLength=30</td></tr>
+<tr><td><code>nombre</code></td><td>string.  minLength=3; maxLength=120</td></tr>
+<tr><td><code>categoria</code></td><td>string.  enum=[&#x27;PANEL_SOLAR&#x27;, &#x27;INVERSOR&#x27;, &#x27;BATERIA&#x27;, &#x27;KIT_SOLAR&#x27;, &#x27;ACCESORIO&#x27;]</td></tr>
+<tr><td><code>precio</code></td><td>string. Importe COP mayor que 0 y hasta 9999999999.99. Texto con punto decimal y sin separador de miles.</td></tr>
+</tbody></table>
+<p>Respuesta correcta: <strong>HTTP 200</strong>.</p>
+<pre><code>{
+  &quot;id&quot;: 1,
+  &quot;codigo&quot;: &quot;SOL-550&quot;,
+  &quot;nombre&quot;: &quot;Panel solar 550 W&quot;,
+  &quot;categoria&quot;: &quot;PANEL_SOLAR&quot;,
+  &quot;precio&quot;: &quot;680000.50&quot;,
+  &quot;existencias&quot;: 20,
+  &quot;activo&quot;: true
+}</code></pre>
+<p>Errores:</p>
+<table><tbody>
+<tr><th>HTTP</th><th>Causa</th></tr>
+<tr><td>400</td><td>Datos, identificador o parámetros de consulta inválidos.</td></tr>
+<tr><td>401</td><td>Token ausente, inválido, revocado o vencido.</td></tr>
+<tr><td>403</td><td>Se requiere rol ADMIN.</td></tr>
+<tr><td>404</td><td>Producto inexistente o retirado.</td></tr>
+<tr><td>405</td><td>Método no permitido para este recurso.</td></tr>
+<tr><td>409</td><td>Código repetido.</td></tr>
+<tr><td>413</td><td>Cuerpo superior a 32768 bytes.</td></tr>
+<tr><td>415</td><td>Se requiere application/json sin compresión.</td></tr>
+<tr><td>500</td><td>Error interno; no se exponen trazas ni consultas SQL.</td></tr>
+</tbody></table>
+<h2>S12 · Retirar producto</h2>
+<p><code>DELETE /api/productos/{id}</code> · Acceso: <strong>ADMIN</strong></p>
+<p>Realiza baja lógica; conserva pedidos, cotizaciones, movimientos y el código único. Impide nuevas ventas. Sin cuerpo de respuesta.</p>
+<p>Parámetro de ruta <code>id</code>: entero positivo, máximo 9007199254740991.</p>
+<p>Cuerpo de solicitud: no se requiere.</p>
+<p>Respuesta correcta: <strong>HTTP 204</strong>.</p>
+<p>Errores:</p>
+<table><tbody>
+<tr><th>HTTP</th><th>Causa</th></tr>
+<tr><td>400</td><td>Datos, identificador o parámetros de consulta inválidos.</td></tr>
+<tr><td>401</td><td>Token ausente, inválido, revocado o vencido.</td></tr>
+<tr><td>403</td><td>Se requiere rol ADMIN.</td></tr>
+<tr><td>404</td><td>Producto inexistente o ya retirado.</td></tr>
+<tr><td>405</td><td>Método no permitido para este recurso.</td></tr>
+<tr><td>500</td><td>Error interno; no se exponen trazas ni consultas SQL.</td></tr>
+</tbody></table>
+<h2>S13 · Consultar resumen de inventario</h2>
+<p><code>GET /api/inventario</code> · Acceso: <strong>ADMIN</strong></p>
+<p>Resume referencias activas, unidades disponibles, referencias con menos de cinco unidades y valor exacto en COP. Los pedidos ya reservados no cuentan como stock disponible.</p>
+<p>Cuerpo de solicitud: no se requiere.</p>
+<p>Respuesta correcta: <strong>HTTP 200</strong>.</p>
+<pre><code>{
+  &quot;referencias&quot;: 1,
+  &quot;unidades&quot;: 20,
+  &quot;stockBajo&quot;: 0,
+  &quot;valorInventario&quot;: &quot;13600010.00&quot;,
+  &quot;moneda&quot;: &quot;COP&quot;
+}</code></pre>
+<p>Errores:</p>
+<table><tbody>
+<tr><th>HTTP</th><th>Causa</th></tr>
+<tr><td>400</td><td>Datos, identificador o parámetros de consulta inválidos.</td></tr>
+<tr><td>401</td><td>Token ausente, inválido, revocado o vencido.</td></tr>
+<tr><td>403</td><td>Se requiere rol ADMIN.</td></tr>
+<tr><td>405</td><td>Método no permitido para este recurso.</td></tr>
+<tr><td>500</td><td>Error interno; no se exponen trazas ni consultas SQL.</td></tr>
+</tbody></table>
+<h2>S14 · Consultar movimientos</h2>
+<p><code>GET /api/inventario/movimientos</code> · Acceso: <strong>ADMIN</strong></p>
+<p>Lista movimientos más recientes primero, incluidos los de productos retirados. Incluye actor, variación, saldo, motivo y pedido relacionado.</p>
+<p>Consulta: <code>pagina=1&amp;limite=20</code>. Límites: página 1-1000000; tamaño 1-100.</p>
+<p>Cuerpo de solicitud: no se requiere.</p>
+<p>Respuesta correcta: <strong>HTTP 200</strong>.</p>
+<pre><code>{
+  &quot;movimientos&quot;: [
+    {
+      &quot;id&quot;: 1,
+      &quot;productoId&quot;: 1,
+      &quot;codigo&quot;: &quot;SOL-550&quot;,
+      &quot;usuarioId&quot;: 1,
+      &quot;pedidoId&quot;: null,
+      &quot;variacion&quot;: 20,
+      &quot;saldo&quot;: 20,
+      &quot;motivo&quot;: &quot;Inventario inicial&quot;,
+      &quot;creadoEn&quot;: &quot;2026-11-03T01:00:00.000Z&quot;
+    }
+  ],
+  &quot;total&quot;: 1,
+  &quot;pagina&quot;: 1,
+  &quot;limite&quot;: 20
+}</code></pre>
+<p>Errores:</p>
+<table><tbody>
+<tr><th>HTTP</th><th>Causa</th></tr>
+<tr><td>400</td><td>Datos, identificador o parámetros de consulta inválidos.</td></tr>
+<tr><td>401</td><td>Token ausente, inválido, revocado o vencido.</td></tr>
+<tr><td>403</td><td>Se requiere rol ADMIN.</td></tr>
+<tr><td>405</td><td>Método no permitido para este recurso.</td></tr>
+<tr><td>500</td><td>Error interno; no se exponen trazas ni consultas SQL.</td></tr>
+</tbody></table>
+<h2>S15 · Ajustar existencias</h2>
+<p><code>POST /api/productos/{id}/inventario</code> · Acceso: <strong>ADMIN</strong></p>
+<p>Suma o resta variacion; exige motivo. Registra el movimiento y actualiza saldo en la misma transacción.</p>
+<p>Parámetro de ruta <code>id</code>: entero positivo, máximo 9007199254740991.</p>
+<p>Cuerpo JSON de ejemplo:</p>
+<pre><code>{
+  &quot;variacion&quot;: 5,
+  &quot;motivo&quot;: &quot;Ingreso de mercancía de prueba&quot;
+}</code></pre>
+<p>Campos de entrada (todos obligatorios):</p>
+<table><tbody>
+<tr><th>Campo</th><th>Tipo y regla</th></tr>
+<tr><td><code>variacion</code></td><td>integer. Debe ser diferente de cero; el saldo final queda entre 0 y 1000000. minimum=-1000000; maximum=1000000</td></tr>
+<tr><td><code>motivo</code></td><td>string.  minLength=5; maxLength=200</td></tr>
+</tbody></table>
+<p>Respuesta correcta: <strong>HTTP 200</strong>.</p>
+<pre><code>{
+  &quot;id&quot;: 1,
+  &quot;codigo&quot;: &quot;SOL-550&quot;,
+  &quot;nombre&quot;: &quot;Panel solar 550 W&quot;,
+  &quot;categoria&quot;: &quot;PANEL_SOLAR&quot;,
+  &quot;precio&quot;: &quot;680000.50&quot;,
+  &quot;existencias&quot;: 20,
+  &quot;activo&quot;: true
+}</code></pre>
+<p>Errores:</p>
+<table><tbody>
+<tr><th>HTTP</th><th>Causa</th></tr>
+<tr><td>400</td><td>Datos, identificador o parámetros de consulta inválidos.</td></tr>
+<tr><td>401</td><td>Token ausente, inválido, revocado o vencido.</td></tr>
+<tr><td>403</td><td>Se requiere rol ADMIN.</td></tr>
+<tr><td>404</td><td>Producto inexistente o retirado.</td></tr>
+<tr><td>405</td><td>Método no permitido para este recurso.</td></tr>
+<tr><td>409</td><td>Saldo final negativo o superior a 1000000.</td></tr>
+<tr><td>413</td><td>Cuerpo superior a 32768 bytes.</td></tr>
+<tr><td>415</td><td>Se requiere application/json sin compresión.</td></tr>
+<tr><td>500</td><td>Error interno; no se exponen trazas ni consultas SQL.</td></tr>
+</tbody></table>
+<h2>S16 · Crear cotización</h2>
+<p><code>POST /api/cotizaciones</code> · Acceso: <strong>USUARIO</strong></p>
+<p>Obtiene precios del servidor y congela código, nombre y precio. Vigencia: 7 días. No reserva stock; se puede cotizar sin existencias. total suma productos: no incluye flete ni cálculo tributario.</p>
+<p>Cuerpo JSON de ejemplo:</p>
+<pre><code>{
+  &quot;items&quot;: [
+    {
+      &quot;productoId&quot;: 1,
+      &quot;cantidad&quot;: 2
+    }
+  ]
+}</code></pre>
+<p>Campos de entrada (todos obligatorios):</p>
+<table><tbody>
+<tr><th>Campo</th><th>Tipo y regla</th></tr>
+<tr><td><code>items</code></td><td>array. No se admiten productoId repetidos. El servidor obtiene los precios del catálogo. minItems=1; maxItems=20</td></tr>
+</tbody></table>
+<p>Respuesta correcta: <strong>HTTP 201</strong>.</p>
+<pre><code>{
+  &quot;id&quot;: 1,
+  &quot;usuarioId&quot;: 2,
+  &quot;total&quot;: &quot;1360001.00&quot;,
+  &quot;moneda&quot;: &quot;COP&quot;,
+  &quot;creadoEn&quot;: &quot;2026-11-03T01:00:00.000Z&quot;,
+  &quot;venceEn&quot;: &quot;2026-11-10T01:00:00.000Z&quot;,
+  &quot;items&quot;: [
+    {
+      &quot;productoId&quot;: 1,
+      &quot;codigo&quot;: &quot;SOL-550&quot;,
+      &quot;nombre&quot;: &quot;Panel solar 550 W&quot;,
+      &quot;precioUnitario&quot;: &quot;680000.50&quot;,
+      &quot;cantidad&quot;: 2,
+      &quot;subtotal&quot;: &quot;1360001.00&quot;
+    }
+  ]
+}</code></pre>
+<p>Cabecera <code>Location</code>: ruta del recurso creado.</p>
+<p>Errores:</p>
+<table><tbody>
+<tr><th>HTTP</th><th>Causa</th></tr>
+<tr><td>400</td><td>Datos, identificador o parámetros de consulta inválidos.</td></tr>
+<tr><td>401</td><td>Token ausente, inválido, revocado o vencido.</td></tr>
+<tr><td>404</td><td>Un producto no existe o está retirado.</td></tr>
+<tr><td>405</td><td>Método no permitido para este recurso.</td></tr>
+<tr><td>413</td><td>Cuerpo superior a 32768 bytes.</td></tr>
+<tr><td>415</td><td>Se requiere application/json sin compresión.</td></tr>
+<tr><td>500</td><td>Error interno; no se exponen trazas ni consultas SQL.</td></tr>
+</tbody></table>
+<p>Cada línea contiene <code>productoId</code> entero positivo y <code>cantidad</code> entera 1-10000. No se aceptan IDs repetidos, precios ni totales enviados por el cliente.</p>
+<h2>S17 · Listar cotizaciones</h2>
+<p><code>GET /api/cotizaciones</code> · Acceso: <strong>USUARIO</strong></p>
+<p>CLIENTE ve únicamente las propias; ADMIN ve todas. Orden descendente por ID.</p>
+<p>Consulta: <code>pagina=1&amp;limite=20</code>. Límites: página 1-1000000; tamaño 1-100.</p>
+<p>Cuerpo de solicitud: no se requiere.</p>
+<p>Respuesta correcta: <strong>HTTP 200</strong>.</p>
+<pre><code>{
+  &quot;cotizaciones&quot;: [
+    {
+      &quot;id&quot;: 1,
+      &quot;usuarioId&quot;: 2,
+      &quot;total&quot;: &quot;1360001.00&quot;,
+      &quot;moneda&quot;: &quot;COP&quot;,
+      &quot;creadoEn&quot;: &quot;2026-11-03T01:00:00.000Z&quot;,
+      &quot;venceEn&quot;: &quot;2026-11-10T01:00:00.000Z&quot;,
+      &quot;items&quot;: [
+        {
+          &quot;productoId&quot;: 1,
+          &quot;codigo&quot;: &quot;SOL-550&quot;,
+          &quot;nombre&quot;: &quot;Panel solar 550 W&quot;,
+          &quot;precioUnitario&quot;: &quot;680000.50&quot;,
+          &quot;cantidad&quot;: 2,
+          &quot;subtotal&quot;: &quot;1360001.00&quot;
+        }
+      ]
+    }
+  ],
+  &quot;total&quot;: 1,
+  &quot;pagina&quot;: 1,
+  &quot;limite&quot;: 20
+}</code></pre>
+<p>Errores:</p>
+<table><tbody>
+<tr><th>HTTP</th><th>Causa</th></tr>
+<tr><td>400</td><td>Datos, identificador o parámetros de consulta inválidos.</td></tr>
+<tr><td>401</td><td>Token ausente, inválido, revocado o vencido.</td></tr>
+<tr><td>405</td><td>Método no permitido para este recurso.</td></tr>
+<tr><td>500</td><td>Error interno; no se exponen trazas ni consultas SQL.</td></tr>
+</tbody></table>
+<h2>S18 · Consultar cotización</h2>
+<p><code>GET /api/cotizaciones/{id}</code> · Acceso: <strong>USUARIO</strong></p>
+<p>Consulta las líneas y los precios guardados. No cambia por ediciones posteriores del producto.</p>
+<p>Parámetro de ruta <code>id</code>: entero positivo, máximo 9007199254740991.</p>
+<p>Cuerpo de solicitud: no se requiere.</p>
+<p>Respuesta correcta: <strong>HTTP 200</strong>.</p>
+<pre><code>{
+  &quot;id&quot;: 1,
+  &quot;usuarioId&quot;: 2,
+  &quot;total&quot;: &quot;1360001.00&quot;,
+  &quot;moneda&quot;: &quot;COP&quot;,
+  &quot;creadoEn&quot;: &quot;2026-11-03T01:00:00.000Z&quot;,
+  &quot;venceEn&quot;: &quot;2026-11-10T01:00:00.000Z&quot;,
+  &quot;items&quot;: [
+    {
+      &quot;productoId&quot;: 1,
+      &quot;codigo&quot;: &quot;SOL-550&quot;,
+      &quot;nombre&quot;: &quot;Panel solar 550 W&quot;,
+      &quot;precioUnitario&quot;: &quot;680000.50&quot;,
+      &quot;cantidad&quot;: 2,
+      &quot;subtotal&quot;: &quot;1360001.00&quot;
+    }
+  ]
+}</code></pre>
+<p>Errores:</p>
+<table><tbody>
+<tr><th>HTTP</th><th>Causa</th></tr>
+<tr><td>400</td><td>Datos, identificador o parámetros de consulta inválidos.</td></tr>
+<tr><td>401</td><td>Token ausente, inválido, revocado o vencido.</td></tr>
+<tr><td>404</td><td>No existe o no pertenece al cliente.</td></tr>
+<tr><td>405</td><td>Método no permitido para este recurso.</td></tr>
+<tr><td>500</td><td>Error interno; no se exponen trazas ni consultas SQL.</td></tr>
+</tbody></table>
+<h2>S19 · Confirmar pedido</h2>
+<p><code>POST /api/pedidos</code> · Acceso: <strong>USUARIO</strong></p>
+<p>Solo permite convertir una cotización propia vigente y con stock. Exige perfil completo. Guarda dirección y reserva todas las líneas de forma atómica. Una cotización admite un solo pedido: reintentar devuelve ese pedido (200), incluso cancelado, sin otra reserva. Para comprar otra vez se crea una cotización nueva.</p>
+<p>Cuerpo JSON de ejemplo:</p>
+<pre><code>{
+  &quot;cotizacionId&quot;: 1
+}</code></pre>
+<p>Campos de entrada (todos obligatorios):</p>
+<table><tbody>
+<tr><th>Campo</th><th>Tipo y regla</th></tr>
+<tr><td><code>cotizacionId</code></td><td>integer.  minimum=1; maximum=9007199254740991</td></tr>
+</tbody></table>
+<p>Respuesta correcta: <strong>HTTP 201</strong> (201 al crear; 200 al repetir la misma cotización).</p>
+<pre><code>{
+  &quot;id&quot;: 1,
+  &quot;cotizacionId&quot;: 1,
+  &quot;usuarioId&quot;: 2,
+  &quot;estado&quot;: &quot;PENDIENTE&quot;,
+  &quot;total&quot;: &quot;1360001.00&quot;,
+  &quot;moneda&quot;: &quot;COP&quot;,
+  &quot;envio&quot;: {
+    &quot;nombre&quot;: &quot;Cliente de demostración&quot;,
+    &quot;telefono&quot;: &quot;+57 300 000 0000&quot;,
+    &quot;municipio&quot;: &quot;Zipaquirá&quot;,
+    &quot;direccion&quot;: &quot;Calle de prueba 10-20&quot;
+  },
+  &quot;creadoEn&quot;: &quot;2026-11-03T01:00:00.000Z&quot;,
+  &quot;actualizadoEn&quot;: &quot;2026-11-03T01:00:00.000Z&quot;,
+  &quot;items&quot;: [
+    {
+      &quot;productoId&quot;: 1,
+      &quot;codigo&quot;: &quot;SOL-550&quot;,
+      &quot;nombre&quot;: &quot;Panel solar 550 W&quot;,
+      &quot;precioUnitario&quot;: &quot;680000.50&quot;,
+      &quot;cantidad&quot;: 2,
+      &quot;subtotal&quot;: &quot;1360001.00&quot;
+    }
+  ]
+}</code></pre>
+<p>Cabecera <code>Location</code>: ruta del recurso creado.</p>
+<p>Errores:</p>
+<table><tbody>
+<tr><th>HTTP</th><th>Causa</th></tr>
+<tr><td>400</td><td>Datos, identificador o parámetros de consulta inválidos.</td></tr>
+<tr><td>401</td><td>Token ausente, inválido, revocado o vencido.</td></tr>
+<tr><td>404</td><td>No existe una cotización propia con ese ID.</td></tr>
+<tr><td>405</td><td>Método no permitido para este recurso.</td></tr>
+<tr><td>409</td><td>Cotización vencida, producto retirado o existencias insuficientes.</td></tr>
+<tr><td>413</td><td>Cuerpo superior a 32768 bytes.</td></tr>
+<tr><td>415</td><td>Se requiere application/json sin compresión.</td></tr>
+<tr><td>500</td><td>Error interno; no se exponen trazas ni consultas SQL.</td></tr>
+</tbody></table>
+<h2>S20 · Listar pedidos</h2>
+<p><code>GET /api/pedidos</code> · Acceso: <strong>USUARIO</strong></p>
+<p>CLIENTE ve sus pedidos; ADMIN ve todos. La dirección es la copia guardada al confirmar.</p>
+<p>Consulta: <code>pagina=1&amp;limite=20</code>. Límites: página 1-1000000; tamaño 1-100.</p>
+<p>Cuerpo de solicitud: no se requiere.</p>
+<p>Respuesta correcta: <strong>HTTP 200</strong>.</p>
+<pre><code>{
+  &quot;pedidos&quot;: [
+    {
+      &quot;id&quot;: 1,
+      &quot;cotizacionId&quot;: 1,
+      &quot;usuarioId&quot;: 2,
+      &quot;estado&quot;: &quot;PENDIENTE&quot;,
+      &quot;total&quot;: &quot;1360001.00&quot;,
+      &quot;moneda&quot;: &quot;COP&quot;,
+      &quot;envio&quot;: {
+        &quot;nombre&quot;: &quot;Cliente de demostración&quot;,
+        &quot;telefono&quot;: &quot;+57 300 000 0000&quot;,
+        &quot;municipio&quot;: &quot;Zipaquirá&quot;,
+        &quot;direccion&quot;: &quot;Calle de prueba 10-20&quot;
+      },
+      &quot;creadoEn&quot;: &quot;2026-11-03T01:00:00.000Z&quot;,
+      &quot;actualizadoEn&quot;: &quot;2026-11-03T01:00:00.000Z&quot;,
+      &quot;items&quot;: [
+        {
+          &quot;productoId&quot;: 1,
+          &quot;codigo&quot;: &quot;SOL-550&quot;,
+          &quot;nombre&quot;: &quot;Panel solar 550 W&quot;,
+          &quot;precioUnitario&quot;: &quot;680000.50&quot;,
+          &quot;cantidad&quot;: 2,
+          &quot;subtotal&quot;: &quot;1360001.00&quot;
+        }
+      ]
+    }
+  ],
+  &quot;total&quot;: 1,
+  &quot;pagina&quot;: 1,
+  &quot;limite&quot;: 20
+}</code></pre>
+<p>Errores:</p>
+<table><tbody>
+<tr><th>HTTP</th><th>Causa</th></tr>
+<tr><td>400</td><td>Datos, identificador o parámetros de consulta inválidos.</td></tr>
+<tr><td>401</td><td>Token ausente, inválido, revocado o vencido.</td></tr>
+<tr><td>405</td><td>Método no permitido para este recurso.</td></tr>
+<tr><td>500</td><td>Error interno; no se exponen trazas ni consultas SQL.</td></tr>
+</tbody></table>
+<h2>S21 · Consultar pedido</h2>
+<p><code>GET /api/pedidos/{id}</code> · Acceso: <strong>USUARIO</strong></p>
+<p>Devuelve estado, líneas, total y dirección preservada.</p>
+<p>Parámetro de ruta <code>id</code>: entero positivo, máximo 9007199254740991.</p>
+<p>Cuerpo de solicitud: no se requiere.</p>
+<p>Respuesta correcta: <strong>HTTP 200</strong>.</p>
+<pre><code>{
+  &quot;id&quot;: 1,
+  &quot;cotizacionId&quot;: 1,
+  &quot;usuarioId&quot;: 2,
+  &quot;estado&quot;: &quot;PENDIENTE&quot;,
+  &quot;total&quot;: &quot;1360001.00&quot;,
+  &quot;moneda&quot;: &quot;COP&quot;,
+  &quot;envio&quot;: {
+    &quot;nombre&quot;: &quot;Cliente de demostración&quot;,
+    &quot;telefono&quot;: &quot;+57 300 000 0000&quot;,
+    &quot;municipio&quot;: &quot;Zipaquirá&quot;,
+    &quot;direccion&quot;: &quot;Calle de prueba 10-20&quot;
+  },
+  &quot;creadoEn&quot;: &quot;2026-11-03T01:00:00.000Z&quot;,
+  &quot;actualizadoEn&quot;: &quot;2026-11-03T01:00:00.000Z&quot;,
+  &quot;items&quot;: [
+    {
+      &quot;productoId&quot;: 1,
+      &quot;codigo&quot;: &quot;SOL-550&quot;,
+      &quot;nombre&quot;: &quot;Panel solar 550 W&quot;,
+      &quot;precioUnitario&quot;: &quot;680000.50&quot;,
+      &quot;cantidad&quot;: 2,
+      &quot;subtotal&quot;: &quot;1360001.00&quot;
+    }
+  ]
+}</code></pre>
+<p>Errores:</p>
+<table><tbody>
+<tr><th>HTTP</th><th>Causa</th></tr>
+<tr><td>400</td><td>Datos, identificador o parámetros de consulta inválidos.</td></tr>
+<tr><td>401</td><td>Token ausente, inválido, revocado o vencido.</td></tr>
+<tr><td>404</td><td>No existe o no pertenece al cliente.</td></tr>
+<tr><td>405</td><td>Método no permitido para este recurso.</td></tr>
+<tr><td>500</td><td>Error interno; no se exponen trazas ni consultas SQL.</td></tr>
+</tbody></table>
+<h2>S22 · Cambiar estado del pedido</h2>
+<p><code>PATCH /api/pedidos/{id}/estado</code> · Acceso: <strong>USUARIO</strong></p>
+<p>ADMIN: PENDIENTE a ENVIADO y ENVIADO a ENTREGADO. El propietario o ADMIN puede cancelar solo PENDIENTE, devolviendo existencias una vez. Repetir el estado actual devuelve 200 sin nuevos movimientos. CANCELADO y ENTREGADO son finales.</p>
+<p>Parámetro de ruta <code>id</code>: entero positivo, máximo 9007199254740991.</p>
+<p>Cuerpo JSON de ejemplo:</p>
+<pre><code>{
+  &quot;estado&quot;: &quot;CANCELADO&quot;
+}</code></pre>
+<p>Campos de entrada (todos obligatorios):</p>
+<table><tbody>
+<tr><th>Campo</th><th>Tipo y regla</th></tr>
+<tr><td><code>estado</code></td><td>string.  enum=[&#x27;ENVIADO&#x27;, &#x27;ENTREGADO&#x27;, &#x27;CANCELADO&#x27;]</td></tr>
+</tbody></table>
+<p>Respuesta correcta: <strong>HTTP 200</strong>.</p>
+<pre><code>{
+  &quot;id&quot;: 1,
+  &quot;cotizacionId&quot;: 1,
+  &quot;usuarioId&quot;: 2,
+  &quot;estado&quot;: &quot;PENDIENTE&quot;,
+  &quot;total&quot;: &quot;1360001.00&quot;,
+  &quot;moneda&quot;: &quot;COP&quot;,
+  &quot;envio&quot;: {
+    &quot;nombre&quot;: &quot;Cliente de demostración&quot;,
+    &quot;telefono&quot;: &quot;+57 300 000 0000&quot;,
+    &quot;municipio&quot;: &quot;Zipaquirá&quot;,
+    &quot;direccion&quot;: &quot;Calle de prueba 10-20&quot;
+  },
+  &quot;creadoEn&quot;: &quot;2026-11-03T01:00:00.000Z&quot;,
+  &quot;actualizadoEn&quot;: &quot;2026-11-03T01:00:00.000Z&quot;,
+  &quot;items&quot;: [
+    {
+      &quot;productoId&quot;: 1,
+      &quot;codigo&quot;: &quot;SOL-550&quot;,
+      &quot;nombre&quot;: &quot;Panel solar 550 W&quot;,
+      &quot;precioUnitario&quot;: &quot;680000.50&quot;,
+      &quot;cantidad&quot;: 2,
+      &quot;subtotal&quot;: &quot;1360001.00&quot;
+    }
+  ]
+}</code></pre>
+<p>Errores:</p>
+<table><tbody>
+<tr><th>HTTP</th><th>Causa</th></tr>
+<tr><td>400</td><td>Datos, identificador o parámetros de consulta inválidos.</td></tr>
+<tr><td>401</td><td>Token ausente, inválido, revocado o vencido.</td></tr>
+<tr><td>403</td><td>El cliente intentó enviar o entregar.</td></tr>
+<tr><td>404</td><td>No existe o no pertenece al cliente.</td></tr>
+<tr><td>405</td><td>Método no permitido para este recurso.</td></tr>
+<tr><td>409</td><td>Transición inválida o devolución que supera 1000000 unidades.</td></tr>
+<tr><td>413</td><td>Cuerpo superior a 32768 bytes.</td></tr>
+<tr><td>415</td><td>Se requiere application/json sin compresión.</td></tr>
+<tr><td>500</td><td>Error interno; no se exponen trazas ni consultas SQL.</td></tr>
+</tbody></table>
+<h2>S23 · Descargar contrato OpenAPI</h2>
+<p><code>GET /api/openapi.json</code> · Acceso: <strong>PUBLICO</strong></p>
+<p>Entrega la especificación completa de los servicios, entradas, respuestas, errores y autenticación.</p>
+<p>Cuerpo de solicitud: no se requiere.</p>
+<p>Respuesta correcta: <strong>HTTP 200</strong>.</p>
+<pre><code>{
+  &quot;openapi&quot;: &quot;3.1.1&quot;,
+  &quot;info&quot;: {
+    &quot;title&quot;: &quot;RaízVolt API&quot;,
+    &quot;version&quot;: &quot;1.0.0&quot;
+  },
+  &quot;paths&quot;: {}
+}</code></pre>
+<p>Errores:</p>
+<table><tbody>
+<tr><th>HTTP</th><th>Causa</th></tr>
+<tr><td>400</td><td>Datos, identificador o parámetros de consulta inválidos.</td></tr>
+<tr><td>405</td><td>Método no permitido para este recurso.</td></tr>
+<tr><td>500</td><td>Error interno; no se exponen trazas ni consultas SQL.</td></tr>
+</tbody></table></main></html>
