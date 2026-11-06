@@ -6,8 +6,4 @@ https://github.com/Joan-dot650/Programa-Git
 
 DESTINO PREVISTO PARA AA5-EV04
 Rama: evidencia-aa5-ev04-postman-local
-Carpeta: AA5-EV04
-La rama fue creada; la carpeta de la evidencia aun no fue publicada.
-
-ORIGEN AA5-EV03 PUBLICADO
-https://github.com/Joan-dot650/Programa-Git/tree/1a1ebb54280d66194f28e95194c3491d90bc8162/API-PROYECTO
+https://github.com/Joan-dot650/Programa-Git/tree/evidencia-aa5-ev04-postman-local/JHON_EDWARDS_TINEO_LANDAETA_AA5_EV04
