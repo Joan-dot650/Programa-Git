@@ -1,0 +1,20 @@
+RAIZVOLT - GA8-220501096-AA1-EV01
+
+CONTROL DE VERSIONES LOCAL
+65337a9 docs: completar informe, evidencias y guia de entrega GA8
+b594bad feat: integrar interfaz web, compilar y verificar modulos GA8
+3644e05 Base: servicios RaizVolt de AA5-EV03
+
+El bundle contiene el historial local de preparación y entrega.
+El commit de implementación probado es b594bad.
+El PDF y documentación principal se incorporaron en 65337a9.
+
+RECUPERAR HISTORIAL (desde la carpeta del proyecto extraído)
+git clone versionamiento/RaizVolt_GA8.bundle RaizVolt-Git
+cd RaizVolt-Git
+git log --oneline
+
+PUBLICACION REMOTA
+Pendiente. La revisión automática exige autorización explícita para compartir este
+paquete concreto en el repositorio público Joan-dot650/Programa-Git.
+No se creó el commit ni la rama remota de GA8.

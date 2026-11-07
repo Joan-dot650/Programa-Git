@@ -4,3 +4,4 @@ data/
 .env
 test-results/
 versionamiento/*.bundle
+SHA256SUMS.txt
