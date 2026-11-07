@@ -2,4 +2,4 @@ digraph G { rankdir=TB;node [shape=record,style=filled,fillcolor="#f0f5ed",color
 Sales[label="{SalesService|store : Store\lcatalog : CatalogService\lnow : Function\l|+ createQuote(body, user)\l+ createOrder(body, user)\l+ changeState(id, body, user)\l+ owned(table, id, user)\l}"];
 Catalog[label="{CatalogService|store : Store\l|+ find(id)\l+ list(params)\l+ save(body, actor, id)\l+ adjust(id, body, actor)\l+ summary()\l}"];
 Store[label="{Store|db : DatabaseSync\l|+ one(sql, ...params)\l+ all(sql, ...params)\l+ run(sql, ...params)\l+ transaction(work)\l+ close()\l}"];
-Sales->Catalog[label="usa"];Sales->Store[label="usa"];Catalog->Store[label="usa"];}
+Sales:e->Catalog:w[label="usa",constraint=false];Sales->Store[label="usa"];Catalog->Store[label="usa"];{rank=same; Sales; Catalog;} }

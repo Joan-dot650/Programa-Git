@@ -1,0 +1,8 @@
+{
+  "resultado": "PASS",
+  "verificacion": "Demo compilada ejecutada desde copia independiente de dist, sin node_modules",
+  "productos": 3,
+  "administradores_generados": 1,
+  "credenciales": "Generadas aleatoriamente; no conservadas en el informe",
+  "fecha": "2026-11-07T01:20:40.282276+00:00"
+}

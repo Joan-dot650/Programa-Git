@@ -13,7 +13,7 @@ Los identificadores HU-PR01 a HU-PR04 y HU-API01 a HU-API05 provienen de la docu
 | RF07 | HU-API03: cotización | Cliente selecciona 1-20 productos; precio del servidor; vigencia de 7 días; sin reserva. | U-S04/U-V06/U-F01 a U-F03; E-04. |
 | RF08 | HU-API04: pedido | Perfil completo, cotización propia vigente y stock; transacción atómica; repetición sin descuento doble. | U-S01/U-S05/U-D01; E-04/E-05; API rollback. |
 | RF09 | HU-API05: estados | PENDIENTE a ENVIADO a ENTREGADO por ADMIN; cancelación de PENDIENTE por propietario o ADMIN devuelve stock una vez. | U-S02/U-S03; E-06/E-10; API transiciones. |
-| RNF01 | Seguridad | Servidor comprueba roles y propiedad, valida campos, cifra derivación de contraseña, limita intentos; UI escapa datos. | U-A01 a U-A06/U-F04; E-07; API permisos. |
+| RNF01 | Seguridad | Servidor comprueba roles y propiedad, valida campos, deriva el hash de contraseña, limita intentos; UI escapa datos. | U-A01 a U-A06/U-F04; E-07; API permisos. |
 | RNF02 | Mantenibilidad | Módulos ES, nombres claros, capas, componentes de formularios, tablas y paginación reutilizables; build reproducible. | Compilación, pruebas unitarias y configuración IDE. |
 | RNF03 | Persistencia y uso web | SQLite persistente, interfaz adaptable, sesión solo en memoria. | API reinicio; E-11/E-12. |
 

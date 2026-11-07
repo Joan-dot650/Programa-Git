@@ -1,0 +1,23 @@
+RAIZVOLT - GA8-220501096-AA1-EV01
+Aprendiz: Jhon Edwards Tineo Landaeta. Ficha: 3235874.
+
+1. Lee docs/GA8_AA1_EV01_Jhon_Tineo.pdf.
+2. Instala Node.js 24.x y extrae todo el ZIP.
+3. En Windows abre PREPARAR_DEMO_WINDOWS.bat y guarda las credenciales mostradas.
+4. Abre INICIAR_WINDOWS.bat y deja la ventana abierta.
+5. Visita http://127.0.0.1:3000 en el navegador.
+6. Usa datos ficticios para la demostración.
+
+La carpeta dist ya contiene los archivos compilados y empaquetados. Requiere Node.js.
+El código fuente está en src y public. Las pruebas y capturas están en docs/evidencias.
+README.md y docs/AMBIENTES.md explican cómo usar VS Code, compilar y repetir las pruebas.
+
+RESULTADO: 85 pruebas de Node aprobadas y 13 comprobaciones de navegador aprobadas.
+
+PUBLICACION REMOTA: PENDIENTE.
+La revisión automática rechazó la subida y solicita autorización explícita para compartir
+este paquete concreto en el repositorio público Joan-dot650/Programa-Git.
+No se ha publicado una URL remota de esta nueva evidencia.
+El ZIP incluye el código, los compilados, la documentación y un historial Git local.
+
+Consulta ENLACE_REPOSITORIO.txt para las direcciones verificadas y el destino preparado.

@@ -82,7 +82,9 @@ La aplicación escucha exclusivamente en `127.0.0.1`. Esta entrega demuestra eje
 
 Repositorio: https://github.com/Joan-dot650/Programa-Git
 
-Evidencia: https://github.com/Joan-dot650/Programa-Git/tree/evidencia-ga8-aa1-ev01/GA8-AA1-EV01
+Publicación de GA8: **pendiente**. La revisión automática bloqueó la publicación y solicita autorización explícita para compartir este paquete concreto. La nueva evidencia aún no está disponible mediante URL remota.
+
+Destino preparado (aún no publicado): rama `evidencia-ga8-aa1-ev01`, carpeta `GA8-AA1-EV01` del repositorio anterior.
 
 Interfaz local: http://127.0.0.1:3000
 
