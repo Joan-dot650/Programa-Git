@@ -15,6 +15,4 @@ cd RaizVolt-Git
 git log --oneline
 
 PUBLICACION REMOTA
-Pendiente. La revisión automática exige autorización explícita para compartir este
-paquete concreto en el repositorio público Joan-dot650/Programa-Git.
-No se creó el commit ni la rama remota de GA8.
+https://github.com/Joan-dot650/Programa-Git/tree/evidencia-ga8-aa1-ev01
