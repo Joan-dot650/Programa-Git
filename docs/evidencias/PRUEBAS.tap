@@ -2,519 +2,555 @@ TAP version 13
 # Subtest: Salud pública y cabeceras de seguridad
 ok 1 - Salud pública y cabeceras de seguridad
   ---
-  duration_ms: 1573.160831
+  duration_ms: 1460.169718
   type: 'test'
   ...
 # Subtest: Registro normaliza el usuario y nunca entrega hash ni contraseña
 ok 2 - Registro normaliza el usuario y nunca entrega hash ni contraseña
   ---
-  duration_ms: 161.986462
+  duration_ms: 169.800927
   type: 'test'
   ...
 # Subtest: Usuario duplicado, incluso con mayúsculas, devuelve 409
 ok 3 - Usuario duplicado, incluso con mayúsculas, devuelve 409
   ---
-  duration_ms: 2.87928
+  duration_ms: 2.485543
   type: 'test'
   ...
 # Subtest: La API no permite registrarse como administrador
 ok 4 - La API no permite registrarse como administrador
   ---
-  duration_ms: 2.725259
+  duration_ms: 2.327514
   type: 'test'
   ...
 # Subtest: Registro rechaza cuerpo nulo
 ok 5 - Registro rechaza cuerpo nulo
   ---
-  duration_ms: 3.244539
+  duration_ms: 1.978317
   type: 'test'
   ...
 # Subtest: Registro rechaza arreglo
 ok 6 - Registro rechaza arreglo
   ---
-  duration_ms: 1.871174
+  duration_ms: 1.584592
   type: 'test'
   ...
 # Subtest: Registro rechaza usuario corto
 ok 7 - Registro rechaza usuario corto
   ---
-  duration_ms: 1.616601
+  duration_ms: 1.312291
   type: 'test'
   ...
 # Subtest: Registro rechaza usuario con inyección SQL
 ok 8 - Registro rechaza usuario con inyección SQL
   ---
-  duration_ms: 1.781009
+  duration_ms: 1.614968
   type: 'test'
   ...
 # Subtest: Registro rechaza contraseña corta
 ok 9 - Registro rechaza contraseña corta
   ---
-  duration_ms: 1.730453
+  duration_ms: 1.180372
   type: 'test'
   ...
 # Subtest: Registro rechaza contraseña vacía de espacios
 ok 10 - Registro rechaza contraseña vacía de espacios
   ---
-  duration_ms: 1.27003
+  duration_ms: 1.383118
   type: 'test'
   ...
 # Subtest: Registro rechaza contraseña excesiva
 ok 11 - Registro rechaza contraseña excesiva
   ---
-  duration_ms: 1.390401
+  duration_ms: 1.019739
   type: 'test'
   ...
 # Subtest: Error de acceso genérico para cuenta inexistente y contraseña incorrecta
 ok 12 - Error de acceso genérico para cuenta inexistente y contraseña incorrecta
   ---
-  duration_ms: 343.966057
+  duration_ms: 333.539352
   type: 'test'
   ...
 # Subtest: Ruta protegida sin token devuelve 401 y anuncia Bearer
 ok 13 - Ruta protegida sin token devuelve 401 y anuncia Bearer
   ---
-  duration_ms: 2.193148
+  duration_ms: 3.244848
   type: 'test'
   ...
 # Subtest: Un cliente no crea productos ni consulta inventario administrativo
 ok 14 - Un cliente no crea productos ni consulta inventario administrativo
   ---
-  duration_ms: 3.130407
+  duration_ms: 2.787438
   type: 'test'
   ...
 # Subtest: Perfil propio conserva tildes y no acepta cambiar el rol
 ok 15 - Perfil propio conserva tildes y no acepta cambiar el rol
   ---
-  duration_ms: 7.58754
+  duration_ms: 3.063234
   type: 'test'
   ...
 # Subtest: Catálogo enumera las cinco categorías del proyecto anterior
 ok 16 - Catálogo enumera las cinco categorías del proyecto anterior
   ---
-  duration_ms: 1.93479
+  duration_ms: 1.565453
   type: 'test'
   ...
 # Subtest: CRUD registra, consulta, edita y retira sin reutilizar código
 ok 17 - CRUD registra, consulta, edita y retira sin reutilizar código
   ---
-  duration_ms: 10.202664
+  duration_ms: 8.563739
   type: 'test'
   ...
 # Subtest: Producto rechaza precio numérico
 ok 18 - Producto rechaza precio numérico
   ---
-  duration_ms: 1.291823
+  duration_ms: 1.180792
   type: 'test'
   ...
 # Subtest: Producto rechaza precio cero
 ok 19 - Producto rechaza precio cero
   ---
-  duration_ms: 1.202568
+  duration_ms: 1.22519
   type: 'test'
   ...
 # Subtest: Producto rechaza precio negativo
 ok 20 - Producto rechaza precio negativo
   ---
-  duration_ms: 1.168847
+  duration_ms: 1.587656
   type: 'test'
   ...
 # Subtest: Producto rechaza precio con tres decimales
 ok 21 - Producto rechaza precio con tres decimales
   ---
-  duration_ms: 1.264221
+  duration_ms: 1.38429
   type: 'test'
   ...
 # Subtest: Producto rechaza precio fuera del máximo
 ok 22 - Producto rechaza precio fuera del máximo
   ---
-  duration_ms: 2.818163
+  duration_ms: 1.362717
   type: 'test'
   ...
 # Subtest: Producto rechaza precio con coma
 ok 23 - Producto rechaza precio con coma
   ---
-  duration_ms: 1.079073
+  duration_ms: 2.549259
   type: 'test'
   ...
 # Subtest: Producto rechaza stock negativo
 ok 24 - Producto rechaza stock negativo
   ---
-  duration_ms: 1.464452
+  duration_ms: 1.839307
   type: 'test'
   ...
 # Subtest: Producto rechaza stock fraccionario
 ok 25 - Producto rechaza stock fraccionario
   ---
-  duration_ms: 1.353175
+  duration_ms: 1.475468
   type: 'test'
   ...
 # Subtest: Producto rechaza stock como texto
 ok 26 - Producto rechaza stock como texto
   ---
-  duration_ms: 1.20362
+  duration_ms: 1.249176
   type: 'test'
   ...
 # Subtest: Producto rechaza stock excesivo
 ok 27 - Producto rechaza stock excesivo
   ---
-  duration_ms: 1.171582
+  duration_ms: 1.208705
   type: 'test'
   ...
 # Subtest: Producto rechaza categoría desconocida
 ok 28 - Producto rechaza categoría desconocida
   ---
-  duration_ms: 1.07678
+  duration_ms: 1.607016
   type: 'test'
   ...
 # Subtest: Producto rechaza nombre corto
 ok 29 - Producto rechaza nombre corto
   ---
-  duration_ms: 1.204221
+  duration_ms: 1.115134
   type: 'test'
   ...
 # Subtest: Producto rechaza nombre con control
 ok 30 - Producto rechaza nombre con control
   ---
-  duration_ms: 1.218913
+  duration_ms: 1.500946
   type: 'test'
   ...
 # Subtest: Producto rechaza código inválido
 ok 31 - Producto rechaza código inválido
   ---
-  duration_ms: 1.000034
+  duration_ms: 1.185389
   type: 'test'
   ...
 # Subtest: ID inválido, recurso inexistente y método incorrecto se distinguen
 ok 32 - ID inválido, recurso inexistente y método incorrecto se distinguen
   ---
-  duration_ms: 3.100542
+  duration_ms: 3.945516
   type: 'test'
   ...
 # Subtest: Filtros literales, tildes, paginación y parámetros inesperados
 ok 33 - Filtros literales, tildes, paginación y parámetros inesperados
   ---
-  duration_ms: 9.23632
+  duration_ms: 8.243115
   type: 'test'
   ...
 # Subtest: Ajuste de inventario registra motivo y saldo, y rechaza saldo negativo
 ok 34 - Ajuste de inventario registra motivo y saldo, y rechaza saldo negativo
   ---
-  duration_ms: 6.791054
+  duration_ms: 8.349295
   type: 'test'
   ...
 # Subtest: Resumen mantiene importes exactos por encima del límite entero de JavaScript
 ok 35 - Resumen mantiene importes exactos por encima del límite entero de JavaScript
   ---
-  duration_ms: 3.526824
+  duration_ms: 5.183496
   type: 'test'
   ...
 # Subtest: Cotización calcula precios del servidor, no descuenta stock y congela los importes
 ok 36 - Cotización calcula precios del servidor, no descuenta stock y congela los importes
   ---
-  duration_ms: 10.51985
+  duration_ms: 9.665933
   type: 'test'
   ...
 # Subtest: Cotización valida cantidades, repetidos y campos de precio impuestos por el cliente
 ok 37 - Cotización valida cantidades, repetidos y campos de precio impuestos por el cliente
   ---
-  duration_ms: 7.176432
+  duration_ms: 7.532972
   type: 'test'
   ...
 # Subtest: Cliente ajeno no consulta ni convierte una cotización de otra cuenta
 ok 38 - Cliente ajeno no consulta ni convierte una cotización de otra cuenta
   ---
-  duration_ms: 7.154429
+  duration_ms: 9.217134
   type: 'test'
   ...
 # Subtest: Cotización caducada se rechaza sin alterar existencias
 ok 39 - Cotización caducada se rechaza sin alterar existencias
   ---
-  duration_ms: 6.406565
+  duration_ms: 6.733135
   type: 'test'
   ...
 # Subtest: Pedido requiere un perfil completo antes de reservar productos
 ok 40 - Pedido requiere un perfil completo antes de reservar productos
   ---
-  duration_ms: 190.755813
+  duration_ms: 166.900381
   type: 'test'
   ...
 # Subtest: Pedido multiartículo falla de forma atómica ante existencias insuficientes
 ok 41 - Pedido multiartículo falla de forma atómica ante existencias insuficientes
   ---
-  duration_ms: 7.885698
+  duration_ms: 7.027209
   type: 'test'
   ...
 # Subtest: Dos confirmaciones concurrentes de la misma cotización reservan una sola vez
 ok 42 - Dos confirmaciones concurrentes de la misma cotización reservan una sola vez
   ---
-  duration_ms: 11.817292
+  duration_ms: 6.991545
   type: 'test'
   ...
 # Subtest: Dos cotizaciones compiten por la última unidad sin sobreventa
 ok 43 - Dos cotizaciones compiten por la última unidad sin sobreventa
   ---
-  duration_ms: 13.417684
+  duration_ms: 14.798511
   type: 'test'
   ...
 # Subtest: Cancelar un pedido devuelve existencias una sola vez y conserva sus datos
 ok 44 - Cancelar un pedido devuelve existencias una sola vez y conserva sus datos
   ---
-  duration_ms: 10.316233
+  duration_ms: 11.526832
   type: 'test'
   ...
 # Subtest: El estado del pedido respeta permisos, propietario y transiciones
 ok 45 - El estado del pedido respeta permisos, propietario y transiciones
   ---
-  duration_ms: 12.324173
+  duration_ms: 13.791336
   type: 'test'
   ...
 # Subtest: Retirar un producto impide nuevas compras y permite cancelar reservas anteriores
 ok 46 - Retirar un producto impide nuevas compras y permite cancelar reservas anteriores
   ---
-  duration_ms: 10.263165
+  duration_ms: 15.486761
   type: 'test'
   ...
 # Subtest: Modificar perfil no cambia la dirección guardada en un pedido anterior
 ok 47 - Modificar perfil no cambia la dirección guardada en un pedido anterior
   ---
-  duration_ms: 7.11404
+  duration_ms: 9.421413
   type: 'test'
   ...
 # Subtest: Registro concurrente conserva una sola cuenta y responde 201/409
 ok 48 - Registro concurrente conserva una sola cuenta y responde 201/409
   ---
-  duration_ms: 171.39819
+  duration_ms: 183.947812
   type: 'test'
   ...
 # Subtest: Cancelación multiartículo revierte todo si una devolución supera el máximo
 ok 49 - Cancelación multiartículo revierte todo si una devolución supera el máximo
   ---
-  duration_ms: 13.574294
+  duration_ms: 12.725277
   type: 'test'
   ...
 # Subtest: Protocolo rechaza JSON roto, UTF-8 inválido, tipos y cuerpos excesivos
 ok 50 - Protocolo rechaza JSON roto, UTF-8 inválido, tipos y cuerpos excesivos
   ---
-  duration_ms: 4.105755
+  duration_ms: 4.514395
   type: 'test'
   ...
 # Subtest: Tokens guardados como hash; un nuevo login y logout revocan accesos previos
 ok 51 - Tokens guardados como hash; un nuevo login y logout revocan accesos previos
   ---
-  duration_ms: 367.641326
+  duration_ms: 350.763594
   type: 'test'
   ...
 # Subtest: Rate limit devuelve 429 y Retry-After al superar la ventana por IP
 ok 52 - Rate limit devuelve 429 y Retry-After al superar la ventana por IP
   ---
-  duration_ms: 173.951776
+  duration_ms: 182.775027
   type: 'test'
   ...
 # Subtest: Datos y sesiones persisten al reiniciar el servidor
 ok 53 - Datos y sesiones persisten al reiniciar el servidor
   ---
-  duration_ms: 186.948162
+  duration_ms: 178.117049
   type: 'test'
   ...
 # Subtest: Token vencido se rechaza después de dos horas
 ok 54 - Token vencido se rechaza después de dos horas
   ---
-  duration_ms: 364.278455
+  duration_ms: 357.080927
   type: 'test'
   ...
 # Subtest: Contrato OpenAPI cubre exactamente las rutas implementadas
 ok 55 - Contrato OpenAPI cubre exactamente las rutas implementadas
   ---
-  duration_ms: 6.778133
+  duration_ms: 5.698142
   type: 'test'
   ...
 # Subtest: Las 34 solicitudes de la colección completan el recorrido HTTP documentado
 ok 56 - Las 34 solicitudes de la colección completan el recorrido HTTP documentado
   ---
-  duration_ms: 1241.868158
+  duration_ms: 1144.840565
+  type: 'test'
+  ...
+# Subtest: R-01: artefacto compilado inicia y declara la misma versión que el paquete
+ok 57 - R-01: artefacto compilado inicia y declara la misma versión que el paquete
+  ---
+  duration_ms: 331.432352
+  type: 'test'
+  ...
+# Subtest: R-02: compilado entrega interfaz, JavaScript, estilos y contratos
+ok 58 - R-02: compilado entrega interfaz, JavaScript, estilos y contratos
+  ---
+  duration_ms: 368.156026
+  type: 'test'
+  ...
+# Subtest: R-03: compilado conserva cuentas después de cerrar y reiniciar
+ok 59 - R-03: compilado conserva cuentas después de cerrar y reiniciar
+  ---
+  duration_ms: 946.047613
+  type: 'test'
+  ...
+# Subtest: R-04: respaldo con servidor detenido restaura datos e integridad referencial
+ok 60 - R-04: respaldo con servidor detenido restaura datos e integridad referencial
+  ---
+  duration_ms: 890.942501
+  type: 'test'
+  ...
+# Subtest: R-05: compilado bloquea archivos internos y protege inventario
+ok 61 - R-05: compilado bloquea archivos internos y protege inventario
+  ---
+  duration_ms: 273.580346
+  type: 'test'
+  ...
+# Subtest: R-06: compilado y fuentes entregan el mismo contrato y esquema
+ok 62 - R-06: compilado y fuentes entregan el mismo contrato y esquema
+  ---
+  duration_ms: 303.665636
   type: 'test'
   ...
 # Subtest: U-F01: carrito acumula cantidades y envía únicamente ID y cantidad
-ok 57 - U-F01: carrito acumula cantidades y envía únicamente ID y cantidad
+ok 63 - U-F01: carrito acumula cantidades y envía únicamente ID y cantidad
   ---
-  duration_ms: 2.137175
+  duration_ms: 1.942713
   type: 'test'
   ...
 # Subtest: U-F02: carrito rechaza cero, fracción y exceso
-ok 58 - U-F02: carrito rechaza cero, fracción y exceso
+ok 64 - U-F02: carrito rechaza cero, fracción y exceso
   ---
-  duration_ms: 0.454964
+  duration_ms: 0.428527
   type: 'test'
   ...
 # Subtest: U-F03: carrito limita 20 productos, permite quitar y limpiar
-ok 59 - U-F03: carrito limita 20 productos, permite quitar y limpiar
+ok 65 - U-F03: carrito limita 20 productos, permite quitar y limpiar
   ---
-  duration_ms: 0.310907
+  duration_ms: 0.376919
   type: 'test'
   ...
 # Subtest: U-F04: contenido HTML no se interpreta al mostrar datos
-ok 60 - U-F04: contenido HTML no se interpreta al mostrar datos
+ok 66 - U-F04: contenido HTML no se interpreta al mostrar datos
   ---
-  duration_ms: 0.324959
+  duration_ms: 0.360624
   type: 'test'
   ...
 # Subtest: U-F05: moneda conserva decimales y valores grandes
-ok 61 - U-F05: moneda conserva decimales y valores grandes
+ok 67 - U-F05: moneda conserva decimales y valores grandes
   ---
-  duration_ms: 0.259781
+  duration_ms: 0.26501
   type: 'test'
   ...
 # Subtest: U-C01: catálogo traduce producto inexistente en 404
-ok 62 - U-C01: catálogo traduce producto inexistente en 404
+ok 68 - U-C01: catálogo traduce producto inexistente en 404
   ---
-  duration_ms: 3.845373
+  duration_ms: 1.869142
   type: 'test'
   ...
 # Subtest: U-C02: resumen de inventario conserva exactitud monetaria
-ok 63 - U-C02: resumen de inventario conserva exactitud monetaria
+ok 69 - U-C02: resumen de inventario conserva exactitud monetaria
   ---
-  duration_ms: 0.960575
+  duration_ms: 0.868091
   type: 'test'
   ...
 # Subtest: U-C03: ajuste fuera de rango no escribe movimiento ni producto
-ok 64 - U-C03: ajuste fuera de rango no escribe movimiento ni producto
+ok 70 - U-C03: ajuste fuera de rango no escribe movimiento ni producto
   ---
-  duration_ms: 0.724941
+  duration_ms: 0.432123
   type: 'test'
   ...
 # Subtest: U-S01: acceso a documentos ajenos devuelve 404
-ok 65 - U-S01: acceso a documentos ajenos devuelve 404
+ok 71 - U-S01: acceso a documentos ajenos devuelve 404
   ---
-  duration_ms: 0.311919
+  duration_ms: 0.272231
   type: 'test'
   ...
 # Subtest: U-S02: cliente no puede despachar pedido
-ok 66 - U-S02: cliente no puede despachar pedido
+ok 72 - U-S02: cliente no puede despachar pedido
   ---
-  duration_ms: 0.49208
+  duration_ms: 0.390931
   type: 'test'
   ...
 # Subtest: U-S03: administrador no puede pasar directamente a entregado
-ok 67 - U-S03: administrador no puede pasar directamente a entregado
+ok 73 - U-S03: administrador no puede pasar directamente a entregado
   ---
-  duration_ms: 0.273972
+  duration_ms: 0.224539
   type: 'test'
   ...
 # Subtest: U-S04: precio de cotización se toma del catálogo y usa enteros exactos
-ok 68 - U-S04: precio de cotización se toma del catálogo y usa enteros exactos
+ok 74 - U-S04: precio de cotización se toma del catálogo y usa enteros exactos
   ---
-  duration_ms: 0.87725
+  duration_ms: 1.371911
   type: 'test'
   ...
 # Subtest: U-S05: cotización vencida bloquea el pedido antes de escritura
-ok 69 - U-S05: cotización vencida bloquea el pedido antes de escritura
+ok 75 - U-S05: cotización vencida bloquea el pedido antes de escritura
   ---
-  duration_ms: 0.752562
+  duration_ms: 0.393454
   type: 'test'
   ...
 # Subtest: U-D01: transacción confirma resultado o revierte el fallo
-ok 70 - U-D01: transacción confirma resultado o revierte el fallo
+ok 76 - U-D01: transacción confirma resultado o revierte el fallo
   ---
-  duration_ms: 0.286421
+  duration_ms: 0.57572
   type: 'test'
   ...
 # Subtest: U-A01: hash con sal individual, contraseña válida e incorrecta
-ok 71 - U-A01: hash con sal individual, contraseña válida e incorrecta
+ok 77 - U-A01: hash con sal individual, contraseña válida e incorrecta
   ---
-  duration_ms: 889.678249
+  duration_ms: 794.199928
   type: 'test'
   ...
 # Subtest: U-A02: hash corrupto se rechaza sin derivación insegura
-ok 72 - U-A02: hash corrupto se rechaza sin derivación insegura
+ok 78 - U-A02: hash corrupto se rechaza sin derivación insegura
   ---
-  duration_ms: 0.466211
+  duration_ms: 0.351762
   type: 'test'
   ...
 # Subtest: U-A03: autenticar valida token y consulta solo su hash
-ok 73 - U-A03: autenticar valida token y consulta solo su hash
+ok 79 - U-A03: autenticar valida token y consulta solo su hash
   ---
-  duration_ms: 205.665305
+  duration_ms: 171.004085
   type: 'test'
   ...
 # Subtest: U-A04: sesión inexistente se rechaza
-ok 74 - U-A04: sesión inexistente se rechaza
+ok 80 - U-A04: sesión inexistente se rechaza
   ---
-  duration_ms: 195.476042
+  duration_ms: 165.692405
   type: 'test'
   ...
 # Subtest: U-A05: logout revoca exclusivamente el hash de la sesión
-ok 75 - U-A05: logout revoca exclusivamente el hash de la sesión
+ok 81 - U-A05: logout revoca exclusivamente el hash de la sesión
   ---
-  duration_ms: 177.585526
+  duration_ms: 169.982878
   type: 'test'
   ...
 # Subtest: U-A06: límite por IP, aislamiento y vencimiento con reloj inyectado
-ok 76 - U-A06: límite por IP, aislamiento y vencimiento con reloj inyectado
+ok 82 - U-A06: límite por IP, aislamiento y vencimiento con reloj inyectado
   ---
-  duration_ms: 0.505129
+  duration_ms: 0.449559
   type: 'test'
   ...
 # Subtest: U-V01: decimal a centavos y total grande sin pérdida
-ok 77 - U-V01: decimal a centavos y total grande sin pérdida
+ok 83 - U-V01: decimal a centavos y total grande sin pérdida
   ---
-  duration_ms: 2.181681
+  duration_ms: 1.207733
   type: 'test'
   ...
 # Subtest: U-V02: precio rechaza cero, coma, número JSON y exceso
-ok 78 - U-V02: precio rechaza cero, coma, número JSON y exceso
+ok 84 - U-V02: precio rechaza cero, coma, número JSON y exceso
   ---
-  duration_ms: 1.379044
+  duration_ms: 0.768961
   type: 'test'
   ...
 # Subtest: U-V03: credenciales normalizan usuario e impiden asignar rol
-ok 79 - U-V03: credenciales normalizan usuario e impiden asignar rol
+ok 85 - U-V03: credenciales normalizan usuario e impiden asignar rol
   ---
-  duration_ms: 0.522566
+  duration_ms: 0.243157
   type: 'test'
   ...
 # Subtest: U-V04: perfil exige teléfono, municipio y dirección válidos
-ok 80 - U-V04: perfil exige teléfono, municipio y dirección válidos
+ok 86 - U-V04: perfil exige teléfono, municipio y dirección válidos
   ---
-  duration_ms: 0.468485
+  duration_ms: 0.279261
   type: 'test'
   ...
 # Subtest: U-V05: producto requiere stock entero y categoría conocida
-ok 81 - U-V05: producto requiere stock entero y categoría conocida
+ok 87 - U-V05: producto requiere stock entero y categoría conocida
   ---
-  duration_ms: 0.441404
+  duration_ms: 0.411552
   type: 'test'
   ...
 # Subtest: U-V06: cotización rechaza duplicados y cantidades negativas
-ok 82 - U-V06: cotización rechaza duplicados y cantidades negativas
+ok 88 - U-V06: cotización rechaza duplicados y cantidades negativas
   ---
-  duration_ms: 0.41199
+  duration_ms: 0.248526
   type: 'test'
   ...
 # Subtest: U-V07: paginación limita consultas y rechaza parámetros repetidos
-ok 83 - U-V07: paginación limita consultas y rechaza parámetros repetidos
+ok 89 - U-V07: paginación limita consultas y rechaza parámetros repetidos
   ---
-  duration_ms: 0.515155
+  duration_ms: 0.319051
   type: 'test'
   ...
 # Subtest: U-V08: identificadores rechazan cero e inyección
-ok 84 - U-V08: identificadores rechazan cero e inyección
+ok 90 - U-V08: identificadores rechazan cero e inyección
   ---
-  duration_ms: 0.177026
+  duration_ms: 0.221204
   type: 'test'
   ...
 # Subtest: W-01: interfaz y componentes públicos con CSP y lista cerrada de archivos
-ok 85 - W-01: interfaz y componentes públicos con CSP y lista cerrada de archivos
+ok 91 - W-01: interfaz y componentes públicos con CSP y lista cerrada de archivos
   ---
-  duration_ms: 294.063153
+  duration_ms: 246.776429
   type: 'test'
   ...
-1..85
-# tests 85
+1..91
+# tests 91
 # suites 0
-# pass 85
+# pass 91
 # fail 0
 # cancelled 0
 # skipped 0
 # todo 0
-# duration_ms 3887.515317
+# duration_ms 3716.987934

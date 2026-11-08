@@ -1,18 +1,16 @@
-RAIZVOLT - GA8-220501096-AA1-EV01
+RAÍZVOLT - GA8-220501096-AA1-EV02
+Base remota verificada: abade4bb09ab773d14d5dbdb3c617de6aeecc289
+https://github.com/Joan-dot650/Programa-Git/tree/abade4bb09ab773d14d5dbdb3c617de6aeecc289
 
-CONTROL DE VERSIONES LOCAL
-65337a9 docs: completar informe, evidencias y guia de entrega GA8
-b594bad feat: integrar interfaz web, compilar y verificar modulos GA8
-3644e05 Base: servicios RaizVolt de AA5-EV03
+Entrega: https://github.com/Joan-dot650/Programa-Git/tree/evidencia-ga8-aa1-ev02
+La rama EV02 conserva el historial de EV01 y añade documentación, pruebas de
+entrega y ejemplos corregidos del contrato. La lógica de negocio se conserva.
+Consulta el commit de entrega en GitHub > Commits o mediante git log.
 
-El bundle contiene el historial local de preparación y entrega.
-El commit de implementación probado es b594bad.
-El PDF y documentación principal se incorporaron en 65337a9.
+DESCARGA Y VERSIONAMIENTO
+git clone --branch evidencia-ga8-aa1-ev02 --single-branch https://github.com/Joan-dot650/Programa-Git.git RaizVolt-EV02
+cd RaizVolt-EV02
+git log --oneline -5
+git status
 
-RECUPERAR HISTORIAL (desde la carpeta del proyecto extraído)
-git clone versionamiento/RaizVolt_GA8.bundle RaizVolt-Git
-cd RaizVolt-Git
-git log --oneline
-
-PUBLICACION REMOTA
-https://github.com/Joan-dot650/Programa-Git/tree/evidencia-ga8-aa1-ev01
+No se incluyen bases de usuario, tokens, contraseñas de administración ni node_modules.

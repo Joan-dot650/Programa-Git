@@ -1,0 +1,12 @@
+RAÍZVOLT - GA8-AA1-EV02
+1. Descarga la rama de GitHub con Code > Download ZIP y extrae toda la carpeta.
+2. Abre docs/GA8_AA1_EV02_Jhon_Tineo.pdf: documento principal de la evidencia.
+3. Instala Node.js 24.x; comprueba node --version en una terminal nueva.
+4. En Windows abre PREPARAR_DEMO_WINDOWS.bat y guarda localmente las credenciales que muestra.
+5. Abre INICIAR_WINDOWS.bat y visita http://127.0.0.1:3000.
+6. Conserva abierta la ventana; detén con Ctrl+C cuando termines.
+
+Los compilados dist/ se entregan listos para Node; no son archivos .exe.
+La demo y las pruebas usan datos ficticios. No publiques la base ni credenciales.
+Actas: preparadas para revisión y firma; no equivalen a aceptación del instructor.
+URL pública de la aplicación: pendiente de disponer de alojamiento compatible.

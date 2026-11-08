@@ -5,3 +5,5 @@ data/
 test-results/
 versionamiento/*.bundle
 SHA256SUMS.txt
+backups/
+*.log

@@ -1,5 +1,5 @@
 {
-  "executedAt": "2026-11-06T16:34:30.664Z",
+  "executedAt": "2026-11-08T22:35:00.008Z",
   "node": "v24.22.1",
   "target": "dist/ - aplicación compilada",
   "results": [
@@ -56,9 +56,5 @@
       "status": "PASS"
     }
   ],
-  "browserErrors": [],
-  "browser": "Chromium 153.0.8010.0",
-  "playwright": "1.58.1",
-  "platform": "Linux-6.18.57-x86_64-with-glibc2.39",
-  "provision": "Ejecutable de Chromium suministrado mediante CHROME_PATH; no se incluye navegador en el proyecto."
+  "browserErrors": []
 }

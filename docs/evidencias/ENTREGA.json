@@ -1,0 +1,33 @@
+{
+  "evidence": "GA8-220501096-AA1-EV02",
+  "applicationVersion": "2.0.0",
+  "preparedAt": "2026-11-08T22:37:16.391047+00:00",
+  "baseCommit": "abade4bb09ab773d14d5dbdb3c617de6aeecc289",
+  "runtime": {
+    "node": "24.22.1",
+    "sqlite": "3.53.4",
+    "os": "Linux 6.18.57",
+    "npm": "11.9.0",
+    "git": "2.51.1",
+    "esbuild": "0.25.12",
+    "playwright": "1.58.1",
+    "chromium": "153.0.8010.0"
+  },
+  "nodeTests": {
+    "tests": 91,
+    "pass": 91,
+    "fail": 0
+  },
+  "browserTests": {
+    "pass": 13,
+    "fail": 0,
+    "executedAt": "2026-11-08T22:35:00.008Z",
+    "browserErrors": []
+  },
+  "deployment": {
+    "localVerified": true,
+    "publicApplicationUrl": null,
+    "repositoryBranchUrl": "https://github.com/Joan-dot650/Programa-Git/tree/evidencia-ga8-aa1-ev02"
+  },
+  "acceptance": "Pendiente de revisión y firma; no se atribuye aceptación externa."
+}

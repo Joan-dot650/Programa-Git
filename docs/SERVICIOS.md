@@ -66,7 +66,7 @@ Respuesta correcta: **HTTP 200**.
 {
   "exito": true,
   "mensaje": "RaízVolt API disponible.",
-  "version": "1.0.0"
+  "version": "2.0.0"
 }
 ```
 
@@ -1067,7 +1067,7 @@ Respuesta correcta: **HTTP 200**.
   "openapi": "3.1.1",
   "info": {
     "title": "RaízVolt API",
-    "version": "1.0.0"
+    "version": "2.0.0"
   },
   "paths": {}
 }

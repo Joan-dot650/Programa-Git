@@ -1,21 +1,23 @@
-EVIDENCIA GA8-220501096-AA1-EV01
-Estado de publicación: exitosa.
+EVIDENCIA GA8-220501096-AA1-EV02 - MÓDULOS INTEGRADOS
+Repositorio: https://github.com/Joan-dot650/Programa-Git
+Rama de entrega: https://github.com/Joan-dot650/Programa-Git/tree/evidencia-ga8-aa1-ev02
+Código y compilados: raíz de la rama; carpetas src/, public/ y dist/.
+PDF principal: docs/GA8_AA1_EV02_Jhon_Tineo.pdf
 
-REPOSITORIO EXISTENTE VERIFICADO
-https://github.com/Joan-dot650/Programa-Git
-
-ENLACE DIRECTO
-Rama: https://github.com/Joan-dot650/Programa-Git/tree/evidencia-ga8-aa1-ev01
-Carpeta: GA8-AA1-EV01
-
-
-BASE AA5-EV03 PUBLICADA Y CONSULTADA
-https://github.com/Joan-dot650/Programa-Git/tree/1a1ebb54280d66194f28e95194c3491d90bc8162/API-PROYECTO
-
-APLICACION LOCAL (DESPUES DE INICIAR EL SERVIDOR)
-http://127.0.0.1:3000
+APLICACIÓN LOCAL (requiere iniciar el servidor en el mismo equipo)
+http://127.0.0.1:3000/
+http://127.0.0.1:3000/#cuenta
+http://127.0.0.1:3000/#perfil
+http://127.0.0.1:3000/#catalogo
+http://127.0.0.1:3000/#admin
+http://127.0.0.1:3000/#cotizaciones
+http://127.0.0.1:3000/#pedidos
 http://127.0.0.1:3000/documentacion
 http://127.0.0.1:3000/api/openapi.json
 
-HISTORIAL LOCAL
-El ZIP incluye versionamiento/RaizVolt_GA8.bundle y VERSIONAMIENTO.txt.
+ESTADO DE DESPLIEGUE
+Compilado ejecutado y probado localmente en Linux.
+No existe una URL pública verificada de la aplicación. La URL de GitHub es de código.
+El servidor escucha en 127.0.0.1; un despliegue remoto necesita servidor Node.js 24,
+almacenamiento persistente para SQLite y proxy HTTPS. No se ha contratado hosting.
+Las direcciones localhost no permiten al instructor acceder al equipo del aprendiz.

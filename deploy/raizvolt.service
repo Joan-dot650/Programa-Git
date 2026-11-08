@@ -1,0 +1,24 @@
+# PLANTILLA: instalación y prueba pendientes en un servidor real.
+[Unit]
+Description=RaizVolt - modulos integrados
+After=network.target
+
+[Service]
+Type=simple
+User=raizvolt
+Group=raizvolt
+WorkingDirectory=/opt/raizvolt
+Environment=NODE_ENV=production
+Environment=PORT=3000
+Environment=DB_PATH=/var/lib/raizvolt/raizvolt.sqlite
+ExecStart=/usr/bin/node /opt/raizvolt/dist/src/server.js
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/raizvolt
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target

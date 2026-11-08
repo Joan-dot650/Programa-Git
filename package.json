@@ -2,7 +2,7 @@
   "name": "raizvolt-modulos-web",
   "version": "2.0.0",
   "private": true,
-  "description": "Integración web de autenticación, catálogo, inventario, cotizaciones y pedidos - GA8-AA1-EV01",
+  "description": "Entrega de módulos integrados RaízVolt - GA8-AA1-EV02",
   "author": "Jhon Edwards Tineo Landaeta",
   "type": "module",
   "engines": {
@@ -17,7 +17,8 @@
     "test:e2e": "node tests/e2e.mjs",
     "build": "node scripts/build.js",
     "start:dist": "node dist/src/server.js",
-    "demo:dist": "node dist/scripts/preparar-demo.js"
+    "demo:dist": "node dist/scripts/preparar-demo.js",
+    "test:release": "node --test tests/release.test.js"
   },
   "devDependencies": {
     "esbuild": "0.25.12",

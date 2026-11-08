@@ -1,10 +1,10 @@
-# RaízVolt - Integración de módulos web
+# RaízVolt - Entrega de módulos integrados
 
-**Evidencia:** GA8-220501096-AA1-EV01. Desarrollar software a partir de la integración de sus módulos componentes.
+**GA8-220501096-AA1-EV02 · Jhon Edwards Tineo Landaeta · Ficha 3235874**
 
-**Aprendiz:** Jhon Edwards Tineo Landaeta · **Ficha:** 3235874 · **Programa:** Análisis y Desarrollo de Software · SENA.
+Documento principal: [PDF de la evidencia](docs/GA8_AA1_EV02_Jhon_Tineo.pdf).
 
-Aplicación académica de catálogo solar, autenticación, perfil, inventario, cotizaciones y pedidos. Integra una interfaz web nueva con los servicios Node.js/SQLite de AA5-EV03. El frontend anterior de React/Spring Boot no se reutiliza: esta versión consume el contrato `/api` del backend Node.js. No hay migración automática desde H2 ni pagos reales.
+Resultado de esta entrega: **91 pruebas Node y 13 comprobaciones de navegador aprobadas**. Los registros corresponden a la ejecución de EV02 del 8 de noviembre de 2026. Los formularios de aprobación y aceptación están preparados para firma; no se atribuye aceptación a terceros. El despliegue de la aplicación está verificado localmente, sin URL pública contratada.
 
 ## Abrir la versión compilada en Windows
 
@@ -37,14 +37,14 @@ Abre `src/app.js` para seguir las rutas y `public/app.js` para la navegación. P
 ## Pruebas y compilación
 
 ```sh
+npm run build
 npm test
 npm run test:unit
-npm run build
 npx playwright install chromium
 npm run test:e2e
 ```
 
-`npm test` ejecuta 85 casos: 28 unitarios, 55 de API, 1 recorrido HTTP de la colección (34 solicitudes) y 1 comprobación de entrega de archivos web. El script de colección es un ejecutor limitado en Node, no una ejecución de Postman.
+`npm test` ejecuta 91 casos: 28 unitarios, 55 de API, 1 recorrido HTTP de la colección (34 solicitudes), 1 comprobación web y 6 pruebas del compilado, persistencia y respaldo. El script de colección es un ejecutor limitado en Node, no una ejecución de Postman.
 
 Las pruebas E2E ejecutan la versión `dist/`, crean una base temporal y producen `docs/evidencias/E2E.json` y capturas reales de los recorridos. `CHROME_PATH` permite seleccionar un ejecutable de Chromium cuando el navegador está instalado por otra vía. `TEST_PORT` cambia el puerto de prueba (3487 por defecto).
 
@@ -82,7 +82,7 @@ La aplicación escucha exclusivamente en `127.0.0.1`. Esta entrega demuestra eje
 
 Repositorio: https://github.com/Joan-dot650/Programa-Git
 
-Rama de la evidencia GA8: https://github.com/Joan-dot650/Programa-Git/tree/evidencia-ga8-aa1-ev01
+Rama de la evidencia GA8: https://github.com/Joan-dot650/Programa-Git/tree/evidencia-ga8-aa1-ev02
 
 
 Interfaz local: http://127.0.0.1:3000

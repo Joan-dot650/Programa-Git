@@ -1,96 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
 <testsuites>
-	<testcase name="Salud pública y cabeceras de seguridad" time="1.573161" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Registro normaliza el usuario y nunca entrega hash ni contraseña" time="0.161986" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Usuario duplicado, incluso con mayúsculas, devuelve 409" time="0.002879" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="La API no permite registrarse como administrador" time="0.002725" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Registro rechaza cuerpo nulo" time="0.003245" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Registro rechaza arreglo" time="0.001871" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Registro rechaza usuario corto" time="0.001617" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Registro rechaza usuario con inyección SQL" time="0.001781" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Registro rechaza contraseña corta" time="0.001730" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Registro rechaza contraseña vacía de espacios" time="0.001270" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Registro rechaza contraseña excesiva" time="0.001390" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Error de acceso genérico para cuenta inexistente y contraseña incorrecta" time="0.343966" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Ruta protegida sin token devuelve 401 y anuncia Bearer" time="0.002193" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Un cliente no crea productos ni consulta inventario administrativo" time="0.003130" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Perfil propio conserva tildes y no acepta cambiar el rol" time="0.007588" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Catálogo enumera las cinco categorías del proyecto anterior" time="0.001935" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="CRUD registra, consulta, edita y retira sin reutilizar código" time="0.010203" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Producto rechaza precio numérico" time="0.001292" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Producto rechaza precio cero" time="0.001203" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Producto rechaza precio negativo" time="0.001169" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Producto rechaza precio con tres decimales" time="0.001264" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Producto rechaza precio fuera del máximo" time="0.002818" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Producto rechaza precio con coma" time="0.001079" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Producto rechaza stock negativo" time="0.001464" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Producto rechaza stock fraccionario" time="0.001353" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Producto rechaza stock como texto" time="0.001204" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Producto rechaza stock excesivo" time="0.001172" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Producto rechaza categoría desconocida" time="0.001077" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Producto rechaza nombre corto" time="0.001204" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Producto rechaza nombre con control" time="0.001219" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Producto rechaza código inválido" time="0.001000" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="ID inválido, recurso inexistente y método incorrecto se distinguen" time="0.003101" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Filtros literales, tildes, paginación y parámetros inesperados" time="0.009236" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Ajuste de inventario registra motivo y saldo, y rechaza saldo negativo" time="0.006791" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Resumen mantiene importes exactos por encima del límite entero de JavaScript" time="0.003527" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Cotización calcula precios del servidor, no descuenta stock y congela los importes" time="0.010520" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Cotización valida cantidades, repetidos y campos de precio impuestos por el cliente" time="0.007176" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Cliente ajeno no consulta ni convierte una cotización de otra cuenta" time="0.007154" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Cotización caducada se rechaza sin alterar existencias" time="0.006407" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Pedido requiere un perfil completo antes de reservar productos" time="0.190756" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Pedido multiartículo falla de forma atómica ante existencias insuficientes" time="0.007886" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Dos confirmaciones concurrentes de la misma cotización reservan una sola vez" time="0.011817" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Dos cotizaciones compiten por la última unidad sin sobreventa" time="0.013418" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Cancelar un pedido devuelve existencias una sola vez y conserva sus datos" time="0.010316" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="El estado del pedido respeta permisos, propietario y transiciones" time="0.012324" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Retirar un producto impide nuevas compras y permite cancelar reservas anteriores" time="0.010263" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Modificar perfil no cambia la dirección guardada en un pedido anterior" time="0.007114" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Registro concurrente conserva una sola cuenta y responde 201/409" time="0.171398" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Cancelación multiartículo revierte todo si una devolución supera el máximo" time="0.013574" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Protocolo rechaza JSON roto, UTF-8 inválido, tipos y cuerpos excesivos" time="0.004106" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Tokens guardados como hash; un nuevo login y logout revocan accesos previos" time="0.367641" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Rate limit devuelve 429 y Retry-After al superar la ventana por IP" time="0.173952" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Datos y sesiones persisten al reiniciar el servidor" time="0.186948" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Token vencido se rechaza después de dos horas" time="0.364278" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Contrato OpenAPI cubre exactamente las rutas implementadas" time="0.006778" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/api.test.js"/>
-	<testcase name="Las 34 solicitudes de la colección completan el recorrido HTTP documentado" time="1.241868" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/coleccion.test.js"/>
-	<testcase name="U-F01: carrito acumula cantidades y envía únicamente ID y cantidad" time="0.002137" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/frontend.test.js"/>
-	<testcase name="U-F02: carrito rechaza cero, fracción y exceso" time="0.000455" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/frontend.test.js"/>
-	<testcase name="U-F03: carrito limita 20 productos, permite quitar y limpiar" time="0.000311" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/frontend.test.js"/>
-	<testcase name="U-F04: contenido HTML no se interpreta al mostrar datos" time="0.000325" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/frontend.test.js"/>
-	<testcase name="U-F05: moneda conserva decimales y valores grandes" time="0.000260" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/frontend.test.js"/>
-	<testcase name="U-C01: catálogo traduce producto inexistente en 404" time="0.003845" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/modules.test.js"/>
-	<testcase name="U-C02: resumen de inventario conserva exactitud monetaria" time="0.000961" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/modules.test.js"/>
-	<testcase name="U-C03: ajuste fuera de rango no escribe movimiento ni producto" time="0.000725" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/modules.test.js"/>
-	<testcase name="U-S01: acceso a documentos ajenos devuelve 404" time="0.000312" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/modules.test.js"/>
-	<testcase name="U-S02: cliente no puede despachar pedido" time="0.000492" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/modules.test.js"/>
-	<testcase name="U-S03: administrador no puede pasar directamente a entregado" time="0.000274" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/modules.test.js"/>
-	<testcase name="U-S04: precio de cotización se toma del catálogo y usa enteros exactos" time="0.000877" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/modules.test.js"/>
-	<testcase name="U-S05: cotización vencida bloquea el pedido antes de escritura" time="0.000753" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/modules.test.js"/>
-	<testcase name="U-D01: transacción confirma resultado o revierte el fallo" time="0.000286" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/modules.test.js"/>
-	<testcase name="U-A01: hash con sal individual, contraseña válida e incorrecta" time="0.889678" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/security.test.js"/>
-	<testcase name="U-A02: hash corrupto se rechaza sin derivación insegura" time="0.000466" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/security.test.js"/>
-	<testcase name="U-A03: autenticar valida token y consulta solo su hash" time="0.205665" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/security.test.js"/>
-	<testcase name="U-A04: sesión inexistente se rechaza" time="0.195476" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/security.test.js"/>
-	<testcase name="U-A05: logout revoca exclusivamente el hash de la sesión" time="0.177586" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/security.test.js"/>
-	<testcase name="U-A06: límite por IP, aislamiento y vencimiento con reloj inyectado" time="0.000505" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/security.test.js"/>
-	<testcase name="U-V01: decimal a centavos y total grande sin pérdida" time="0.002182" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/validation.test.js"/>
-	<testcase name="U-V02: precio rechaza cero, coma, número JSON y exceso" time="0.001379" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/validation.test.js"/>
-	<testcase name="U-V03: credenciales normalizan usuario e impiden asignar rol" time="0.000523" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/validation.test.js"/>
-	<testcase name="U-V04: perfil exige teléfono, municipio y dirección válidos" time="0.000468" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/validation.test.js"/>
-	<testcase name="U-V05: producto requiere stock entero y categoría conocida" time="0.000441" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/validation.test.js"/>
-	<testcase name="U-V06: cotización rechaza duplicados y cantidades negativas" time="0.000412" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/validation.test.js"/>
-	<testcase name="U-V07: paginación limita consultas y rechaza parámetros repetidos" time="0.000515" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/validation.test.js"/>
-	<testcase name="U-V08: identificadores rechazan cero e inyección" time="0.000177" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/unit/validation.test.js"/>
-	<testcase name="W-01: interfaz y componentes públicos con CSP y lista cerrada de archivos" time="0.294063" classname="test" file="/workspace/scratch/42ee0ceba265/trabajo/GA8-AA1-EV01/tests/web.test.js"/>
-	<!-- tests 85 -->
+	<testcase name="Salud pública y cabeceras de seguridad" time="1.460170" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Registro normaliza el usuario y nunca entrega hash ni contraseña" time="0.169801" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Usuario duplicado, incluso con mayúsculas, devuelve 409" time="0.002486" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="La API no permite registrarse como administrador" time="0.002328" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Registro rechaza cuerpo nulo" time="0.001978" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Registro rechaza arreglo" time="0.001585" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Registro rechaza usuario corto" time="0.001312" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Registro rechaza usuario con inyección SQL" time="0.001615" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Registro rechaza contraseña corta" time="0.001180" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Registro rechaza contraseña vacía de espacios" time="0.001383" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Registro rechaza contraseña excesiva" time="0.001020" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Error de acceso genérico para cuenta inexistente y contraseña incorrecta" time="0.333539" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Ruta protegida sin token devuelve 401 y anuncia Bearer" time="0.003245" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Un cliente no crea productos ni consulta inventario administrativo" time="0.002787" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Perfil propio conserva tildes y no acepta cambiar el rol" time="0.003063" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Catálogo enumera las cinco categorías del proyecto anterior" time="0.001565" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="CRUD registra, consulta, edita y retira sin reutilizar código" time="0.008564" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Producto rechaza precio numérico" time="0.001181" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Producto rechaza precio cero" time="0.001225" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Producto rechaza precio negativo" time="0.001588" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Producto rechaza precio con tres decimales" time="0.001384" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Producto rechaza precio fuera del máximo" time="0.001363" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Producto rechaza precio con coma" time="0.002549" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Producto rechaza stock negativo" time="0.001839" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Producto rechaza stock fraccionario" time="0.001475" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Producto rechaza stock como texto" time="0.001249" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Producto rechaza stock excesivo" time="0.001209" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Producto rechaza categoría desconocida" time="0.001607" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Producto rechaza nombre corto" time="0.001115" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Producto rechaza nombre con control" time="0.001501" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Producto rechaza código inválido" time="0.001185" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="ID inválido, recurso inexistente y método incorrecto se distinguen" time="0.003946" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Filtros literales, tildes, paginación y parámetros inesperados" time="0.008243" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Ajuste de inventario registra motivo y saldo, y rechaza saldo negativo" time="0.008349" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Resumen mantiene importes exactos por encima del límite entero de JavaScript" time="0.005183" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Cotización calcula precios del servidor, no descuenta stock y congela los importes" time="0.009666" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Cotización valida cantidades, repetidos y campos de precio impuestos por el cliente" time="0.007533" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Cliente ajeno no consulta ni convierte una cotización de otra cuenta" time="0.009217" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Cotización caducada se rechaza sin alterar existencias" time="0.006733" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Pedido requiere un perfil completo antes de reservar productos" time="0.166900" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Pedido multiartículo falla de forma atómica ante existencias insuficientes" time="0.007027" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Dos confirmaciones concurrentes de la misma cotización reservan una sola vez" time="0.006992" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Dos cotizaciones compiten por la última unidad sin sobreventa" time="0.014799" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Cancelar un pedido devuelve existencias una sola vez y conserva sus datos" time="0.011527" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="El estado del pedido respeta permisos, propietario y transiciones" time="0.013791" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Retirar un producto impide nuevas compras y permite cancelar reservas anteriores" time="0.015487" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Modificar perfil no cambia la dirección guardada en un pedido anterior" time="0.009421" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Registro concurrente conserva una sola cuenta y responde 201/409" time="0.183948" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Cancelación multiartículo revierte todo si una devolución supera el máximo" time="0.012725" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Protocolo rechaza JSON roto, UTF-8 inválido, tipos y cuerpos excesivos" time="0.004514" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Tokens guardados como hash; un nuevo login y logout revocan accesos previos" time="0.350764" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Rate limit devuelve 429 y Retry-After al superar la ventana por IP" time="0.182775" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Datos y sesiones persisten al reiniciar el servidor" time="0.178117" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Token vencido se rechaza después de dos horas" time="0.357081" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Contrato OpenAPI cubre exactamente las rutas implementadas" time="0.005698" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/api.test.js"/>
+	<testcase name="Las 34 solicitudes de la colección completan el recorrido HTTP documentado" time="1.144841" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/coleccion.test.js"/>
+	<testcase name="R-01: artefacto compilado inicia y declara la misma versión que el paquete" time="0.331432" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/release.test.js"/>
+	<testcase name="R-02: compilado entrega interfaz, JavaScript, estilos y contratos" time="0.368156" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/release.test.js"/>
+	<testcase name="R-03: compilado conserva cuentas después de cerrar y reiniciar" time="0.946048" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/release.test.js"/>
+	<testcase name="R-04: respaldo con servidor detenido restaura datos e integridad referencial" time="0.890943" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/release.test.js"/>
+	<testcase name="R-05: compilado bloquea archivos internos y protege inventario" time="0.273580" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/release.test.js"/>
+	<testcase name="R-06: compilado y fuentes entregan el mismo contrato y esquema" time="0.303666" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/release.test.js"/>
+	<testcase name="U-F01: carrito acumula cantidades y envía únicamente ID y cantidad" time="0.001943" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/frontend.test.js"/>
+	<testcase name="U-F02: carrito rechaza cero, fracción y exceso" time="0.000429" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/frontend.test.js"/>
+	<testcase name="U-F03: carrito limita 20 productos, permite quitar y limpiar" time="0.000377" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/frontend.test.js"/>
+	<testcase name="U-F04: contenido HTML no se interpreta al mostrar datos" time="0.000361" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/frontend.test.js"/>
+	<testcase name="U-F05: moneda conserva decimales y valores grandes" time="0.000265" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/frontend.test.js"/>
+	<testcase name="U-C01: catálogo traduce producto inexistente en 404" time="0.001869" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/modules.test.js"/>
+	<testcase name="U-C02: resumen de inventario conserva exactitud monetaria" time="0.000868" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/modules.test.js"/>
+	<testcase name="U-C03: ajuste fuera de rango no escribe movimiento ni producto" time="0.000432" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/modules.test.js"/>
+	<testcase name="U-S01: acceso a documentos ajenos devuelve 404" time="0.000272" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/modules.test.js"/>
+	<testcase name="U-S02: cliente no puede despachar pedido" time="0.000391" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/modules.test.js"/>
+	<testcase name="U-S03: administrador no puede pasar directamente a entregado" time="0.000225" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/modules.test.js"/>
+	<testcase name="U-S04: precio de cotización se toma del catálogo y usa enteros exactos" time="0.001372" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/modules.test.js"/>
+	<testcase name="U-S05: cotización vencida bloquea el pedido antes de escritura" time="0.000393" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/modules.test.js"/>
+	<testcase name="U-D01: transacción confirma resultado o revierte el fallo" time="0.000576" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/modules.test.js"/>
+	<testcase name="U-A01: hash con sal individual, contraseña válida e incorrecta" time="0.794200" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/security.test.js"/>
+	<testcase name="U-A02: hash corrupto se rechaza sin derivación insegura" time="0.000352" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/security.test.js"/>
+	<testcase name="U-A03: autenticar valida token y consulta solo su hash" time="0.171004" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/security.test.js"/>
+	<testcase name="U-A04: sesión inexistente se rechaza" time="0.165692" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/security.test.js"/>
+	<testcase name="U-A05: logout revoca exclusivamente el hash de la sesión" time="0.169983" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/security.test.js"/>
+	<testcase name="U-A06: límite por IP, aislamiento y vencimiento con reloj inyectado" time="0.000450" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/security.test.js"/>
+	<testcase name="U-V01: decimal a centavos y total grande sin pérdida" time="0.001208" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/validation.test.js"/>
+	<testcase name="U-V02: precio rechaza cero, coma, número JSON y exceso" time="0.000769" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/validation.test.js"/>
+	<testcase name="U-V03: credenciales normalizan usuario e impiden asignar rol" time="0.000243" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/validation.test.js"/>
+	<testcase name="U-V04: perfil exige teléfono, municipio y dirección válidos" time="0.000279" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/validation.test.js"/>
+	<testcase name="U-V05: producto requiere stock entero y categoría conocida" time="0.000412" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/validation.test.js"/>
+	<testcase name="U-V06: cotización rechaza duplicados y cantidades negativas" time="0.000249" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/validation.test.js"/>
+	<testcase name="U-V07: paginación limita consultas y rechaza parámetros repetidos" time="0.000319" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/validation.test.js"/>
+	<testcase name="U-V08: identificadores rechazan cero e inyección" time="0.000221" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/unit/validation.test.js"/>
+	<testcase name="W-01: interfaz y componentes públicos con CSP y lista cerrada de archivos" time="0.246776" classname="test" file="/workspace/scratch/6786f368f26d/raizvolt-ev02/tests/web.test.js"/>
+	<!-- tests 91 -->
 	<!-- suites 0 -->
-	<!-- pass 85 -->
+	<!-- pass 91 -->
 	<!-- fail 0 -->
 	<!-- cancelled 0 -->
 	<!-- skipped 0 -->
 	<!-- todo 0 -->
-	<!-- duration_ms 3887.515317 -->
+	<!-- duration_ms 3716.987934 -->
 </testsuites>
