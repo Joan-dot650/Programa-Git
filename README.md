@@ -2,7 +2,7 @@
 
 **GA8-220501096-AA1-EV02 · Jhon Edwards Tineo Landaeta · Ficha 3235874**
 
-Documento principal: [PDF de la evidencia](docs/GA8_AA1_EV02_Jhon_Tineo.pdf).
+Documento principal: [PDF de la evidencia](docs/GA8_AA1_EV02_Modulos_integrados.pdf).
 
 Resultado de esta entrega: **91 pruebas Node y 13 comprobaciones de navegador aprobadas**. Los registros corresponden a la ejecución de EV02 del 8 de noviembre de 2026. Los formularios de aprobación y aceptación están preparados para firma; no se atribuye aceptación a terceros. El despliegue de la aplicación está verificado localmente, sin URL pública contratada.
 
