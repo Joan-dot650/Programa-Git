@@ -1,0 +1,24 @@
+Verifies
+Verified using v1 scheme (JAR signing): true
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): false
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+WARNING: META-INF/com/android/build/gradle/app-metadata.properties not protected by signature. Unauthorized modifications to this JAR entry will not be detected. Delete or move the entry outside of META-INF/.
+Verifying alignment of delivery/GA8-AA2-EV02/apk/RaizVoltMovil-debug.apk (4)...
+      87 META-INF/com/android/build/gradle/app-metadata.properties (OK - compressed)
+     180 classes.dex (OK - compressed)
+   38582 AndroidManifest.xml (OK - compressed)
+   39548 res/drawable/ic_launcher.xml (OK - compressed)
+   39964 res/xml/data_extraction_rules.xml (OK - compressed)
+   40284 resources.arsc (OK)
+    1142 classes2.dex (OK - compressed)
+    1995 classes3.dex (OK - compressed)
+    8147 classes4.dex (OK - compressed)
+   44062 classes5.dex (OK - compressed)
+   29820 META-INF/CERT.SF (OK - compressed)
+   30520 META-INF/CERT.RSA (OK - compressed)
+   31585 META-INF/MANIFEST.MF (OK - compressed)
+Verification succesful

@@ -1,0 +1,6 @@
+Performing Push Install
+	pkg: /data/local/tmp/app-debug.apk
+Success
+Performing Push Install
+	pkg: /data/local/tmp/app-debug-androidTest.apk
+Success

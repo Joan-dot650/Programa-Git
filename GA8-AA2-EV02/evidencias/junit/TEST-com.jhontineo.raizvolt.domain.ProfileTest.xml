@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.jhontineo.raizvolt.domain.ProfileTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-11-16T11:37:47" hostname="450d78135d5d" time="0.003">
+  <properties/>
+  <testcase name="missingAddressRejected" classname="com.jhontineo.raizvolt.domain.ProfileTest" time="0.0"/>
+  <testcase name="shortNameRejected" classname="com.jhontineo.raizvolt.domain.ProfileTest" time="0.0"/>
+  <testcase name="validCustomerIsTrimmed" classname="com.jhontineo.raizvolt.domain.ProfileTest" time="0.0"/>
+  <testcase name="controlCharactersRejected" classname="com.jhontineo.raizvolt.domain.ProfileTest" time="0.0"/>
+  <testcase name="phoneLettersRejected" classname="com.jhontineo.raizvolt.domain.ProfileTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

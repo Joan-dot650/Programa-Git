@@ -1,0 +1,96 @@
+INSTRUMENTATION_STATUS: stream=APROBADO: DB01 Semilla de productos
+
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: stream=APROBADO: DB02 Consulta parametrizada ante entrada SQL
+
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: stream=APROBADO: DB03 Crear y editar producto
+
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: stream=APROBADO: DB04 Código único
+
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: stream=APROBADO: DB05 Ajuste de inventario
+
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: stream=APROBADO: DB06 Total exacto y cotización persistida
+
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: stream=APROBADO: DB07 Reserva transaccional
+
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: stream=APROBADO: DB08 Confirmación idempotente
+
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: stream=APROBADO: DB09 Devolución una sola vez
+
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: stream=APROBADO: DB10 Rollback real de SQLite
+
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: stream=APROBADO: DB11 Baja lógica conserva referencias
+
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: stream=APROBADO: DB12 Persistencia después de cerrar y abrir
+
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: stream=APROBADO: UI01 Catálogo inicial nativo
+
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: stream=APROBADO: UI02 Guardado del cliente
+
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: stream=APROBADO: UI03 Búsqueda del catálogo
+
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: stream=APROBADO: UI04 Carrito combina cantidades
+
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: stream=APROBADO: UI05 Recreación conserva carrito y pantalla
+
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: stream=APROBADO: UI06 Cotización creada desde la interfaz
+
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: stream=APROBADO: UI07 Pedido e inventario confirmados
+
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: stream=APROBADO: UI08 Cancelación desde la interfaz
+
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: stream=APROBADO: UI09 Envío y entrega secuenciales
+
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: stream=APROBADO: UI10 Validación visible del cliente
+
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: stream=APROBADO: UI11 Cancelación devuelve el stock original
+
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_RESULT: stream=
+APROBADO: DB01 Semilla de productos
+APROBADO: DB02 Consulta parametrizada ante entrada SQL
+APROBADO: DB03 Crear y editar producto
+APROBADO: DB04 Código único
+APROBADO: DB05 Ajuste de inventario
+APROBADO: DB06 Total exacto y cotización persistida
+APROBADO: DB07 Reserva transaccional
+APROBADO: DB08 Confirmación idempotente
+APROBADO: DB09 Devolución una sola vez
+APROBADO: DB10 Rollback real de SQLite
+APROBADO: DB11 Baja lógica conserva referencias
+APROBADO: DB12 Persistencia después de cerrar y abrir
+APROBADO: UI01 Catálogo inicial nativo
+APROBADO: UI02 Guardado del cliente
+APROBADO: UI03 Búsqueda del catálogo
+APROBADO: UI04 Carrito combina cantidades
+APROBADO: UI05 Recreación conserva carrito y pantalla
+APROBADO: UI06 Cotización creada desde la interfaz
+APROBADO: UI07 Pedido e inventario confirmados
+APROBADO: UI08 Cancelación desde la interfaz
+APROBADO: UI09 Envío y entrega secuenciales
+APROBADO: UI10 Validación visible del cliente
+APROBADO: UI11 Cancelación devuelve el stock original
+TOTAL: 23 comprobaciones aprobadas; 0 fallos.
+
+INSTRUMENTATION_CODE: -1

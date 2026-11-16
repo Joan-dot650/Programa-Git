@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.jhontineo.raizvolt.domain.CartTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-11-16T11:37:47" hostname="450d78135d5d" time="0.022">
+  <properties/>
+  <testcase name="repeatedProductCombines" classname="com.jhontineo.raizvolt.domain.CartTest" time="0.001"/>
+  <testcase name="invalidPricePrecisionRejected" classname="com.jhontineo.raizvolt.domain.CartTest" time="0.002"/>
+  <testcase name="negativeQuantityRejected" classname="com.jhontineo.raizvolt.domain.CartTest" time="0.0"/>
+  <testcase name="zeroRemoves" classname="com.jhontineo.raizvolt.domain.CartTest" time="0.001"/>
+  <testcase name="snapshotIsImmutableAndIndependent" classname="com.jhontineo.raizvolt.domain.CartTest" time="0.001"/>
+  <testcase name="maxQuantityEnforced" classname="com.jhontineo.raizvolt.domain.CartTest" time="0.0"/>
+  <testcase name="currencyDisplayKeepsTwoDecimals" classname="com.jhontineo.raizvolt.domain.CartTest" time="0.015"/>
+  <testcase name="moneyIsExact" classname="com.jhontineo.raizvolt.domain.CartTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

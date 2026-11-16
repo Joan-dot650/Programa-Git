@@ -1,0 +1,13 @@
+Fecha de ejecución: 16 de noviembre de 2026
+Sistema: Linux x86_64
+JDK: Azul Zulu 17.0.17
+Gradle: 8.11.1
+AGP: 8.9.2
+Compile SDK / Target SDK: 35 / 35
+Minimum SDK: 23
+Android Build Tools: 35.0.0
+Android Emulator: 37.2.13.0
+Sistema probado: Android 6.0 API 23 x86_64
+Pantalla: 480 x 900 px, 160 dpi
+JVM: JUnit 4.13.2
+Interfaz y SQLite: Android framework

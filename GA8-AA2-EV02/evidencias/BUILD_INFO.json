@@ -1,0 +1,15 @@
+{
+  "application_id": "com.jhontineo.raizvolt",
+  "version": "1.0",
+  "min_sdk": 23,
+  "compile_sdk": 35,
+  "target_sdk": 35,
+  "unit_tests_passed": 38,
+  "android_checks_passed": 23,
+  "lint_errors": 0,
+  "lint_warnings": 0,
+  "apk_sha256": "2df41544f4661bbcb94977c5acceeafb3a4d956883d2db29dc64a35e5ebdf6c4",
+  "source_tree_sha256": "0b88c5f353d69032b8b4b34d1ab1be03f0e5da76c7ecd1ea66ef0ae3f980dadb",
+  "verified_environment": "Android 6.0 API 23 x86_64 emulator; Linux; JDK 17.0.17",
+  "prepared_at_bogota": "2026-11-16T06:46:20.473476-05:00"
+}

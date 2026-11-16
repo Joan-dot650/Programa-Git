@@ -1,0 +1,4 @@
+6.0
+23
+Physical size: 480x900
+Physical density: 160

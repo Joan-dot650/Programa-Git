@@ -1,0 +1,10 @@
+Evidencia GA8-220501096-AA2-EV02
+https://github.com/Joan-dot650/Programa-Git/tree/main/GA8-AA2-EV02
+
+Código:
+https://github.com/Joan-dot650/Programa-Git/tree/main/GA8-AA2-EV02/proyecto/RaizVoltMovil
+
+APK:
+https://github.com/Joan-dot650/Programa-Git/blob/main/GA8-AA2-EV02/apk/RaizVoltMovil-debug.apk
+
+La aplicación es nativa y local. Estas son URL del código y los entregables; no son una aplicación web desplegada.
