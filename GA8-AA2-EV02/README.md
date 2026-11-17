@@ -36,7 +36,7 @@ En la terminal de Android Studio, Windows PowerShell:
 
 En Linux/macOS usar `./gradlew`. APK generado: `app/build/outputs/apk/debug/app-debug.apk`.
 
-Para depurar, poner un breakpoint en `SalesService.confirm`, iniciar **Debug**, confirmar una cotización e inspeccionar sus líneas y stock. La entrega demuestra compilación por terminal y ejecución en emulador; el aprendiz debe repetir el manejo del IDE cuando lo solicite el instructor.
+Para depurar, poner un breakpoint en `SalesService.confirm`, iniciar **Debug**, confirmar una cotización e inspeccionar sus líneas y stock. La entrega demuestra compilación por terminal y ejecución en emulador; Se debera repetir el manejo del IDE cuando lo solicite el instructor.
 
 ## Repetir las pruebas Android
 
